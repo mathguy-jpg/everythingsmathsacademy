@@ -1,0 +1,651 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#001f66">
+<link rel="icon" type="image/png" href="logo.png.png">
+<title>Login Portal | EVERYTHING'S MATHS</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --navy: #001f66;
+    --blue: #1565c0;
+    --gold: #ffd700;
+    --light: #eef5ff;
+    --text: #263238;
+    --muted: #64748b;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 15% 15%, rgba(21,101,192,.10), transparent 30%),
+        radial-gradient(circle at 85% 85%, rgba(255,215,0,.10), transparent 28%),
+        linear-gradient(135deg, #edf4ff, #ffffff 55%, #f4f8ff);
+}
+
+/* NAVIGATION */
+nav {
+    width: 100%;
+    min-height: 54px;
+    padding: 10px 5%;
+    background: var(--navy);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 12px rgba(0,31,102,.12);
+}
+
+nav .menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 28px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    transition: color .2s ease;
+}
+
+nav a:hover {
+    color: var(--gold);
+}
+
+/* MAIN LOGIN AREA */
+.login-page {
+    min-height: calc(100vh - 54px);
+    min-height: calc(100svh - 54px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 15px;
+}
+
+.login-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.login-logo {
+    width: 76px;
+    height: 76px;
+    object-fit: contain;
+    margin-bottom: 7px;
+}
+
+.login-title {
+    color: var(--navy);
+    font-size: clamp(24px, 4vw, 31px);
+    font-weight: 800;
+    letter-spacing: -.6px;
+    margin: 0;
+}
+
+.login-subtitle {
+    color: var(--muted);
+    font-size: 13px;
+    margin: 7px 0 0;
+}
+
+/* LOGIN CARD */
+.login-card {
+    width: 100%;
+    max-width: 410px;
+    padding: 25px;
+    background: rgba(255,255,255,.97);
+    border: 1px solid #e0e9f7;
+    border-radius: 16px;
+    box-shadow: 0 12px 35px rgba(0,31,102,.11);
+    text-align: center;
+}
+
+.card-heading {
+    color: var(--navy);
+    font-size: 17px;
+    font-weight: 800;
+    margin: 0 0 5px;
+}
+
+.card-description {
+    color: var(--muted);
+    font-size: 12px;
+    margin: 0 0 19px;
+    line-height: 1.5;
+}
+
+/* ROLE SELECTOR */
+.role-selector {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.role-btn {
+    min-height: 45px;
+    padding: 10px 8px;
+    border: 1px solid #d5e1f5;
+    border-radius: 9px;
+    background: #f3f7ff;
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .2s, color .2s, border-color .2s, transform .2s;
+}
+
+.role-btn:hover {
+    border-color: var(--blue);
+    background: #e8f1ff;
+}
+
+.role-btn.active {
+    color: white;
+    background: var(--navy);
+    border-color: var(--navy);
+    box-shadow: 0 4px 10px rgba(0,31,102,.15);
+}
+
+.role-btn:active {
+    transform: scale(.98);
+}
+
+/* SELECTED ROLE */
+#selectedRole {
+    min-height: 17px;
+    margin: 15px 0;
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* FORM */
+#loginForm {
+    text-align: left;
+    margin-top: 13px;
+    padding-top: 15px;
+    border-top: 1px solid #edf1f7;
+}
+
+#loginForm h2 {
+    color: #263238;
+    font-size: 12px;
+    font-weight: 700;
+    margin: 11px 0 7px;
+}
+
+#loginForm input {
+    display: block;
+    width: 100%;
+    height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #ccd6e5;
+    border-radius: 8px;
+    background: #fff;
+    color: var(--text);
+    font-size: 14px;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+#loginForm input::placeholder {
+    color: #9aa7b8;
+}
+
+#loginForm input:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(21,101,192,.11);
+}
+
+/* LOGIN BUTTON */
+.login-btn-main {
+    display: block;
+    width: 100%;
+    min-height: 45px;
+    margin-top: 18px;
+    padding: 11px 15px;
+    border: none;
+    border-radius: 8px;
+    background: var(--navy);
+    color: white;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background .2s, transform .2s;
+}
+
+.login-btn-main:hover {
+    background: var(--blue);
+}
+
+.login-btn-main:active {
+    transform: scale(.99);
+}
+
+.login-btn-main:disabled {
+    opacity: .65;
+    cursor: wait;
+}
+
+/* FEEDBACK */
+#loginMessage {
+    color: #c62828;
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 12px 0 0;
+    overflow-wrap: anywhere;
+}
+
+.contact-note {
+    margin: 18px 0 0;
+    padding-top: 14px;
+    border-top: 1px solid #edf1f7;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.contact-note strong {
+    color: var(--navy);
+}
+
+/* FOOTER */
+.login-footer {
+    margin-top: 17px;
+    color: #8491a5;
+    font-size: 10px;
+    text-align: center;
+}
+
+/* TABLETS */
+@media (max-width: 760px) {
+    nav {
+        padding: 11px 15px;
+    }
+
+    nav .menu {
+        gap: 10px 20px;
+    }
+
+    .login-page {
+        padding: 25px 15px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+    nav {
+        min-height: 48px;
+        padding: 10px 8px;
+    }
+
+    nav .menu {
+        gap: 9px 15px;
+    }
+
+    nav a {
+        font-size: 11px;
+    }
+
+    .login-page {
+        min-height: calc(100svh - 48px);
+        padding: 20px 13px;
+    }
+
+    .login-brand {
+        margin-bottom: 14px;
+    }
+
+    .login-logo {
+        width: 65px;
+        height: 65px;
+    }
+
+    .login-title {
+        font-size: 25px;
+    }
+
+    .login-subtitle {
+        font-size: 12px;
+    }
+
+    .login-card {
+        max-width: 370px;
+        padding: 21px 17px;
+        border-radius: 13px;
+    }
+
+    .role-selector {
+        gap: 8px;
+    }
+
+    .role-btn {
+        min-height: 43px;
+        font-size: 12px;
+    }
+
+    #loginForm input {
+        height: 43px;
+        font-size: 13px;
+    }
+
+    .login-btn-main {
+        min-height: 44px;
+    }
+}
+
+/* SHORT SCREENS */
+@media (max-height: 650px) and (min-width: 481px) {
+    .login-page {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .login-brand {
+        margin-bottom: 10px;
+    }
+
+    .login-logo {
+        width: 52px;
+        height: 52px;
+    }
+
+    .login-title {
+        font-size: 23px;
+    }
+
+    .login-subtitle {
+        margin-top: 3px;
+    }
+
+    .login-card {
+        padding: 16px 22px;
+    }
+
+    .card-description {
+        margin-bottom: 12px;
+    }
+
+    #selectedRole {
+        margin: 9px 0;
+    }
+
+    #loginForm {
+        margin-top: 8px;
+        padding-top: 9px;
+    }
+
+    .contact-note {
+        margin-top: 10px;
+        padding-top: 8px;
+    }
+
+    .login-footer {
+        margin-top: 8px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: .01ms !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="menu">
+        <a href="index.html">Home</a>
+        <a href="lessons.html">Our Lessons</a>
+        <a href="index.html#why-choose-us">Why Choose Us</a>
+        <a href="index.html#about-us">About Us</a>
+    </div>
+</nav>
+
+<main class="login-page">
+
+    <div class="login-brand">
+        <img
+            src="logo.png.png"
+            class="login-logo"
+            alt="EVERYTHING'S MATHS logo"
+        >
+        <h1 class="login-title">Login Portal</h1>
+        <p class="login-subtitle">Welcome back! Sign in to continue.</p>
+    </div>
+
+    <section class="login-card">
+
+        <h2 class="card-heading">Access Your Account</h2>
+        <p class="card-description">
+            Select your account type to get started.
+        </p>
+
+        <div class="role-selector">
+            <button type="button" class="role-btn"
+                onclick="selectRole('learner', this)">
+                Learner
+            </button>
+
+            <button type="button" class="role-btn"
+                onclick="selectRole('parent', this)">
+                Parent
+            </button>
+
+            <button type="button" class="role-btn"
+                onclick="selectRole('tutor', this)">
+                Tutor
+            </button>
+
+            <button type="button" class="role-btn"
+                onclick="selectRole('admin', this)">
+                Administrator
+            </button>
+        </div>
+
+        <p id="selectedRole" aria-live="polite">
+            Select a role to continue
+        </p>
+
+        <form id="loginForm" style="display:none;"
+            onsubmit="loginUser(event)">
+
+            <h2 id="usernameLabel">Email Address</h2>
+
+            <input
+                type="text"
+                id="usernameInput"
+                autocomplete="username"
+                placeholder="Enter email address"
+                required
+            >
+
+            <h2>Password</h2>
+
+            <input
+                type="password"
+                id="passwordInput"
+                autocomplete="current-password"
+                placeholder="Enter password"
+                required
+            >
+
+            <button type="submit" class="login-btn-main" id="loginButton">
+                Login
+            </button>
+
+        </form>
+
+        <p id="loginMessage" role="status" aria-live="polite"></p>
+
+        <p class="contact-note">
+            Haven't received your login credentials yet?<br>
+            Please contact <strong>EVERYTHING'S MATHS administration.</strong>
+        </p>
+
+    </section>
+
+    <div class="login-footer">
+        © <span id="currentYear"></span> EVERYTHING'S MATHS. All rights reserved.
+    </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="ema-supabase.js"></script>
+
+<script>
+let currentRole = '';
+
+document.getElementById('currentYear').textContent =
+    new Date().getFullYear();
+
+function selectRole(role, button) {
+    currentRole = role;
+
+    document.querySelectorAll('.role-btn').forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-pressed', 'false');
+    });
+
+    button.classList.add('active');
+    button.setAttribute('aria-pressed', 'true');
+
+    const names = {
+        learner: 'Learner',
+        parent: 'Parent',
+        tutor: 'Tutor',
+        admin: 'Administrator'
+    };
+
+    document.getElementById('selectedRole').textContent =
+        'Selected Role: ' + names[role];
+
+    document.getElementById('loginForm').style.display = 'block';
+    document.getElementById('loginMessage').textContent = '';
+
+    const label = document.getElementById('usernameLabel');
+    const input = document.getElementById('usernameInput');
+
+    if (role === 'learner') {
+        label.textContent = 'Student Number';
+        input.placeholder = 'Enter Student Number';
+        input.type = 'text';
+        input.autocomplete = 'username';
+    } else {
+        label.textContent = 'Email Address';
+        input.placeholder = 'Enter Email Address';
+        input.type = 'email';
+        input.autocomplete = 'username';
+    }
+
+    input.focus();
+}
+
+async function loginUser(event) {
+    event.preventDefault();
+
+    const identifier = document.getElementById('usernameInput').value.trim();
+    const password = document.getElementById('passwordInput').value;
+    const button = document.getElementById('loginButton');
+    const message = document.getElementById('loginMessage');
+
+    if (!currentRole) {
+        message.textContent = 'Please select your role first.';
+        return;
+    }
+
+    if (!window.EMA) {
+        message.textContent =
+            'Login service is not ready. Check your configuration files.';
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = 'Logging in...';
+    message.textContent = '';
+
+    try {
+        await EMA.signIn(identifier, password);
+
+        const profile = await EMA.requireSession();
+
+        if (!profile) {
+            throw new Error('Unable to load your account profile. Please try again.');
+        }
+
+        if (profile.role !== currentRole) {
+            await EMA.db.auth.signOut();
+
+            throw new Error(
+                'This account is not registered as a ' +
+                currentRole +
+                '. Please select the correct role.'
+            );
+        }
+
+        if (profile.status !== 'active') {
+            await EMA.db.auth.signOut();
+
+            throw new Error(
+                'Your account is awaiting approval or has been suspended. Please contact administration.'
+            );
+        }
+
+        sessionStorage.setItem('loggedIn', 'true');
+        sessionStorage.setItem('learnerName', profile.full_name || '');
+        sessionStorage.setItem('studentNumber', profile.student_number || '');
+        sessionStorage.setItem('adminName', profile.full_name || '');
+
+        if (profile.role === 'learner') {
+            window.location.href = 'learner-dashboard.html';
+
+        } else if (profile.role === 'admin' || profile.role === 'tutor') {
+            window.location.href = 'admin-dashboard.html';
+
+        } else if (profile.role === 'parent') {
+            message.textContent =
+                'Login successful. The parent dashboard still needs to be connected.';
+        }
+
+    } catch (error) {
+        message.textContent =
+            error.message || 'Login failed. Check your details and try again.';
+
+    } finally {
+        button.disabled = false;
+        button.textContent = 'Login';
+    }
+}
+</script>
+
+</body>
+</html>

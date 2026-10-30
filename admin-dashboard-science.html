@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physical Sciences Admin | EVERYTHING'S MATHS</title>
+<link rel="icon" href="logo.png.png">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="ema-supabase.js"></script>
+<style>
+:root{--blue:#001f66;--bright:#1565c0;--cyan:#16a9e8;--gold:#ffd700;--white:#fff;--ink:#263238;--muted:#64748b;--bg:#f3f6fb;--line:#e2e8f0;--green:#16834a;--red:#c62828}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Arial,sans-serif;color:var(--ink)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.ps-admin nav{background:var(--blue);color:white;padding:15px 5%;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+.ps-admin nav strong{font-size:18px}
+.ps-admin nav a{color:white;text-decoration:none;margin-left:18px;font-weight:bold}
+.ps-admin nav a:hover{color:var(--gold)}
+.ps-admin .page{max-width:1250px;margin:auto;padding:28px 20px 60px}
+.ps-admin .welcome{background:linear-gradient(120deg,var(--blue),var(--bright));color:white;padding:30px;border-radius:16px;margin-bottom:25px;box-shadow:0 8px 24px #001f6620}
+.ps-admin .welcome h1{margin:0 0 8px;font-size:clamp(23px,4vw,34px)}
+.ps-admin .welcome p{margin:0;color:#e4efff}
+.ps-admin .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:32px}
+.ps-admin .stat{background:white;border:1px solid var(--line);border-radius:13px;padding:20px;box-shadow:0 3px 12px #001f6609}
+.ps-admin .stat h2{font-size:30px;color:var(--bright);margin:0 0 6px}
+.ps-admin .stat p{margin:0;color:var(--muted);font-size:14px}
+.ps-admin .section{margin:32px 0}
+.ps-admin .section-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.ps-admin .section-heading h2{font-size:22px;color:var(--blue);margin:0}
+.ps-admin .portal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.ps-admin .portal-card,.ps-admin .panel{background:white;border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:0 3px 12px #001f6609;min-width:0}
+.ps-admin .portal-card h3{margin:10px 0;color:var(--blue)}
+.ps-admin .portal-card p{color:var(--muted);line-height:1.5;min-height:42px}
+.ps-admin .portal-icon{font-size:30px}
+.ps-admin .btn{border:0;border-radius:8px;padding:11px 16px;font-weight:bold;background:var(--bright);color:white}
+.ps-admin .btn:hover{filter:brightness(1.08)}
+.ps-admin .btn:disabled{opacity:.55;cursor:not-allowed}
+.ps-admin .btn.gold{background:var(--gold);color:var(--blue)}
+.ps-admin .btn.dark{background:var(--blue)}
+.ps-admin .btn.red{background:var(--red)}
+.ps-admin .btn.green{background:var(--green)}
+.ps-admin .btn.light{background:#eaf2ff;color:var(--blue)}
+.ps-admin .btn.small{padding:8px 11px;font-size:13px}
+.ps-admin .topic-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.ps-admin .topic{background:white;border:1px solid var(--line);border-left:4px solid var(--cyan);border-radius:9px;padding:13px;font-size:14px}
+.ps-admin .item-list{display:grid;gap:12px}
+.ps-admin .item{background:white;border:1px solid var(--line);border-radius:12px;padding:17px;display:flex;justify-content:space-between;align-items:flex-start;gap:15px;flex-wrap:wrap}
+.ps-admin .item h3{margin:0 0 7px;color:var(--blue)}
+.ps-admin .item p{margin:4px 0;color:var(--muted);font-size:14px}
+.ps-admin .item-actions{display:flex;gap:8px;flex-wrap:wrap}
+.ps-admin .tag{display:inline-block;padding:5px 9px;border-radius:20px;font-size:12px;font-weight:bold;background:#eaf2ff;color:var(--blue)}
+.ps-admin .tag.published{background:#e4f7eb;color:var(--green)}
+.ps-admin .tag.draft{background:#fff5d6;color:#805d00}
+.ps-admin .empty{background:white;border:1px dashed #b8c5d6;padding:22px;border-radius:10px;color:var(--muted);text-align:center}
+.ps-admin .modal{display:none;position:fixed;inset:0;background:#07152dcc;z-index:1000;padding:20px;overflow-y:auto;align-items:flex-start;justify-content:center}
+.ps-admin .modal.show{display:flex}
+.ps-admin .modal-box{background:white;width:min(850px,100%);margin:25px auto;border-radius:15px;padding:25px;box-shadow:0 20px 60px #0005}
+.ps-admin .modal-header{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding-bottom:15px;margin-bottom:20px}
+.ps-admin .modal-header h2{margin:0;color:var(--blue);font-size:22px}
+.ps-admin .close{border:0;background:#edf2f7;border-radius:8px;padding:8px 12px;font-size:18px;color:var(--ink)}
+.ps-admin .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.ps-admin .field{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
+.ps-admin .field.full{grid-column:1/-1}
+.ps-admin label{font-size:13px;font-weight:bold;color:#334155}
+.ps-admin input,.ps-admin select,.ps-admin textarea{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:8px;background:white;color:var(--ink);min-width:0}
+.ps-admin textarea{min-height:90px;resize:vertical}
+.ps-admin .choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.ps-admin .choice{border:1px solid var(--line);border-radius:12px;padding:18px;background:#fbfdff;text-align:left}
+.ps-admin .choice:hover{border-color:var(--cyan);background:#f0f9ff}
+.ps-admin .choice strong{display:block;color:var(--blue);margin:8px 0}
+.ps-admin .choice span{font-size:13px;color:var(--muted);line-height:1.4}
+.ps-admin .question-card{border:1px solid var(--line);border-radius:10px;padding:15px;margin:14px 0;background:#fbfdff}
+.ps-admin .question-card h4{margin:0 0 12px;color:var(--blue)}
+.ps-admin .question-card .remove-question{float:right}
+.ps-admin .modal-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:17px;margin-top:20px}
+.ps-admin .notice{background:#fff8df;border:1px solid #f2d36b;color:#735600;border-radius:9px;padding:13px;font-size:13px;line-height:1.5;margin:14px 0}
+.ps-admin .loading{color:var(--muted);padding:15px}
+.ps-admin footer{text-align:center;color:var(--muted);padding:25px}
+
+/* LEARNER DIRECTORY */
+.ps-admin .directory-toolbar{display:flex;gap:10px;margin:15px 0;flex-wrap:wrap}
+.ps-admin .directory-toolbar input{flex:1;min-width:200px}
+.ps-admin .directory-grade{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:18px 0}
+.ps-admin .directory-grade h3{color:var(--blue);margin:0 0 12px}
+.ps-admin .directory-table-wrap{width:100%;overflow-x:auto}
+.ps-admin .directory-table{width:100%;min-width:750px;border-collapse:collapse;background:white}
+.ps-admin .directory-table th,.ps-admin .directory-table td{padding:12px;text-align:left;border-bottom:1px solid var(--line);font-size:14px}
+.ps-admin .directory-table th{background:#eaf2ff;color:var(--blue)}
+.ps-admin .directory-status{display:inline-block;padding:5px 9px;border-radius:20px;font-size:12px;font-weight:bold}
+.ps-admin .directory-status.active{background:#e4f7eb;color:var(--green)}
+.ps-admin .directory-status.pending{background:#fff5d6;color:#805d00}
+.ps-admin .directory-status.suspended{background:#fee2e2;color:var(--red)}
+.ps-admin .directory-summary{color:var(--muted);font-size:13px}
+.ps-admin .remove-learner{white-space:nowrap}
+@media(max-width:850px){.ps-admin .stats{grid-template-columns:repeat(2,minmax(0,1fr))}.ps-admin .portal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ps-admin .topic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){
+.ps-admin .page{padding:18px 13px 40px}
+.ps-admin .stats,.ps-admin .portal-grid,.ps-admin .topic-grid,.ps-admin .choice-grid,.ps-admin .form-grid{grid-template-columns:1fr}
+.ps-admin .welcome{padding:22px}
+.ps-admin .modal{padding:8px}
+.ps-admin .modal-box{padding:17px;margin:8px auto}
+.ps-admin nav a{margin-left:8px;font-size:13px}
+.ps-admin .directory-toolbar{flex-direction:column}
+.ps-admin .directory-toolbar input,.ps-admin .directory-toolbar button{width:100%}
+.ps-admin .directory-grade{padding:10px}
+}
+</style>
+</head>
+<body class="ps-admin">
+
+<nav>
+<strong>⚛ EVERYTHING'S MATHS | SCIENCES</strong>
+<div>
+<a href="index.html">Home</a>
+<a href="admin-dashboard.html">Main Dashboard</a>
+<a href="#assessments">Assessments</a>
+<a href="#resources">Resources</a>
+<a href="#" id="logoutBtn">Logout</a>
+</div>
+</nav>
+
+<main class="page">
+<section class="welcome">
+<h1>⚛ Physical Sciences Control Centre</h1>
+<p id="adminWelcome">Administrator Dashboard</p>
+</section>
+
+<section class="stats">
+<div class="stat"><h2 id="learnerCount">--</h2><p>Active Science Learners</p></div>
+<div class="stat"><h2 id="pendingCount">--</h2><p>Pending Approvals</p></div>
+<div class="stat"><h2 id="assessmentCount">--</h2><p>Assessments Created</p></div>
+<div class="stat"><h2 id="resourceCount">--</h2><p>Study Resources</p></div>
+</section>
+
+<section class="section">
+<div class="section-heading"><h2>Pending Account Requests</h2></div>
+<div id="pendingLearners" class="item-list"><div class="loading">Loading requests...</div></div>
+</section>
+
+<section class="section" id="learnerDirectory">
+<div class="section-heading">
+<h2>👥 Physical Sciences Learner Directory</h2>
+<button class="btn gold" id="refreshDirectory">↻ Refresh</button>
+</div>
+<p class="directory-summary" id="directorySummary">Loading Physical Sciences learners...</p>
+<div class="directory-toolbar">
+<input type="search" id="directorySearch" placeholder="Search name, EMA number or email...">
+</div>
+<div id="directoryContent"><div class="loading">Loading learners...</div></div>
+</section>
+
+<section class="section">
+<div class="section-heading"><h2>Physical Sciences Management</h2></div>
+<div class="portal-grid">
+<div class="portal-card">
+<div class="portal-icon">📝</div><h3>Assessment Centre</h3>
+<p>Create tests, build questions, publish assessments and manage your exam library.</p>
+<button class="btn" id="openCreation">Create Assessment</button>
+</div>
+<div class="portal-card">
+<div class="portal-icon">📚</div><h3>Study Resources</h3>
+<p>Register revision guides, notes, worksheets and PDF resources for learners.</p>
+<button class="btn" id="openResource">Add Resource</button>
+</div>
+<div class="portal-card">
+<div class="portal-icon">📢</div><h3>Announcements</h3>
+<p>Publish important notices for Physical Sciences learners.</p>
+<button class="btn" id="openAnnouncement">Publish Announcement</button>
+</div>
+</div>
+</section>
+
+<section class="section" id="assessments">
+<div class="section-heading"><h2>Physical Sciences Assessment Library</h2><button class="btn gold" id="openCreation2">+ New Assessment</button></div>
+<div id="assessmentList" class="item-list"><div class="loading">Loading assessments...</div></div>
+</section>
+
+<section class="section">
+<div class="section-heading"><h2>Physics & Chemistry Topics</h2></div>
+<div class="topic-grid">
+<div class="topic">Motion in One Dimension</div><div class="topic">Projectile Motion</div>
+<div class="topic">Newton's Laws</div><div class="topic">Momentum & Impulse</div>
+<div class="topic">Work, Energy & Power</div><div class="topic">Gravitation</div>
+<div class="topic">Electrostatics</div><div class="topic">Electric Circuits</div>
+<div class="topic">Electrodynamics</div><div class="topic">Waves, Sound & Light</div>
+<div class="topic">Organic Chemistry</div><div class="topic">Chemical Change</div>
+<div class="topic">Rate of Reaction</div><div class="topic">Chemical Equilibrium</div>
+<div class="topic">Acids & Bases</div><div class="topic">Atomic Combinations</div>
+<div class="topic">Chemical Systems</div><div class="topic">Matter & Materials</div>
+</div>
+</section>
+
+<section class="section" id="resources">
+<div class="section-heading"><h2>Recent Physical Sciences Resources</h2><button class="btn light" id="openResource2">+ Add Resource</button></div>
+<div id="resourceList" class="item-list"><div class="loading">Loading resources...</div></div>
+</section>
+
+<section class="section">
+<div class="section-heading"><h2>Recent Announcements</h2><button class="btn light" id="openAnnouncement2">+ Announcement</button></div>
+<div id="announcementList" class="item-list"><div class="loading">Loading announcements...</div></div>
+</section>
+</main>
+
+<footer>EVERYTHING'S MATHS | Physical Sciences Administration</footer>
+
+<div class="modal" id="creationModal"><div class="modal-box">
+<div class="modal-header"><h2>Choose Assessment Creation Method</h2><button class="close" data-close="creationModal">✕</button></div>
+<div class="choice-grid">
+<button class="choice" id="chooseGoogle"><div class="portal-icon">🟢</div><strong>Google Forms Quiz</strong><span>Connect an existing Google Forms assessment and record its results.</span></button>
+<button class="choice" id="chooseBuilder"><div class="portal-icon">📝</div><strong>EMA Quiz Builder</strong><span>Create an assessment with questions, answers, marks and a timer.</span></button>
+<button class="choice" id="chooseAI"><div class="portal-icon">🤖</div><strong>AI Quiz Generator</strong><span>Generate a detailed AI prompt for a CAPS-aligned Physical Sciences test.</span></button>
+<button class="choice" id="chooseUpload"><div class="portal-icon">📄</div><strong>Upload an Exam</strong><span>Prepare an existing PDF or Word exam for registration.</span></button>
+</div>
+</div></div>
+
+<div class="modal" id="builderModal"><div class="modal-box">
+<div class="modal-header"><h2>EMA Physical Sciences Quiz Builder</h2><button class="close" data-close="builderModal">✕</button></div>
+<div class="form-grid">
+<div class="field full"><label>Assessment Title</label><input id="builderTitle" placeholder="e.g. Grade 11 Newton's Laws Test"></div>
+<div class="field"><label>Grade</label><select id="builderGrade"><option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option></select></div>
+<div class="field"><label>Paper</label><select id="builderPaper"><option>Paper 1 - Physics</option><option>Paper 2 - Chemistry</option><option>Combined</option></select></div>
+<div class="field"><label>Duration (minutes)</label><input type="number" id="builderDuration" min="1" value="60"></div>
+<div class="field"><label>Assessment topic</label><input id="builderTopic" placeholder="e.g. Mechanics"></div>
+</div>
+<div class="notice">Built-in MCQ questions can be automatically marked. Written questions require manual marking.</div>
+<div class="section-heading"><h2>Questions</h2><button class="btn small" id="addQuestion">+ Add Question</button></div>
+<div id="questionContainer"></div>
+<div class="modal-actions"><button class="btn light" data-close="builderModal">Cancel</button><button class="btn gold" id="saveBuiltAssessment">Save Assessment Draft</button></div>
+</div></div>
+
+<div class="modal" id="googleModal"><div class="modal-box">
+<div class="modal-header"><h2>Register Google Forms Assessment</h2><button class="close" data-close="googleModal">✕</button></div>
+<div class="field"><label>Assessment Title</label><input id="googleTitle" placeholder="Assessment title"></div>
+<div class="form-grid">
+<div class="field"><label>Grade</label><select id="googleGrade"><option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option></select></div>
+<div class="field"><label>Paper</label><select id="googlePaper"><option>Paper 1 - Physics</option><option>Paper 2 - Chemistry</option><option>Combined</option></select></div>
+<div class="field"><label>Total Marks</label><input id="googleMarks" type="number" min="1"></div>
+<div class="field"><label>Duration (minutes)</label><input id="googleDuration" type="number" min="1" value="60"></div>
+</div>
+<div class="field"><label>Google Form URL</label><input id="googleUrl" type="url" placeholder="https://docs.google.com/forms/..."></div>
+<div class="notice">The form must collect the learner's EMA student number to connect results to learner accounts.</div>
+<div class="modal-actions"><button class="btn light" data-close="googleModal">Cancel</button><button class="btn gold" id="saveGoogleAssessment">Save Assessment</button></div>
+</div></div>
+
+<div class="modal" id="aiModal"><div class="modal-box">
+<div class="modal-header"><h2>AI Physical Sciences Quiz Generator</h2><button class="close" data-close="aiModal">✕</button></div>
+<div class="form-grid">
+<div class="field"><label>Grade</label><select id="aiGrade"><option>10</option><option>11</option><option>12</option></select></div>
+<div class="field"><label>Paper</label><select id="aiPaper"><option>Paper 1 - Physics</option><option>Paper 2 - Chemistry</option><option>Combined</option></select></div>
+<div class="field"><label>Topic</label><input id="aiTopic" placeholder="e.g. Electricity"></div>
+<div class="field"><label>Total Marks</label><input id="aiMarks" type="number" value="50"></div>
+<div class="field"><label>Duration (minutes)</label><input id="aiDuration" type="number" value="60"></div>
+<div class="field"><label>Question count</label><input id="aiCount" type="number" value="10"></div>
+</div>
+<div class="field"><label>Additional instructions</label><textarea id="aiInstructions" placeholder="e.g. Include calculations, diagrams and application questions."></textarea></div>
+<div class="notice">This creates a ready-to-copy prompt. It does not automatically import AI-generated questions into EMA.</div>
+<div class="modal-actions"><button class="btn light" data-close="aiModal">Cancel</button><button class="btn" id="copyAIPrompt">Copy AI Prompt</button><button class="btn gold" id="openAI">Open ChatGPT</button></div>
+</div></div>
+
+<div class="modal" id="uploadModal"><div class="modal-box">
+<div class="modal-header"><h2>Register an Existing Exam</h2><button class="close" data-close="uploadModal">✕</button></div>
+<div class="notice">Direct file uploads require a configured Supabase Storage bucket. This form registers a hosted exam link.</div>
+<div class="field"><label>Exam Title</label><input id="uploadTitle" placeholder="Exam title"></div>
+<div class="form-grid">
+<div class="field"><label>Grade</label><select id="uploadGrade"><option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option></select></div>
+<div class="field"><label>Paper</label><select id="uploadPaper"><option>Paper 1 - Physics</option><option>Paper 2 - Chemistry</option><option>Combined</option></select></div>
+<div class="field"><label>Total Marks</label><input id="uploadMarks" type="number" min="1"></div>
+<div class="field"><label>Duration (minutes)</label><input id="uploadDuration" type="number" min="1" value="60"></div>
+</div>
+<div class="field"><label>Hosted PDF/Word URL</label><input id="uploadUrl" type="url" placeholder="https://..."></div>
+<div class="modal-actions"><button class="btn light" data-close="uploadModal">Cancel</button><button class="btn gold" id="saveUploadLink">Register Exam Link</button></div>
+</div></div>
+
+<div class="modal" id="resourceModal"><div class="modal-box">
+<div class="modal-header"><h2>Register Study Resource</h2><button class="close" data-close="resourceModal">✕</button></div>
+<div class="field"><label>Resource Title</label><input id="resourceTitle" placeholder="e.g. Grade 12 Electrostatics Notes"></div>
+<div class="form-grid">
+<div class="field"><label>Grade</label><select id="resourceGrade"><option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option></select></div>
+<div class="field"><label>Topic</label><input id="resourceTopic" placeholder="Topic"></div>
+</div>
+<div class="field"><label>Description</label><textarea id="resourceDescription" placeholder="Short description"></textarea></div>
+<div class="field"><label>PDF or Resource URL</label><input id="resourceUrl" type="url" placeholder="https://..."></div>
+<div class="modal-actions"><button class="btn light" data-close="resourceModal">Cancel</button><button class="btn gold" id="saveResource">Save Resource</button></div>
+</div></div>
+
+<div class="modal" id="announcementModal"><div class="modal-box">
+<div class="modal-header"><h2>Publish Announcement</h2><button class="close" data-close="announcementModal">✕</button></div>
+<div class="field"><label>Announcement Title</label><input id="announcementTitle" placeholder="Title"></div>
+<div class="field"><label>Message</label><textarea id="announcementBody" placeholder="Write your announcement..."></textarea></div>
+<div class="field"><label>Target Grade</label><select id="announcementGrade"><option value="">All Physical Sciences Grades</option><option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option></select></div>
+<div class="modal-actions"><button class="btn light" data-close="announcementModal">Cancel</button><button class="btn gold" id="saveAnnouncement">Publish</button></div>
+</div></div>
+
+<div class="modal" id="editModal"><div class="modal-box">
+<div class="modal-header"><h2>Edit Assessment</h2><button class="close" data-close="editModal">✕</button></div>
+<input type="hidden" id="editId">
+<div class="field"><label>Assessment Title</label><input id="editTitle"></div>
+<div class="form-grid">
+<div class="field"><label>Grade</label><select id="editGrade"><option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option></select></div>
+<div class="field"><label>Total Marks</label><input id="editMarks" type="number" min="1"></div>
+<div class="field"><label>Duration (minutes)</label><input id="editDuration" type="number" min="1"></div>
+<div class="field"><label>Paper</label><input id="editPaper"></div>
+</div>
+<div class="field"><label>Google Form / Exam URL</label><input id="editUrl" type="url"></div>
+<div class="modal-actions"><button class="btn light" data-close="editModal">Cancel</button><button class="btn gold" id="saveEdit">Save Changes</button></div>
+</div></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+    if (!window.EMA || !EMA.db) {
+        alert("Supabase connection not found. Check config.js and ema-supabase.js.");
+        return;
+    }
+
+    const db = EMA.db;
+    const SUBJECT = "Physical Sciences";
+    let adminProfile;
+    let questions = [];
+    let scienceLearners = [];
+
+    const $ = id => document.getElementById(id);
+    const escapeHTML = value => String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[char]));
+
+    function openModal(id){$(id).classList.add("show")}
+    function closeModal(id){$(id).classList.remove("show")}
+
+    document.querySelectorAll("[data-close]").forEach(button=>{
+        button.addEventListener("click",()=>closeModal(button.dataset.close));
+    });
+    document.querySelectorAll(".modal").forEach(modal=>{
+        modal.addEventListener("click",event=>{
+            if(event.target===modal)modal.classList.remove("show");
+        });
+    });
+
+    adminProfile = await EMA.requireSession(["admin"]);
+    if(!adminProfile)return;
+
+    $("adminWelcome").textContent="Welcome, "+(adminProfile.full_name||"Administrator");
+
+    $("logoutBtn").addEventListener("click",async event=>{
+        event.preventDefault();
+        await EMA.signOut();
+    });
+
+    $("openCreation").onclick=$("openCreation2").onclick=()=>openModal("creationModal");
+    $("openResource").onclick=$("openResource2").onclick=()=>openModal("resourceModal");
+    $("openAnnouncement").onclick=$("openAnnouncement2").onclick=()=>openModal("announcementModal");
+
+    $("chooseGoogle").onclick=()=>{closeModal("creationModal");openModal("googleModal")};
+    $("chooseBuilder").onclick=()=>{
+        closeModal("creationModal");
+        questions=[];
+        $("questionContainer").innerHTML="";
+        addQuestion();
+        openModal("builderModal");
+    };
+    $("chooseAI").onclick=()=>{closeModal("creationModal");openModal("aiModal")};
+    $("chooseUpload").onclick=()=>{closeModal("creationModal");openModal("uploadModal")};
+
+    async function loadDashboard(){
+        await Promise.all([
+            loadStatistics(),
+            loadPendingLearners(),
+            loadAssessments(),
+            loadResources(),
+            loadAnnouncements(),
+            loadLearnerDirectory()
+        ]);
+    }
+
+    async function loadStatistics(){
+        const [learners,pending,assessments,resources]=await Promise.all([
+            db.from("profiles").select("id",{count:"exact",head:true})
+                .eq("role","learner").eq("status","active").contains("subject_access",[SUBJECT]),
+            db.from("profiles").select("id",{count:"exact",head:true})
+                .eq("role","learner").eq("status","pending").contains("subject_access",[SUBJECT]),
+            db.from("assessments").select("id",{count:"exact",head:true}).eq("subject",SUBJECT),
+            db.from("resources").select("id",{count:"exact",head:true}).eq("subject",SUBJECT)
+        ]);
+
+        if(learners.error||pending.error||assessments.error||resources.error){
+            console.error(learners.error||pending.error||assessments.error||resources.error);
+            return;
+        }
+        $("learnerCount").textContent=learners.count??0;
+        $("pendingCount").textContent=pending.count??0;
+        $("assessmentCount").textContent=assessments.count??0;
+        $("resourceCount").textContent=resources.count??0;
+    }
+
+    async function loadPendingLearners(){
+        const container=$("pendingLearners");
+        const {data,error}=await db.from("profiles")
+            .select("id,full_name,email,student_number,grade")
+            .eq("role","learner").eq("status","pending")
+            .contains("subject_access",[SUBJECT]).order("created_at");
+
+        if(error){
+            container.innerHTML=`<div class="empty">Could not load requests: ${escapeHTML(error.message)}</div>`;
+            return;
+        }
+        container.innerHTML="";
+        if(!data?.length){
+            container.innerHTML='<div class="empty">No pending Physical Sciences learner requests.</div>';
+            return;
+        }
+
+        data.forEach(learner=>{
+            const card=document.createElement("div");
+            card.className="item";
+            const details=document.createElement("div");
+            const heading=document.createElement("h3");
+            heading.textContent=learner.full_name||"Learner";
+            const info=document.createElement("p");
+            info.textContent=`Grade ${learner.grade||"Not specified"} · ${learner.email||""} · ${learner.student_number||""}`;
+            details.append(heading,info);
+
+            const approve=document.createElement("button");
+            approve.className="btn green";
+            approve.textContent="Approve Learner";
+            approve.onclick=async()=>{
+                if(!confirm(`Approve ${learner.full_name}?`))return;
+                approve.disabled=true;
+                approve.textContent="Approving...";
+                const {error}=await db.from("profiles").update({status:"active"}).eq("id",learner.id);
+                if(error){
+                    alert("Approval failed: "+error.message);
+                    approve.disabled=false;
+                    approve.textContent="Approve Learner";
+                    return;
+                }
+                alert("Learner approved.");
+                await loadDashboard();
+            };
+            card.append(details,approve);
+            container.appendChild(card);
+        });
+    }
+
+    // PHYSICAL SCIENCES LEARNER DIRECTORY
+    async function loadLearnerDirectory(){
+        const container=$("directoryContent");
+        const summary=$("directorySummary");
+        container.textContent="Loading learners...";
+
+        const {data,error}=await db.from("profiles")
+            .select("id,full_name,email,student_number,grade,status,subject_access")
+            .eq("role","learner")
+            .contains("subject_access",[SUBJECT])
+            .in("grade",[10,11,12])
+            .order("grade",{ascending:true})
+            .order("full_name",{ascending:true});
+
+        if(error){
+            container.textContent="Could not load learners: "+error.message;
+            summary.textContent="Directory unavailable.";
+            console.error("Science directory error:",error);
+            return;
+        }
+
+        scienceLearners=data||[];
+        summary.textContent=`${scienceLearners.length} Physical Sciences learners registered across Grades 10–12.`;
+        renderLearnerDirectory();
+    }
+
+    function renderLearnerDirectory(){
+        const container=$("directoryContent");
+        const search=$("directorySearch").value.trim().toLowerCase();
+        container.innerHTML="";
+
+        const filtered=scienceLearners.filter(learner=>{
+            const searchable=[
+                learner.full_name,
+                learner.email,
+                learner.student_number,
+                learner.grade,
+                learner.status
+            ].join(" ").toLowerCase();
+            return searchable.includes(search);
+        });
+
+        if(!filtered.length){
+            container.innerHTML='<div class="empty">No matching Physical Sciences learners found.</div>';
+            return;
+        }
+
+        [10,11,12].forEach(grade=>{
+            const learners=filtered.filter(learner=>Number(learner.grade)===grade);
+            if(!learners.length)return;
+
+            const section=document.createElement("div");
+            section.className="directory-grade";
+            const heading=document.createElement("h3");
+            heading.textContent=`Grade ${grade} (${learners.length} learners)`;
+
+            const wrapper=document.createElement("div");
+            wrapper.className="directory-table-wrap";
+            const table=document.createElement("table");
+            table.className="directory-table";
+            table.innerHTML=`
+                <thead><tr>
+                    <th>Learner Name</th>
+                    <th>EMA Number</th>
+                    <th>Email Address</th>
+                    <th>Account Status</th>
+                    <th>Action</th>
+                </tr></thead><tbody></tbody>`;
+
+            const tbody=table.querySelector("tbody");
+            learners.forEach(learner=>{
+                const row=document.createElement("tr");
+                const name=document.createElement("td");
+                name.textContent=learner.full_name||"Not provided";
+                const number=document.createElement("td");
+                number.textContent=learner.student_number||"Not assigned";
+                const email=document.createElement("td");
+                email.textContent=learner.email||"Not provided";
+                const statusCell=document.createElement("td");
+                const status=document.createElement("span");
+                const statusValue=learner.status||"unknown";
+                status.className="directory-status "+
+                    (["active","pending","suspended"].includes(statusValue)?statusValue:"");
+                status.textContent=statusValue.charAt(0).toUpperCase()+statusValue.slice(1);
+                statusCell.appendChild(status);
+
+                const actionCell=document.createElement("td");
+                const removeButton=document.createElement("button");
+                removeButton.type="button";
+                removeButton.className="btn small red remove-learner";
+                removeButton.dataset.learnerId=learner.id;
+                removeButton.textContent="Remove";
+                actionCell.appendChild(removeButton);
+
+                row.append(name,number,email,statusCell,actionCell);
+                tbody.appendChild(row);
+            });
+
+            wrapper.appendChild(table);
+            section.append(heading,wrapper);
+            container.appendChild(section);
+        });
+
+        container.querySelectorAll(".remove-learner").forEach(button=>{
+            button.addEventListener("click",()=>{
+                removePhysicalSciencesLearner(button.dataset.learnerId);
+            });
+        });
+    }
+
+    // REMOVE PHYSICAL SCIENCES ACCESS ONLY
+    async function removePhysicalSciencesLearner(learnerId){
+        const learner=scienceLearners.find(item=>item.id===learnerId);
+        if(!learner)return;
+
+        const learnerName=learner.full_name||"this learner";
+        const confirmed=confirm(
+            `Remove ${learnerName} from Physical Sciences?\n\nThis removes Physical Sciences access only. Their account and access to other subjects, including Mathematics, will remain.`
+        );
+        if(!confirmed)return;
+
+        try{
+            const {data:current,error:fetchError}=await db
+                .from("profiles")
+                .select("id,full_name,subject_access")
+                .eq("id",learnerId)
+                .eq("role","learner")
+                .single();
+
+            if(fetchError)throw fetchError;
+            if(!current)throw new Error("Learner profile was not found.");
+
+            const currentAccess=Array.isArray(current.subject_access)
+                ?current.subject_access
+                :[];
+
+            if(!currentAccess.includes(SUBJECT)){
+                alert("This learner no longer has Physical Sciences access.");
+                await loadDashboard();
+                return;
+            }
+
+            const updatedAccess=currentAccess.filter(subject=>subject!==SUBJECT);
+
+            const {error:updateError}=await db
+                .from("profiles")
+                .update({subject_access:updatedAccess})
+                .eq("id",learnerId)
+                .eq("role","learner");
+
+            if(updateError)throw updateError;
+
+            alert(`${learnerName} has been removed from Physical Sciences. Their account and other subject access remain unchanged.`);
+            await loadDashboard();
+
+        }catch(error){
+            console.error("Physical Sciences learner removal failed:",error);
+            alert("Could not remove learner: "+error.message);
+            await loadLearnerDirectory();
+        }
+    }
+
+    $("directorySearch").addEventListener("input",renderLearnerDirectory);
+    $("refreshDirectory").addEventListener("click",loadLearnerDirectory);
+
+    // ASSESSMENT LIBRARY
+    async function loadAssessments(){
+        const container=$("assessmentList");
+        const {data,error}=await db.from("assessments")
+            .select("*").eq("subject",SUBJECT)
+            .order("created_at",{ascending:false});
+
+        if(error){
+            container.innerHTML=`<div class="empty">Could not load assessments: ${escapeHTML(error.message)}</div>`;
+            return;
+        }
+        container.innerHTML="";
+        if(!data?.length){
+            container.innerHTML='<div class="empty">No Physical Sciences assessments created yet.</div>';
+            return;
+        }
+
+        data.forEach(item=>{
+            const card=document.createElement("div");
+            card.className="item";
+            const info=document.createElement("div");
+            const heading=document.createElement("h3");
+            heading.textContent=item.title;
+            const status=document.createElement("span");
+            status.className="tag "+(item.published?"published":"draft");
+            status.textContent=item.published?"PUBLISHED":"DRAFT";
+            const details=document.createElement("p");
+            details.textContent=`Grade ${item.grade} · ${item.paper||"Physical Sciences"} · ${item.max_score||0} marks · ${item.duration_minutes||45} minutes · ${item.assessment_type||"built_in"}`;
+            info.append(heading,status,details);
+
+            const actions=document.createElement("div");
+            actions.className="item-actions";
+
+            const edit=document.createElement("button");
+            edit.className="btn small light";
+            edit.textContent="Edit";
+            edit.onclick=()=>editAssessment(item);
+
+            const publish=document.createElement("button");
+            publish.className="btn small "+(item.published?"dark":"green");
+            publish.textContent=item.published?"Unpublish":"Publish";
+            publish.onclick=async()=>{
+                const next=!item.published;
+                if(next&&!confirm(`Publish "${item.title}" for Grade ${item.grade} Physical Sciences learners?`))return;
+                const {error}=await db.from("assessments").update({published:next}).eq("id",item.id);
+                if(error)return alert("Could not update assessment: "+error.message);
+                await loadDashboard();
+            };
+
+            const remove=document.createElement("button");
+            remove.className="btn small red";
+            remove.textContent="Delete";
+            remove.onclick=async()=>{
+                if(!confirm(`Delete "${item.title}"? This will also remove its saved questions.`))return;
+                const q=await db.from("questions").delete().eq("assessment_id",item.id);
+                if(q.error)return alert("Could not delete questions: "+q.error.message);
+                const result=await db.from("assessments").delete().eq("id",item.id);
+                if(result.error)return alert("Could not delete assessment: "+result.error.message);
+                await loadDashboard();
+            };
+
+            actions.append(edit,publish,remove);
+            card.append(info,actions);
+            container.appendChild(card);
+        });
+    }
+
+    function editAssessment(item){
+        $("editId").value=item.id;
+        $("editTitle").value=item.title||"";
+        $("editGrade").value=String(item.grade||10);
+        $("editMarks").value=item.max_score||"";
+        $("editDuration").value=item.duration_minutes||45;
+        $("editPaper").value=item.paper||"";
+        $("editUrl").value=item.google_form_url||"";
+        openModal("editModal");
+    }
+
+    $("saveEdit").onclick=async()=>{
+        const title=$("editTitle").value.trim();
+        const marks=Number($("editMarks").value);
+        const duration=Number($("editDuration").value);
+        if(!title||marks<=0||duration<=0)return alert("Complete the title, marks and duration.");
+        const {error}=await db.from("assessments").update({
+            title,grade:Number($("editGrade").value),max_score:marks,
+            duration_minutes:duration,paper:$("editPaper").value.trim(),
+            google_form_url:$("editUrl").value.trim()||null
+        }).eq("id",$("editId").value);
+        if(error)return alert("Update failed: "+error.message);
+        closeModal("editModal");
+        await loadDashboard();
+    };
+
+    // QUESTION BUILDER
+    function addQuestion(){
+        const index=document.querySelectorAll(".question-card").length;
+        const card=document.createElement("div");
+        card.className="question-card";
+        card.innerHTML=`
+            <button class="btn red small remove-question" type="button">Remove</button>
+            <h4>Question ${index+1}</h4>
+            <div class="field"><label>Question</label><textarea class="q-text" placeholder="Enter the question"></textarea></div>
+            <div class="form-grid">
+                <div class="field"><label>Question Type</label><select class="q-type">
+                    <option value="mcq">Multiple Choice (MCQ)</option>
+                    <option value="short_answer">Short Answer</option>
+                    <option value="long_answer">Long Answer / Written</option>
+                </select></div>
+                <div class="field"><label>Marks</label><input class="q-marks" type="number" min="1" value="1"></div>
+            </div>
+            <div class="q-options">
+                <div class="field"><label>Option A</label><input class="option-a"></div>
+                <div class="field"><label>Option B</label><input class="option-b"></div>
+                <div class="field"><label>Option C</label><input class="option-c"></div>
+                <div class="field"><label>Option D</label><input class="option-d"></div>
+                <div class="field full"><label>Correct Answer (A, B, C or D)</label><input class="q-answer" placeholder="A"></div>
+            </div>`;
+        card.querySelector(".remove-question").onclick=()=>{
+            card.remove();
+            renumberQuestions();
+        };
+        card.querySelector(".q-type").onchange=event=>{
+            card.querySelector(".q-options").style.display=event.target.value==="mcq"?"grid":"none";
+        };
+        $("questionContainer").appendChild(card);
+    }
+
+    function renumberQuestions(){
+        document.querySelectorAll(".question-card h4").forEach((heading,index)=>{
+            heading.textContent=`Question ${index+1}`;
+        });
+    }
+    $("addQuestion").onclick=addQuestion;
+
+    async function saveAssessment({title,grade,paper,marks,duration,type,url=null}){
+        const {data,error}=await db.from("assessments").insert({
+            title,subject:SUBJECT,grade:Number(grade),paper,
+            duration_minutes:Number(duration),max_score:Number(marks),
+            assessment_type:type,google_form_url:url,published:false,
+            created_by:adminProfile.id
+        }).select("id").single();
+        if(error)throw error;
+        return data.id;
+    }
+
+    $("saveBuiltAssessment").onclick=async()=>{
+        const title=$("builderTitle").value.trim();
+        const cards=[...document.querySelectorAll(".question-card")];
+        if(!title)return alert("Enter an assessment title.");
+        if(!cards.length)return alert("Add at least one question.");
+
+        const prepared=[];
+        for(const card of cards){
+            const question=card.querySelector(".q-text").value.trim();
+            const type=card.querySelector(".q-type").value;
+            const marks=Number(card.querySelector(".q-marks").value);
+            if(!question||marks<=0)return alert("Complete every question and its marks.");
+
+            const options=type==="mcq"?{
+                A:card.querySelector(".option-a").value.trim(),
+                B:card.querySelector(".option-b").value.trim(),
+                C:card.querySelector(".option-c").value.trim(),
+                D:card.querySelector(".option-d").value.trim()
+            }:null;
+            const answer=type==="mcq"?card.querySelector(".q-answer").value.trim().toUpperCase():null;
+
+            if(type==="mcq"&&(!options.A||!options.B||!options.C||!options.D||!["A","B","C","D"].includes(answer))){
+                return alert("For each MCQ, complete all four options and enter the correct answer as A, B, C or D.");
+            }
+            prepared.push({
+                question_text:question,question_type:type,options,
+                correct_answer:answer,marks,position:prepared.length+1
+            });
+        }
+
+        const totalMarks=prepared.reduce((sum,q)=>sum+q.marks,0);
+        const button=$("saveBuiltAssessment");
+        button.disabled=true;
+        button.textContent="Saving...";
+        try{
+            const assessmentId=await saveAssessment({
+                title,grade:$("builderGrade").value,paper:$("builderPaper").value,
+                marks:totalMarks,duration:$("builderDuration").value,type:"built_in"
+            });
+            const rows=prepared.map(q=>({...q,assessment_id:assessmentId}));
+            const {error}=await db.from("questions").insert(rows);
+            if(error){
+                await db.from("assessments").delete().eq("id",assessmentId);
+                throw error;
+            }
+            alert("Assessment draft and questions saved successfully. Review it in the assessment library before publishing.");
+            closeModal("builderModal");
+            await loadDashboard();
+        }catch(error){
+            alert("Could not save assessment: "+error.message);
+        }finally{
+            button.disabled=false;
+            button.textContent="Save Assessment Draft";
+        }
+    };
+
+    // GOOGLE FORMS
+    $("saveGoogleAssessment").onclick=async()=>{
+        const title=$("googleTitle").value.trim();
+        const url=$("googleUrl").value.trim();
+        const marks=Number($("googleMarks").value);
+        const duration=Number($("googleDuration").value);
+        if(!title||!/^https:\/\/docs\.google\.com\/forms\//i.test(url)||marks<=0||duration<=0){
+            return alert("Enter a title, valid Google Forms URL, total marks and duration.");
+        }
+        try{
+            await saveAssessment({
+                title,grade:$("googleGrade").value,paper:$("googlePaper").value,
+                marks,duration,type:"google_form",url
+            });
+            alert("Google Forms assessment registered as a draft.");
+            closeModal("googleModal");
+            await loadDashboard();
+        }catch(error){
+            alert("Could not save assessment: "+error.message);
+        }
+    };
+
+    // AI PROMPT GENERATOR
+    function buildAIPrompt(){
+        return `Create a CAPS-aligned South African Physical Sciences assessment for EVERYTHING'S MATHS.
+
+Grade: ${$("aiGrade").value}
+Paper: ${$("aiPaper").value}
+Topic: ${$("aiTopic").value}
+Total marks: ${$("aiMarks").value}
+Duration: ${$("aiDuration").value} minutes
+Number of questions: ${$("aiCount").value}
+
+Additional instructions: ${$("aiInstructions").value||"Use a suitable range of difficulty."}
+
+Requirements:
+1. Follow the South African CAPS curriculum for the specified grade and paper.
+2. Include clear instructions and mark allocations.
+3. Include appropriate calculations, units and scientific notation where relevant.
+4. Include a complete memorandum with worked solutions.
+5. Make the total marks add up exactly to the requested total.
+6. Present the question paper separately from the memorandum.
+7. Use original questions and do not invent curriculum requirements.`;
+    }
+
+    $("copyAIPrompt").onclick=async()=>{
+        try{
+            await navigator.clipboard.writeText(buildAIPrompt());
+            alert("AI prompt copied. Paste it into your AI assistant.");
+        }catch{
+            prompt("Copy this AI prompt:",buildAIPrompt());
+        }
+    };
+    $("openAI").onclick=()=>{
+        const promptText=buildAIPrompt();
+        navigator.clipboard?.writeText(promptText).catch(()=>{});
+        window.open("https://chatgpt.com/","_blank","noopener");
+        alert("Your prompt has been copied where clipboard access is available. Paste it into ChatGPT.");
+    };
+
+    // REGISTER HOSTED EXAM LINK
+    $("saveUploadLink").onclick=async()=>{
+        const title=$("uploadTitle").value.trim();
+        const url=$("uploadUrl").value.trim();
+        const marks=Number($("uploadMarks").value);
+        const duration=Number($("uploadDuration").value);
+        if(!title||!/^https:\/\/\S+/i.test(url)||marks<=0||duration<=0){
+            return alert("Enter a title, valid HTTPS file link, marks and duration.");
+        }
+        try{
+            await saveAssessment({
+                title,grade:$("uploadGrade").value,paper:$("uploadPaper").value,
+                marks,duration,type:"google_form",url
+            });
+            alert("Hosted exam link registered as an assessment draft.");
+            closeModal("uploadModal");
+            await loadDashboard();
+        }catch(error){
+            alert("Could not register exam: "+error.message);
+        }
+    };
+
+    // RESOURCES
+    $("saveResource").onclick=async()=>{
+        const title=$("resourceTitle").value.trim();
+        const url=$("resourceUrl").value.trim();
+        const topic=$("resourceTopic").value.trim();
+        if(!title||!topic||!/^https:\/\/\S+/i.test(url)){
+            return alert("Enter a title, topic and valid HTTPS resource URL.");
+        }
+        const {error}=await db.from("resources").insert({
+            title,
+            description:$("resourceDescription").value.trim()||"Physical Sciences study resource",
+            subject:SUBJECT,grade:Number($("resourceGrade").value),
+            topic,file_path:url,created_by:adminProfile.id
+        });
+        if(error)return alert("Could not save resource: "+error.message);
+        alert("Resource registered successfully.");
+        closeModal("resourceModal");
+        await loadDashboard();
+    };
+
+    async function loadResources(){
+        const container=$("resourceList");
+        const {data,error}=await db.from("resources")
+            .select("id,title,description,grade,topic,file_path,created_at")
+            .eq("subject",SUBJECT).order("created_at",{ascending:false}).limit(15);
+        if(error){
+            container.innerHTML=`<div class="empty">Could not load resources: ${escapeHTML(error.message)}</div>`;
+            return;
+        }
+        container.innerHTML="";
+        if(!data?.length){
+            container.innerHTML='<div class="empty">No resources registered yet.</div>';
+            return;
+        }
+        data.forEach(item=>{
+            const card=document.createElement("div");
+            card.className="item";
+            const info=document.createElement("div");
+            const title=document.createElement("h3");
+            title.textContent=item.title;
+            const details=document.createElement("p");
+            details.textContent=`Grade ${item.grade} · ${item.topic||"General"}`;
+            const description=document.createElement("p");
+            description.textContent=item.description||"";
+            info.append(title,details,description);
+
+            const actions=document.createElement("div");
+            actions.className="item-actions";
+            if(item.file_path){
+                const link=document.createElement("a");
+                link.className="btn small";
+                link.href=item.file_path;
+                link.target="_blank";
+                link.rel="noopener noreferrer";
+                link.textContent="Open Resource";
+                actions.appendChild(link);
+            }
+            const remove=document.createElement("button");
+            remove.className="btn small red";
+            remove.textContent="Delete";
+            remove.onclick=async()=>{
+                if(!confirm(`Delete resource "${item.title}"?`))return;
+                const {error}=await db.from("resources").delete().eq("id",item.id);
+                if(error)return alert("Could not delete resource: "+error.message);
+                await loadDashboard();
+            };
+            actions.appendChild(remove);
+            card.append(info,actions);
+            container.appendChild(card);
+        });
+    }
+
+    // ANNOUNCEMENTS
+    $("saveAnnouncement").onclick=async()=>{
+        const title=$("announcementTitle").value.trim();
+        const body=$("announcementBody").value.trim();
+        if(!title||!body)return alert("Enter an announcement title and message.");
+        const gradeValue=$("announcementGrade").value;
+        const {error}=await db.from("announcements").insert({
+            title,body,subject:SUBJECT,
+            grade:gradeValue?Number(gradeValue):null,
+            created_by:adminProfile.id
+        });
+        if(error)return alert("Could not publish announcement: "+error.message);
+        alert("Announcement published successfully.");
+        closeModal("announcementModal");
+        await loadDashboard();
+    };
+
+    async function loadAnnouncements(){
+        const container=$("announcementList");
+        const {data,error}=await db.from("announcements")
+            .select("id,title,body,grade,created_at")
+            .eq("subject",SUBJECT).order("created_at",{ascending:false}).limit(10);
+        if(error){
+            container.innerHTML=`<div class="empty">Could not load announcements: ${escapeHTML(error.message)}</div>`;
+            return;
+        }
+        container.innerHTML="";
+        if(!data?.length){
+            container.innerHTML='<div class="empty">No announcements yet.</div>';
+            return;
+        }
+        data.forEach(item=>{
+            const card=document.createElement("div");
+            card.className="item";
+            const info=document.createElement("div");
+            const heading=document.createElement("h3");
+            heading.textContent=item.title;
+            const message=document.createElement("p");
+            message.textContent=item.body;
+            const target=document.createElement("p");
+            target.textContent=item.grade?`Target: Grade ${item.grade}`:"Target: All Physical Sciences grades";
+            info.append(heading,message,target);
+            const remove=document.createElement("button");
+            remove.className="btn small red";
+            remove.textContent="Delete";
+            remove.onclick=async()=>{
+                if(!confirm("Delete this announcement?"))return;
+                const {error}=await db.from("announcements").delete().eq("id",item.id);
+                if(error)return alert("Could not delete announcement: "+error.message);
+                await loadDashboard();
+            };
+            card.append(info,remove);
+            container.appendChild(card);
+        });
+    }
+
+    await loadDashboard();
+});
+</script>
+</body>
+</html>

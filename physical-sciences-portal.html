@@ -1,0 +1,551 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#001f66">
+<link rel="icon" type="image/png" href="logo.png.png">
+<link rel="stylesheet" href="style.css">
+<title>Physical Sciences Portal | EVERYTHING'S MATHS</title>
+
+<style>
+:root {
+    --royal:#001f66;
+    --blue:#16a9e8;
+    --light-blue:#eaf4ff;
+    --gold:#ffd700;
+    --text:#203047;
+    --muted:#64748b;
+    --border:#dce5f0;
+    --shadow:0 5px 16px rgba(0,31,102,.07);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:85px}
+body{margin:0;font-family:"Segoe UI",Arial,sans-serif;color:var(--text);background:#f5f7fb}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:10px 5%;background:var(--royal);box-shadow:0 2px 8px #0002}
+.nav-brand{display:flex;align-items:center;gap:10px;color:white;font-size:.95rem;font-weight:800;letter-spacing:.5px}
+.nav-brand img{width:48px;height:48px;object-fit:contain;filter:drop-shadow(0 0 5px white)}
+.menu{display:flex;align-items:center;gap:23px}
+.menu a{color:white;font-size:.9rem;font-weight:600}
+.menu a:hover{color:var(--gold)}
+.dashboard-page{width:min(1080px,92%);margin:auto;padding:25px 0 45px}
+.welcome-panel{display:flex;align-items:center;gap:22px;padding:25px;background:white;border:1px solid var(--border);border-left:5px solid var(--royal);border-radius:12px;box-shadow:var(--shadow)}
+.welcome-logo{width:100px;height:100px;flex-shrink:0;object-fit:contain}
+.welcome-content{min-width:0}
+#welcomeName{margin:0 0 7px;color:var(--royal);font-size:clamp(1.6rem,3vw,2.2rem)}
+.dashboard-subtitle{margin:0;color:var(--muted);line-height:1.6}
+.quick-nav{display:flex;flex-wrap:wrap;gap:9px;margin-top:17px}
+.portal-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 16px;color:white;background:var(--royal);border:1px solid var(--royal);border-radius:7px;font-size:.88rem;font-weight:700;cursor:pointer;transition:.2s}
+.portal-btn:hover{background:#073b91;transform:translateY(-1px)}
+.quick-nav .portal-btn{background:white;color:var(--royal);border-color:var(--border)}
+.quick-nav .portal-btn:hover{background:var(--light-blue)}
+.stats-container{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:22px 0 28px}
+.stat-box{padding:18px 12px;text-align:center;background:white;border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow)}
+.stat-box h2{margin:0 0 5px;color:var(--royal);font-size:1.7rem}
+.stat-box p{margin:0;color:var(--muted);font-size:.84rem}
+.portal-heading{margin:30px 0 15px;color:var(--royal);font-size:1.35rem}
+.exam-card-wrap{margin:25px 0}
+.exam-card{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px;color:white;background:var(--royal);border:1px solid #2aa9ec;border-radius:12px;box-shadow:0 0 8px #16a9e873;transition:.25s}
+.exam-card:hover{transform:translateY(-2px);box-shadow:0 0 13px #16a9e8b3}
+.exam-badge{display:inline-block;margin-bottom:8px;padding:5px 9px;border-radius:4px;background:var(--gold);color:var(--royal);font-size:.7rem;font-weight:800}
+.exam-card h2{margin:0 0 9px;color:white;font-size:1.6rem}
+.exam-card p{max-width:650px;margin:0;color:#e3efff;font-size:.92rem;line-height:1.65}
+.exam-action{display:inline-flex;flex-shrink:0;align-items:center;justify-content:center;padding:13px 18px;border-radius:7px;background:var(--gold);color:var(--royal);font-weight:800;font-size:.9rem}
+.attendance-section{margin:25px 0}
+.attendance-toggle{width:100%;display:flex;align-items:center;gap:14px;padding:17px 20px;text-align:left;background:white;border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow);color:var(--royal);cursor:pointer}
+.attendance-toggle:hover,.attendance-toggle[aria-expanded=true]{background:#fafdff;border-color:var(--blue)}
+.attendance-icon{display:grid;place-items:center;flex-shrink:0;width:43px;height:43px;border-radius:8px;background:var(--light-blue);font-size:1.35rem}
+.attendance-title{flex:1;min-width:0}
+.attendance-title strong{display:block;margin-bottom:4px;font-size:1.02rem}
+.attendance-title small{display:block;color:var(--muted);font-size:.82rem;line-height:1.5}
+.attendance-arrow{flex-shrink:0;transition:transform .25s}
+.attendance-toggle[aria-expanded=true] .attendance-arrow{transform:rotate(180deg)}
+.attendance-content{display:none;margin-top:12px;padding:15px;background:white;border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow)}
+.attendance-content.open{display:block;animation:revealForm .25s ease}
+@keyframes revealForm{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+.attendance-frame{display:block;width:100%;height:700px;border:0;border-radius:5px;background:white}
+.attendance-fallback{margin:12px 0 0;color:var(--muted);font-size:.85rem}
+.attendance-fallback a{color:#0878ba;text-decoration:underline;font-weight:700}
+.portal-container{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.subject-portal{padding:20px;background:white;border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow);transition:.2s}
+.subject-portal:hover{transform:translateY(-2px);border-color:#a6d9f5}
+.portal-icon{display:grid;place-items:center;width:43px;height:43px;margin-bottom:12px;border-radius:8px;background:var(--light-blue);color:var(--royal);font-size:1.3rem;font-weight:800}
+.subject-portal h2{margin:0 0 8px;color:var(--royal);font-size:1.12rem}
+.subject-portal p{margin:0 0 15px;color:var(--muted);font-size:.88rem;line-height:1.6}
+.resource-link{display:flex;width:100%;margin-top:9px;white-space:normal;text-align:left}
+.task-card{padding:20px;background:white;border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow)}
+.task-card h3{margin:0 0 10px;color:var(--royal)}
+.task-card p{color:var(--muted);font-size:.92rem;line-height:1.7}
+.task-container{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.progress-section{padding:22px;background:white;border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow)}
+.progress-section p{margin:16px 0 7px;color:var(--royal);font-size:.9rem;font-weight:700}
+.progress-bar{height:13px;overflow:hidden;background:#e8edf5;border-radius:20px}
+.progress-fill{height:100%;background:linear-gradient(90deg,#001f66,#16a9e8);border-radius:inherit}
+.achievement{display:flex;align-items:center;gap:15px;border-left:4px solid var(--gold)}
+.achievement-icon{font-size:2rem}
+.achievement h3{margin:0 0 5px}
+.achievement p{margin:0}
+.status-message{padding:15px;background:white;border:1px solid var(--border);border-radius:9px;color:var(--muted)}
+footer{padding:20px;text-align:center;color:#e2eaff;background:#001746;font-size:.88rem}
+footer strong{color:var(--gold)}
+@media(max-width:760px){
+nav{flex-wrap:wrap;padding:10px 4%}
+.menu{gap:15px;flex-wrap:wrap}
+.menu a{font-size:.83rem}
+.stats-container{grid-template-columns:repeat(2,minmax(0,1fr))}
+.portal-container,.task-container{grid-template-columns:repeat(2,minmax(0,1fr))}
+.exam-card{align-items:flex-start;flex-direction:column}
+.exam-action{width:100%}
+}
+@media(max-width:480px){
+.dashboard-page{width:93%;padding-top:17px}
+.welcome-panel{align-items:flex-start;gap:14px;padding:17px}
+.welcome-logo{width:66px;height:66px}
+#welcomeName{font-size:1.45rem}
+.dashboard-subtitle{font-size:.85rem}
+.quick-nav{gap:7px}
+.quick-nav .portal-btn{padding:8px 10px;font-size:.78rem}
+.portal-container,.task-container{grid-template-columns:1fr}
+.exam-card{padding:19px}
+.exam-card h2{font-size:1.35rem}
+.attendance-toggle{padding:14px 12px;gap:10px}
+.attendance-title strong{font-size:.93rem}
+.attendance-title small{font-size:.78rem}
+.attendance-frame{height:760px}
+.attendance-content{padding:8px}
+}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <a class="nav-brand" href="learner-dashboard.html">
+        <img src="logo.png.png" alt="EVERYTHING'S MATHS logo">
+        <span>EVERYTHING'S MATHS</span>
+    </a>
+    <div class="menu">
+        <a href="learner-dashboard.html">Dashboard</a>
+        <a href="#attendance">Attendance</a>
+        <a href="#weekly-quiz">Assessments</a>
+        <a href="#" id="logoutLink">Logout</a>
+    </div>
+</nav>
+
+<main class="dashboard-page">
+
+<header class="welcome-panel" id="dashboard">
+    <img src="logo.png.png" class="welcome-logo" alt="EVERYTHING'S MATHS logo">
+    <div class="welcome-content">
+        <h1 id="welcomeName">Welcome Back 👋</h1>
+        <p class="dashboard-subtitle" id="learnerDetails">
+            Physical Sciences Portal — explore Physics and Chemistry,
+            practise your skills and prepare for assessments.
+        </p>
+        <div class="quick-nav">
+            <a href="#physics-topics" class="portal-btn">⚛ Physics</a>
+            <a href="#chemistry-topics" class="portal-btn">🧪 Chemistry</a>
+            <a href="#weekly-quiz" class="portal-btn">📝 Assessments</a>
+            <a href="#attendance" class="portal-btn">📋 Attendance</a>
+        </div>
+    </div>
+</header>
+
+<section class="stats-container" aria-label="Learning statistics">
+    <div class="stat-box"><h2 id="averageStat">--</h2><p>Current Average</p></div>
+    <div class="stat-box"><h2 id="resourceStat">--</h2><p>Resources Available</p></div>
+    <div class="stat-box"><h2 id="assessmentStat">--</h2><p>Assessments Completed</p></div>
+    <div class="stat-box"><h2 id="achievementStat">--</h2><p>Achievements</p></div>
+</section>
+
+<section class="exam-card-wrap" id="exam-centre">
+    <a class="exam-card" href="exam-site.html" aria-label="Enter the EMA Exam Site">
+        <div>
+            <span class="exam-badge">ONLINE ASSESSMENT CENTRE</span>
+            <h2>📝 EMA Exam Test Centre</h2>
+            <p>Access Mathematics and Physical Sciences assessments for Grades 9–12. Choose your grade and paper, then complete available online tests.</p>
+        </div>
+        <span class="exam-action">ENTER EXAM SITE →</span>
+    </a>
+</section>
+
+<section class="attendance-section" id="attendance">
+    <button type="button" class="attendance-toggle" id="attendanceToggle" aria-expanded="false" aria-controls="attendanceContent">
+        <span class="attendance-icon">📋</span>
+        <span class="attendance-title">
+            <strong>PHYSICAL SCIENCES ATTENDANCE REGISTER</strong>
+            <small>Click here to open the class attendance form.</small>
+        </span>
+        <span class="attendance-arrow">⌄</span>
+    </button>
+
+    <div class="attendance-content" id="attendanceContent">
+        <iframe class="attendance-frame"
+            src="https://docs.google.com/forms/d/e/1FAIpQLSeni2XH7abGThaorFarYcyi0OfVjqc0v96QhjFjgv0DDiLybA/viewform?embedded=true"
+            title="Physical Sciences Attendance Register" loading="lazy"></iframe>
+        <p class="attendance-fallback">
+            If the form does not load,
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeni2XH7abGThaorFarYcyi0OfVjqc0v96QhjFjgv0DDiLybA/viewform" target="_blank" rel="noopener noreferrer">open the attendance register directly</a>.
+        </p>
+    </div>
+</section>
+
+<h2 class="portal-heading" id="physics-topics">⚛ Physics Topics</h2>
+<div class="portal-container" id="physicsContainer">
+    <div class="status-message">Loading Physics resources...</div>
+</div>
+
+<h2 class="portal-heading" id="chemistry-topics">🧪 Chemistry Topics</h2>
+<div class="portal-container" id="chemistryContainer">
+    <div class="status-message">Loading Chemistry resources...</div>
+</div>
+
+<h2 class="portal-heading" id="weekly-quiz">📝 Physical Sciences Assessments</h2>
+<div class="task-container" id="assessmentsContainer">
+    <div class="status-message">Loading assessments...</div>
+</div>
+
+<h2 class="portal-heading" id="tasks">📅 Upcoming Tasks</h2>
+<div class="task-container" id="tasksContainer">
+    <div class="task-card">Your published assessments will appear here.</div>
+</div>
+
+<h2 class="portal-heading" id="progress">📈 Learning Progress</h2>
+<div class="progress-section" id="progressContainer">
+    <p>Complete assessments to build your learning record.</p>
+</div>
+
+<h2 class="portal-heading">📢 Physical Sciences Announcements</h2>
+<div class="task-container" id="announcementsContainer">
+    <div class="status-message">Loading announcements...</div>
+</div>
+
+<h2 class="portal-heading">🏆 Latest Achievement</h2>
+<div class="task-card achievement" id="achievementCard">
+    <div class="achievement-icon">🏆</div>
+    <div>
+        <h3>Your learning journey starts here!</h3>
+        <p>Keep practising Physics and Chemistry to reach your next learning goal.</p>
+    </div>
+</div>
+
+</main>
+
+<footer>
+    © <span id="currentYear"></span>
+    <strong>EVERYTHING'S MATHS</strong> · Physical Sciences Portal
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="ema-supabase.js"></script>
+
+<script>
+document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+const attendanceToggle = document.getElementById("attendanceToggle");
+const attendanceContent = document.getElementById("attendanceContent");
+
+attendanceToggle.addEventListener("click", () => {
+    const isOpen = attendanceToggle.getAttribute("aria-expanded") === "true";
+    attendanceToggle.setAttribute("aria-expanded", String(!isOpen));
+    attendanceContent.classList.toggle("open", !isOpen);
+});
+
+document.getElementById("logoutLink").addEventListener("click", async event => {
+    event.preventDefault();
+    await EMA.signOut();
+});
+
+const physicsTopics = [
+    "Motion",
+    "Newton's Laws",
+    "Momentum & Impulse",
+    "Work, Energy & Power",
+    "Gravitation",
+    "Electrostatics"
+];
+
+const chemistryTopics = [
+    "Organic Chemistry",
+    "Chemical Change",
+    "Rate of Reactions",
+    "Chemical Equilibrium",
+    "Acids & Bases"
+];
+
+function makeElement(tag, className, text) {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    if (text !== undefined) element.textContent = text;
+    return element;
+}
+
+async function initialisePortal() {
+    try {
+        if (!window.EMA) {
+            throw new Error("Supabase could not initialise. Check config.js and ema-supabase.js.");
+        }
+
+        const profile = await EMA.requireSession(["learner"]);
+        if (!profile) return;
+
+        if (profile.subject_access &&
+            !profile.subject_access.includes("Physical Sciences")) {
+            alert("Your account does not currently have Physical Sciences access.");
+            location.replace("learner-dashboard.html");
+            return;
+        }
+
+        document.getElementById("welcomeName").textContent =
+            `Welcome Back, ${profile.full_name || "Learner"} 👋`;
+
+        document.getElementById("learnerDetails").textContent =
+            `Grade ${profile.grade || "Not assigned"} · Physical Sciences Portal — explore Physics and Chemistry.`;
+
+        await Promise.all([
+            loadResources(profile),
+            loadAssessments(profile),
+            loadAnnouncements(profile)
+        ]);
+
+    } catch (error) {
+        console.error("Physical Sciences portal error:", error);
+        alert("The Physical Sciences Portal could not load. Please check your connection and refresh the page.");
+    }
+}
+
+
+// LOAD PHYSICS AND CHEMISTRY RESOURCES
+
+async function loadResources(profile) {
+    const { data, error } = await EMA.db
+        .from("resources")
+        .select("*")
+        .eq("subject", "Physical Sciences")
+        .eq("grade", profile.grade)
+        .order("created_at", { ascending: false });
+
+    if (error) throw error;
+
+    const resources = data || [];
+
+    document.getElementById("resourceStat").textContent = resources.length;
+
+    renderTopicCards("physicsContainer", physicsTopics, resources);
+    renderTopicCards("chemistryContainer", chemistryTopics, resources);
+}
+
+function renderTopicCards(containerId, topics, resources) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = "";
+
+    topics.forEach(topic => {
+        const matching = resources.filter(resource =>
+            (resource.topic || "").trim().toLowerCase() === topic.toLowerCase()
+        );
+
+        const card = makeElement("article", "subject-portal");
+        card.appendChild(makeElement("div", "portal-icon", topic.charAt(0)));
+        card.appendChild(makeElement("h2", "", topic));
+        card.appendChild(makeElement("p", "", `${matching.length} resource(s) available`));
+
+        if (!matching.length) {
+            card.appendChild(makeElement("small", "", "No resources uploaded yet."));
+        }
+
+        matching.forEach(resource => {
+            const link = makeElement("a", "portal-btn resource-link", "📄 " + resource.title);
+
+            if (resource.file_path) {
+                link.href = resource.file_path;
+                link.target = "_blank";
+                link.rel = "noopener noreferrer";
+            } else {
+                link.href = "#";
+                link.addEventListener("click", event => {
+                    event.preventDefault();
+                    alert("This resource does not have a link yet.");
+                });
+            }
+
+            card.appendChild(link);
+
+            if (resource.description) {
+                card.appendChild(makeElement("p", "", resource.description));
+            }
+        });
+
+        container.appendChild(card);
+    });
+}
+
+
+// LOAD PUBLISHED ASSESSMENTS
+
+async function loadAssessments(profile) {
+    const { data, error } = await EMA.db
+        .from("assessments")
+        .select("*")
+        .eq("subject", "Physical Sciences")
+        .eq("grade", profile.grade)
+        .eq("published", true)
+        .order("created_at", { ascending: false });
+
+    if (error) throw error;
+
+    const assessments = data || [];
+    const container = document.getElementById("assessmentsContainer");
+    container.innerHTML = "";
+
+    if (!assessments.length) {
+        container.appendChild(makeElement("div", "status-message",
+            "There are currently no published Physical Sciences assessments for your grade."));
+    }
+
+    assessments.forEach(assessment => {
+        const card = makeElement("div", "task-card");
+        card.appendChild(makeElement("h3", "", assessment.title));
+
+        card.appendChild(makeElement("p", "",
+            `Grade ${assessment.grade} · ${assessment.duration_minutes || 45} minutes · ${assessment.max_score} marks`
+        ));
+
+        const button = makeElement("a", "portal-btn", "Start Assessment →");
+
+        if (assessment.assessment_type === "google_form" && assessment.google_form_url) {
+            button.href = assessment.google_form_url;
+            button.target = "_blank";
+            button.rel = "noopener noreferrer";
+        } else {
+            button.href = "exam-site.html";
+        }
+
+        card.appendChild(button);
+        container.appendChild(card);
+    });
+
+    const tasks = document.getElementById("tasksContainer");
+    tasks.innerHTML = "";
+
+    if (!assessments.length) {
+        tasks.appendChild(makeElement("div", "task-card",
+            "No upcoming Physical Sciences assessments have been published."));
+    } else {
+        assessments.slice(0, 3).forEach(assessment => {
+            const card = makeElement("div", "task-card");
+            card.appendChild(makeElement("h3", "", assessment.title));
+            card.appendChild(makeElement("p", "",
+                `Grade ${assessment.grade} · ${assessment.duration_minutes || 45} minutes`
+            ));
+            tasks.appendChild(card);
+        });
+    }
+
+    await loadResults(assessments, profile);
+}
+
+
+// LOAD ONLY THIS LEARNER'S RESULTS
+
+async function loadResults(assessments, profile) {
+    const { data, error } = await EMA.db
+        .from("assessment_results")
+        .select("assessment_id,score,percentage,submitted_at")
+        .eq("learner_id", profile.id)
+        .order("submitted_at", { ascending: false });
+
+    if (error) throw error;
+
+    const assessmentIds = new Set(assessments.map(item => item.id));
+    const results = (data || []).filter(result =>
+        assessmentIds.has(result.assessment_id)
+    );
+
+    const average = results.length
+        ? results.reduce((sum, result) => sum + Number(result.percentage || 0), 0) / results.length
+        : null;
+
+    document.getElementById("averageStat").textContent =
+        average === null ? "--" : `${average.toFixed(1)}%`;
+
+    document.getElementById("assessmentStat").textContent = results.length;
+
+    const achievements = results.filter(result =>
+        Number(result.percentage) >= 80
+    ).length;
+
+    document.getElementById("achievementStat").textContent = achievements;
+
+    const progress = document.getElementById("progressContainer");
+    progress.innerHTML = "";
+
+    if (average === null) {
+        progress.appendChild(makeElement("p", "",
+            "Your progress will appear here once your assessment results are recorded."));
+    } else {
+        progress.appendChild(makeElement("p", "",
+            `Physical Sciences assessment average: ${average.toFixed(1)}%`));
+
+        const bar = makeElement("div", "progress-bar");
+        const fill = makeElement("div", "progress-fill");
+        fill.style.width = `${Math.max(0, Math.min(100, average))}%`;
+        bar.appendChild(fill);
+        progress.appendChild(bar);
+    }
+
+    if (achievements > 0) {
+        document.querySelector("#achievementCard h3").textContent =
+            "Physical Sciences Achievement Unlocked!";
+
+        document.querySelector("#achievementCard p").textContent =
+            `You have achieved 80% or more in ${achievements} assessment(s). Keep it up!`;
+    }
+}
+
+
+// LOAD ANNOUNCEMENTS
+
+async function loadAnnouncements(profile) {
+    const { data, error } = await EMA.db
+        .from("announcements")
+        .select("*")
+        .eq("subject", "Physical Sciences")
+        .order("created_at", { ascending: false });
+
+    if (error) throw error;
+
+    const announcements = (data || []).filter(item =>
+        !item.grade || Number(item.grade) === Number(profile.grade)
+    );
+
+    const container = document.getElementById("announcementsContainer");
+    container.innerHTML = "";
+
+    if (!announcements.length) {
+        container.appendChild(makeElement("div", "status-message",
+            "There are no Physical Sciences announcements at the moment."));
+        return;
+    }
+
+    announcements.forEach(item => {
+        const card = makeElement("div", "task-card");
+        card.appendChild(makeElement("h3", "", item.title));
+        card.appendChild(makeElement("p", "", item.body));
+        card.appendChild(makeElement("small", "",
+            new Date(item.created_at).toLocaleDateString()));
+        container.appendChild(card);
+    });
+}
+
+initialisePortal();
+</script>
+
+</body>
+</html>

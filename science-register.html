@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="icon" type="image/png" href="logo.png.png">
+    <title>Physical Sciences Registration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+    <div class="menu">
+        <a href="index.html">Home</a>
+        <a href="lessons.html">Our Lessons</a>
+        <a href="index.html#why-choose-us">Why Choose Us</a>
+        <a href="index.html#about-us">About Us</a>
+    </div>
+</nav>
+
+<section class="trial-page">
+
+    <h1>Physical Sciences Registration</h1>
+
+    <div class="trial-box">
+
+        <h2>Package</h2>
+
+        <input
+            type="text"
+            value="Physical Sciences - R249.99 Per Month"
+            readonly>
+
+        <h2>Learner Name</h2>
+
+        <input
+            type="text"
+            id="learnerName"
+            placeholder="Enter Learner Name">
+
+        <h2>Parent / Guardian Name</h2>
+
+        <input
+            type="text"
+            id="parentName"
+            placeholder="Enter Parent Name">
+
+        <h2>Parent Contact Number</h2>
+
+        <input
+            type="text"
+            id="parentNumber"
+            placeholder="Enter Parent Contact Number">
+
+        <h2>Email Address</h2>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Enter Email Address">
+
+        <h2>Grade</h2>
+
+        <select id="grade">
+            <option value="">Select Grade</option>
+            <option>Grade 10</option>
+            <option>Grade 11</option>
+            <option>Grade 12</option>
+        </select>
+
+        <button onclick="continueRegistration()">
+            Continue To Payment
+        </button>
+
+    </div>
+
+</section>
+
+<script>
+
+function continueRegistration(){
+
+    let learner =
+        document.getElementById("learnerName").value;
+
+    let parent =
+        document.getElementById("parentName").value;
+
+    let parentNumber =
+        document.getElementById("parentNumber").value;
+
+    let email =
+        document.getElementById("email").value;
+
+    let grade =
+        document.getElementById("grade").value;
+
+    if(learner === ""){
+        alert("Please enter learner name.");
+        return;
+    }
+
+    if(parent === ""){
+        alert("Please enter parent name.");
+        return;
+    }
+
+    if(parentNumber === ""){
+        alert("Please enter parent contact number.");
+        return;
+    }
+
+    if(email === ""){
+        alert("Please enter email.");
+        return;
+    }
+
+    if(grade === ""){
+        alert("Please select a grade.");
+        return;
+    }
+
+    alert(
+        "Registration Captured Successfully!\n\n" +
+        "Next Step: PayFast Payment."
+    );
+
+}
+
+</script>
+
+</body>
+
+</html>

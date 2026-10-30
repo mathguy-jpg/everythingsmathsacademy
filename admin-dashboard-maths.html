@@ -1,0 +1,636 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="logo.png.png">
+<title>Mathematics Admin | EVERYTHING'S MATHS</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="ema-supabase.js"></script>
+<style>
+:root{--blue:#001f66;--bright:#1565c0;--cyan:#16a9e8;--gold:#ffd700;--white:#fff;--ink:#263238;--muted:#64748b;--bg:#f3f6fb;--line:#e2e8f0;--green:#16834a;--red:#c62828}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,sans-serif;overflow-x:hidden}
+button,input,select,textarea{font:inherit}
+nav{background:var(--blue);padding:13px 22px;min-height:58px}
+nav .menu{max-width:1250px;margin:auto;display:flex;align-items:center;justify-content:flex-end;gap:22px;flex-wrap:wrap}
+nav a{color:white;text-decoration:none;font-weight:700;font-size:14px}
+nav a:hover{color:var(--gold)}
+.dashboard-page{width:100%;max-width:1250px;margin:auto;padding:25px 18px 60px}
+.login-logo{display:block;width:90px;max-width:35%;height:auto;object-fit:contain;margin:10px auto 20px}
+.welcome-banner{background:linear-gradient(120deg,var(--blue),#0756a5);color:white;padding:30px;border-radius:17px;margin:20px 0;box-shadow:0 8px 25px #001f6620}
+.welcome-banner h1{margin:0 0 9px;font-size:28px}
+.welcome-banner p{margin:7px 0 0;opacity:.92;line-height:1.5}
+.stats-container{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin:20px 0 30px}
+.stat-box{min-width:0;background:white;padding:21px;border-radius:13px;border:1px solid var(--line);border-bottom:4px solid var(--cyan);box-shadow:0 3px 12px #0000000c}
+.stat-box h2{color:var(--blue);font-size:30px;margin:0 0 6px}
+.stat-box p{margin:0;color:var(--muted);font-size:14px;line-height:1.4}
+.portal-heading{color:var(--blue);font-size:21px;margin:32px 0 15px}
+.portal-container{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.subject-portal{min-width:0;background:white;padding:22px;border:1px solid var(--line);border-radius:14px;box-shadow:0 3px 12px #0000000c;display:flex;flex-direction:column;align-items:flex-start}
+.portal-icon{font-size:34px}
+.subject-portal h2{color:var(--blue);font-size:19px;margin:10px 0}
+.subject-portal p{color:var(--muted);line-height:1.5;flex:1;margin:0 0 17px}
+.portal-btn,.ema-btn{border:0;border-radius:8px;padding:11px 15px;background:var(--blue);color:white;cursor:pointer;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;max-width:100%;overflow-wrap:anywhere}
+.portal-btn:hover,.ema-btn:hover{filter:brightness(1.12)}
+.ema-btn.gold{background:#e2b400;color:#172033}.ema-btn.red{background:#b42318}.ema-btn.grey{background:#64748b}.ema-btn.green{background:var(--green)}.ema-btn.light{background:#e8f2ff;color:var(--blue)}
+.ema-btn:disabled{opacity:.5;cursor:not-allowed}
+.exam-manager,.content-panel{background:white;padding:22px;border:1px solid var(--line);border-radius:14px;margin:22px 0;box-shadow:0 3px 12px #0000000c;min-width:0}
+.exam-manager h2,.content-panel h2{color:var(--blue);margin-top:0}
+.exam-manager>p,.content-panel>p{color:var(--muted);line-height:1.5}
+.exam-actions{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}
+.exam-item,.record-card{border:1px solid var(--line);border-radius:12px;padding:17px;margin:13px 0;background:white;min-width:0;overflow-wrap:anywhere}
+.exam-item h3,.record-card h3{color:var(--blue);margin:0 0 8px;font-size:17px}
+.exam-item p,.record-card p{margin:7px 0;line-height:1.5;overflow-wrap:anywhere}
+.exam-status{font-size:12px;font-weight:800}.status-draft{color:#b7791f}.status-live{color:var(--green)}
+.task-container{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.task-card{background:white;border:1px solid var(--line);border-left:4px solid var(--cyan);border-radius:11px;padding:17px;box-shadow:0 2px 8px #0000000b;color:var(--blue);font-weight:700;min-width:0}
+.empty-state{background:#f8fafc;border:1px dashed #cbd5e1;padding:20px;border-radius:10px;color:var(--muted);line-height:1.5;overflow-wrap:anywhere}
+.form-field{display:flex;flex-direction:column;gap:7px;margin-bottom:15px;min-width:0}
+.form-field label{font-weight:700;color:var(--ink)}
+.form-field input,.form-field select,.form-field textarea{width:100%;min-width:0;padding:12px;border:1px solid #cbd5e1;border-radius:8px;font:inherit;background:white;color:var(--ink)}
+.form-field textarea{min-height:90px;resize:vertical}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.question-card{border:1px solid var(--line);border-radius:12px;padding:17px;margin:15px 0;background:#f8fafc;min-width:0}
+.question-card h3{color:var(--blue)}
+.modal{display:none;position:fixed!important;inset:0!important;z-index:99990!important;background:rgba(3,14,40,.86)!important;overflow-y:auto!important;padding:20px 12px!important}
+.modal.open{display:block!important}
+.modal-panel{display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;width:min(900px,100%)!important;margin:15px auto 35px!important;padding:25px!important;border-radius:16px!important;background:white!important;color:var(--ink)!important;box-shadow:0 20px 60px #0006!important;overflow-wrap:anywhere}
+.modal-panel h2{color:var(--blue)}
+.modal-header{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding-bottom:13px;margin-bottom:18px}
+.modal-header h2{margin:0 0 7px}.modal-header p{margin:0;color:var(--muted)}
+.modal-note{background:#eff6ff;border-left:4px solid var(--cyan);padding:13px;border-radius:5px;margin:14px 0;line-height:1.5}
+.creation-options{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:22px 0}
+.creation-option{display:block!important;width:100%;min-width:0;min-height:185px;padding:21px;border:2px solid #dce6f5;border-radius:13px;background:#f7faff;text-align:left;cursor:pointer;color:var(--ink);transition:.2s}
+.creation-option:hover{border-color:var(--cyan);background:#eaf5ff;transform:translateY(-2px)}
+.creation-option h3{color:var(--blue);margin:9px 0}.creation-option p{color:var(--muted);line-height:1.5}
+.option-icon{font-size:34px}.creation-option strong{color:var(--blue)}
+.assignment-summary{background:#f1f6ff;padding:17px;border-radius:12px;margin:15px 0;overflow-wrap:anywhere}
+.assignment-summary strong{color:var(--blue)}
+.assignment-stat{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0}
+.assignment-stat div{background:white;padding:15px;border-radius:10px;border:1px solid var(--line);min-width:0}
+.assignment-stat h3{margin:0;font-size:25px;color:var(--blue)}
+.assignment-stat p{margin:5px 0 0;color:var(--muted)}
+.modal-footer{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.hidden{display:none!important}
+.directory-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:15px 0}
+.directory-search{flex:1;min-width:190px;max-width:380px;padding:11px 13px;border:1px solid #cbd5e1;border-radius:8px;background:white;color:var(--ink)}
+.directory-count{color:var(--muted);font-size:13px;font-weight:700}
+.table-wrap{width:100%;overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:white}
+.learner-table{width:100%;min-width:760px;border-collapse:collapse;text-align:left}
+.learner-table th{background:#f1f6ff;color:var(--blue);font-size:13px;padding:13px;white-space:nowrap}
+.learner-table td{padding:13px;border-top:1px solid var(--line);font-size:14px}
+.learner-table tr:hover td{background:#f8fbff}
+.learner-name{color:var(--blue);font-weight:700}
+.grade-pill{display:inline-block;padding:5px 9px;background:#e8f2ff;color:var(--blue);border-radius:20px;font-size:12px;font-weight:700}
+.approval-actions{display:flex;gap:8px;flex-wrap:wrap}
+.remove-learner-btn{background:#b42318;color:white;border:0;border-radius:7px;padding:8px 11px;font-weight:700;cursor:pointer;white-space:nowrap}
+.remove-learner-btn:hover{background:#8f1b13}
+.remove-learner-btn:disabled{opacity:.5;cursor:not-allowed}
+@media(max-width:850px){.stats-container{grid-template-columns:repeat(2,minmax(0,1fr))}.portal-container{grid-template-columns:repeat(2,minmax(0,1fr))}.task-container{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){
+nav{padding:12px 13px}nav .menu{justify-content:center;gap:12px 18px}nav a{font-size:13px}
+.dashboard-page{padding:12px 13px 40px}.login-logo{width:75px;margin:8px auto 15px}
+.welcome-banner{padding:21px 18px;border-radius:13px;margin:14px 0 18px}
+.welcome-banner h1{font-size:22px;line-height:1.3}.welcome-banner p{font-size:14px}
+.stats-container{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:15px 0 25px}
+.stat-box{padding:14px 12px}.stat-box h2{font-size:23px}.stat-box p{font-size:12px}
+.portal-heading{font-size:19px;margin:27px 0 13px}.portal-container{grid-template-columns:1fr;gap:12px}
+.subject-portal{padding:18px}.task-container{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.task-card{padding:13px 11px;font-size:13px}
+.exam-manager,.content-panel{padding:16px;margin:17px 0}
+.exam-manager h2,.content-panel h2{font-size:19px}
+.exam-item,.record-card{padding:14px}
+.form-grid,.creation-options,.assignment-stat{grid-template-columns:1fr}
+.modal{padding:7px!important}.modal-panel{padding:16px!important;margin:8px auto 22px!important;border-radius:12px!important}
+.modal-header{align-items:flex-start;flex-direction:column}.modal-header .ema-btn{align-self:flex-start}
+.creation-option{min-height:auto}.modal-footer{flex-direction:column}.modal-footer .ema-btn{width:100%}
+.exam-actions .ema-btn,.exam-actions a{flex:1 1 auto}
+.directory-toolbar{align-items:stretch;flex-direction:column}
+.directory-search{width:100%;max-width:none}
+}
+@media(max-width:380px){.dashboard-page{padding-left:10px;padding-right:10px}.stats-container{gap:7px}.stat-box{padding:12px 9px}.stat-box h2{font-size:21px}.task-card{font-size:12px}.welcome-banner h1{font-size:20px}}
+</style>
+</head>
+<body>
+<nav><div class="menu">
+<a href="index.html">Home</a>
+<a href="admin-dashboard.html">Main Dashboard</a>
+<a href="#reports">Reports</a>
+<a href="#" id="logoutBtn">Logout</a>
+</div></nav>
+
+<section class="dashboard-page">
+<img src="logo.png.png" class="login-logo" alt="EMA logo">
+<div class="welcome-banner">
+<h1>📘 Mathematics Control Centre</h1>
+<p id="adminWelcome">Loading administrator profile...</p>
+<p>Manage Mathematics learners, examinations, resources and announcements.</p>
+</div>
+
+<div class="stats-container">
+<div class="stat-box"><h2 id="learnerCount">--</h2><p>Active Mathematics Learners</p></div>
+<div class="stat-box"><h2 id="pendingCount">--</h2><p>Pending Approvals</p></div>
+<div class="stat-box"><h2 id="quizCount">--</h2><p>Assessments Created</p></div>
+<div class="stat-box"><h2 id="resourceCount">--</h2><p>Resources Registered</p></div>
+</div>
+
+<h2 class="portal-heading">Mathematics Management</h2>
+<div class="portal-container">
+<div class="subject-portal"><div class="portal-icon">📝</div><h2>Exam Management</h2><p>Create, edit, preview and assign Mathematics assessments.</p><button class="portal-btn" id="newExamBtn">＋ Create New Exam</button></div>
+<div class="subject-portal"><div class="portal-icon">📄</div><h2>Study Resources</h2><p>Register PDFs, revision guides and study resource links.</p><button class="portal-btn" id="resourceBtn">＋ Add Resource</button></div>
+<div class="subject-portal"><div class="portal-icon">📢</div><h2>Announcements</h2><p>Publish notices for Mathematics learners.</p><button class="portal-btn" id="announcementBtn">＋ Publish Announcement</button></div>
+</div>
+
+<div class="exam-manager" id="examLibrary">
+<h2>📚 Mathematics Assessment Library</h2>
+<p>Manage saved Mathematics assessments, including drafts and published tests.</p>
+<div class="exam-actions"><button class="ema-btn" id="refreshExamsBtn">↻ Refresh Assessments</button><button class="ema-btn gold" id="libraryCreateBtn">＋ Create Exam</button></div>
+<div id="examList"><p>Loading assessments...</p></div>
+</div>
+
+<h2 class="portal-heading">Mathematics Learner Directory</h2>
+<div class="content-panel">
+<p>Active learners registered for Mathematics. Learner names are loaded directly from your EMA database.</p>
+<div class="directory-toolbar">
+<input type="search" id="learnerSearch" class="directory-search" placeholder="Search learner name, email or student number...">
+<span class="directory-count" id="directoryCount">Loading learners...</span>
+</div>
+<div id="learnerDirectory"><div class="empty-state">Loading Mathematics learner directory...</div></div>
+</div>
+
+<h2 class="portal-heading">Pending Mathematics Learner Requests</h2>
+<div id="pendingLearners"><div class="empty-state">Loading learner requests...</div></div>
+
+<h2 class="portal-heading">Mathematics Topics</h2>
+<div class="task-container">
+<div class="task-card">Algebra</div><div class="task-card">Equations and Inequalities</div><div class="task-card">Patterns and Sequences</div><div class="task-card">Functions and Graphs</div><div class="task-card">Finance and Growth</div><div class="task-card">Trigonometry</div><div class="task-card">Euclidean Geometry</div><div class="task-card">Analytical Geometry</div><div class="task-card">Measurement</div><div class="task-card">Statistics</div><div class="task-card">Probability</div><div class="task-card">Differential Calculus</div>
+</div>
+
+<h2 class="portal-heading">Recent Mathematics Resources</h2>
+<div id="resourceList"><div class="empty-state">Loading resources...</div></div>
+<h2 class="portal-heading">Recent Announcements</h2>
+<div id="announcementList"><div class="empty-state">Loading announcements...</div></div>
+</section>
+
+<div class="modal" id="examCreationModal" aria-hidden="true"><div class="modal-panel">
+<div class="modal-header"><div><h2>🚀 Create a Mathematics Exam</h2><p>Choose how you want to prepare your assessment.</p></div><button class="ema-btn grey" id="closeCreationModal">✕ Close</button></div>
+<div class="creation-options">
+<button type="button" class="creation-option" id="chooseGoogle"><div class="option-icon">📝</div><h3>Google Forms Quiz</h3><p>Connect an existing Google Forms quiz. Learners complete it inside the EMA Exam Centre.</p><strong>Choose Google Forms →</strong></button>
+<button type="button" class="creation-option" id="chooseBuilder"><div class="option-icon">📚</div><h3>EMA Quiz Builder</h3><p>Create your own multiple-choice, short-answer and written questions directly in EMA.</p><strong>Build an EMA exam →</strong></button>
+<button type="button" class="creation-option" id="chooseAI"><div class="option-icon">🤖</div><h3>AI-Assisted Quiz Generator</h3><p>Prepare an AI question-generation prompt using a grade, topic, difficulty and question count.</p><strong>Generate questions →</strong></button>
+<button type="button" class="creation-option" id="chooseUpload"><div class="option-icon">📄</div><h3>Upload an Exam Paper</h3><p>PDF and Word upload support will be added after file storage is connected.</p><strong>Upload feature coming soon</strong></button>
+</div>
+<div class="modal-note">Your selected method opens in the exam editor. Review your assessment before assigning it.</div>
+</div></div>
+
+<div class="modal" id="examModal" aria-hidden="true"><div class="modal-panel">
+<div class="modal-header"><div><h2 id="editorHeading">Create Mathematics Exam</h2><p id="editorMessage">Complete the assessment details below.</p></div><button class="ema-btn grey" id="closeEditorBtn">✕ Close</button></div>
+<div class="form-grid">
+<div class="form-field"><label for="examTitle">Assessment title</label><input id="examTitle" placeholder="e.g. Grade 10 Algebra Test"></div>
+<div class="form-field"><label for="examGrade">Grade</label><select id="examGrade"><option value="">Choose grade</option><option value="8">Grade 8</option><option value="9">Grade 9</option><option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option></select></div>
+<div class="form-field"><label for="examPaper">Paper / category</label><input id="examPaper" placeholder="e.g. Paper 2"></div>
+<div class="form-field"><label for="examDuration">Duration (minutes)</label><input id="examDuration" type="number" min="1" value="45"></div>
+<div class="form-field"><label for="examType">Assessment type</label><select id="examType"><option value="built_in">Built-in EMA exam</option><option value="google_form">Google Forms exam</option></select></div>
+<div class="form-field"><label for="examMaxScore">Total marks (Google Forms)</label><input id="examMaxScore" type="number" min="1" step="0.5" placeholder="e.g. 50"></div>
+</div>
+<div id="googleFormFields" class="hidden"><div class="form-field"><label for="googleFormUrl">Google Forms link</label><input id="googleFormUrl" type="url" placeholder="Paste your Google Forms URL"></div><div class="modal-note">Paste the normal Google Forms link ending in /viewform.</div></div>
+<div id="builtInFields"><hr><h2>Exam Questions</h2><p>Add multiple-choice, short-answer or long-answer questions.</p><div id="questionList"></div><button class="ema-btn grey" id="addQuestionBtn" type="button">＋ Add Question</button></div>
+<div class="modal-note" id="editorStatus">Save as a draft first. You can return to edit it before assigning it.</div>
+<div class="modal-footer"><button class="ema-btn" id="saveDraftBtn">Save Draft</button><button class="ema-btn gold" id="assignExamBtn">Assign Test</button><button class="ema-btn grey" id="backToChoicesBtn">Back to Choices</button></div>
+</div></div>
+
+<div class="modal" id="assignModal" aria-hidden="true"><div class="modal-panel">
+<div class="modal-header"><div><h2>📣 Assign Mathematics Assessment</h2><p>Review the assignment before publishing.</p></div><button class="ema-btn grey" id="closeAssignBtn">✕ Close</button></div>
+<div class="assignment-summary"><h3 id="assignTitle">Assessment title</h3><p id="assignDetails">Grade and assessment information</p><div class="assignment-stat"><div><h3 id="assignLearnerCount">--</h3><p>Eligible active learners</p></div><div><h3 id="assignGrade">--</h3><p>Target grade</p></div></div></div>
+<div class="modal-note"><strong>Website availability:</strong> After publishing, active Mathematics learners in the selected grade can see the assessment in their Exam Centre.</div>
+<div class="modal-note"><strong>Email notifications:</strong> Email delivery is not connected in this version. Publishing here does not send an email.</div>
+<div id="assignLearnerPreview" class="empty-state">Loading eligible learners...</div>
+<div class="modal-footer"><button class="ema-btn gold" id="confirmAssignBtn">Confirm & Publish Assessment</button><button class="ema-btn grey" id="cancelAssignBtn">Cancel</button></div>
+</div></div>
+
+<script>
+document.addEventListener("DOMContentLoaded",async()=>{
+const $=id=>document.getElementById(id);
+if(!window.EMA||!EMA.db){alert("Supabase connection not found. Check config.js and ema-supabase.js.");return}
+const db=EMA.db;
+const profile=await EMA.requireSession(["admin"]);
+if(!profile)return;
+
+let editingId=null,editingPublished=false,questionCounter=0,assignmentMode=null,selectedLibraryExam=null,assignmentBusy=false,directoryLearners=[];
+
+$("adminWelcome").textContent="Welcome, "+(profile.full_name||"Mathematics Administrator");
+$("logoutBtn").addEventListener("click",async e=>{e.preventDefault();await EMA.signOut()});
+
+function escapeHTML(value){return String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[char]))}
+function moveToModal(id){const modal=$(id),panel=modal?.querySelector(".modal-panel");if(!modal)return;modal.scrollTop=0;requestAnimationFrame(()=>panel?.scrollIntoView({behavior:"smooth",block:"start"}))}
+function openModal(id){$(id).classList.add("open");$(id).setAttribute("aria-hidden","false");document.body.style.overflow="hidden";moveToModal(id)}
+function closeModal(id){$(id).classList.remove("open");$(id).setAttribute("aria-hidden","true");if(!document.querySelectorAll(".modal.open").length)document.body.style.overflow=""}
+function openCreationChoices(){closeModal("examModal");closeModal("assignModal");openModal("examCreationModal")}
+function closeCreationChoices(){closeModal("examCreationModal")}
+
+$("newExamBtn").addEventListener("click",openCreationChoices);
+$("libraryCreateBtn").addEventListener("click",openCreationChoices);
+$("closeCreationModal").addEventListener("click",closeCreationChoices);
+$("backToChoicesBtn").addEventListener("click",()=>{closeModal("examModal");openCreationChoices()});
+$("closeEditorBtn").addEventListener("click",()=>closeModal("examModal"));
+$("closeAssignBtn").addEventListener("click",()=>closeModal("assignModal"));
+$("cancelAssignBtn").addEventListener("click",()=>closeModal("assignModal"));
+
+function updateExamType(){const google=$("examType").value==="google_form";$("googleFormFields").classList.toggle("hidden",!google);$("builtInFields").classList.toggle("hidden",google);$("examMaxScore").disabled=!google}
+$("examType").addEventListener("change",updateExamType);
+
+function addQuestion(question={}){
+questionCounter++;
+const card=document.createElement("div");card.className="question-card";card.dataset.questionId=questionCounter;
+const options=Array.isArray(question.options)?question.options.join("\n"):"";
+card.innerHTML=`
+<h3>Question ${questionCounter}</h3>
+<div class="form-field"><label>Question text</label><textarea class="q-text" placeholder="Enter the question">${escapeHTML(question.question_text||"")}</textarea></div>
+<div class="form-grid">
+<div class="form-field"><label>Question type</label><select class="q-type"><option value="mcq">Multiple choice</option><option value="short_answer">Short answer</option><option value="long_answer">Long answer</option></select></div>
+<div class="form-field"><label>Marks</label><input class="q-marks" type="number" min="0.5" step="0.5" value="${escapeHTML(question.marks??1)}"></div>
+</div>
+<div class="form-field q-options-wrap"><label>Answer options (one per line)</label><textarea class="q-options" placeholder="Option A&#10;Option B&#10;Option C&#10;Option D">${escapeHTML(options)}</textarea></div>
+<div class="form-field"><label>Correct answer / marking guide</label><textarea class="q-answer" placeholder="Enter the correct answer or marking guide">${escapeHTML(question.correct_answer||"")}</textarea></div>
+<button type="button" class="ema-btn red remove-question">Remove Question</button>`;
+$("questionList").appendChild(card);
+card.querySelector(".q-type").value=question.question_type||"mcq";
+function updateQuestionFields(){card.querySelector(".q-options-wrap").classList.toggle("hidden",card.querySelector(".q-type").value!=="mcq")}
+card.querySelector(".q-type").addEventListener("change",updateQuestionFields);
+card.querySelector(".remove-question").addEventListener("click",()=>card.remove());
+updateQuestionFields();
+}
+$("addQuestionBtn").addEventListener("click",()=>addQuestion());
+
+function readQuestions(){
+return [...$("questionList").querySelectorAll(".question-card")].map((card,index)=>{
+const type=card.querySelector(".q-type").value;
+return{question_text:card.querySelector(".q-text").value.trim(),question_type:type,options:type==="mcq"?card.querySelector(".q-options").value.split("\n").map(x=>x.trim()).filter(Boolean):[],correct_answer:card.querySelector(".q-answer").value.trim(),marks:Number(card.querySelector(".q-marks").value),position:index+1}
+})
+}
+function validateQuestions(questions){
+if(!questions.length)return"Add at least one question.";
+for(let i=0;i<questions.length;i++){const q=questions[i];if(!q.question_text)return`Enter the text for question ${i+1}.`;if(!Number.isFinite(q.marks)||q.marks<=0)return`Enter valid marks for question ${i+1}.`;if(q.question_type==="mcq"&&q.options.length<2)return`Question ${i+1} needs at least two options.`;if(!q.correct_answer)return`Enter the correct answer or marking guide for question ${i+1}.`}
+return null
+}
+function resetEditor(){
+editingId=null;editingPublished=false;questionCounter=0;
+$("editorHeading").textContent="Create Mathematics Exam";$("editorMessage").textContent="Complete the assessment details below.";
+$("examTitle").value="";$("examGrade").value="";$("examPaper").value="";$("examDuration").value=45;$("examType").value="built_in";$("examMaxScore").value="";$("googleFormUrl").value="";$("questionList").innerHTML="";
+$("editorStatus").textContent="Save as a draft first. You can return to edit it before assigning it.";updateExamType()
+}
+function openNewExam(type){resetEditor();$("examType").value=type;updateExamType();$("editorHeading").textContent=type==="google_form"?"Create Google Forms Assessment":"Create EMA Assessment";closeCreationChoices();openModal("examModal")}
+$("chooseGoogle").addEventListener("click",()=>openNewExam("google_form"));
+$("chooseBuilder").addEventListener("click",()=>openNewExam("built_in"));
+
+$("chooseAI").addEventListener("click",async()=>{
+const grade=prompt("Which grade? (8–12)");
+if(!["8","9","10","11","12"].includes(grade)){alert("Choose a valid grade.");return}
+const topic=prompt("Enter the Mathematics topic:");if(!topic?.trim())return;
+const difficulty=prompt("Choose difficulty: Easy, Medium or Hard","Medium");if(!difficulty?.trim())return;
+const count=prompt("How many questions?","10");
+if(!/^\d+$/.test(count)||Number(count)<1||Number(count)>50){alert("Enter a number between 1 and 50.");return}
+const promptText=`Create a Grade ${grade} South African Mathematics assessment.
+
+Topic: ${topic}
+Difficulty: ${difficulty}
+Number of questions: ${count}
+
+Requirements:
+- Align questions with the appropriate grade level.
+- Include clear, accurate questions.
+- Include marks for every question.
+- Include four options and the correct answer for multiple-choice questions.
+- Include worked solutions for calculations.
+- Include a marking guide for written questions.
+- Separate the questions from the memorandum.
+- Prepare the assessment for teacher review and editing.`;
+try{await navigator.clipboard.writeText(promptText);alert("AI assessment prompt copied. Paste it into ChatGPT.")}catch(error){window.prompt("Copy this AI assessment prompt:",promptText)}
+window.open("https://chatgpt.com/","_blank")
+});
+$("chooseUpload").addEventListener("click",()=>alert("PDF and Word upload is not connected yet. File storage and document processing still need to be implemented."));
+
+function getGoogleFormId(url){try{const match=url.match(/\/forms\/d\/(?:e\/)?([^/]+)/);return match?match[1]:null}catch{return null}}
+
+function getEditorData(){
+const title=$("examTitle").value.trim(),grade=Number($("examGrade").value),paper=$("examPaper").value.trim(),duration=Number($("examDuration").value),type=$("examType").value,formUrl=$("googleFormUrl").value.trim();
+if(!title)throw new Error("Enter an assessment title.");
+if(![8,9,10,11,12].includes(grade))throw new Error("Choose a valid grade.");
+if(!Number.isFinite(duration)||duration<=0)throw new Error("Enter a valid duration.");
+let questions=[],maxScore=Number($("examMaxScore").value||0);
+if(type==="built_in"){questions=readQuestions();const problem=validateQuestions(questions);if(problem)throw new Error(problem);maxScore=questions.reduce((total,q)=>total+q.marks,0)}
+else{if(!/^https:\/\/docs\.google\.com\/forms\//i.test(formUrl))throw new Error("Paste a valid Google Forms link.");if(!Number.isFinite(maxScore)||maxScore<=0)throw new Error("Enter the total marks for this Google Form.")}
+return{title,grade,paper:paper||null,duration,type,formUrl,questions,maxScore}
+}
+
+async function saveExam(publish=false){
+let values;try{values=getEditorData()}catch(error){alert(error.message);return false}
+$("saveDraftBtn").disabled=true;$("assignExamBtn").disabled=true;$("editorStatus").textContent="Saving assessment...";
+try{
+const payload={title:values.title,subject:"Mathematics",grade:values.grade,paper:values.paper,duration_minutes:values.duration,max_score:values.maxScore,assessment_type:values.type,google_form_url:values.type==="google_form"?values.formUrl:null,google_form_id:values.type==="google_form"?getGoogleFormId(values.formUrl):null,published:publish?true:editingPublished,created_by:profile.id};
+let savedId=editingId;
+if(savedId){const{error}=await db.from("assessments").update(payload).eq("id",savedId);if(error)throw error}
+else{const{data,error}=await db.from("assessments").insert(payload).select("id").single();if(error)throw error;savedId=data.id;editingId=savedId}
+if(values.type==="built_in"){
+const{error:deleteError}=await db.from("questions").delete().eq("assessment_id",savedId);if(deleteError)throw deleteError;
+const questionRows=values.questions.map(q=>({...q,assessment_id:savedId}));
+const{error:insertError}=await db.from("questions").insert(questionRows);if(insertError)throw insertError
+}else{const{error:deleteError}=await db.from("questions").delete().eq("assessment_id",savedId);if(deleteError)throw deleteError}
+editingPublished=publish?true:editingPublished;
+$("editorStatus").textContent=publish?"Assessment successfully published.":"Draft saved successfully.";
+closeModal("examModal");await loadDashboard();
+alert(publish?"Assessment published. Eligible Mathematics learners can now see it in their Exam Centre.":"Assessment draft saved successfully.");return true
+}catch(error){console.error(error);$("editorStatus").textContent="Save failed: "+error.message;alert("Could not save assessment: "+error.message);return false}
+finally{$("saveDraftBtn").disabled=false;$("assignExamBtn").disabled=false}
+}
+$("saveDraftBtn").addEventListener("click",()=>saveExam(false));
+
+async function getEligibleLearners(grade){
+const{data,error}=await db.from("profiles").select("id,full_name,email,student_number,grade").eq("role","learner").eq("status","active").eq("grade",Number(grade)).contains("subject_access",["Mathematics"]).order("full_name",{ascending:true});
+if(error)throw error;return data||[]
+}
+async function openAssignmentForEditor(){
+let values;try{values=getEditorData()}catch(error){alert(error.message);return}
+assignmentMode="editor";selectedLibraryExam=null;
+$("assignTitle").textContent=values.title;$("assignDetails").textContent=`${values.type==="google_form"?"Google Forms":"EMA built-in"} | ${values.duration} minutes | ${values.maxScore} marks`;
+$("assignGrade").textContent="Grade "+values.grade;$("assignLearnerCount").textContent="...";$("assignLearnerPreview").textContent="Loading eligible learners...";
+closeModal("examModal");openModal("assignModal");
+try{const learners=await getEligibleLearners(values.grade);$("assignLearnerCount").textContent=learners.length;$("assignLearnerPreview").innerHTML=learners.length?`<strong>Eligible learners:</strong><ul>${learners.map(l=>`<li>${escapeHTML(l.full_name)} — ${escapeHTML(l.student_number||"No student number")}</li>`).join("")}</ul>`:"No active Mathematics learners currently match this grade.";$("confirmAssignBtn").disabled=learners.length===0}
+catch(error){$("assignLearnerPreview").textContent="Could not load eligible learners: "+error.message;$("confirmAssignBtn").disabled=true}
+}
+async function openAssignmentForLibrary(exam){
+assignmentMode="library";selectedLibraryExam=exam;
+$("assignTitle").textContent=exam.title;$("assignDetails").textContent=`${exam.assessment_type==="google_form"?"Google Forms":"EMA built-in"} | ${exam.duration_minutes} minutes | ${exam.max_score} marks`;
+$("assignGrade").textContent="Grade "+exam.grade;$("assignLearnerCount").textContent="...";$("assignLearnerPreview").textContent="Loading eligible learners...";openModal("assignModal");
+try{const learners=await getEligibleLearners(exam.grade);$("assignLearnerCount").textContent=learners.length;$("assignLearnerPreview").innerHTML=learners.length?`<strong>Eligible learners:</strong><ul>${learners.map(l=>`<li>${escapeHTML(l.full_name)} — ${escapeHTML(l.student_number||"No student number")}</li>`).join("")}</ul>`:"No active Mathematics learners currently match this grade.";$("confirmAssignBtn").disabled=learners.length===0}
+catch(error){$("assignLearnerPreview").textContent="Could not load eligible learners: "+error.message;$("confirmAssignBtn").disabled=true}
+}
+$("assignExamBtn").addEventListener("click",openAssignmentForEditor);
+$("confirmAssignBtn").addEventListener("click",async()=>{
+if(assignmentBusy)return;assignmentBusy=true;$("confirmAssignBtn").disabled=true;$("confirmAssignBtn").textContent="Publishing...";
+try{
+if(assignmentMode==="editor"){closeModal("assignModal");openModal("examModal");const success=await saveExam(true);if(!success)openAssignmentForEditor()}
+if(assignmentMode==="library"&&selectedLibraryExam){
+const{error}=await db.from("assessments").update({published:true}).eq("id",selectedLibraryExam.id).eq("published",false);
+if(error)throw error;closeModal("assignModal");alert("Assessment published. Eligible learners can now access it in their Exam Centre.");await loadDashboard()
+}
+}catch(error){console.error(error);alert("Could not publish assessment: "+error.message)}
+finally{assignmentBusy=false;$("confirmAssignBtn").disabled=false;$("confirmAssignBtn").textContent="Confirm & Publish Assessment"}
+});
+
+async function openEditor(id){
+const{data:exam,error}=await db.from("assessments").select("*").eq("id",id).single();
+if(error||!exam){alert("Could not open assessment: "+(error?.message||"Not found"));return}
+editingId=exam.id;editingPublished=!!exam.published;questionCounter=0;
+$("editorHeading").textContent="Edit Mathematics Exam";$("editorMessage").textContent=exam.published?"This assessment is published. Be careful when changing its questions.":"This assessment is a draft.";
+$("examTitle").value=exam.title||"";$("examGrade").value=String(exam.grade||"");$("examPaper").value=exam.paper||"";$("examDuration").value=exam.duration_minutes||45;$("examType").value=exam.assessment_type||"built_in";$("examMaxScore").value=exam.max_score||"";$("googleFormUrl").value=exam.google_form_url||"";$("questionList").innerHTML="";
+updateExamType();
+if(exam.assessment_type==="built_in"){
+const{data:questions,error:qError}=await db.from("questions").select("*").eq("assessment_id",id).order("position",{ascending:true});
+if(qError){alert("Could not load questions: "+qError.message);return}(questions||[]).forEach(addQuestion)
+}
+$("editorStatus").textContent=editingPublished?"Published assessment. Saving changes updates the existing assessment.":"Draft loaded. Make your changes and save or assign it.";openModal("examModal")
+}
+
+async function loadAssessments(){
+const container=$("examList");container.innerHTML="<div class='empty-state'>Loading assessments...</div>";
+const{data,error}=await db.from("assessments").select("*").eq("subject","Mathematics").order("created_at",{ascending:false});
+if(error){container.textContent="Could not load assessments: "+error.message;return}
+if(!data?.length){container.innerHTML="<div class='empty-state'>No Mathematics assessments found. Create your first exam above.</div>";return}
+container.innerHTML="";
+data.forEach(exam=>{
+const card=document.createElement("div");card.className="exam-item";
+const status=exam.published?"<span class='exam-status status-live'>● PUBLISHED</span>":"<span class='exam-status status-draft'>● DRAFT</span>";
+card.innerHTML=`<h3>${escapeHTML(exam.title)}</h3><p>${status}</p><p>Grade ${escapeHTML(exam.grade)} | ${escapeHTML(exam.paper||"No paper specified")}</p><p>Type: ${exam.assessment_type==="google_form"?"Google Forms":"Built-in EMA exam"}</p><p>Duration: ${escapeHTML(exam.duration_minutes)} minutes | Marks: ${escapeHTML(exam.max_score)}</p><div class="exam-actions"><button class="ema-btn light edit-exam">Edit</button>${!exam.published?'<button class="ema-btn gold assign-exam">Assign Test</button>':""}${!exam.published?'<button class="ema-btn red delete-exam">Delete Draft</button>':""}${exam.assessment_type==="google_form"&&exam.google_form_url?'<a class="ema-btn grey open-form" target="_blank" rel="noopener noreferrer">Open Form</a>':""}</div>`;
+card.querySelector(".edit-exam").addEventListener("click",()=>openEditor(exam.id));
+const assignButton=card.querySelector(".assign-exam");if(assignButton)assignButton.addEventListener("click",()=>openAssignmentForLibrary(exam));
+const deleteButton=card.querySelector(".delete-exam");
+if(deleteButton)deleteButton.addEventListener("click",async()=>{
+if(!confirm(`Permanently delete the draft "${exam.title}"?`))return;
+const{error}=await db.from("assessments").delete().eq("id",exam.id).eq("published",false);
+if(error){alert("Could not delete draft: "+error.message);return}
+alert("Draft deleted.");await loadDashboard()
+});
+const openForm=card.querySelector(".open-form");if(openForm)openForm.href=exam.google_form_url;
+container.appendChild(card)
+})
+}
+$("refreshExamsBtn").addEventListener("click",loadAssessments);
+
+async function loadStatistics(){
+const[learners,pending,quizzes,resources]=await Promise.all([
+db.from("profiles").select("id",{count:"exact",head:true}).eq("role","learner").eq("status","active").contains("subject_access",["Mathematics"]),
+db.from("profiles").select("id",{count:"exact",head:true}).eq("role","learner").eq("status","pending").contains("subject_access",["Mathematics"]),
+db.from("assessments").select("id",{count:"exact",head:true}).eq("subject","Mathematics"),
+db.from("resources").select("id",{count:"exact",head:true}).eq("subject","Mathematics")
+]);
+const errors=[learners.error,pending.error,quizzes.error,resources.error].filter(Boolean);
+if(errors.length){console.error(errors);return}
+$("learnerCount").textContent=learners.count??0;$("pendingCount").textContent=pending.count??0;$("quizCount").textContent=quizzes.count??0;$("resourceCount").textContent=resources.count??0
+}
+
+// ---------------------------------------
+// MATHEMATICS LEARNER DIRECTORY + REMOVAL
+// ---------------------------------------
+
+function renderLearnerDirectory(){
+const container=$("learnerDirectory"),search=$("learnerSearch").value.trim().toLowerCase();
+const filtered=directoryLearners.filter(learner=>{
+const searchable=[learner.full_name,learner.email,learner.student_number,learner.grade].join(" ").toLowerCase();
+return searchable.includes(search)
+});
+$("directoryCount").textContent=`${filtered.length} of ${directoryLearners.length} learners`;
+if(!filtered.length){
+container.innerHTML=`<div class="empty-state">${directoryLearners.length?"No learners match your search.":"No active Mathematics learners found."}</div>`;return
+}
+const rows=filtered.map((learner,index)=>`
+<tr>
+<td>${index+1}</td>
+<td class="learner-name">${escapeHTML(learner.full_name||"Name not provided")}</td>
+<td>${escapeHTML(learner.student_number||"—")}</td>
+<td>${escapeHTML(learner.email||"—")}</td>
+<td><span class="grade-pill">Grade ${escapeHTML(learner.grade||"—")}</span></td>
+<td><button type="button" class="remove-learner-btn" data-learner-id="${escapeHTML(learner.id)}" ${learner.removing?"disabled":""}>${learner.removing?"Removing...":"Remove"}</button></td>
+</tr>`).join("");
+container.innerHTML=`
+<div class="table-wrap"><table class="learner-table">
+<thead><tr><th>#</th><th>Learner Name</th><th>Student Number</th><th>Email Address</th><th>Grade</th><th>Action</th></tr></thead>
+<tbody>${rows}</tbody></table></div>`;
+container.querySelectorAll(".remove-learner-btn").forEach(button=>{
+button.addEventListener("click",()=>removeMathematicsLearner(button.dataset.learnerId))
+})
+}
+
+async function removeMathematicsLearner(learnerId){
+const learner=directoryLearners.find(item=>item.id===learnerId);
+if(!learner)return;
+if(learner.removing)return;
+const learnerName=learner.full_name||"this learner";
+const confirmed=confirm(
+`Remove ${learnerName} from Mathematics?\n\nThis will remove Mathematics access only. Their EMA account and access to other subjects will remain.`
+);
+if(!confirmed)return;
+
+learner.removing=true;
+renderLearnerDirectory();
+
+try{
+// Fetch the latest subject access before changing anything.
+const{data:currentProfile,error:fetchError}=await db
+.from("profiles")
+.select("id,full_name,subject_access")
+.eq("id",learnerId)
+.eq("role","learner")
+.single();
+
+if(fetchError)throw fetchError;
+if(!currentProfile)throw new Error("Learner profile could not be found.");
+
+const currentAccess=currentProfile.subject_access;
+if(!Array.isArray(currentAccess))throw new Error("The learner's subject_access field is not an array. No changes were made.");
+
+if(!currentAccess.includes("Mathematics"))
+throw new Error("This learner no longer has Mathematics access.");
+
+const updatedAccess=currentAccess.filter(subject=>subject!=="Mathematics");
+
+const{error:updateError}=await db
+.from("profiles")
+.update({subject_access:updatedAccess})
+.eq("id",learnerId)
+.eq("role","learner");
+
+if(updateError)throw updateError;
+
+alert(`${learnerName} has been removed from Mathematics. Their account and other subject access remain unchanged.`);
+await loadDashboard();
+
+}catch(error){
+console.error("Mathematics learner removal failed:",error);
+alert("Could not remove learner from Mathematics: "+error.message+"\n\nCheck that your Supabase administrator update policy permits changing learner subject_access.");
+learner.removing=false;
+await loadLearnerDirectory()
+}
+}
+
+async function loadLearnerDirectory(){
+const container=$("learnerDirectory");
+container.innerHTML="<div class='empty-state'>Loading Mathematics learners...</div>";
+const{data,error}=await db.from("profiles")
+.select("id,full_name,email,student_number,grade,subject_access")
+.eq("role","learner")
+.eq("status","active")
+.contains("subject_access",["Mathematics"])
+.order("full_name",{ascending:true});
+if(error){
+console.error("Learner directory error:",error);
+container.innerHTML=`<div class="empty-state">Could not load learners: ${escapeHTML(error.message)}</div>`;
+$("directoryCount").textContent="Unable to load";return
+}
+directoryLearners=data||[];
+renderLearnerDirectory()
+}
+$("learnerSearch").addEventListener("input",renderLearnerDirectory);
+
+// ---------------------------------------
+// PENDING LEARNERS
+// ---------------------------------------
+
+async function loadPendingLearners(){
+const container=$("pendingLearners");
+const{data,error}=await db.from("profiles").select("id,full_name,email,student_number,grade").eq("role","learner").eq("status","pending").contains("subject_access",["Mathematics"]).order("created_at",{ascending:true});
+if(error){container.textContent="Could not load requests: "+error.message;return}
+container.innerHTML="";
+if(!data?.length){container.innerHTML="<div class='empty-state'>No pending Mathematics learner requests.</div>";return}
+data.forEach(learner=>{
+const card=document.createElement("div");card.className="record-card";
+const heading=document.createElement("h3");heading.textContent=learner.full_name||"New learner";
+const details=document.createElement("p");details.textContent=`Grade ${learner.grade||"Not specified"} | ${learner.email||""}`;
+const approve=document.createElement("button");approve.className="ema-btn";approve.textContent="Approve Learner";
+approve.addEventListener("click",async()=>{
+if(!confirm(`Approve ${learner.full_name}?`))return;
+approve.disabled=true;
+const{error:updateError}=await db.from("profiles").update({status:"active"}).eq("id",learner.id);
+if(updateError){alert("Approval failed: "+updateError.message);approve.disabled=false;return}
+alert("Learner approved.");await loadDashboard()
+});
+card.append(heading,details,approve);container.appendChild(card)
+})
+}
+
+// ---------------------------------------
+// RESOURCES
+// ---------------------------------------
+
+async function addResource(){
+const title=prompt("Enter the resource title:");if(!title?.trim())return;
+const grade=prompt("Enter the grade (8 to 12):");
+if(!["8","9","10","11","12"].includes(grade)){alert("Enter a valid grade.");return}
+const topic=prompt("Enter the Mathematics topic:");if(!topic?.trim())return;
+const url=prompt("Paste the PDF or resource link:");
+if(!url||!/^https:\/\/\S+/i.test(url)){alert("Enter a valid HTTPS link.");return}
+const{error}=await db.from("resources").insert({title:title.trim(),description:"Mathematics study resource",subject:"Mathematics",grade:Number(grade),topic:topic.trim(),file_path:url,created_by:profile.id});
+if(error){alert("Could not register resource: "+error.message);return}
+alert("Resource registered.");await loadDashboard()
+}
+$("resourceBtn").addEventListener("click",addResource);
+
+async function loadResources(){
+const container=$("resourceList");
+const{data,error}=await db.from("resources").select("title,grade,topic,file_path,created_at").eq("subject","Mathematics").order("created_at",{ascending:false}).limit(10);
+if(error){container.textContent="Could not load resources: "+error.message;return}
+container.innerHTML="";
+if(!data?.length){container.innerHTML="<div class='empty-state'>No resources registered yet.</div>";return}
+data.forEach(item=>{
+const card=document.createElement("div");card.className="record-card";
+const heading=document.createElement("h3");heading.textContent=item.title;
+const details=document.createElement("p");details.textContent=`Grade ${item.grade} | ${item.topic||"General"}`;
+card.append(heading,details);
+if(item.file_path){const link=document.createElement("a");link.href=item.file_path;link.target="_blank";link.rel="noopener noreferrer";link.textContent="Open Resource";card.appendChild(link)}
+container.appendChild(card)
+})
+}
+
+// ---------------------------------------
+// ANNOUNCEMENTS
+// ---------------------------------------
+
+async function addAnnouncement(){
+const title=prompt("Enter announcement title:");if(!title?.trim())return;
+const body=prompt("Enter announcement message:");if(!body?.trim())return;
+const{error}=await db.from("announcements").insert({title:title.trim(),body:body.trim(),subject:"Mathematics",created_by:profile.id});
+if(error){alert("Could not publish announcement: "+error.message);return}
+alert("Announcement published.");await loadDashboard()
+}
+$("announcementBtn").addEventListener("click",addAnnouncement);
+
+async function loadAnnouncements(){
+const container=$("announcementList");
+const{data,error}=await db.from("announcements").select("title,body,created_at").eq("subject","Mathematics").order("created_at",{ascending:false}).limit(10);
+if(error){container.textContent="Could not load announcements: "+error.message;return}
+container.innerHTML="";
+if(!data?.length){container.innerHTML="<div class='empty-state'>No announcements yet.</div>";return}
+data.forEach(item=>{
+const card=document.createElement("div");card.className="record-card";
+const heading=document.createElement("h3");heading.textContent=item.title;
+const message=document.createElement("p");message.textContent=item.body;
+card.append(heading,message);container.appendChild(card)
+})
+}
+
+// ---------------------------------------
+// LOAD EVERYTHING
+// ---------------------------------------
+
+async function loadDashboard(){
+await Promise.all([loadStatistics(),loadLearnerDirectory(),loadPendingLearners(),loadAssessments(),loadResources(),loadAnnouncements()])
+}
+await loadDashboard();
+});
+</script>
+</body>
+</html>

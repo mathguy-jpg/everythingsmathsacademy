@@ -1,0 +1,1753 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#001f66">
+<title>EMA Examination Centre | EVERYTHING'S MATHS</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+:root {
+  --navy:#001f66;
+  --blue:#1565c0;
+  --cyan:#16a9e8;
+  --gold:#ffd700;
+  --ink:#263238;
+  --muted:#64748b;
+  --line:#dce5ef;
+  --pale:#eff6ff;
+  --white:#fff;
+  --shadow:0 5px 20px rgba(0,31,102,.07);
+}
+
+* { box-sizing:border-box; min-width:0; }
+
+html {
+  scroll-behavior:smooth;
+  scroll-padding-top:70px;
+  overflow-x:hidden;
+  -webkit-text-size-adjust:100%;
+}
+
+body {
+  margin:0;
+  width:100%;
+  overflow-x:hidden;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--ink);
+  background:#f4f7fc;
+  line-height:1.5;
+}
+
+button { font:inherit; cursor:pointer; }
+button:disabled { opacity:.6; cursor:not-allowed; }
+img,iframe { max-width:100%; }
+.hidden { display:none!important; }
+
+.topbar {
+  width:100%;
+  min-height:64px;
+  padding:9px 5%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  background:var(--navy);
+  color:white;
+}
+
+.brand {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:14px;
+  font-weight:900;
+  letter-spacing:.6px;
+}
+
+.brand img {
+  width:43px;
+  height:43px;
+  object-fit:contain;
+  flex-shrink:0;
+}
+
+.brand small {
+  display:block;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:1px;
+  color:#c8eaff;
+  margin-top:2px;
+}
+
+.topbar>small {
+  font-size:12px;
+  color:#dceaff;
+}
+
+/* INTRODUCTION */
+
+.hero {
+  position:relative;
+  overflow:hidden;
+  text-align:center;
+  color:white;
+  background:linear-gradient(145deg,#00143f 0%,#001f66 60%,#064a9b 100%);
+  padding:37px 18px 55px;
+}
+
+.hero::before {
+  content:"";
+  position:absolute;
+  width:260px;
+  height:260px;
+  border:1px solid #ffffff12;
+  border-radius:50%;
+  top:-155px;
+  right:-90px;
+}
+
+.hero::after {
+  content:"";
+  position:absolute;
+  width:210px;
+  height:210px;
+  border:1px solid #ffffff12;
+  border-radius:50%;
+  bottom:-145px;
+  left:-85px;
+}
+
+.hero-inner {
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:620px;
+  margin:0 auto;
+}
+
+.hero-logo {
+  display:block;
+  width:105px;
+  height:100px;
+  object-fit:contain;
+  margin:0 auto 13px;
+  filter:drop-shadow(0 3px 10px #16a9e855);
+}
+
+.eyebrow {
+  color:var(--gold);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  margin-bottom:9px;
+}
+
+.hero h1 {
+  margin:0;
+  font-size:clamp(25px,5vw,38px);
+  line-height:1.15;
+  font-weight:900;
+  letter-spacing:.5px;
+  overflow-wrap:normal;
+}
+
+.hero h2 {
+  margin:10px 0 15px;
+  color:#bdeaff;
+  font-size:13px;
+  line-height:1.4;
+  font-weight:800;
+  letter-spacing:1.8px;
+}
+
+.hero p {
+  width:100%;
+  max-width:450px;
+  margin:0 auto 22px;
+  padding:0 8px;
+  color:#e7f1ff;
+  font-size:14px;
+  line-height:1.75;
+}
+
+.hero-actions {
+  display:flex;
+  justify-content:center;
+}
+
+/* BUTTONS */
+
+.btn {
+  border:0;
+  border-radius:9px;
+  padding:11px 17px;
+  font-size:13px;
+  font-weight:800;
+  transition:.2s;
+  max-width:100%;
+}
+
+.btn:hover:not(:disabled) {
+  transform:translateY(-1px);
+}
+
+.btn-gold {
+  background:var(--gold);
+  color:var(--navy);
+}
+
+.btn-blue {
+  background:var(--navy);
+  color:white;
+}
+
+.btn-outline {
+  background:white;
+  color:var(--navy);
+  border:1px solid var(--line);
+}
+
+/* PAGE CONTENT */
+
+.container {
+  width: min(100% - 36px, 1050px);
+  margin:0 auto;
+}
+
+.features {
+  position:relative;
+  z-index:2;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin-top:-22px;
+}
+
+.feature {
+  background:white;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:13px 8px;
+  text-align:center;
+  font-size:12px;
+  font-weight:800;
+  color:var(--navy);
+  box-shadow:var(--shadow);
+}
+
+.feature span {
+  display:block;
+  font-size:20px;
+  margin-bottom:4px;
+}
+
+main {
+  padding:34px 0 48px;
+}
+
+.section-heading {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.section-heading h2 {
+  margin:0;
+  color:var(--navy);
+  font-size:22px;
+  line-height:1.25;
+}
+
+.section-heading p {
+  margin:5px 0 0;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.pill {
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:30px;
+  background:#e8f3ff;
+  color:var(--navy);
+  font-size:10px;
+  font-weight:900;
+  text-align:center;
+}
+
+.subject-tabs {
+  display:flex;
+  gap:9px;
+  margin-bottom:16px;
+}
+
+.tab {
+  border:1px solid var(--line);
+  border-radius:9px;
+  padding:10px 15px;
+  background:white;
+  color:var(--navy);
+  font-size:13px;
+  font-weight:800;
+}
+
+.tab.active {
+  background:var(--navy);
+  color:white;
+  border-color:var(--navy);
+}
+
+.status-message {
+  padding:13px 15px;
+  margin:12px 0;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:white;
+  color:var(--muted);
+  font-size:13px;
+  overflow-wrap:anywhere;
+}
+
+.grade-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+
+.grade-card {
+  padding:17px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:white;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+
+.grade-head {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding-bottom:11px;
+  border-bottom:1px solid var(--line);
+}
+
+.grade-head h3 {
+  margin:0;
+  color:var(--navy);
+  font-size:17px;
+}
+
+.paper {
+  border-bottom:1px solid #edf1f6;
+}
+
+.paper summary {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  padding:13px 2px;
+  cursor:pointer;
+  list-style:none;
+  font-size:13px;
+  font-weight:800;
+  color:var(--ink);
+}
+
+.paper summary::-webkit-details-marker { display:none; }
+
+.paper summary::after {
+  content:"+";
+  color:var(--blue);
+  font-size:18px;
+}
+
+.paper[open] summary::after { content:"−"; }
+
+.test-list {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+  padding:0 0 13px;
+}
+
+.test-card {
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#fbfdff;
+  overflow-wrap:anywhere;
+}
+
+.test-card strong {
+  display:block;
+  font-size:13px;
+  line-height:1.4;
+  margin-bottom:5px;
+}
+
+.test-card small {
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-bottom:10px;
+}
+
+.test-card .btn {
+  width:100%;
+  padding:9px 7px;
+  font-size:11px;
+}
+
+.active-test {
+  border-color:#b8def4;
+  background:#f5fbff;
+}
+
+.active-label {
+  display:block;
+  margin-bottom:6px;
+  color:#0879a8;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.5px;
+}
+
+.notice {
+  margin-top:20px;
+  padding:13px 15px;
+  border:1px solid #f0df91;
+  border-radius:10px;
+  background:#fff9df;
+  color:#665300;
+  font-size:12px;
+  line-height:1.6;
+}
+
+/* EXAM MODE */
+
+.exam-mode {
+  display:none;
+  min-height:100vh;
+  width:100%;
+  background:#f4f7fc;
+}
+
+.timer-ribbon {
+  position:fixed;
+  z-index:99999;
+  top:0;
+  left:0;
+  right:0;
+  min-height:66px;
+  padding:9px max(18px,calc((100% - 900px)/2));
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  background:var(--navy);
+  color:white;
+  box-shadow:0 3px 15px #001f6633;
+}
+
+.timer-label {
+  color:#dceaff;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+.timer {
+  color:var(--gold);
+  font-size:25px;
+  line-height:1.2;
+  font-weight:900;
+  font-variant-numeric:tabular-nums;
+}
+
+.timer.warning {
+  color:#ff9b9b;
+  animation:pulse 1s infinite;
+}
+
+@keyframes pulse {
+  50% { opacity:.55; }
+}
+
+.timer-exit {
+  flex-shrink:0;
+  border:0;
+  border-radius:8px;
+  padding:10px 14px;
+  background:white;
+  color:var(--navy);
+  font-size:11px;
+  font-weight:900;
+}
+
+.timer-exit:hover { background:var(--gold); }
+
+.exam-content {
+  width:min(100% - 32px,850px);
+  margin:0 auto;
+  padding:88px 0 35px;
+  overflow-wrap:anywhere;
+}
+
+.exam-mode .exam-title-card {
+  display:none!important;
+}
+
+.question-card {
+  padding:20px;
+  margin-bottom:14px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:white;
+  box-shadow:var(--shadow);
+  overflow-wrap:anywhere;
+}
+
+.question-card h3 {
+  margin:0 0 9px;
+  color:var(--navy);
+  font-size:16px;
+}
+
+.question-card p {
+  font-size:14px;
+  line-height:1.65;
+}
+
+.question-option {
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  padding:11px;
+  margin:8px 0;
+  border:1px solid var(--line);
+  border-radius:8px;
+  cursor:pointer;
+  font-size:13px;
+}
+
+.question-option:hover { background:var(--pale); }
+.question-option input { margin-top:4px; flex-shrink:0; }
+.question-option span { overflow-wrap:anywhere; }
+
+.exam-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:17px;
+}
+
+.form-shell {
+  width:100%;
+  padding:8px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:white;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+
+.form-shell iframe {
+  display:block;
+  width:100%;
+  height:5505px;
+  border:0;
+  border-radius:8px;
+}
+
+/* FULL-SCREEN EXAM */
+
+body.exam-active {
+  margin:0!important;
+  padding:0!important;
+  width:100%!important;
+  overflow-x:hidden!important;
+  background:#f4f7fc!important;
+}
+
+body.exam-active > *:not(#examMode) {
+  display:none!important;
+}
+
+body.exam-active #examMode {
+  display:block!important;
+  position:relative;
+  width:100%;
+  min-height:100vh;
+}
+
+/* CLOSED / RESULT */
+
+.closed-screen {
+  display:none;
+  min-height:100vh;
+  width:100%;
+  place-items:center;
+  padding:20px;
+  text-align:center;
+  background:var(--navy);
+  color:white;
+}
+
+.closed-card {
+  width:100%;
+  max-width:460px;
+  padding:30px 22px;
+  border:1px solid #ffffff35;
+  border-radius:17px;
+  background:#ffffff0b;
+}
+
+.closed-card h1 {
+  margin:12px 0;
+  color:var(--gold);
+  font-size:25px;
+  letter-spacing:2px;
+}
+
+.closed-card p {
+  font-size:14px;
+  line-height:1.6;
+}
+
+.result-card {
+  width:100%;
+  max-width:500px;
+  margin:20px auto;
+  padding:27px 20px;
+  border-radius:15px;
+  background:white;
+  color:var(--ink);
+  text-align:center;
+}
+
+.result-card h2 {
+  color:var(--navy);
+  font-size:20px;
+}
+
+.result-score {
+  color:var(--navy);
+  font-size:38px;
+  font-weight:900;
+  overflow-wrap:anywhere;
+}
+
+footer {
+  padding:19px 12px;
+  background:#001746;
+  color:#d8e8ff;
+  text-align:center;
+  font-size:12px;
+}
+
+footer strong { color:var(--gold); }
+
+/* TABLETS */
+
+@media(max-width:850px) {
+  .container { width:calc(100% - 32px); }
+  .grade-grid { grid-template-columns:1fr; }
+  .features { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+
+/* PHONES */
+
+@media(max-width:600px) {
+  html { scroll-padding-top:60px; }
+
+  body { font-size:14px; }
+
+  .topbar {
+    min-height:57px;
+    padding:7px 13px;
+  }
+
+  .brand {
+    gap:8px;
+    font-size:12px;
+    letter-spacing:.3px;
+  }
+
+  .brand img {
+    width:37px;
+    height:37px;
+  }
+
+  .brand small { font-size:9px; }
+
+  .topbar>small { display:none; }
+
+  .hero {
+    padding:29px 17px 43px;
+  }
+
+  .hero-inner {
+    max-width:390px;
+  }
+
+  .hero-logo {
+    width:82px;
+    height:78px;
+    margin-bottom:10px;
+  }
+
+  .eyebrow {
+    font-size:9px;
+    letter-spacing:1.7px;
+  }
+
+  .hero h1 {
+    font-size:27px;
+    line-height:1.18;
+    letter-spacing:.2px;
+  }
+
+  .hero h2 {
+    max-width:270px;
+    margin:9px auto 12px;
+    font-size:11px;
+    line-height:1.55;
+    letter-spacing:1.1px;
+  }
+
+  .hero p {
+    max-width:310px;
+    padding:0 4px;
+    margin:0 auto 18px;
+    font-size:13px;
+    line-height:1.7;
+  }
+
+  .hero .btn {
+    width:auto;
+    min-width:180px;
+    padding:11px 16px;
+    font-size:12px;
+  }
+
+  .container { width:calc(100% - 28px); }
+
+  .features {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+    margin-top:-17px;
+  }
+
+  .feature {
+    padding:10px 6px;
+    border-radius:10px;
+    font-size:11px;
+  }
+
+  .feature span {
+    font-size:18px;
+    margin-bottom:3px;
+  }
+
+  main { padding:27px 0 36px; }
+
+  .section-heading {
+    display:block;
+    margin-bottom:15px;
+  }
+
+  .section-heading h2 {
+    font-size:19px;
+    line-height:1.3;
+  }
+
+  .section-heading p {
+    max-width:290px;
+    font-size:12px;
+    line-height:1.6;
+  }
+
+  .section-heading .pill { margin-top:10px; }
+
+  .subject-tabs {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+  }
+
+  .tab {
+    min-height:42px;
+    padding:9px 6px;
+    border-radius:8px;
+    font-size:11px;
+    line-height:1.35;
+  }
+
+  .status-message {
+    padding:11px;
+    font-size:12px;
+    line-height:1.6;
+  }
+
+  .grade-grid { grid-template-columns:1fr; gap:11px; }
+
+  .grade-card {
+    padding:13px;
+    border-radius:11px;
+  }
+
+  .grade-head h3 { font-size:15px; }
+
+  .grade-head { padding-bottom:10px; }
+
+  .paper summary {
+    padding:12px 2px;
+    font-size:12px;
+  }
+
+  .test-list {
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+
+  .test-card {
+    padding:11px;
+    border-radius:9px;
+  }
+
+  .test-card strong { font-size:13px; }
+
+  .test-card small { font-size:11px; }
+
+  .test-card .btn {
+    padding:10px;
+    font-size:11px;
+  }
+
+  .notice {
+    padding:11px;
+    font-size:11px;
+  }
+
+  /* PHONE EXAM VIEW */
+
+  .timer-ribbon {
+    min-height:60px;
+    padding:7px 13px;
+  }
+
+  .timer-label {
+    font-size:9px;
+    letter-spacing:.6px;
+  }
+
+  .timer { font-size:22px; }
+
+  .timer-exit {
+    padding:9px 11px;
+    font-size:10px;
+  }
+
+  .exam-content {
+    width:calc(100% - 24px);
+    padding:76px 0 25px;
+  }
+
+  .question-card {
+    padding:14px;
+    margin-bottom:11px;
+    border-radius:10px;
+  }
+
+  .question-card h3 { font-size:14px; }
+
+  .question-card p {
+    font-size:13px;
+    line-height:1.65;
+  }
+
+  .question-option {
+    padding:10px;
+    font-size:12px;
+    line-height:1.5;
+  }
+
+  .form-shell {
+    padding:4px;
+    border-radius:9px;
+  }
+
+  .form-shell iframe { height:5505px; }
+
+  .exam-actions { flex-direction:column; }
+
+  .exam-actions .btn { width:100%; }
+
+  .closed-card { padding:25px 16px; }
+
+  .closed-card h1 { font-size:22px; }
+
+  .result-card { padding:22px 15px; }
+
+  .result-score { font-size:34px; }
+
+  .result-card .btn { width:100%; }
+
+  footer {
+    padding:17px 10px;
+    font-size:10px;
+  }
+}
+
+/* VERY SMALL PHONES */
+
+@media(max-width:360px) {
+  .hero { padding:25px 13px 38px; }
+  .hero h1 { font-size:24px; }
+  .hero p { font-size:12px; }
+  .features { gap:6px; }
+  .feature { font-size:10px; }
+  .tab { font-size:10px; }
+  .timer-ribbon { padding:7px 9px; }
+  .timer { font-size:20px; }
+  .timer-exit { padding:8px 9px; font-size:9px; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar" id="siteTop">
+  <div class="brand">
+    <img src="logo.png.png" alt="EMA Logo">
+    <div>
+      EVERYTHING'S MATHS
+      <small>EMA EXAMINATION CENTRE</small>
+    </div>
+  </div>
+  <small id="learnerLabel">Learn confidently. Improve.</small>
+</header>
+
+<!-- INTRODUCTION -->
+
+<section class="hero" id="intro">
+  <div class="hero-inner">
+    <img class="hero-logo" src="logo.png.png" alt="Everything's Maths Academy Logo">
+    <div class="eyebrow">EVERYTHING'S MATHS ACADEMY</div>
+    <h1>EXAMINATION CENTRE</h1>
+    <h2>ONLINE ASSESSMENTS & PRACTICE</h2>
+    <p>
+      Welcome to your examination centre. Choose your subject,
+      select an available assessment and put your knowledge to the test.
+    </p>
+    <div class="hero-actions">
+      <button class="btn btn-gold" id="enterBtn">VIEW ASSESSMENTS ↓</button>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="features">
+    <div class="feature"><span>⏱️</span>Timed Assessments</div>
+    <div class="feature"><span>📘</span>Mathematics</div>
+    <div class="feature"><span>⚛️</span>Physical Sciences</div>
+    <div class="feature"><span>🎯</span>Grades 9–12</div>
+  </div>
+</div>
+
+<main id="examSection" class="container">
+  <div class="section-heading">
+    <div>
+      <h2>Available Assessments</h2>
+      <p>Choose your subject and open an assessment to begin.</p>
+    </div>
+    <span class="pill" id="assessmentCount">LOADING</span>
+  </div>
+
+  <div class="subject-tabs">
+    <button class="tab active" data-subject="Mathematics">📘 Mathematics</button>
+    <button class="tab" data-subject="Physical Sciences">⚛️ Physical Sciences</button>
+  </div>
+
+  <div id="catalogueStatus" class="status-message">
+    Loading your available assessments...
+  </div>
+
+  <div id="gradeGrid" class="grade-grid"></div>
+
+  <div class="notice">
+    <strong>EXAMINATION NOTICE</strong><br>
+    Only assessments published by EVERYTHING'S MATHS administrators
+    will appear in your examination centre.
+  </div>
+</main>
+
+<!-- EXAM MODE -->
+
+<section id="examMode" class="exam-mode">
+  <div class="timer-ribbon">
+    <div>
+      <div class="timer-label">TIME REMAINING</div>
+      <div id="timerDisplay" class="timer">45:00</div>
+    </div>
+    <button type="button" class="timer-exit" id="exitExamBtn">LEAVE EXAM</button>
+  </div>
+
+  <div class="exam-content">
+    <div class="exam-title-card">
+      <span class="pill">ACTIVE ASSESSMENT</span>
+      <h2 id="examTitle">Assessment</h2>
+      <p id="examInstructions">
+        Read each question carefully. Your timer continues if you refresh this page.
+      </p>
+    </div>
+
+    <div id="builtInArea"></div>
+
+    <div id="googleFormArea" class="form-shell hidden">
+      <iframe
+        id="googleFormFrame"
+        title="EMA Google Form Assessment"
+        allow="fullscreen">
+      </iframe>
+      <p style="padding:10px;color:#62718a;font-size:12px">
+        If the form does not load,
+        <a id="googleFormLink" target="_blank" rel="noopener">
+          open the assessment directly
+        </a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="closedScreen" class="closed-screen">
+  <div class="closed-card">
+    <div style="font-size:42px">⏱</div>
+    <h1>EXAM CLOSED</h1>
+    <p>Your allocated time has expired.</p>
+    <p id="closedMessage">Your assessment session has ended.</p>
+  </div>
+</section>
+
+<section id="resultScreen" class="closed-screen">
+  <div class="result-card">
+    <div style="font-size:38px">🏆</div>
+    <h2>Assessment submitted</h2>
+    <div class="result-score" id="resultScore">--</div>
+    <p id="resultDetails">Your result has been saved.</p>
+    <button class="btn btn-blue" id="returnCatalogueBtn">
+      RETURN TO ASSESSMENTS
+    </button>
+  </div>
+</section>
+
+<footer id="siteFooter">
+  © <span id="year"></span>
+  <strong>EVERYTHING'S MATHS</strong>
+  · EMA Online Assessment Centre
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="ema-supabase.js"></script>
+
+<script>
+(() => {
+"use strict";
+
+let profile = null;
+let currentSubject = "Mathematics";
+let assessments = [];
+let activeAssessment = null;
+let questions = [];
+let session = null;
+let timerInterval = null;
+let answers = {};
+let submitting = false;
+
+const $ = id => document.getElementById(id);
+
+const intro = $("intro");
+const topbar = $("siteTop");
+const main = $("examSection");
+const footer = $("siteFooter");
+const examMode = $("examMode");
+const closedScreen = $("closedScreen");
+const resultScreen = $("resultScreen");
+const gradeGrid = $("gradeGrid");
+
+$("year").textContent = new Date().getFullYear();
+
+function normalise(value) {
+  return String(value ?? "").trim().toLowerCase();
+}
+
+function sessionKey() {
+  return "ema_exam_" + profile.id + "_" + activeAssessment.id;
+}
+
+function readSavedSession() {
+  try {
+    return JSON.parse(localStorage.getItem(sessionKey()) || "null");
+  } catch {
+    return null;
+  }
+}
+
+function saveSession() {
+  if (!session || !activeAssessment) return;
+
+  try {
+    localStorage.setItem(sessionKey(), JSON.stringify(session));
+  } catch (error) {
+    console.warn("Could not save exam timer:", error);
+  }
+}
+
+/* RETURN TO EXAM CENTRE */
+
+function showCatalogue() {
+  document.body.classList.remove("exam-active");
+
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = null;
+
+  examMode.style.display = "none";
+  closedScreen.style.display = "none";
+  resultScreen.style.display = "none";
+
+  intro.classList.remove("hidden");
+  topbar.classList.remove("hidden");
+  main.classList.remove("hidden");
+  footer.classList.remove("hidden");
+
+  $("googleFormFrame").src = "about:blank";
+
+  window.scrollTo(0, 0);
+}
+
+/* ENTER EXAM MODE */
+
+function showExamScreen() {
+  document.body.classList.add("exam-active");
+
+  intro.classList.add("hidden");
+  topbar.classList.add("hidden");
+  main.classList.add("hidden");
+  footer.classList.add("hidden");
+
+  closedScreen.style.display = "none";
+  resultScreen.style.display = "none";
+
+  examMode.style.display = "block";
+
+  window.scrollTo(0, 0);
+}
+
+/* EXAM CLOSED */
+
+function showClosed(message) {
+  document.body.classList.remove("exam-active");
+
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = null;
+
+  if (session) {
+    session.ended = true;
+    saveSession();
+  }
+
+  examMode.style.display = "none";
+  intro.classList.add("hidden");
+  topbar.classList.add("hidden");
+  main.classList.add("hidden");
+  footer.classList.add("hidden");
+
+  closedScreen.style.display = "grid";
+
+  $("closedMessage").textContent =
+    message || "Your assessment session has ended.";
+
+  window.scrollTo(0, 0);
+}
+
+/* RESULT SCREEN */
+
+function showResult(score, maxScore, percentage) {
+  document.body.classList.remove("exam-active");
+
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = null;
+
+  examMode.style.display = "none";
+  intro.classList.add("hidden");
+  topbar.classList.add("hidden");
+  main.classList.add("hidden");
+  footer.classList.add("hidden");
+
+  closedScreen.style.display = "none";
+  resultScreen.style.display = "grid";
+
+  $("resultScore").textContent = `${score} / ${maxScore}`;
+
+  $("resultDetails").textContent =
+    `You achieved ${percentage}%. Your result has been recorded in your learner account.`;
+
+  window.scrollTo(0, 0);
+}
+
+/* LOAD PUBLISHED ASSESSMENTS */
+
+async function loadCatalogue() {
+  const status = $("catalogueStatus");
+
+  status.textContent = "Loading published assessments...";
+  $("assessmentCount").textContent = "LOADING";
+  gradeGrid.replaceChildren();
+
+  if (!profile.grade) {
+    $("assessmentCount").textContent = "GRADE MISSING";
+    status.textContent =
+      "Your learner account does not have a grade assigned. Please contact the administrator.";
+    return;
+  }
+
+  const { data, error } = await EMA.db
+    .from("assessments")
+    .select(`
+      id,
+      title,
+      subject,
+      grade,
+      paper,
+      duration_minutes,
+      max_score,
+      assessment_type,
+      google_form_url,
+      published,
+      created_at
+    `)
+    .eq("published", true)
+    .order("created_at", { ascending:false });
+
+  if (error) {
+    console.error("Assessment catalogue error:", error);
+    $("assessmentCount").textContent = "ERROR";
+    status.textContent = "Could not load assessments: " + error.message;
+    return;
+  }
+
+  const allowedSubjects = Array.isArray(profile.subject_access)
+    ? profile.subject_access.map(normalise)
+    : ["mathematics", "physical sciences"];
+
+  assessments = (data || []).filter(item => {
+    const correctGrade =
+      Number(item.grade) === Number(profile.grade);
+
+    const correctSubject =
+      allowedSubjects.includes(normalise(item.subject));
+
+    return correctGrade && correctSubject;
+  });
+
+  console.log("EMA learner profile:", {
+    grade:profile.grade,
+    subject_access:profile.subject_access
+  });
+
+  console.log("Published assessments:", data);
+  console.log("Available to learner:", assessments);
+
+  $("assessmentCount").textContent =
+    `${assessments.length} AVAILABLE`;
+
+  if (!data || data.length === 0) {
+    status.textContent =
+      "No published assessments were returned. Check that your assessment is published and that the assessment access policies are configured correctly.";
+  } else if (assessments.length === 0) {
+    const publishedSubjects = [
+      ...new Set(data.map(item => `${item.subject} — Grade ${item.grade}`))
+    ];
+
+    status.textContent =
+      `Your account is Grade ${profile.grade}. Published assessments were found, but none match your grade and subject access. Available assessments: ${publishedSubjects.join(", ")}.`;
+  } else {
+    status.textContent =
+      `Welcome! Showing assessments for Grade ${profile.grade}.`;
+  }
+
+  renderSubject();
+}
+
+/* DISPLAY ASSESSMENTS */
+
+function renderSubject() {
+  gradeGrid.replaceChildren();
+
+  const subjectAssessments = assessments.filter(a =>
+    normalise(a.subject) === normalise(currentSubject)
+  );
+
+  if (!subjectAssessments.length) {
+    const message = document.createElement("div");
+    message.className = "status-message";
+    message.textContent =
+      `No published ${currentSubject} assessments are currently available for Grade ${profile.grade}.`;
+    gradeGrid.appendChild(message);
+    return;
+  }
+
+  const grades = [
+    ...new Set(subjectAssessments.map(a => Number(a.grade)))
+  ].sort((a,b) => a-b);
+
+  grades.forEach(grade => {
+    const gradeCard = document.createElement("article");
+    gradeCard.className = "grade-card";
+
+    const head = document.createElement("div");
+    head.className = "grade-head";
+
+    const heading = document.createElement("h3");
+    heading.textContent = `Grade ${grade}`;
+
+    const pill = document.createElement("span");
+    pill.className = "pill";
+    pill.textContent =
+      `${subjectAssessments.filter(a => Number(a.grade) === grade).length} TESTS`;
+
+    head.append(heading, pill);
+    gradeCard.appendChild(head);
+
+    const gradeItems = subjectAssessments.filter(a =>
+      Number(a.grade) === grade
+    );
+
+    const groups = new Map();
+
+    gradeItems.forEach(a => {
+      const paper = a.paper || "General";
+      if (!groups.has(paper)) groups.set(paper, []);
+      groups.get(paper).push(a);
+    });
+
+    groups.forEach((items, paperName) => {
+      const details = document.createElement("details");
+      details.className = "paper";
+
+      const summary = document.createElement("summary");
+      summary.textContent = paperName;
+      details.appendChild(summary);
+
+      const list = document.createElement("div");
+      list.className = "test-list";
+
+      items.forEach(a => {
+        const card = document.createElement("div");
+        card.className = "test-card active-test";
+
+        const label = document.createElement("span");
+        label.className = "active-label";
+        label.textContent = "● AVAILABLE NOW";
+
+        const title = document.createElement("strong");
+        title.textContent = a.title;
+
+        const info = document.createElement("small");
+        info.textContent =
+          `${a.duration_minutes || 45} minutes · ${
+            a.assessment_type === "built_in"
+              ? "Online test"
+              : "Google Form"
+          }`;
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "btn btn-blue";
+        button.textContent = "START TEST";
+        button.addEventListener("click", () => startAssessment(a));
+
+        card.append(label, title, info, button);
+        list.appendChild(card);
+      });
+
+      details.appendChild(list);
+      gradeCard.appendChild(details);
+    });
+
+    gradeGrid.appendChild(gradeCard);
+  });
+}
+
+/* SUBJECT TABS */
+
+document.querySelectorAll(".tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    currentSubject = tab.dataset.subject;
+
+    document.querySelectorAll(".tab").forEach(other => {
+      other.classList.toggle("active", other === tab);
+    });
+
+    renderSubject();
+  });
+});
+
+$("enterBtn").addEventListener("click", () => {
+  main.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+});
+
+/* START ASSESSMENT */
+
+async function startAssessment(assessment) {
+  activeAssessment = assessment;
+  answers = {};
+  questions = [];
+  submitting = false;
+
+  const saved = readSavedSession();
+
+  if (saved && saved.submitted) {
+    alert("You have already submitted this assessment on this browser.");
+    return;
+  }
+
+  if (saved && saved.ended) {
+    session = saved;
+    showClosed("This assessment session has already ended.");
+    return;
+  }
+
+  if (saved && saved.endAt) {
+    session = saved;
+  } else {
+    const now = Date.now();
+    const duration = Math.max(1, Number(assessment.duration_minutes || 45));
+
+    session = {
+      assessmentId:assessment.id,
+      startedAt:now,
+      endAt:now + duration * 60 * 1000,
+      ended:false,
+      submitted:false
+    };
+
+    saveSession();
+  }
+
+  $("examTitle").textContent = assessment.title;
+
+  $("examInstructions").textContent =
+    `You have ${assessment.duration_minutes || 45} minutes. Your timer continues if you refresh this page.`;
+
+  if (Date.now() >= session.endAt) {
+    showClosed("Your allocated time has expired.");
+    return;
+  }
+
+  showExamScreen();
+
+  if (assessment.assessment_type === "built_in") {
+    $("googleFormArea").classList.add("hidden");
+    $("googleFormFrame").src = "about:blank";
+    $("builtInArea").replaceChildren();
+    await loadBuiltInQuestions();
+  } else {
+    $("builtInArea").replaceChildren();
+    $("googleFormArea").classList.remove("hidden");
+
+    const formUrl = assessment.google_form_url || "";
+
+    if (!formUrl) {
+      $("googleFormArea").innerHTML =
+        "<p style='padding:20px'>The administrator has not added a Google Form link to this assessment.</p>";
+    } else {
+      try {
+        const embeddedUrl = new URL(formUrl);
+        embeddedUrl.searchParams.set("embedded", "true");
+        $("googleFormFrame").src = embeddedUrl.toString();
+
+        const directUrl = new URL(formUrl);
+        directUrl.searchParams.delete("embedded");
+        $("googleFormLink").href = directUrl.toString();
+      } catch (error) {
+        console.error("Invalid Google Form URL:", error);
+        $("googleFormArea").innerHTML =
+          "<p style='padding:20px'>The Google Form link is invalid. Please contact the administrator.</p>";
+      }
+    }
+  }
+
+  updateTimer();
+
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = setInterval(updateTimer, 1000);
+}
+
+/* LOAD BUILT-IN QUESTIONS */
+
+async function loadBuiltInQuestions() {
+  $("builtInArea").innerHTML =
+    "<div class='status-message'>Loading questions...</div>";
+
+  const { data, error } = await EMA.db
+    .from("questions")
+    .select("id,assessment_id,question_text,question_type,options,marks,position")
+    .eq("assessment_id", activeAssessment.id)
+    .order("position", { ascending:true });
+
+  if (error) {
+    console.error(error);
+    $("builtInArea").innerHTML =
+      "<div class='status-message'>Could not load the questions: " +
+      error.message + "</div>";
+    return;
+  }
+
+  questions = data || [];
+
+  if (!questions.length) {
+    $("builtInArea").innerHTML =
+      "<div class='status-message'>This assessment has no questions yet.</div>";
+    return;
+  }
+
+  const unsupported = questions.filter(q => q.question_type !== "mcq");
+
+  if (unsupported.length) {
+    $("builtInArea").innerHTML =
+      "<div class='status-message'>This test contains question types that are not supported for automatic marking yet.</div>";
+    return;
+  }
+
+  renderQuestions();
+}
+
+/* DISPLAY BUILT-IN QUESTIONS */
+
+function renderQuestions() {
+  const area = $("builtInArea");
+  area.replaceChildren();
+
+  questions.forEach((question,index) => {
+    const card = document.createElement("article");
+    card.className = "question-card";
+
+    const heading = document.createElement("h3");
+    heading.textContent = `Question ${index + 1}`;
+
+    const questionText = document.createElement("p");
+    questionText.textContent = question.question_text;
+
+    const marks = document.createElement("small");
+    marks.style.color = "#64748b";
+    marks.textContent = `${question.marks} mark(s)`;
+
+    card.append(heading, questionText, marks);
+
+    let options = question.options;
+
+    if (typeof options === "string") {
+      try {
+        options = JSON.parse(options);
+      } catch {
+        options = [];
+      }
+    }
+
+    if (!Array.isArray(options)) {
+      options = Object.values(options || {});
+    }
+
+    options.forEach((option,optionIndex) => {
+      const optionText = typeof option === "string"
+        ? option
+        : (option.text || option.label || option.value || "");
+
+      const label = document.createElement("label");
+      label.className = "question-option";
+
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = question.id;
+      input.value = optionText;
+
+      input.addEventListener("change",() => {
+        answers[question.id] = optionText;
+      });
+
+      const span = document.createElement("span");
+      span.textContent =
+        `${String.fromCharCode(65 + optionIndex)}. ${optionText}`;
+
+      label.append(input,span);
+      card.appendChild(label);
+    });
+
+    area.appendChild(card);
+  });
+
+  const actions = document.createElement("div");
+  actions.className = "question-card";
+
+  const submit = document.createElement("button");
+  submit.type = "button";
+  submit.className = "btn btn-gold";
+  submit.textContent = "SUBMIT MY TEST";
+
+  submit.addEventListener("click",() => {
+    submitBuiltInAssessment(false);
+  });
+
+  actions.appendChild(submit);
+  area.appendChild(actions);
+}
+
+/* SUBMIT AND AUTOMATICALLY MARK MCQ TEST */
+
+async function submitBuiltInAssessment(force = false) {
+  if (!activeAssessment || !questions.length || submitting) return;
+
+  if (!force) {
+    const unanswered = questions.filter(q => !answers[q.id]);
+
+    if (unanswered.length) {
+      if (!confirm(
+        `You have ${unanswered.length} unanswered question(s). Submit anyway?`
+      )) return;
+    } else if (!confirm(
+      "Submit your assessment now? You cannot change your answers afterwards."
+    )) {
+      return;
+    }
+  }
+
+  submitting = true;
+
+  const submitButton = $("builtInArea").querySelector("button");
+
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.textContent = "SUBMITTING...";
+  }
+
+  const { data,error } = await EMA.db.rpc("ema_submit_mcq", {
+    p_assessment_id:activeAssessment.id,
+    p_answers:answers
+  });
+
+  if (error) {
+    console.error(error);
+    submitting = false;
+
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = "SUBMIT MY TEST";
+    }
+
+    alert("Your test could not be submitted: " + error.message);
+    return;
+  }
+
+  session.submitted = true;
+  session.ended = true;
+  saveSession();
+
+  showResult(data.score,data.max_score,data.percentage);
+}
+
+/* TIMER */
+
+function updateTimer() {
+  if (!session || session.ended || session.submitted) return;
+
+  const remaining = Math.max(
+    0,
+    Math.ceil((session.endAt - Date.now()) / 1000)
+  );
+
+  const minutes = Math.floor(remaining / 60);
+  const seconds = remaining % 60;
+
+  $("timerDisplay").textContent =
+    String(minutes).padStart(2,"0") + ":" +
+    String(seconds).padStart(2,"0");
+
+  $("timerDisplay").classList.toggle("warning", remaining <= 60);
+
+  if (remaining <= 0) {
+    if (activeAssessment?.assessment_type === "built_in") {
+      if (questions.length && !submitting) {
+        submitBuiltInAssessment(true).catch(error => {
+          console.error("Automatic submission failed:",error);
+        });
+      } else {
+        showClosed(
+          "Time expired. Your test could not be automatically submitted. Please contact your administrator."
+        );
+      }
+    } else {
+      showClosed(
+        "Time expired. Google Forms cannot be force-submitted by this timer. Any answers not submitted in Google Forms may be lost."
+      );
+    }
+
+    return;
+  }
+
+  saveSession();
+}
+
+/* LEAVE EXAM */
+
+$("exitExamBtn").addEventListener("click",() => {
+  if (confirm("Leave exam view? Your timer will continue running.")) {
+    showCatalogue();
+  }
+});
+
+$("returnCatalogueBtn").addEventListener("click",showCatalogue);
+
+/* AUTHENTICATION AND INITIALISATION */
+
+async function initialise() {
+  if (!window.EMA) {
+    $("catalogueStatus").textContent =
+      "Supabase has not loaded. Check config.js and ema-supabase.js.";
+    return;
+  }
+
+  profile = await EMA.requireSession(["learner"]);
+
+  if (!profile) return;
+
+  $("learnerLabel").textContent =
+    `Signed in: ${profile.full_name || profile.student_number || "Learner"} · Grade ${profile.grade || "Not assigned"}`;
+
+  await loadCatalogue();
+}
+
+initialise().catch(error => {
+  console.error(error);
+  $("catalogueStatus").textContent =
+    "Something went wrong while loading the exam centre: " + error.message;
+});
+
+})();
+</script>
+
+</body>
+</html>

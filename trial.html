@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/png" href="logo.png.png">
+    <title>Free Trial Registration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+    <div class="menu">
+        <a href="index.html">Home</a>
+        <a href="lessons.html">Our Lessons</a>
+        <a href="index.html#why-choose-us">Why Choose Us</a>
+        <a href="index.html#about-us">About Us</a>
+    </div>
+</nav>
+
+<section class="trial-page">
+
+    <h1>3-Day Free Trial Registration</h1>
+
+    <div class="trial-box">
+
+        <label>Subject</label>
+
+        <select id="subject">
+            <option value="">Select Subject</option>
+            <option value="maths">Mathematics</option>
+            <option value="science">Physical Sciences</option>
+            <option value="technology">Technology (Grade 9)</option>
+        </select>
+
+        <label>Learner Name</label>
+
+        <input type="text" id="learnerName" placeholder="Enter your name">
+
+        <label>Grade</label>
+
+        <select id="grade">
+            <option value="">Select Grade</option>
+            <option>Grade 9</option>
+            <option>Grade 10</option>
+            <option>Grade 11</option>
+            <option>Grade 12</option>
+        </select>
+
+        <button onclick="goToWhatsapp()">
+            Continue
+        </button>
+
+    </div>
+
+</section>
+
+<script>
+
+function goToWhatsapp(){
+
+    const name =
+        document.getElementById("learnerName").value;
+
+    const subject =
+        document.getElementById("subject").value;
+
+    const grade =
+        document.getElementById("grade").value;
+
+    if(name === ""){
+        alert("Please enter your name.");
+        return;
+    }
+
+    if(subject === ""){
+        alert("Please select a subject.");
+        return;
+    }
+
+    if(grade === ""){
+        alert("Please select a grade.");
+        return;
+    }
+
+    let number = "";
+    let subjectName = "";
+
+    if(subject === "maths"){
+        number = "27733882049";
+        subjectName = "Mathematics";
+    }
+
+    if(subject === "science"){
+        number = "27728363511";
+        subjectName = "Physical Sciences";
+    }
+
+    if(subject === "technology"){
+        number = "27728363511";
+        subjectName = "Technology";
+    }
+
+    let message =
+        "Hi, I'm " + name +
+        ". I would like to join Everything's Maths Academy for " +
+        subjectName +
+        ". I am in " + grade + ".";
+
+    let whatsapp =
+        "https://wa.me/" +
+        number +
+        "?text=" +
+        encodeURIComponent(message);
+
+    window.open(whatsapp, "_blank");
+}
+
+</script>
+
+</body>
+</html>

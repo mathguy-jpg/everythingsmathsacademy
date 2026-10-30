@@ -1,0 +1,818 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/png" href="logo.png.png">
+    <title>Learner Dashboard | EVERYTHING'S MATHS</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script src="ema-supabase.js"></script>
+
+    <style>
+        [hidden] {
+            display: none !important;
+        }
+
+        /* DASHBOARD LAYOUT */
+        body {
+            background: #f4f7fc;
+        }
+
+        .dashboard-page {
+            width: min(1100px, 94%);
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 22px 20px 45px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        /* NAVIGATION */
+        body > nav {
+            padding: 13px 30px;
+            min-height: 52px;
+            box-sizing: border-box;
+        }
+
+        body > nav .menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px 20px;
+        }
+
+        body > nav .menu a {
+            font-size: 15px;
+            margin: 0;
+        }
+
+        /* LOGO */
+        .dashboard-logo {
+            width: 145px !important;
+            max-width: 40%;
+            height: auto;
+            margin: 0 auto 5px;
+            animation: none !important;
+            filter: none !important;
+        }
+
+        /* LEARNER PROFILE */
+        #welcomeName {
+            color: #001f66;
+            font-size: clamp(25px, 3vw, 34px);
+            margin: 5px 0 8px;
+        }
+
+        #studentNumber {
+            color: #526174;
+            font-size: 14px;
+            margin: 7px 0;
+            font-weight: 600;
+        }
+
+        .learner-grade {
+            display: inline-block;
+            background: #001f66;
+            color: #ffd700;
+            padding: 7px 19px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 13px;
+            margin: 8px 0 10px;
+        }
+
+        .dashboard-subtitle {
+            color: #667085;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin: 5px 0 10px;
+        }
+
+        #dashboardMessage {
+            color: #526174;
+            font-size: 13px;
+            margin: 8px 0 15px;
+            line-height: 1.5;
+        }
+
+        .dashboard-error {
+            color: #a32121;
+            background: #fff0f0;
+            border: 1px solid #f2caca;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 12px 0;
+            font-size: 13px;
+        }
+
+        /* STATISTICS */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 15px;
+            margin: 20px 0 25px;
+        }
+
+        .stat-box {
+            width: auto !important;
+            min-width: 0;
+            padding: 17px 12px !important;
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0, 31, 102, 0.07);
+            box-sizing: border-box;
+            animation: none !important;
+        }
+
+        .stat-box h2 {
+            color: #1565c0;
+            font-size: 29px;
+            margin: 0 0 7px;
+        }
+
+        .stat-box p {
+            color: #526174;
+            font-size: 12px;
+            margin: 0;
+        }
+
+        /* EXAMINATION CENTRE */
+        .exam-centre-card {
+            background: linear-gradient(135deg, #001f66, #1565c0);
+            color: white;
+            padding: 23px;
+            border-radius: 16px;
+            margin: 20px 0 25px;
+            text-align: center;
+            box-shadow: 0 6px 18px rgba(0, 31, 102, 0.12);
+        }
+
+        .exam-centre-card h2 {
+            color: #ffd700;
+            font-size: 21px;
+            margin: 0 0 10px;
+        }
+
+        .exam-centre-card p {
+            color: white;
+            font-size: 13px;
+            line-height: 1.6;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .exam-centre-btn {
+            display: inline-block;
+            background: #ffd700;
+            color: #001f66;
+            padding: 11px 23px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 13px;
+            margin-top: 12px;
+            transition: 0.2s ease;
+        }
+
+        .exam-centre-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        /* SUBJECT PORTALS */
+        .portal-heading {
+            color: #001f66;
+            font-size: 22px;
+            margin: 27px 0 15px;
+        }
+
+        .portal-container {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 17px;
+            margin: 15px 0 25px;
+        }
+
+        .subject-portal {
+            width: auto !important;
+            min-width: 0;
+            min-height: 0 !important;
+            padding: 22px 18px !important;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 5px 18px rgba(0, 31, 102, 0.07);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            box-sizing: border-box;
+            cursor: default;
+        }
+
+        .subject-portal:hover {
+            transform: translateY(-4px);
+        }
+
+        .portal-icon {
+            width: 62px;
+            height: 62px;
+            font-size: 29px;
+            margin: 0 auto 10px;
+        }
+
+        .subject-portal h2 {
+            color: #001f66;
+            font-size: 19px;
+            margin: 5px 0 8px;
+        }
+
+        .subject-portal p {
+            color: #667085;
+            font-size: 12px;
+            line-height: 1.6;
+            margin: 0;
+            max-width: 300px;
+        }
+
+        .portal-link {
+            display: inline-block;
+            background: #1565c0;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 12px;
+            margin-top: 14px;
+            transition: 0.2s ease;
+        }
+
+        .portal-link:hover {
+            background: #001f66;
+            transform: translateY(-2px);
+        }
+
+        .portal-link:focus-visible,
+        .exam-centre-btn:focus-visible {
+            outline: 3px solid #ffd700;
+            outline-offset: 3px;
+        }
+
+        #noSubjectsMessage {
+            color: #667085;
+            font-size: 13px;
+            background: white;
+            padding: 18px;
+            border-radius: 12px;
+        }
+
+        /* THIS WEEK */
+        .task-container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .task-card {
+            background: white;
+            padding: 14px 17px;
+            margin: 10px 0;
+            border-radius: 11px;
+            box-shadow: 0 3px 12px rgba(0, 31, 102, 0.05);
+            font-size: 13px;
+            color: #344054;
+        }
+
+        /* RESULTS */
+        .results-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+
+        .results-list li {
+            padding: 12px 15px;
+            margin: 8px 0;
+            background: white;
+            border-left: 4px solid #1565c0;
+            border-radius: 7px;
+            text-align: left;
+            line-height: 1.5;
+            font-size: 13px;
+            color: #344054;
+            box-shadow: 0 3px 10px rgba(0, 31, 102, 0.04);
+        }
+
+        .empty-results {
+            color: #667085;
+            font-style: italic;
+        }
+
+        /* TABLETS */
+        @media (max-width: 750px) {
+            .dashboard-page {
+                width: 96%;
+                padding: 18px 12px 35px;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .portal-container {
+                grid-template-columns: 1fr;
+            }
+
+            .subject-portal {
+                min-height: 0 !important;
+            }
+        }
+
+        /* PHONES */
+        @media (max-width: 480px) {
+            body > nav {
+                padding: 12px 8px;
+            }
+
+            body > nav .menu {
+                gap: 10px 14px;
+            }
+
+            body > nav .menu a {
+                font-size: 12px;
+            }
+
+            .dashboard-page {
+                width: 100%;
+                padding: 15px 12px 30px;
+            }
+
+            .dashboard-logo {
+                width: 115px !important;
+            }
+
+            #welcomeName {
+                font-size: 25px;
+            }
+
+            #studentNumber {
+                font-size: 12px;
+            }
+
+            .stats-container {
+                gap: 10px;
+                margin: 16px 0 20px;
+            }
+
+            .stat-box {
+                padding: 14px 8px !important;
+            }
+
+            .stat-box h2 {
+                font-size: 25px;
+            }
+
+            .stat-box p {
+                font-size: 11px;
+            }
+
+            .exam-centre-card {
+                padding: 19px 14px;
+                margin: 17px 0 22px;
+            }
+
+            .exam-centre-card h2 {
+                font-size: 18px;
+            }
+
+            .exam-centre-card p {
+                font-size: 12px;
+            }
+
+            .exam-centre-btn,
+            .portal-link {
+                width: 100%;
+                text-align: center;
+                box-sizing: border-box;
+            }
+
+            .portal-heading {
+                font-size: 20px;
+            }
+
+            .subject-portal {
+                padding: 19px 14px !important;
+            }
+
+            .task-card,
+            .results-list li {
+                padding: 12px;
+                font-size: 12px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .dashboard-page,
+            .stat-box,
+            .subject-portal,
+            .exam-centre-btn,
+            .portal-link {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="menu">
+        <a href="index.html">Home</a>
+        <a href="learner-dashboard.html">Dashboard</a>
+        <a href="#this-week">This Week</a>
+        <a href="#" id="logoutLink">Logout</a>
+    </div>
+</nav>
+
+<main class="dashboard-page">
+
+    <img src="logo.png.png"
+         class="dashboard-logo"
+         alt="EVERYTHING'S MATHS logo">
+
+    <h1 id="welcomeName">Welcome Back 👋</h1>
+
+    <h3 id="studentNumber">Student Number: Loading...</h3>
+
+    <div id="learnerGrade" class="learner-grade">
+        Loading grade...
+    </div>
+
+    <p class="dashboard-subtitle">
+        Learn • Practise • Improve
+    </p>
+
+    <p id="dashboardMessage" role="status" aria-live="polite">
+        Verifying your learner account...
+    </p>
+
+    <div id="dashboardError"
+         class="dashboard-error"
+         role="alert"
+         hidden>
+    </div>
+
+    <!-- LEARNER STATISTICS -->
+    <div class="stats-container">
+
+        <div class="stat-box">
+            <h2 id="currentAverage">--</h2>
+            <p>Current Average</p>
+        </div>
+
+        <div class="stat-box">
+            <h2 id="upcomingTasks">--</h2>
+            <p>Examination Centre</p>
+        </div>
+
+        <div class="stat-box">
+            <h2 id="activeSubjects">--</h2>
+            <p>Active Subjects</p>
+        </div>
+
+        <div class="stat-box">
+            <h2 id="achievements">0</h2>
+            <p>Achievements</p>
+        </div>
+
+    </div>
+
+    <!-- EXAMINATION CENTRE -->
+    <section class="exam-centre-card">
+
+        <h2>📝 EMA Examination Centre</h2>
+
+        <p>
+            Access your Mathematics and Physical Sciences tests,
+            complete assessments and view your examination results.
+        </p>
+
+        <a href="exam-site.html" class="exam-centre-btn">
+            ENTER EXAM CENTRE
+        </a>
+
+    </section>
+
+    <!-- SUBJECT PORTALS -->
+    <h2 class="portal-heading">My Subject Portals</h2>
+
+    <div class="portal-container">
+
+        <div class="subject-portal" id="mathsPortalCard" hidden>
+
+            <div class="portal-icon">∑</div>
+
+            <h2>Mathematics</h2>
+
+            <p>
+                Notes, quizzes, assignments, progress tracking
+                and exam preparation.
+            </p>
+
+            <a href="mathematics-portal.html" class="portal-link">
+                Open Mathematics
+            </a>
+
+        </div>
+
+        <div class="subject-portal" id="sciencePortalCard" hidden>
+
+            <div class="portal-icon">⚛</div>
+
+            <h2>Physical Sciences</h2>
+
+            <p>
+                Notes, quizzes, assignments, progress tracking
+                and exam preparation.
+            </p>
+
+            <a href="physical-sciences-portal.html" class="portal-link">
+                Open Physical Sciences
+            </a>
+
+        </div>
+
+    </div>
+
+    <p id="noSubjectsMessage" hidden>
+        No subjects have been assigned to your account yet.
+        Please contact your administrator.
+    </p>
+
+    <!-- THIS WEEK -->
+    <h2 class="portal-heading" id="this-week">
+        This Week
+    </h2>
+
+    <div class="task-container">
+
+        <div class="task-card">
+            📝 Check your available examination tests
+        </div>
+
+        <div class="task-card">
+            📚 Continue your revision
+        </div>
+
+        <div class="task-card">
+            ⚛ Practise Physical Sciences
+        </div>
+
+    </div>
+
+    <!-- RECENT RESULTS -->
+    <h2 class="portal-heading">My Recent Results</h2>
+
+    <div class="task-container">
+
+        <ul id="recentResults" class="results-list">
+            <li>Loading your results...</li>
+        </ul>
+
+    </div>
+
+</main>
+
+<script>
+document.addEventListener("DOMContentLoaded", async function () {
+
+    const $ = (id) => document.getElementById(id);
+
+    const message = $("dashboardMessage");
+    const errorBox = $("dashboardError");
+    const logoutLink = $("logoutLink");
+
+    function showError(text) {
+        errorBox.textContent = text;
+        errorBox.hidden = false;
+    }
+
+    function clearError() {
+        errorBox.textContent = "";
+        errorBox.hidden = true;
+    }
+
+    // LOGOUT
+    logoutLink.addEventListener("click", async function (event) {
+        event.preventDefault();
+
+        logoutLink.textContent = "Logging out...";
+
+        try {
+            if (window.EMA && typeof EMA.signOut === "function") {
+                await EMA.signOut();
+            } else {
+                window.location.replace("login.html");
+            }
+        } catch (error) {
+            console.error("EMA logout error:", error);
+            logoutLink.textContent = "Logout";
+
+            showError(
+                "Logout could not be completed. Please try again."
+            );
+        }
+    });
+
+    // CHECK SUPABASE CONNECTION
+    if (!window.EMA ||
+        typeof EMA.requireSession !== "function") {
+
+        message.textContent = "Login service unavailable.";
+
+        showError(
+            "The Supabase connection could not be loaded. " +
+            "Please check config.js and ema-supabase.js."
+        );
+
+        return;
+    }
+
+    try {
+
+        // VERIFY LEARNER LOGIN
+        const profile = await EMA.requireSession(["learner"]);
+
+        if (!profile) {
+            return;
+        }
+
+        clearError();
+
+        // LEARNER PROFILE
+        $("welcomeName").textContent =
+            "Welcome " + (profile.full_name || "Learner") + " 👋";
+
+        $("studentNumber").textContent =
+            "Student Number: " +
+            (profile.student_number || "Not assigned");
+
+        $("learnerGrade").textContent =
+            "GRADE " + (profile.grade || "NOT ASSIGNED");
+
+        // SUBJECT ACCESS
+        const subjects = Array.isArray(profile.subject_access)
+            ? profile.subject_access
+            : [];
+
+        const hasMaths = subjects.includes("Mathematics");
+        const hasScience = subjects.includes("Physical Sciences");
+
+        $("activeSubjects").textContent = subjects.length;
+
+        $("mathsPortalCard").hidden = !hasMaths;
+        $("sciencePortalCard").hidden = !hasScience;
+
+        $("noSubjectsMessage").hidden = subjects.length > 0;
+
+        // UPCOMING TASKS
+        $("upcomingTasks").textContent = "Open";
+
+        // EXAMINATION RESULTS
+        const resultsList = $("recentResults");
+
+        try {
+
+            if (typeof EMA.getMyResults !== "function") {
+                throw new Error("Results service is unavailable.");
+            }
+
+            const results = await EMA.getMyResults();
+
+            const safeResults = Array.isArray(results)
+                ? results
+                : [];
+
+            // CALCULATE AVERAGE
+            const percentages = safeResults
+                .map(result => Number(result.percentage))
+                .filter(value => Number.isFinite(value));
+
+            const average = percentages.length
+                ? Math.round(
+                    percentages.reduce(
+                        (total, value) => total + value,
+                        0
+                    ) / percentages.length
+                )
+                : null;
+
+            $("currentAverage").textContent =
+                average === null ? "--" : average + "%";
+
+            // ACHIEVEMENTS
+            $("achievements").textContent =
+                safeResults.filter(result => {
+                    const percentage = Number(result.percentage);
+
+                    return Number.isFinite(percentage) &&
+                           percentage >= 80;
+                }).length;
+
+            // LATEST FIVE RESULTS
+            resultsList.replaceChildren();
+
+            if (!safeResults.length) {
+
+                const item = document.createElement("li");
+
+                item.className = "empty-results";
+
+                item.textContent =
+                    "No marked assessments yet. Your results will appear here when available.";
+
+                resultsList.appendChild(item);
+
+            } else {
+
+                safeResults.slice(0, 5).forEach(result => {
+
+                    const item = document.createElement("li");
+
+                    const title =
+                        result.assessments?.title || "Assessment";
+
+                    const score =
+                        result.score ?? "--";
+
+                    const maxScore =
+                        result.assessments?.max_score ?? "?";
+
+                    const percentage =
+                        Number(result.percentage);
+
+                    const percentageText =
+                        Number.isFinite(percentage)
+                            ? percentage + "%"
+                            : "Not available";
+
+                    item.textContent =
+                        `${title} — ${score}/${maxScore} (${percentageText})`;
+
+                    resultsList.appendChild(item);
+
+                });
+
+            }
+
+        } catch (resultsError) {
+
+            console.error("EMA results error:", resultsError);
+
+            $("currentAverage").textContent = "--";
+            $("achievements").textContent = "0";
+
+            resultsList.replaceChildren();
+
+            const item = document.createElement("li");
+
+            item.textContent =
+                "Your results could not be loaded right now. Please try again later.";
+
+            resultsList.appendChild(item);
+
+        }
+
+        // DASHBOARD READY
+        message.textContent =
+            "Your learner dashboard is ready.";
+
+    } catch (error) {
+
+        console.error("EMA learner dashboard error:", error);
+
+        message.textContent =
+            "We could not load your dashboard.";
+
+        showError(
+            "Please refresh the page or log in again. " +
+            "If the problem continues, contact administration."
+        );
+
+    }
+
+});
+</script>
+
+</body>
+</html>

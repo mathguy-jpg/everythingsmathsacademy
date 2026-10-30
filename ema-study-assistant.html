@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EMA Study Assistant™</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f7fc;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+.header{
+    background:#1677ff;
+    color:white;
+    padding:15px;
+}
+
+.header h1{
+    font-size:24px;
+}
+
+#chatBox{
+    flex:1;
+    padding:20px;
+    overflow-y:auto;
+}
+
+.botMessage{
+    background:#eaeaea;
+    padding:12px;
+    border-radius:12px;
+    margin-bottom:10px;
+    width:fit-content;
+    max-width:80%;
+}
+
+.userMessage{
+    background:#1677ff;
+    color:white;
+    padding:12px;
+    border-radius:12px;
+    margin-bottom:10px;
+    margin-left:auto;
+    width:fit-content;
+    max-width:80%;
+}
+
+.inputArea{
+    display:flex;
+    gap:10px;
+    padding:10px;
+    background:white;
+    border-top:1px solid #ddd;
+}
+
+#question{
+    flex:1;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:12px;
+}
+
+#sendBtn{
+    width:60px;
+    border:none;
+    border-radius:12px;
+    background:#1677ff;
+    color:white;
+    cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+    <h1>🤖 EMA Study Assistant™</h1>
+
+</div>
+
+<div id="chatBox">
+
+    <div class="botMessage">
+
+        Hello 👋
+
+        <br><br>
+
+        I am EMA Study Assistant.
+
+    </div>
+
+</div>
+
+<div class="inputArea">
+
+    <input
+        id="question"
+        type="text"
+        placeholder="Ask a question...">
+
+    <button
+        id="sendBtn"
+        onclick="sendQuestion()">
+
+        ✈
+
+    </button>
+
+</div>
+
+<script>
+
+function sendQuestion(){
+
+    let question =
+    document.getElementById(
+        "question"
+    ).value;
+
+    if(question.trim() === ""){
+        return;
+    }
+
+    const chat =
+    document.getElementById(
+        "chatBox"
+    );
+
+    chat.innerHTML +=
+    '<div class="userMessage">' +
+    question +
+    '</div>';
+
+    chat.innerHTML +=
+    '<div class="botMessage" id="thinking">🤔 Thinking...</div>';
+
+    document.getElementById(
+        "question"
+    ).value = "";
+
+    setTimeout(function(){
+
+        let response = "";
+
+        const q =
+        question.toLowerCase();
+
+        if(q.includes("hello") || q.includes("hi")){
+
+            response =
+            "Hello! How can I help you today?";
+
+        }
+
+        else if(q.includes("how are you")){
+
+            response =
+            "I am doing well. How can I assist you with Mathematics or Physical Sciences today?";
+
+        }
+
+        else if(q.includes("newton")){
+
+            response =
+            "Newton's Second Law states that F = ma.";
+
+        }
+
+        else if(q.includes("ohm")){
+
+            response =
+            "Ohm's Law states that V = IR.";
+
+        }
+
+        else if(q.includes("quadratic")){
+
+            response =
+            "The quadratic formula is x = (-b plus or minus square root of b squared minus 4ac) divided by 2a.";
+
+        }
+
+        else{
+
+            response =
+            "I am EMA Study Assistant. Please ask a Mathematics or Physical Sciences question.";
+
+        }
+
+        document.getElementById(
+            "thinking"
+        ).innerHTML =
+        response;
+
+        chat.scrollTop =
+        chat.scrollHeight;
+
+    },2000);
+
+}
+
+</script>
+
+</body>
+</html>
