@@ -1163,3 +1163,42 @@ footer#contact a:hover,
         transition-duration: 0.01ms !important;
     }
 }
+
+/* =========================================
+   EMA: KEEP DESKTOP LAYOUT ON MOBILE
+   Scale the complete page to fit phone screens
+========================================= */
+
+@media screen and (max-width: 768px) {
+
+    html {
+        width: 1200px;
+        min-width: 1200px;
+        overflow-x: hidden;
+    }
+
+    body {
+        width: 1200px;
+        min-width: 1200px;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        zoom: 0.32;
+    }
+
+    #site-scale-shell,
+    #desktop-site {
+        width: 1200px;
+        min-width: 1200px;
+        max-width: none;
+    }
+
+    header,
+    main,
+    footer {
+        width: 1200px;
+        min-width: 1200px;
+    }
+
+}
+
