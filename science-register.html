@@ -1,7 +1,10 @@
+
 <!DOCTYPE html>
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="logo.png.png">
     <title>Physical Sciences Registration</title>
     <link rel="stylesheet" href="style.css">
@@ -32,43 +35,43 @@
             readonly>
 
         <h2>Learner Name</h2>
-
         <input
             type="text"
             id="learnerName"
-            placeholder="Enter Learner Name">
+            placeholder="Enter Learner Name"
+            required>
 
         <h2>Parent / Guardian Name</h2>
-
         <input
             type="text"
             id="parentName"
-            placeholder="Enter Parent Name">
+            placeholder="Enter Parent Name"
+            required>
 
         <h2>Parent Contact Number</h2>
-
         <input
-            type="text"
+            type="tel"
             id="parentNumber"
-            placeholder="Enter Parent Contact Number">
+            placeholder="Enter Parent Contact Number"
+            required>
 
         <h2>Email Address</h2>
-
         <input
             type="email"
             id="email"
-            placeholder="Enter Email Address">
+            placeholder="Enter Email Address"
+            required>
 
         <h2>Grade</h2>
 
-        <select id="grade">
+        <select id="grade" required>
             <option value="">Select Grade</option>
-            <option>Grade 10</option>
-            <option>Grade 11</option>
-            <option>Grade 12</option>
+            <option value="Grade 10">Grade 10</option>
+            <option value="Grade 11">Grade 11</option>
+            <option value="Grade 12">Grade 12</option>
         </select>
 
-        <button onclick="continueRegistration()">
+        <button type="button" onclick="continueRegistration()">
             Continue To Payment
         </button>
 
@@ -78,57 +81,59 @@
 
 <script>
 
-function continueRegistration(){
+function continueRegistration() {
 
-    let learner =
-        document.getElementById("learnerName").value;
+    const learner =
+        document.getElementById("learnerName").value.trim();
 
-    let parent =
-        document.getElementById("parentName").value;
+    const parent =
+        document.getElementById("parentName").value.trim();
 
-    let parentNumber =
-        document.getElementById("parentNumber").value;
+    const parentNumber =
+        document.getElementById("parentNumber").value.trim();
 
-    let email =
-        document.getElementById("email").value;
+    const email =
+        document.getElementById("email").value.trim();
 
-    let grade =
+    const grade =
         document.getElementById("grade").value;
 
-    if(learner === ""){
+    if (!learner) {
         alert("Please enter learner name.");
         return;
     }
 
-    if(parent === ""){
+    if (!parent) {
         alert("Please enter parent name.");
         return;
     }
 
-    if(parentNumber === ""){
+    if (!parentNumber) {
         alert("Please enter parent contact number.");
         return;
     }
 
-    if(email === ""){
-        alert("Please enter email.");
+    if (!email) {
+        alert("Please enter email address.");
         return;
     }
 
-    if(grade === ""){
+    if (!grade) {
         alert("Please select a grade.");
         return;
     }
 
     alert(
-        "Registration Captured Successfully!\n\n" +
+        "Registration Details Completed Successfully!\n\n" +
         "Next Step: PayFast Payment."
     );
+
+    // Redirect to Physical Sciences payment
+    window.location.href = "science-payment.html";
 
 }
 
 </script>
 
 </body>
-
 </html>
