@@ -1828,5 +1828,103 @@ body{
         padding: 45px 15px;
     }
 }
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
 
+    nav{
+        flex-direction: column;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .menu{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .menu a{
+        font-size: 14px;
+    }
+
+    .trial-btn button,
+    .login-btn{
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .hero{
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .hero-left,
+    .hero-right{
+        width: 100%;
+    }
+
+    .hero h1{
+        font-size: 3rem;
+        line-height: 1.1;
+    }
+
+    .hero p{
+        font-size: 1rem;
+    }
+
+    .hero-right img{
+        width: 90%;
+        max-width: 350px;
+        margin-top: 20px;
+    }
+
+    .hero-buttons{
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .hero-buttons button{
+        width: 100%;
+    }
+
+    .learning-showcase img{
+        width: 100%;
+        height: auto;
+    }
+
+    .surround-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .center-image img{
+        width: 90%;
+    }
+
+    .vision-boxes{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .founders-section{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .founders-section img{
+        width: 100%;
+        height: auto;
+    }
+
+    .team-info{
+        width: 100%;
+    }
+
+}
 
