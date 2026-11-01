@@ -326,33 +326,29 @@
     </main>
 
 
-    <!-- CONTACT -->
-    <footer id="contact">
+    
+<!-- CONTACT / FOOTER -->
+<footer id="contact" class="footer-bar">
 
-        <h2>Everything's Maths Academy</h2>
+    <span>Everything's Maths Academy</span>
 
-        <p>
-            Empowering learners through Mathematics,
-            Physical Sciences and quality education.
-        </p>
+    <span>Empowering learners through Mathematics & Physical Sciences.</span>
 
-        <a href="lessons.html">Our Lessons</a>
-        <a href="trial.html">Start Free Trial</a>
-        <a href="login.html">Learner Login</a>
+    <a href="lessons.html">Our Lessons</a>
 
-        <p>
-            &copy; <span id="current-year">2026</span>
-            Everything's Maths Academy. All rights reserved.
-        </p>
+    <a href="trial.html">Start Free Trial</a>
 
-    </footer>
+    <a href="login.html">Learner Login</a>
 
-    <script>
-        const yearElement = document.getElementById("current-year");
-        if (yearElement) {
-            yearElement.textContent = new Date().getFullYear();
-        }
-    </script>
+    <span>
+        &copy; <span id="current-year">2026</span> EMA
+    </span>
 
+</footer>
+
+<script>
+    document.getElementById("current-year").textContent =
+        new Date().getFullYear();
+</script>
 </body>
 </html>
