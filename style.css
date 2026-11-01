@@ -1635,3 +1635,53 @@ nav {
     }
 }
 
+/* EMA SINGLE-LINE BLUE FOOTER - FINAL OVERRIDE */
+
+body footer#contact.ema-footer {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 65px !important;
+    height: auto !important;
+    box-sizing: border-box !important;
+
+    padding: 14px 2% !important;
+    margin: 0 !important;
+
+    background: #061b4d !important;
+    border: 2px solid #1677ff !important;
+    border-radius: 12px !important;
+
+    gap: 8px !important;
+    overflow: hidden !important;
+
+    color: #ffffff !important;
+    font-size: clamp(8px, 1vw, 13px) !important;
+    line-height: 1.3 !important;
+    text-align: center !important;
+}
+
+body footer#contact.ema-footer > * {
+    display: block !important;
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+}
+
+body footer#contact.ema-footer a {
+    color: #4de1ff !important;
+    text-decoration: none !important;
+    font-weight: 700 !important;
+}
+
+body footer#contact.ema-footer a:hover {
+    color: #ffffff !important;
+}
+
