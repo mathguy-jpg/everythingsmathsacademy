@@ -1767,3 +1767,25 @@ body footer#contact.ema-footer a:hover {
         max-width:350px !important;
     }
 }
+/* PRESERVE DESKTOP DESIGN ON MOBILE */
+
+#site-scale-shell {
+    width: 100%;
+    overflow: hidden;
+}
+
+#desktop-site {
+    width: 1200px;
+    transform-origin: top left;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        margin: 0;
+        overflow-x: hidden;
+    }
+
+    #desktop-site {
+        transform: scale(calc(100vw / 1200));
+    }
+}
