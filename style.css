@@ -1679,3 +1679,32 @@ body{
         width:150px;
     }
 }
+@media screen and (max-width:768px){
+
+    .surround-container{
+        height:auto;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:20px;
+    }
+
+    .top-card,
+    .left-card,
+    .right-card,
+    .bottom-card,
+    .center-image{
+        position:static;
+        transform:none;
+    }
+
+    .center-image img{
+        width:300px;
+    }
+
+    .card{
+        width:90%;
+        max-width:320px;
+    }
+
+}
