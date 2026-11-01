@@ -1684,4 +1684,86 @@ body footer#contact.ema-footer a {
 body footer#contact.ema-footer a:hover {
     color: #ffffff !important;
 }
+/* ===== EMA FORCE FIX ===== */
 
+@media screen and (max-width:700px){
+
+    nav{
+        display:flex !important;
+        flex-direction:column !important;
+        padding:15px !important;
+        gap:15px !important;
+    }
+
+    .menu{
+        display:flex !important;
+        flex-wrap:wrap !important;
+        justify-content:center !important;
+        gap:10px !important;
+    }
+
+    .menu a{
+        font-size:16px !important;
+        margin:0 8px !important;
+    }
+
+    .hero{
+        display:flex !important;
+        flex-direction:row !important;
+        align-items:center !important;
+        justify-content:space-between !important;
+        padding:20px !important;
+        gap:10px !important;
+    }
+
+    .hero-left{
+        width:55% !important;
+    }
+
+    .hero-right{
+        width:45% !important;
+    }
+
+    .hero-left h1{
+        font-size:50px !important;
+        line-height:1 !important;
+    }
+
+    .hero-left p{
+        font-size:18px !important;
+        line-height:1.5 !important;
+    }
+
+    .hero-right img{
+        width:130% !important;
+        max-width:none !important;
+        margin-top:0 !important;
+    }
+
+    .hero-buttons button{
+        width:100% !important;
+        max-width:280px !important;
+        font-size:16px !important;
+    }
+
+    .surround-container{
+        display:flex !important;
+        flex-direction:column !important;
+        align-items:center !important;
+        height:auto !important;
+    }
+
+    .top-card,
+    .left-card,
+    .right-card,
+    .bottom-card,
+    .center-image{
+        position:static !important;
+        transform:none !important;
+    }
+
+    .card{
+        width:95% !important;
+        max-width:350px !important;
+    }
+}
