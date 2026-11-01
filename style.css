@@ -1829,14 +1829,4 @@ body{
     }
 }
 
-/* Prevent accidental horizontal page overflow */
-html,
-body {
-    max-width: 100%;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-}
 
