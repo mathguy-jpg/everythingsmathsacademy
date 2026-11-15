@@ -2,7 +2,6 @@
 /* EMA shared browser integration.
    Load config.js, Supabase v2 CDN, then this file.
 */
-
 (() => {
   const cfg = window.EMA_CONFIG || {};
 
@@ -28,14 +27,13 @@
 
     // VERIFY LOGGED-IN USER AND LEARNER PROFILE
     async requireSession(allowedRoles = []) {
-
       const {
         data: { user },
         error
       } = await client.auth.getUser();
 
       if (error || !user) {
-        location.replace('login.html');
+        window.location.replace('login.html');
         return null;
       }
 
@@ -58,22 +56,19 @@
         )
       ) {
         await client.auth.signOut();
-        location.replace('login.html');
+        window.location.replace('login.html');
         return null;
       }
 
       window.EMA_PROFILE = profile;
-
       return profile;
     },
 
     // LOGIN USING EMAIL OR LEARNER NUMBER
     async signIn(identifier, password) {
-
       let email = identifier.trim();
 
       if (!email.includes('@')) {
-
         const {
           data,
           error
@@ -108,16 +103,15 @@
 
     // SEND FORGOTTEN PASSWORD RESET EMAIL
     async sendPasswordReset(email) {
-
       const redirectTo =
-        `${window.location.origin}/reset-password.html`;
+        'https://www.everythingsmathsacademy.website/reset-password.html';
 
       const {
         error
       } = await client.auth.resetPasswordForEmail(
         email.trim(),
         {
-          redirectTo
+          redirectTo: redirectTo
         }
       );
 
@@ -126,7 +120,6 @@
 
     // UPDATE PASSWORD FOR AN AUTHENTICATED USER
     async updatePassword(newPassword) {
-
       const {
         data,
         error
@@ -141,15 +134,12 @@
 
     // LOGOUT
     async signOut() {
-
       await client.auth.signOut();
-
-      location.replace('login.html');
+      window.location.replace('login.html');
     },
 
     // GET LEARNER'S ASSESSMENT RESULTS
     async getMyResults() {
-
       const {
         data,
         error
@@ -172,7 +162,6 @@
 
     // GET PUBLISHED ASSESSMENTS
     async listPublishedAssessments(subject, grade) {
-
       let q = client
         .from('assessments')
         .select('*')
@@ -203,5 +192,5 @@
     }
 
   };
-
 })();
+S
