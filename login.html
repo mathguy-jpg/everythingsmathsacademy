@@ -509,6 +509,43 @@ nav a:hover {
     id="forgotPasswordButton">
     Forgot Password?
 </button>
+        <div id="recoveryPanel" style="display:none; margin-top:18px; text-align:left;">
+
+    <h3 style="color:#001f66; font-size:15px;">Recover Your Password</h3>
+
+    <p style="font-size:12px; color:#64748b;">
+        Enter your registered email address to receive a verification code.
+    </p>
+
+    <input type="email" id="recoveryEmail"
+        placeholder="Registered email address">
+
+    <button type="button" class="login-btn-main"
+        onclick="sendRecoveryCode()">
+        Send Verification Code
+    </button>
+
+    <div id="recoveryCodeSection" style="display:none; margin-top:15px;">
+
+        <input type="text" id="recoveryCode"
+            placeholder="Enter verification code">
+
+        <input type="password" id="newRecoveryPassword"
+            placeholder="Enter new password" style="margin-top:10px;">
+
+        <input type="password" id="confirmRecoveryPassword"
+            placeholder="Confirm new password" style="margin-top:10px;">
+
+        <button type="button" class="login-btn-main"
+            onclick="completePasswordRecovery()">
+            Verify Code & Change Password
+        </button>
+
+    </div>
+
+    <p id="recoveryMessage" role="status" aria-live="polite"></p>
+
+</div>
         <p id="loginMessage" role="status" aria-live="polite"></p>
 
         <p class="contact-note">
@@ -652,6 +689,71 @@ async function loginUser(event) {
         button.textContent = 'Login';
     }
 }
+function startPasswordRecovery() {
+    document.getElementById('recoveryPanel').style.display = 'block';
+    document.getElementById('recoveryMessage').textContent = '';
+}
+
+async function sendRecoveryCode() {
+    const email = document.getElementById('recoveryEmail').value.trim();
+    const message = document.getElementById('recoveryMessage');
+
+    if (!email) {
+        message.textContent = 'Please enter your registered email address.';
+        return;
+    }
+
+    message.textContent = 'Sending verification code...';
+
+    try {
+        await EMA.sendPasswordReset(email);
+
+        document.getElementById('recoveryCodeSection').style.display = 'block';
+        message.style.color = '#16803c';
+        message.textContent = 'Verification code sent. Check your email.';
+    } catch (error) {
+        message.style.color = '#c62828';
+        message.textContent = error.message || 'Could not send verification code.';
+    }
+}
+
+async function completePasswordRecovery() {
+    const email = document.getElementById('recoveryEmail').value.trim();
+    const code = document.getElementById('recoveryCode').value.trim();
+    const password = document.getElementById('newRecoveryPassword').value;
+    const confirmPassword = document.getElementById('confirmRecoveryPassword').value;
+    const message = document.getElementById('recoveryMessage');
+
+    if (!code || !password || !confirmPassword) {
+        message.textContent = 'Please complete all fields.';
+        return;
+    }
+
+    if (password.length < 8) {
+        message.textContent = 'Your new password must contain at least 8 characters.';
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        message.textContent = 'Your passwords do not match.';
+        return;
+    }
+
+    message.textContent = 'Verifying code...';
+
+    try {
+        await EMA.verifyPasswordRecoveryCode(email, code, password);
+
+        message.style.color = '#16803c';
+        message.textContent = 'Password changed successfully. You can now log in.';
+
+        document.getElementById('recoveryCodeSection').style.display = 'none';
+        document.getElementById('passwordInput').value = '';
+    } catch (error) {
+        message.style.color = '#c62828';
+        message.textContent = error.message || 'Verification failed. Please try again.';
+    }
+}    
 </script>
 
 </body>
