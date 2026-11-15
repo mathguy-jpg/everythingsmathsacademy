@@ -206,7 +206,35 @@
 
       return data;
     },
+// VERIFY FORGOTTEN-PASSWORD CODE AND SET NEW PASSWORD
+async verifyPasswordRecoveryCode(email, token, newPassword) {
+  const cleanEmail = String(email || '').trim().toLowerCase();
+  const cleanToken = String(token || '').trim();
 
+  if (!cleanEmail || !cleanToken || !newPassword) {
+    throw new Error('Please enter your email, verification code and new password.');
+  }
+
+  const { data, error } = await client.auth.verifyOtp({
+    email: cleanEmail,
+    token: cleanToken,
+    type: 'recovery'
+  });
+
+  if (error) throw error;
+
+  if (!data.user) {
+    throw new Error('Verification failed. Please request a new code.');
+  }
+
+  const { error: passwordError } = await client.auth.updateUser({
+    password: newPassword
+  });
+
+  if (passwordError) throw passwordError;
+
+  return data;
+},
     // UPDATE PASSWORD FOR AN AUTHENTICATED USER
     async updatePassword(newPassword) {
       const {
