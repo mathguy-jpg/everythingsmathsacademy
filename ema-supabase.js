@@ -22,7 +22,6 @@
   );
 
   window.EMA = {
-
     db: client,
 
     // VERIFY LOGGED-IN USER AND LEARNER PROFILE
@@ -97,11 +96,10 @@
       });
 
       if (error) throw error;
-
       return data;
     },
 
-    // SEND FORGOTTEN PASSWORD RESET EMAIL
+    // EXISTING FORGOTTEN-PASSWORD EMAIL FUNCTION
     async sendPasswordReset(email) {
       const redirectTo =
         'https://www.everythingsmathsacademy.website/reset-password.html';
@@ -118,6 +116,97 @@
       if (error) throw error;
     },
 
+    // SEND VERIFICATION CODE TO THE LOGGED-IN USER'S EMAIL
+    async sendPasswordChangeCode() {
+      const {
+        data,
+        error
+      } = await client.auth.getUser();
+
+      const user = data?.user;
+
+      if (error || !user || !user.email) {
+        throw new Error(
+          'Your account email could not be verified. Please log in again.'
+        );
+      }
+
+      const {
+        error: sendError
+      } = await client.auth.resetPasswordForEmail(
+        user.email
+      );
+
+      if (sendError) throw sendError;
+
+      return user.email;
+    },
+
+    // VERIFY EMAIL CODE, THEN SAVE THE NEW PASSWORD
+    async verifyPasswordChangeCode(token, newPassword) {
+      const cleanToken = String(token || '').trim();
+
+      if (!cleanToken || !newPassword) {
+        throw new Error(
+          'Please enter the verification code and your new password.'
+        );
+      }
+
+      // Identify the original logged-in account.
+      const {
+        data: currentData,
+        error: currentError
+      } = await client.auth.getUser();
+
+      const currentUser = currentData?.user;
+
+      if (
+        currentError ||
+        !currentUser ||
+        !currentUser.email
+      ) {
+        throw new Error(
+          'Your login session has expired. Please log in again.'
+        );
+      }
+
+      // Verify the recovery code sent to the account email.
+      const {
+        data: verifiedData,
+        error: verifyError
+      } = await client.auth.verifyOtp({
+        email: currentUser.email,
+        token: cleanToken,
+        type: 'recovery'
+      });
+
+      if (verifyError) {
+        throw verifyError;
+      }
+
+      // Ensure the verified account is the original account.
+      if (
+        !verifiedData.user ||
+        verifiedData.user.id !== currentUser.id
+      ) {
+        throw new Error(
+          'The verification could not be matched to your account.'
+        );
+      }
+
+      // Password is changed ONLY after successful verification.
+      const {
+        data,
+        error
+      } = await client.auth.updateUser({
+        password: newPassword
+      });
+
+      if (error) throw error;
+
+      return data;
+    },
+
     // UPDATE PASSWORD FOR AN AUTHENTICATED USER
     async updatePassword(newPassword) {
       const {
@@ -128,7 +217,6 @@
       });
 
       if (error) throw error;
-
       return data;
     },
 
@@ -156,7 +244,6 @@
         );
 
       if (error) throw error;
-
       return data || [];
     },
 
@@ -187,10 +274,7 @@
       } = await q;
 
       if (error) throw error;
-
       return data || [];
     }
-
   };
 })();
-S
