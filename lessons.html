@@ -1,17 +1,46 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <link rel="icon" type="image/png" href="logo.png.png">
-    <title>Online Maths & Physical Sciences Lessons | Grades 8–12 South Africa – EVERYTHING'S MATHS</title>
-    <meta name="description" content="Explore online Mathematics and Physical Sciences lessons for Grades 8–12 at EVERYTHING'S MATHS Academy. Get expert tutoring, exam preparation and academic support across South Africa.">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<link rel="icon" type="image/png" href="logo.png.png">
+<title>Online Maths & Physical Sciences Lessons | Grades 8–12 South Africa – EVERYTHING'S MATHS</title>
+<meta name="description" content="Explore online Mathematics and Physical Sciences lessons for Grades 8–12 at EVERYTHING'S MATHS Academy. Get expert tutoring, exam preparation and academic support across South Africa.">
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* Perfect horizontal button alignment fix */
+.lessons-grid {
+    display: flex;
+    align-items: stretch; /* Forces all cards to equal height */
+    gap: 30px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 20px;
+}
+
+.lesson-card {
+    display: flex;
+    flex-direction: column; /* Stack contents vertically */
+    align-items: center;
+    text-align: center;
+}
+
+.lesson-card a {
+    margin-top: auto; /* Pushes the button container to the exact bottom baseline */
+    width: 100%;
+    display: block;
+}
+
+.lesson-card button {
+    width: 100%;
+}
+</style>
 </head>
 
 <body>
 
 <nav>
-
     <div class="menu">
         <a href="index.html">Home</a>
         <a href="lessons.html">Our Lessons</a>
@@ -20,7 +49,6 @@
         <a href="#">Contact</a>
         <a href="#" class="login-btn">Login</a>
     </div>
-
 </nav>
 
 <section class="lessons-page">
@@ -35,8 +63,8 @@
             <h3>R0</h3>
             <p>Experience our lessons before committing.</p>
             <a href="trial.html">
-    <button>Get Started</button>
-</a>
+                <button>Get Started</button>
+            </a>
         </div>
 
         <div class="lesson-card">
@@ -45,8 +73,8 @@
             <h3>R249.99</h3>
             <p>Per Month</p>
             <a href="maths-register.html">
-    <button>Enrol Now</button>
-</a>
+                <button>Enrol Now</button>
+            </a>
         </div>
 
         <div class="lesson-card">
@@ -55,26 +83,21 @@
             <h3>R249.99</h3>
             <p>Per Month</p>
             <a href="science-register.html">
-    <button>Enrol Now</button>
-</a>
-
+                <button>Enrol Now</button>
+            </a>
         </div>
 
         <div class="lesson-card">
+            <div class="lesson-icon">∑ ⚛</div>
+            <h2>Maths + Physical Sciences</h2>
+            <h3>R489.99</h3>
+            <p>Per Month</p>
+            <a href="combo-register.html">
+                <button>Best Value</button>
+            </a>
+        </div>
 
-    <div class="lesson-icon">∑ ⚛</div>
-
-    <h2>Maths + Physical Sciences</h2>
-
-    <h3>R489.99</h3>
-
-    <p>Per Month</p>
-
-    <a href="combo-register.html">
-        <button>Best Value</button>
-    </a>
-
-</div>
+    </div>
 
 </section>
 
