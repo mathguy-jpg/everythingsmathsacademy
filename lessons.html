@@ -74,11 +74,11 @@ nav a:hover {
     display: flex;
     align-items: stretch; /* Forces equal height across cards */
     gap: 25px;
-    overflow-x: auto;
+    overflow-x: auto; /* Enables smooth side-scrolling on mobile */
     scroll-behavior: smooth;
-    padding: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
+    padding: 15px 10px;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
 }
 
 .lesson-card {
@@ -87,9 +87,8 @@ nav a:hover {
     padding: 30px 24px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     transition: 0.3s;
-    width: 270px;
-    flex: 1 1 250px;
-    max-width: 300px;
+    min-width: 270px;
+    flex: 0 0 270px; /* Keeps cards side-by-side without squeezing */
 
     /* Vertical stack layout for perfect button alignment */
     display: flex;
@@ -163,16 +162,6 @@ nav a:hover {
 
 /* MOBILE RESPONSIVE OPTIMIZATIONS */
 @media (max-width: 768px) {
-    .lessons-grid {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .lesson-card {
-        width: 100%;
-        max-width: 380px;
-    }
-
     nav {
         padding: 10px;
     }
