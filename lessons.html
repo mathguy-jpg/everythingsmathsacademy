@@ -9,31 +9,181 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
-/* Perfect horizontal button alignment fix */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* NAVIGATION */
+nav {
+    width: 100%;
+    min-height: 54px;
+    padding: 12px 5%;
+    background: #061b4d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 12px rgba(0,31,102,.12);
+}
+
+nav .menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 26px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    transition: color .2s ease;
+    padding: 4px 6px;
+    white-space: nowrap;
+}
+
+nav a:hover {
+    color: #4de1ff;
+}
+
+.login-btn {
+    background: #1677ff;
+    padding: 8px 16px;
+    border-radius: 10px;
+}
+
+/* LESSONS PAGE LAYOUT & BUTTON ALIGNMENT */
+.lessons-page {
+    padding: 40px 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.lessons-page h1 {
+    font-size: clamp(28px, 5vw, 42px);
+    color: #061b4d;
+    margin-bottom: 30px;
+}
+
 .lessons-grid {
     display: flex;
-    align-items: stretch; /* Forces all cards to equal height */
-    gap: 30px;
+    align-items: stretch; /* Forces equal height across cards */
+    gap: 25px;
     overflow-x: auto;
     scroll-behavior: smooth;
-    padding: 20px;
+    padding: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .lesson-card {
+    background: white;
+    border-radius: 25px;
+    padding: 30px 24px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+    width: 270px;
+    flex: 1 1 250px;
+    max-width: 300px;
+
+    /* Vertical stack layout for perfect button alignment */
     display: flex;
-    flex-direction: column; /* Stack contents vertically */
+    flex-direction: column;
     align-items: center;
     text-align: center;
 }
 
+.lesson-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.lesson-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: #1677ff;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+
+.lesson-card h2 {
+    color: #061b4d;
+    font-size: 20px;
+    margin: 0 0 10px;
+}
+
+.lesson-card h3 {
+    font-size: 32px;
+    color: #1677ff;
+    margin: 0 0 10px;
+}
+
+.lesson-card p {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0 0 20px;
+}
+
+/* Pushes every button to the exact bottom baseline */
 .lesson-card a {
-    margin-top: auto; /* Pushes the button container to the exact bottom baseline */
+    margin-top: auto; 
     width: 100%;
     display: block;
+    text-decoration: none;
 }
 
 .lesson-card button {
+    background: #1677ff;
+    color: white;
+    border: none;
     width: 100%;
+    min-height: 46px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.lesson-card button:hover {
+    background: #0f5dd8;
+}
+
+/* MOBILE RESPONSIVE OPTIMIZATIONS */
+@media (max-width: 768px) {
+    .lessons-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .lesson-card {
+        width: 100%;
+        max-width: 380px;
+    }
+
+    nav {
+        padding: 10px;
+    }
+
+    nav .menu {
+        gap: 8px 16px;
+    }
+
+    nav a {
+        font-size: 13px;
+    }
 }
 </style>
 </head>
