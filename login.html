@@ -1,16 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 <meta name="theme-color" content="#001f66">
 <link rel="icon" type="image/png" href="logo.png.png">
 <title>Login Portal | EVERYTHING'S MATHS</title>
 <link rel="stylesheet" href="style.css">
 
 <style>
-* {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
@@ -25,6 +26,7 @@
 
 html {
     min-height: 100%;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -42,7 +44,7 @@ body {
 nav {
     width: 100%;
     min-height: 54px;
-    padding: 10px 5%;
+    padding: 12px 5%;
     background: var(--navy);
     display: flex;
     justify-content: center;
@@ -61,9 +63,10 @@ nav .menu {
 nav a {
     color: white;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
     transition: color .2s ease;
+    padding: 4px 6px;
 }
 
 nav a:hover {
@@ -79,7 +82,7 @@ nav a:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 25px 15px;
+    padding: 30px 16px;
 }
 
 .login-brand {
@@ -87,19 +90,19 @@ nav a:hover {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-bottom: 18px;
+    margin-bottom: 22px;
 }
 
 .login-logo {
     width: 76px;
     height: 76px;
     object-fit: contain;
-    margin-bottom: 7px;
+    margin-bottom: 10px;
 }
 
 .login-title {
     color: var(--navy);
-    font-size: clamp(24px, 4vw, 31px);
+    font-size: clamp(26px, 5vw, 32px);
     font-weight: 800;
     letter-spacing: -.6px;
     margin: 0;
@@ -107,15 +110,15 @@ nav a:hover {
 
 .login-subtitle {
     color: var(--muted);
-    font-size: 13px;
-    margin: 7px 0 0;
+    font-size: 14px;
+    margin: 8px 0 0;
 }
 
 /* LOGIN CARD */
 .login-card {
     width: 100%;
     max-width: 410px;
-    padding: 25px;
+    padding: 28px 24px;
     background: rgba(255,255,255,.97);
     border: 1px solid #e0e9f7;
     border-radius: 16px;
@@ -125,15 +128,15 @@ nav a:hover {
 
 .card-heading {
     color: var(--navy);
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 800;
-    margin: 0 0 5px;
+    margin: 0 0 6px;
 }
 
 .card-description {
     color: var(--muted);
-    font-size: 12px;
-    margin: 0 0 19px;
+    font-size: 13px;
+    margin: 0 0 20px;
     line-height: 1.5;
 }
 
@@ -141,20 +144,21 @@ nav a:hover {
 .role-selector {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
+    gap: 12px;
 }
 
 .role-btn {
-    min-height: 45px;
-    padding: 10px 8px;
+    min-height: 48px;
+    padding: 12px 10px;
     border: 1px solid #d5e1f5;
-    border-radius: 9px;
+    border-radius: 10px;
     background: #f3f7ff;
     color: var(--navy);
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
     cursor: pointer;
     transition: background .2s, color .2s, border-color .2s, transform .2s;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .role-btn:hover {
@@ -175,38 +179,38 @@ nav a:hover {
 
 /* SELECTED ROLE */
 #selectedRole {
-    min-height: 17px;
-    margin: 15px 0;
+    min-height: 20px;
+    margin: 16px 0;
     color: var(--blue);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
 }
 
 /* FORM */
 #loginForm {
     text-align: left;
-    margin-top: 13px;
-    padding-top: 15px;
+    margin-top: 14px;
+    padding-top: 16px;
     border-top: 1px solid #edf1f7;
 }
 
 #loginForm h2 {
     color: #263238;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
-    margin: 11px 0 7px;
+    margin: 12px 0 8px;
 }
 
 #loginForm input {
     display: block;
     width: 100%;
-    height: 44px;
-    padding: 10px 12px;
+    height: 48px;
+    padding: 12px 14px;
     border: 1px solid #ccd6e5;
-    border-radius: 8px;
+    border-radius: 10px;
     background: #fff;
     color: var(--text);
-    font-size: 14px;
+    font-size: 16px; /* 16px prevents iOS automatic zoom on focus */
     outline: none;
     transition: border-color .2s, box-shadow .2s;
 }
@@ -224,17 +228,18 @@ nav a:hover {
 .login-btn-main {
     display: block;
     width: 100%;
-    min-height: 45px;
-    margin-top: 18px;
-    padding: 11px 15px;
+    min-height: 48px;
+    margin-top: 20px;
+    padding: 12px 16px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     background: var(--navy);
     color: white;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 800;
     cursor: pointer;
     transition: background .2s, transform .2s;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .login-btn-main:hover {
@@ -253,18 +258,18 @@ nav a:hover {
 /* FEEDBACK */
 #loginMessage {
     color: #c62828;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.5;
-    margin: 12px 0 0;
+    margin: 14px 0 0;
     overflow-wrap: anywhere;
 }
 
 .contact-note {
-    margin: 18px 0 0;
-    padding-top: 14px;
+    margin: 20px 0 0;
+    padding-top: 16px;
     border-top: 1px solid #edf1f7;
     color: var(--muted);
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.6;
 }
 
@@ -274,86 +279,79 @@ nav a:hover {
 
 /* FOOTER */
 .login-footer {
-    margin-top: 17px;
+    margin-top: 20px;
     color: #8491a5;
-    font-size: 10px;
+    font-size: 11px;
     text-align: center;
 }
 
 /* TABLETS */
 @media (max-width: 760px) {
     nav {
-        padding: 11px 15px;
+        padding: 12px 18px;
     }
 
     nav .menu {
-        gap: 10px 20px;
+        gap: 10px 22px;
     }
 
     .login-page {
-        padding: 25px 15px;
+        padding: 25px 16px;
     }
 }
 
-/* MOBILE */
+/* MOBILE OPTIMIZATIONS (Scales and pads container cleanly without squishing desktop layout) */
 @media (max-width: 480px) {
     nav {
-        min-height: 48px;
-        padding: 10px 8px;
+        min-height: 50px;
+        padding: 10px 12px;
     }
 
     nav .menu {
-        gap: 9px 15px;
+        gap: 8px 16px;
     }
 
     nav a {
-        font-size: 11px;
-    }
-
-    .login-page {
-        min-height: calc(100svh - 48px);
-        padding: 20px 13px;
-    }
-
-    .login-brand {
-        margin-bottom: 14px;
-    }
-
-    .login-logo {
-        width: 65px;
-        height: 65px;
-    }
-
-    .login-title {
-        font-size: 25px;
-    }
-
-    .login-subtitle {
-        font-size: 12px;
-    }
-
-    .login-card {
-        max-width: 370px;
-        padding: 21px 17px;
-        border-radius: 13px;
-    }
-
-    .role-selector {
-        gap: 8px;
-    }
-
-    .role-btn {
-        min-height: 43px;
-        font-size: 12px;
-    }
-
-    #loginForm input {
-        height: 43px;
         font-size: 13px;
     }
 
-    .login-btn-main {
-        min-height: 44px;
+    .login-page {
+        min-height: calc(100svh - 50px);
+        padding: 20px 14px;
+        justify-content: flex-start; /* Prevents vertical clipping on smaller mobile screens */
+        padding-top: 25px;
+    }
+
+    .login-brand {
+        margin-bottom: 16px;
+    }
+
+    .login-logo {
+        width: 70px;
+        height: 70px;
+    }
+
+    .login-title {
+        font-size: 24px;
+    }
+
+    .login-subtitle {
+        font-size: 13px;
+    }
+
+    .login-card {
+        max-width: 100%;
+        padding: 22px 18px;
+        border-radius: 14px;
+    }
+
+    .role-selector {
+        gap: 10px;
+    }
+
+    .role-btn {
+        min-height: 46px;
+        font-size: 13px;
     }
 }
 
@@ -502,50 +500,52 @@ nav a:hover {
             </button>
 
         </form>
-<button
-    type="button"
-    onclick="startPasswordRecovery()"
-    style="display:none; width:100%; margin-top:12px; border:none; background:none; color:#1565c0; font-weight:bold; cursor:pointer;"
-    id="forgotPasswordButton">
-    Forgot Password?
-</button>
+        <button
+            type="button"
+            onclick="startPasswordRecovery()"
+            style="display:none; width:100%; margin-top:12px; border:none; background:none; color:#1565c0; font-weight:bold; cursor:pointer; padding:8px;"
+            id="forgotPasswordButton">
+            Forgot Password?
+        </button>
+        
         <div id="recoveryPanel" style="display:none; margin-top:18px; text-align:left;">
 
-    <h3 style="color:#001f66; font-size:15px;">Recover Your Password</h3>
+            <h3 style="color:#001f66; font-size:15px;">Recover Your Password</h3>
 
-    <p style="font-size:12px; color:#64748b;">
-        Enter your registered email address to receive a verification code.
-    </p>
+            <p style="font-size:12px; color:#64748b;">
+                Enter your registered email address to receive a verification code.
+            </p>
 
-    <input type="email" id="recoveryEmail"
-        placeholder="Registered email address">
+            <input type="email" id="recoveryEmail"
+                placeholder="Registered email address">
 
-    <button type="button" class="login-btn-main"
-        onclick="sendRecoveryCode()">
-        Send Verification Code
-    </button>
+            <button type="button" class="login-btn-main"
+                onclick="sendRecoveryCode()">
+                Send Verification Code
+            </button>
 
-    <div id="recoveryCodeSection" style="display:none; margin-top:15px;">
+            <div id="recoveryCodeSection" style="display:none; margin-top:15px;">
 
-        <input type="text" id="recoveryCode"
-            placeholder="Enter verification code">
+                <input type="text" id="recoveryCode"
+                    placeholder="Enter verification code">
 
-        <input type="password" id="newRecoveryPassword"
-            placeholder="Enter new password" style="margin-top:10px;">
+                <input type="password" id="newRecoveryPassword"
+                    placeholder="Enter new password" style="margin-top:10px;">
 
-        <input type="password" id="confirmRecoveryPassword"
-            placeholder="Confirm new password" style="margin-top:10px;">
+                <input type="password" id="confirmRecoveryPassword"
+                    placeholder="Confirm new password" style="margin-top:10px;">
 
-        <button type="button" class="login-btn-main"
-            onclick="completePasswordRecovery()">
-            Verify Code & Change Password
-        </button>
+                <button type="button" class="login-btn-main"
+                    onclick="completePasswordRecovery()">
+                    Verify Code & Change Password
+                </button>
 
-    </div>
+            </div>
 
-    <p id="recoveryMessage" role="status" aria-live="polite"></p>
+            <p id="recoveryMessage" role="status" aria-live="polite"></p>
 
-</div>
+        </div>
+        
         <p id="loginMessage" role="status" aria-live="polite"></p>
 
         <p class="contact-note">
