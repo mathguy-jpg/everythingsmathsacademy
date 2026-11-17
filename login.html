@@ -6,7 +6,6 @@
 <meta name="theme-color" content="#001f66">
 <link rel="icon" type="image/png" href="logo.png.png">
 <title>Login Portal | EVERYTHING'S MATHS</title>
-<link rel="stylesheet" href="style.css">
 
 <style>
 *,
@@ -26,11 +25,13 @@
 
 html {
     min-height: 100%;
+    width: 100%;
     -webkit-text-size-adjust: 100%;
 }
 
 body {
     margin: 0;
+    width: 100%;
     min-height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
     color: var(--text);
@@ -38,6 +39,7 @@ body {
         radial-gradient(circle at 15% 15%, rgba(21,101,192,.10), transparent 30%),
         radial-gradient(circle at 85% 85%, rgba(255,215,0,.10), transparent 28%),
         linear-gradient(135deg, #edf4ff, #ffffff 55%, #f4f8ff);
+    overflow-x: hidden;
 }
 
 /* NAVIGATION */
@@ -57,7 +59,7 @@ nav .menu {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 12px 28px;
+    gap: 10px 26px;
 }
 
 nav a {
@@ -67,6 +69,7 @@ nav a {
     font-weight: 700;
     transition: color .2s ease;
     padding: 4px 6px;
+    white-space: nowrap;
 }
 
 nav a:hover {
@@ -82,7 +85,7 @@ nav a:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 30px 16px;
+    padding: 30px 18px;
 }
 
 .login-brand {
@@ -114,10 +117,11 @@ nav a:hover {
     margin: 8px 0 0;
 }
 
-/* LOGIN CARD */
+/* LOGIN CARD - Centered box matching desktop proportions */
 .login-card {
     width: 100%;
     max-width: 410px;
+    margin: 0 auto;
     padding: 28px 24px;
     background: rgba(255,255,255,.97);
     border: 1px solid #e0e9f7;
@@ -140,7 +144,7 @@ nav a:hover {
     line-height: 1.5;
 }
 
-/* ROLE SELECTOR */
+/* ROLE SELECTOR - 2x2 Grid */
 .role-selector {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -186,7 +190,7 @@ nav a:hover {
     font-weight: 700;
 }
 
-/* FORM */
+/* FORM & RECOVERY INPUTS */
 #loginForm {
     text-align: left;
     margin-top: 14px;
@@ -201,7 +205,8 @@ nav a:hover {
     margin: 12px 0 8px;
 }
 
-#loginForm input {
+#loginForm input,
+#recoveryPanel input {
     display: block;
     width: 100%;
     height: 48px;
@@ -210,16 +215,18 @@ nav a:hover {
     border-radius: 10px;
     background: #fff;
     color: var(--text);
-    font-size: 16px; /* 16px prevents iOS automatic zoom on focus */
+    font-size: 16px;
     outline: none;
     transition: border-color .2s, box-shadow .2s;
 }
 
-#loginForm input::placeholder {
+#loginForm input::placeholder,
+#recoveryPanel input::placeholder {
     color: #9aa7b8;
 }
 
-#loginForm input:focus {
+#loginForm input:focus,
+#recoveryPanel input:focus {
     border-color: var(--blue);
     box-shadow: 0 0 0 3px rgba(21,101,192,.11);
 }
@@ -256,7 +263,8 @@ nav a:hover {
 }
 
 /* FEEDBACK */
-#loginMessage {
+#loginMessage,
+#recoveryMessage {
     color: #c62828;
     font-size: 13px;
     line-height: 1.5;
@@ -285,64 +293,44 @@ nav a:hover {
     text-align: center;
 }
 
-/* TABLETS */
-@media (max-width: 760px) {
-    nav {
-        padding: 12px 18px;
-    }
-
-    nav .menu {
-        gap: 10px 22px;
-    }
-
-    .login-page {
-        padding: 25px 16px;
-    }
-}
-
-/* MOBILE OPTIMIZATIONS (Scales and pads container cleanly without squishing desktop layout) */
+/* MOBILE ADJUSTMENTS - Keeps exact card shape with clean side margins */
 @media (max-width: 480px) {
     nav {
         min-height: 50px;
-        padding: 10px 12px;
+        padding: 10px 10px;
     }
 
     nav .menu {
-        gap: 8px 16px;
+        gap: 8px 14px;
     }
 
     nav a {
         font-size: 13px;
+        padding: 4px;
     }
 
     .login-page {
         min-height: calc(100svh - 50px);
-        padding: 20px 14px;
-        justify-content: flex-start; /* Prevents vertical clipping on smaller mobile screens */
-        padding-top: 25px;
+        padding: 24px 16px;
     }
 
     .login-brand {
-        margin-bottom: 16px;
+        margin-bottom: 18px;
     }
 
     .login-logo {
-        width: 70px;
-        height: 70px;
+        width: 72px;
+        height: 72px;
     }
 
     .login-title {
-        font-size: 24px;
-    }
-
-    .login-subtitle {
-        font-size: 13px;
+        font-size: 26px;
     }
 
     .login-card {
-        max-width: 100%;
-        padding: 22px 18px;
-        border-radius: 14px;
+        max-width: 380px;
+        padding: 24px 20px;
+        border-radius: 16px;
     }
 
     .role-selector {
@@ -351,7 +339,7 @@ nav a:hover {
 
     .role-btn {
         min-height: 46px;
-        font-size: 13px;
+        font-size: 14px;
     }
 }
 
@@ -508,11 +496,11 @@ nav a:hover {
             Forgot Password?
         </button>
         
-        <div id="recoveryPanel" style="display:none; margin-top:18px; text-align:left;">
+        <div id="recoveryPanel" style="display:none; margin-top:18px; text-align:left; border-top:1px solid #edf1f7; padding-top:14px;">
 
-            <h3 style="color:#001f66; font-size:15px;">Recover Your Password</h3>
+            <h3 style="color:#001f66; font-size:15px; margin:0 0 6px;">Recover Your Password</h3>
 
-            <p style="font-size:12px; color:#64748b;">
+            <p style="font-size:12px; color:#64748b; margin:0 0 12px;">
                 Enter your registered email address to receive a verification code.
             </p>
 
