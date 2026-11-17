@@ -1,9 +1,213 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link rel="icon" type="image/png" href="logo.png.png">
-    <title>Free Trial Registration</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="theme-color" content="#001f66">
+<link rel="icon" type="image/png" href="logo.png.png">
+<title>Free Trial Registration | EVERYTHING'S MATHS</title>
+
+<style>
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --navy: #001f66;
+    --blue: #1565c0;
+    --gold: #ffd700;
+    --light: #eef5ff;
+    --text: #263238;
+    --muted: #64748b;
+}
+
+html {
+    min-height: 100%;
+    width: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 15% 15%, rgba(21,101,192,.10), transparent 30%),
+        radial-gradient(circle at 85% 85%, rgba(255,215,0,.10), transparent 28%),
+        linear-gradient(135deg, #edf4ff, #ffffff 55%, #f4f8ff);
+    overflow-x: hidden;
+}
+
+/* NAVIGATION */
+nav {
+    width: 100%;
+    min-height: 54px;
+    padding: 12px 5%;
+    background: var(--navy);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 12px rgba(0,31,102,.12);
+}
+
+nav .menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 26px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    transition: color .2s ease;
+    padding: 4px 6px;
+    white-space: nowrap;
+}
+
+nav a:hover {
+    color: var(--gold);
+}
+
+/* TRIAL PAGE AREA */
+.trial-page {
+    min-height: calc(100vh - 54px);
+    min-height: calc(100svh - 54px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 18px;
+    text-align: center;
+}
+
+.trial-page h1 {
+    color: var(--navy);
+    font-size: clamp(24px, 4.5vw, 32px);
+    font-weight: 800;
+    letter-spacing: -.6px;
+    margin: 0 0 24px;
+}
+
+/* TRIAL BOX - Centered card matching login portal proportions */
+.trial-box {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 30px 24px;
+    background: rgba(255,255,255,.97);
+    border: 1px solid #e0e9f7;
+    border-radius: 16px;
+    box-shadow: 0 12px 35px rgba(0,31,102,.11);
+    text-align: left;
+}
+
+.trial-box label {
+    display: block;
+    color: #263238;
+    font-size: 13px;
+    font-weight: 700;
+    margin: 14px 0 8px;
+}
+
+.trial-box label:first-of-type {
+    margin-top: 0;
+}
+
+.trial-box input,
+.trial-box select {
+    display: block;
+    width: 100%;
+    height: 48px;
+    padding: 12px 14px;
+    border: 1px solid #ccd6e5;
+    border-radius: 10px;
+    background: #fff;
+    color: var(--text);
+    font-size: 16px; /* Prevents auto-zoom on mobile */
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.trial-box input::placeholder {
+    color: #9aa7b8;
+}
+
+.trial-box input:focus,
+.trial-box select:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(21,101,192,.11);
+}
+
+.trial-box button {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    margin-top: 24px;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 10px;
+    background: #25d366;
+    color: white;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background .2s, transform .2s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.trial-box button:hover {
+    background: #1ebe5d;
+}
+
+.trial-box button:active {
+    transform: scale(.99);
+}
+
+/* MOBILE ADJUSTMENTS */
+@media (max-width: 480px) {
+    nav {
+        min-height: 50px;
+        padding: 10px 10px;
+    }
+
+    nav .menu {
+        gap: 8px 14px;
+    }
+
+    nav a {
+        font-size: 13px;
+        padding: 4px;
+    }
+
+    .trial-page {
+        min-height: calc(100svh - 50px);
+        padding: 24px 16px;
+    }
+
+    .trial-box {
+        max-width: 380px;
+        padding: 24px 20px;
+        border-radius: 16px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: .01ms !important;
+    }
+}
+</style>
 </head>
 
 <body>
@@ -24,7 +228,6 @@
     <div class="trial-box">
 
         <label>Subject</label>
-
         <select id="subject">
             <option value="">Select Subject</option>
             <option value="maths">Mathematics</option>
@@ -33,11 +236,9 @@
         </select>
 
         <label>Learner Name</label>
-
         <input type="text" id="learnerName" placeholder="Enter your name">
 
         <label>Grade</label>
-
         <select id="grade">
             <option value="">Select Grade</option>
             <option>Grade 9</option>
@@ -55,17 +256,10 @@
 </section>
 
 <script>
-
 function goToWhatsapp(){
-
-    const name =
-        document.getElementById("learnerName").value;
-
-    const subject =
-        document.getElementById("subject").value;
-
-    const grade =
-        document.getElementById("grade").value;
+    const name = document.getElementById("learnerName").value.trim();
+    const subject = document.getElementById("subject").value;
+    const grade = document.getElementById("grade").value;
 
     if(name === ""){
         alert("Please enter your name.");
@@ -114,7 +308,6 @@ function goToWhatsapp(){
 
     window.open(whatsapp, "_blank");
 }
-
 </script>
 
 </body>
