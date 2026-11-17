@@ -1,4 +1,3 @@
-
 /* =========================================
    EVERYTHING'S MATHS ACADEMY
    CLEAN DESKTOP LAYOUT
@@ -6,7 +5,9 @@
 ========================================= */
 
 /* GLOBAL */
-* {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
@@ -1201,4 +1202,3 @@ footer#contact a:hover,
     }
 
 }
-
