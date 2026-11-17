@@ -81,42 +81,45 @@ nav a:hover {
     border-radius: 8px;
 }
 
-/* LESSONS PAGE & GRID */
+/* LESSONS PAGE & HORIZONTAL SCROLL GRID */
 .lessons-page {
     width: 100%;
     min-height: calc(100vh - 54px);
-    padding: 30px 18px;
+    padding: 35px 0;
     text-align: center;
 }
 
 .lessons-page h1 {
     color: var(--navy);
-    font-size: clamp(24px, 5vw, 34px);
+    font-size: clamp(26px, 5vw, 38px);
     font-weight: 800;
-    margin: 0 0 24px;
+    margin: 0 0 25px;
     letter-spacing: -.6px;
+    padding: 0 16px;
 }
 
 .lessons-grid {
     display: flex;
-    align-items: stretch; /* Forces equal height across cards on desktop */
+    align-items: stretch; /* Forces equal height across cards */
     gap: 24px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 10px 0 30px;
-    justify-content: center;
-    flex-wrap: wrap;
+    overflow-x: auto; /* Enables smooth side-swiping on mobile */
+    scroll-behavior: smooth;
+    padding: 10px 20px 30px;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
 }
 
-/* LESSON CARD - Flex column to pin buttons horizontally at the bottom */
+/* LESSON CARD - Side-by-side with locked width and aligned buttons */
 .lesson-card {
     background: rgba(255,255,255,.97);
     border: 1px solid #e0e9f7;
-    border-radius: 16px;
-    padding: 28px 22px;
+    border-radius: 20px;
+    padding: 30px 22px;
     box-shadow: 0 12px 35px rgba(0,31,102,.11);
-    width: 100%;
+    min-width: 270px;
     max-width: 270px;
+    flex: 0 0 270px;
 
     display: flex;
     flex-direction: column;
@@ -126,21 +129,21 @@ nav a:hover {
 }
 
 .lesson-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-5px);
     box-shadow: 0 16px 40px rgba(0,31,102,.15);
 }
 
 .lesson-icon {
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 16px;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 18px;
     border-radius: 50%;
     background: var(--blue);
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
+    font-size: 26px;
 }
 
 .lesson-card h2 {
@@ -151,10 +154,10 @@ nav a:hover {
 }
 
 .lesson-card h3 {
-    font-size: 28px;
+    font-size: 30px;
     color: var(--blue);
     font-weight: 800;
-    margin: 0 0 8px;
+    margin: 0 0 10px;
 }
 
 .lesson-card p {
@@ -195,8 +198,8 @@ nav a:hover {
     transform: scale(.99);
 }
 
-/* MOBILE RESPONSIVE OPTIMIZATIONS (Task 1 Style) */
-@media (max-width: 768px) {
+/* MOBILE ADJUSTMENTS */
+@media (max-width: 480px) {
     nav {
         min-height: 50px;
         padding: 10px;
@@ -208,21 +211,6 @@ nav a:hover {
 
     nav a {
         font-size: 13px;
-    }
-
-    .lessons-page {
-        padding: 20px 16px;
-    }
-
-    .lessons-grid {
-        flex-direction: column;
-        align-items: center;
-        gap: 16px;
-    }
-
-    .lesson-card {
-        max-width: 100%;
-        padding: 24px 20px;
     }
 }
 
