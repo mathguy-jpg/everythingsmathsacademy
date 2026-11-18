@@ -1168,23 +1168,23 @@ footer#contact a:hover,
 
 /* =========================================
    MOBILE VIEW
-   DESKTOP LAYOUT — PROPORTIONAL SCALING
+   DESKTOP LAYOUT — NO STRETCHING
 ========================================= */
 
 @media screen and (max-width: 768px) {
-
     html, body {
-        width: 1200px;
-        min-width: 1200px;
+        width: 100%;
+        max-width: 100%;
         margin: 0;
-        overflow-x: auto;
+        padding: 0;
+        overflow-x: hidden;
     }
 
+    /* Wrap or scale your main desktop container smoothly */
     body {
+        width: 1100px;
+        transform: scale(0.38);
         transform-origin: top left;
-        transform: scale(calc(100vw / 1200px));
-        width: 1200px;
-        min-width: 1200px;
+        margin-right: -62%; /* Pulls back the layout space left by scaling so there's no bottom gap */
     }
-
 }
