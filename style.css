@@ -1173,18 +1173,18 @@ footer#contact a:hover,
 
 @media screen and (max-width: 768px) {
 
-    html {
-        width: 100%;
-        min-width: 0;
-        overflow-x: hidden;
-    }
-
-    body {
+    html, body {
         width: 1200px;
         min-width: 1200px;
         margin: 0;
-        zoom: calc(100vw / 1200px);
+        overflow-x: auto;
+    }
+
+    body {
+        transform-origin: top left;
+        transform: scale(calc(100vw / 1200px));
+        width: 1200px;
+        min-width: 1200px;
     }
 
 }
-
