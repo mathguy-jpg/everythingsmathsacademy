@@ -1165,35 +1165,26 @@ footer#contact a:hover,
     }
 }
 
+
 /* =========================================
    MOBILE VIEW
-   KEEP THE DESKTOP LAYOUT
-   SCALE PROPORTIONALLY — NO STRETCHING
+   DESKTOP LAYOUT — PROPORTIONAL SCALING
 ========================================= */
 
 @media screen and (max-width: 768px) {
 
-    html,
-    body {
-        margin: 0;
-        padding: 0;
+    html {
         width: 100%;
         min-width: 0;
         overflow-x: hidden;
     }
 
     body {
-        zoom: 1;
-    }
-
-    #site-scale-shell,
-    #desktop-site {
         width: 1200px;
         min-width: 1200px;
-        max-width: 1200px;
-
-        transform: scale(calc(100vw / 1200));
-        transform-origin: top left;
+        margin: 0;
+        zoom: calc(100vw / 1200px);
     }
 
 }
+
