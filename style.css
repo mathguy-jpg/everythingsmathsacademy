@@ -1167,8 +1167,8 @@ footer#contact a:hover,
 
 
 /* =========================================
-   MOBILE VIEW
-   DESKTOP LAYOUT — NO STRETCHING
+   MOBILE RESPONSIVE VIEW
+   Fluid and natural scaling (No stretching / No weird zooming)
 ========================================= */
 
 @media screen and (max-width: 768px) {
@@ -1180,11 +1180,75 @@ footer#contact a:hover,
         overflow-x: hidden;
     }
 
-    /* Wrap or scale your main desktop container smoothly */
-    body {
-        width: 1100px;
-        transform: scale(0.38);
-        transform-origin: top left;
-        margin-right: -62%; /* Pulls back the layout space left by scaling so there's no bottom gap */
+    /* Remove fixed desktop minimum widths so containers fill mobile screens naturally */
+    nav, 
+    .hero, 
+    .dashboard-page, 
+    .lessons-page, 
+    .trial-page, 
+    .login-page, 
+    #why-choose-us, 
+    #about-us,
+    .navbar,
+    footer#contact,
+    .footer-bar,
+    .ema-footer {
+        min-width: 0 !important;
+        width: 100% !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    /* Adjust navigation for mobile screens */
+    nav {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    /* Stack hero sections cleanly */
+    .hero {
+        flex-direction: column;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .hero-left, .hero-right {
+        width: 100%;
+    }
+
+    .hero-left h1 {
+        font-size: 45px;
+    }
+
+    /* Adapt grid cards so they fit nicely without overflowing */
+    .stats-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 12px;
+    }
+
+    .portal-container,
+    .vision-boxes,
+    .team-info {
+        flex-wrap: wrap !important;
+    }
+
+    .subject-portal,
+    .vision-card,
+    .team-card {
+        width: 100% !important;
+        flex: 1 1 100% !important;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .stats-container {
+        grid-template-columns: 1fr !important;
     }
 }
