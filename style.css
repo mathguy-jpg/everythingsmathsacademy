@@ -1166,39 +1166,34 @@ footer#contact a:hover,
 }
 
 /* =========================================
-   EMA: KEEP DESKTOP LAYOUT ON MOBILE
-   Scale the complete page to fit phone screens
+   MOBILE VIEW
+   KEEP THE DESKTOP LAYOUT
+   SCALE PROPORTIONALLY — NO STRETCHING
 ========================================= */
 
 @media screen and (max-width: 768px) {
 
-    html {
-        width: 1200px;
-        min-width: 1200px;
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-width: 0;
         overflow-x: hidden;
     }
 
     body {
-        width: 1200px;
-        min-width: 1200px;
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-        zoom: 0.32;
+        zoom: 1;
     }
 
     #site-scale-shell,
     #desktop-site {
         width: 1200px;
         min-width: 1200px;
-        max-width: none;
-    }
+        max-width: 1200px;
 
-    header,
-    main,
-    footer {
-        width: 1200px;
-        min-width: 1200px;
+        transform: scale(calc(100vw / 1200));
+        transform-origin: top left;
     }
 
 }
