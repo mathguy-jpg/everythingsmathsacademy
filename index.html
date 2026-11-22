@@ -981,7 +981,7 @@
             const { data, error } = await db
                 .from("academy_reviews")
                 .select(
-                    "reviewer_name, rating, q1, q2, q3, recommend, created_at"
+    "reviewer_name, rating, q1_answer, q2_answer, q3_answer, recommend, created_at"
                 )
                 .eq("status", "approved")
                 .order("created_at", { ascending: false });
@@ -1043,10 +1043,10 @@
                     : "";
 
                 const combinedComment = [
-                    review.q1,
-                    review.q2,
-                    review.q3
-                ].filter(Boolean).join("\n\n");
+    review.q1_answer,
+    review.q2_answer,
+    review.q3_answer
+].filter(Boolean).join("\n\n");
 
                 return `
                     <article class="review-card">
@@ -1504,11 +1504,9 @@
 
                     rating: selectedRating,
 
-                    q1: q1,
-
-                    q2: q2,
-
-                    q3: q3,
+                   q1_answer: q1,
+                   q2_answer: q2,
+                   q3_answer: q3,
 
                     recommend: recommendInput.value,
 
