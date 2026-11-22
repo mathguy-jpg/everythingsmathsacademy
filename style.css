@@ -1252,3 +1252,72 @@ footer#contact a:hover,
         grid-template-columns: 1fr !important;
     }
 }
+
+/* =========================================
+   EVERYTHING'S MATHS
+   MOBILE REVIEW FORM FIT
+========================================= */
+
+#ema-reviews,
+#ema-reviews * {
+    box-sizing: border-box;
+}
+
+#review-form-container {
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#review-form-container form {
+    width: 100%;
+    max-width: 100%;
+}
+
+#review-form-container input,
+#review-form-container textarea,
+#review-form-container select,
+#review-form-container button {
+    max-width: 100%;
+    min-width: 0;
+}
+
+@media screen and (max-width: 600px) {
+
+    #ema-reviews {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    #review-form-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 12px;
+        margin: 12px auto;
+        border-radius: 12px;
+    }
+
+    #review-form-container form {
+        width: 100%;
+        padding: 0;
+    }
+
+    #review-form-container input,
+    #review-form-container textarea,
+    #review-form-container select {
+        width: 100%;
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    #review-form-container textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    #review-form-container button {
+        width: 100%;
+    }
+}
