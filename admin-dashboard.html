@@ -182,6 +182,329 @@
             line-height: 1.6;
         }
 
+        /* REVIEW MANAGEMENT */
+
+        .reviews-management {
+            margin-top: 45px;
+            text-align: left;
+        }
+
+        .reviews-heading {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .reviews-heading h2 {
+            color: #001f66;
+            font-size: 28px;
+            margin: 0 0 10px;
+        }
+
+        .reviews-heading p {
+            color: #68758a;
+            line-height: 1.6;
+        }
+
+        .rating-overview {
+            background: linear-gradient(135deg, #001f66, #1565c0);
+            color: white;
+            padding: 30px 22px;
+            border-radius: 17px;
+            margin-bottom: 22px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0, 31, 102, 0.12);
+        }
+
+        .rating-overview h3 {
+            margin: 0 0 12px;
+            font-size: 19px;
+        }
+
+        .overall-rating {
+            font-size: 43px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .overall-stars {
+            color: #ffd700;
+            font-size: 27px;
+            letter-spacing: 4px;
+        }
+
+        .rating-subtitle {
+            color: #e2edff;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        .review-stats {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        .review-stat {
+            background: white;
+            padding: 20px 12px;
+            border-radius: 13px;
+            border: 1px solid #e5eaf2;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 31, 102, 0.05);
+        }
+
+        .review-stat strong {
+            display: block;
+            color: #001f66;
+            font-size: 27px;
+            margin-bottom: 6px;
+        }
+
+        .review-stat span {
+            color: #68758a;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .rating-breakdown {
+            background: white;
+            padding: 22px;
+            border: 1px solid #e5eaf2;
+            border-radius: 14px;
+            margin-bottom: 28px;
+        }
+
+        .rating-breakdown h3 {
+            color: #001f66;
+            margin: 0 0 18px;
+        }
+
+        .rating-line {
+            display: grid;
+            grid-template-columns: 65px 1fr 35px;
+            align-items: center;
+            gap: 12px;
+            margin: 12px 0;
+            font-size: 14px;
+        }
+
+        .rating-line .stars {
+            color: #d99b00;
+            white-space: nowrap;
+        }
+
+        .rating-track {
+            background: #edf1f7;
+            height: 10px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .rating-fill {
+            background: #f0b429;
+            height: 100%;
+            width: 0%;
+            border-radius: 20px;
+        }
+
+        .review-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 25px 0;
+        }
+
+        .review-tab {
+            border: 1px solid #dbe3f0;
+            background: white;
+            color: #001f66;
+            padding: 12px 18px;
+            border-radius: 9px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .review-tab.active {
+            background: #001f66;
+            color: white;
+            border-color: #001f66;
+        }
+
+        .review-actions-top {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 16px;
+        }
+
+        .refresh-btn {
+            background: #eaf2ff;
+            color: #001f66;
+            border: 1px solid #cbdcf7;
+            padding: 11px 17px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .review-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .review-card {
+            background: white;
+            border: 1px solid #e5eaf2;
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 4px 15px rgba(0, 31, 102, 0.05);
+            min-width: 0;
+        }
+
+        .review-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .review-card h3 {
+            color: #001f66;
+            margin: 0 0 6px;
+            font-size: 18px;
+            overflow-wrap: anywhere;
+        }
+
+        .review-date {
+            font-size: 12px;
+            color: #8490a2;
+        }
+
+        .review-stars {
+            color: #e0a000;
+            font-size: 19px;
+            white-space: nowrap;
+        }
+
+        .review-answer {
+            background: #f5f8fd;
+            border-radius: 9px;
+            padding: 12px;
+            margin: 10px 0;
+        }
+
+        .review-answer strong {
+            display: block;
+            color: #001f66;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .review-answer p {
+            color: #536176;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+            overflow-wrap: anywhere;
+            white-space: pre-wrap;
+        }
+
+        .recommendation {
+            margin: 13px 0;
+            font-size: 14px;
+            color: #52617d;
+        }
+
+        .review-status {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: #fff4d6;
+            color: #875c00;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+
+        .review-status.approved {
+            background: #e5f7ed;
+            color: #13733c;
+        }
+
+        .review-status.rejected {
+            background: #fff0f0;
+            color: #a32121;
+        }
+
+        .review-card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 17px;
+        }
+
+        .approve-btn,
+        .reject-btn {
+            border: none;
+            padding: 11px 14px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .approve-btn {
+            background: #168447;
+        }
+
+        .approve-btn:hover {
+            background: #106535;
+        }
+
+        .reject-btn {
+            background: #c03939;
+        }
+
+        .reject-btn:hover {
+            background: #a32121;
+        }
+
+        button:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+        .empty-reviews {
+            grid-column: 1 / -1;
+            background: white;
+            padding: 35px 20px;
+            border: 1px solid #e5eaf2;
+            border-radius: 13px;
+            text-align: center;
+            color: #68758a;
+            line-height: 1.7;
+        }
+
+        .review-load-error {
+            background: #fff0f0;
+            color: #a32121;
+            padding: 16px;
+            border-radius: 10px;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .review-message {
+            margin: 12px 0;
+            color: #13733c;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+        }
+
         @media (max-width: 700px) {
             .portal-container {
                 grid-template-columns: 1fr;
@@ -201,6 +524,33 @@
 
             nav {
                 justify-content: center;
+            }
+
+            .review-stats {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .review-list {
+                grid-template-columns: 1fr;
+            }
+
+            .review-card-top {
+                flex-wrap: wrap;
+            }
+
+            .reviews-heading h2 {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .review-card-actions {
+                flex-direction: column;
+            }
+
+            .rating-line {
+                grid-template-columns: 55px 1fr 25px;
+                gap: 7px;
             }
         }
     </style>
@@ -267,6 +617,108 @@
 
     </div>
 
+    <!-- REVIEW MANAGEMENT -->
+    <section class="reviews-management" id="reviewManagement" hidden>
+
+        <div class="reviews-heading">
+            <h2>Academy Review Management</h2>
+            <p>
+                Monitor learner feedback, manage submitted reviews
+                and control which reviews appear publicly.
+            </p>
+        </div>
+
+        <div class="rating-overview">
+            <h3>Overall Academy Rating</h3>
+
+            <div class="overall-rating" id="overallRating">
+                0.0 / 5
+            </div>
+
+            <div class="overall-stars" id="overallStars">
+                ☆☆☆☆☆
+            </div>
+
+            <div class="rating-subtitle" id="overallRatingCount">
+                Based on 0 approved reviews
+            </div>
+        </div>
+
+        <div class="review-stats">
+
+            <div class="review-stat">
+                <strong id="approvedCount">0</strong>
+                <span>Approved Reviews</span>
+            </div>
+
+            <div class="review-stat">
+                <strong id="pendingCount">0</strong>
+                <span>Pending Reviews</span>
+            </div>
+
+            <div class="review-stat">
+                <strong id="rejectedCount">0</strong>
+                <span>Rejected Reviews</span>
+            </div>
+
+            <div class="review-stat">
+                <strong id="totalCount">0</strong>
+                <span>Total Submitted</span>
+            </div>
+
+        </div>
+
+        <div class="rating-breakdown">
+            <h3>Star Rating Breakdown</h3>
+
+            <div id="ratingBreakdown">
+                <p class="loading-message">Loading ratings...</p>
+            </div>
+        </div>
+
+        <div class="review-tabs">
+
+            <button class="review-tab active"
+                    data-status="pending">
+                Pending Reviews
+            </button>
+
+            <button class="review-tab"
+                    data-status="approved">
+                Approved Reviews
+            </button>
+
+            <button class="review-tab"
+                    data-status="rejected">
+                Rejected Reviews
+            </button>
+
+        </div>
+
+        <div class="review-actions-top">
+            <button class="refresh-btn" id="refreshReviews">
+                ↻ Refresh Reviews
+            </button>
+        </div>
+
+        <div id="reviewMessage"
+             class="review-message"
+             role="status"
+             aria-live="polite"></div>
+
+        <div id="reviewLoadError"
+             class="review-load-error"
+             role="alert"
+             hidden></div>
+
+        <div class="review-list" id="reviewList">
+            <div class="empty-reviews">
+                Loading reviews...
+            </div>
+        </div>
+
+    </section>
+
 </main>
 
 <script>
@@ -277,31 +729,50 @@ document.addEventListener("DOMContentLoaded", async function () {
     const errorBox = document.getElementById("dashboardError");
     const logoutBtn = document.getElementById("logoutBtn");
 
+    const reviewManagement =
+        document.getElementById("reviewManagement");
+
+    const reviewList =
+        document.getElementById("reviewList");
+
+    const reviewMessage =
+        document.getElementById("reviewMessage");
+
+    const reviewLoadError =
+        document.getElementById("reviewLoadError");
+
+    let allReviews = [];
+    let currentStatus = "pending";
+
     function showError(message) {
         errorBox.hidden = false;
         errorBox.className = "error-message";
         errorBox.textContent = message;
-        welcome.textContent = "Administrator access could not be verified.";
+        welcome.textContent =
+            "Administrator access could not be verified.";
         portals.hidden = true;
+        reviewManagement.hidden = true;
     }
 
-    // Prevent department access until authentication succeeds.
     portals.hidden = true;
+    reviewManagement.hidden = true;
 
-    if (!window.EMA || typeof EMA.requireSession !== "function") {
+    if (!window.EMA ||
+        typeof EMA.requireSession !== "function") {
+
         showError(
             "The Supabase connection could not be loaded. " +
             "Check config.js and ema-supabase.js."
         );
+
         return;
     }
 
     try {
+
         const profile = await EMA.requireSession(["admin"]);
 
-        if (!profile) {
-            return;
-        }
+        if (!profile) return;
 
         if (profile.role !== "admin") {
             showError("You do not have administrator permission.");
@@ -315,8 +786,13 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         errorBox.hidden = true;
         portals.hidden = false;
+        reviewManagement.hidden = false;
+
+        // LOAD REVIEWS AFTER ADMIN AUTHENTICATION
+        await loadReviews();
 
     } catch (error) {
+
         console.error("Administrator dashboard error:", error);
 
         showError(
@@ -325,8 +801,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         );
     }
 
-    // Secure logout
+    // SECURE LOGOUT
     logoutBtn.addEventListener("click", async function (event) {
+
         event.preventDefault();
 
         logoutBtn.textContent = "Logging out...";
@@ -334,13 +811,389 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         try {
             await EMA.signOut();
+
         } catch (error) {
+
             console.error("Logout error:", error);
+
             logoutBtn.textContent = "Logout";
             logoutBtn.style.pointerEvents = "auto";
+
             alert("Logout failed. Please try again.");
         }
     });
+
+    // LOAD ALL REVIEWS
+    async function loadReviews() {
+
+        reviewLoadError.hidden = true;
+        reviewMessage.textContent = "";
+
+        reviewList.innerHTML = `
+            <div class="empty-reviews">
+                Loading reviews...
+            </div>
+        `;
+
+        try {
+
+            const { data, error } = await EMA.db
+                .from("academy_reviews")
+                .select(
+                    "id, reviewer_name, rating, q1_answer, q2_answer, q3_answer, recommend, status, created_at"
+                )
+                .order("created_at", {
+                    ascending: false
+                });
+
+            if (error) throw error;
+
+            allReviews = data || [];
+
+            updateStatistics();
+            renderReviews();
+
+        } catch (error) {
+
+            console.error("Review loading error:", error);
+
+            reviewList.innerHTML = "";
+
+            reviewLoadError.hidden = false;
+            reviewLoadError.textContent =
+                "Could not load reviews: " +
+                (error.message || "Unknown database error.");
+        }
+    }
+
+    // UPDATE OVERALL RATING AND COUNTS
+    function updateStatistics() {
+
+        const pending = allReviews.filter(
+            review => review.status === "pending"
+        );
+
+        const approved = allReviews.filter(
+            review => review.status === "approved"
+        );
+
+        const rejected = allReviews.filter(
+            review => review.status === "rejected"
+        );
+
+        document.getElementById("pendingCount").textContent =
+            pending.length;
+
+        document.getElementById("approvedCount").textContent =
+            approved.length;
+
+        document.getElementById("rejectedCount").textContent =
+            rejected.length;
+
+        document.getElementById("totalCount").textContent =
+            allReviews.length;
+
+        const ratedReviews = approved.filter(
+            review =>
+                Number.isInteger(Number(review.rating)) &&
+                Number(review.rating) >= 1 &&
+                Number(review.rating) <= 5 &&
+                review.rating !== null
+        );
+
+        const totalStars = ratedReviews.reduce(
+            (sum, review) => sum + Number(review.rating),
+            0
+        );
+
+        const average = ratedReviews.length
+            ? totalStars / ratedReviews.length
+            : 0;
+
+        document.getElementById("overallRating").textContent =
+            average.toFixed(1) + " / 5";
+
+        const roundedStars = Math.round(average);
+
+        document.getElementById("overallStars").textContent =
+            "★".repeat(roundedStars) +
+            "☆".repeat(5 - roundedStars);
+
+        document.getElementById("overallRatingCount").textContent =
+            "Based on " + ratedReviews.length +
+            " approved rated reviews";
+
+        // STAR DISTRIBUTION
+        const breakdown = document.getElementById("ratingBreakdown");
+
+        let breakdownHTML = "";
+
+        for (let star = 5; star >= 1; star--) {
+
+            const count = ratedReviews.filter(
+                review => Number(review.rating) === star
+            ).length;
+
+            const percentage = ratedReviews.length
+                ? (count / ratedReviews.length) * 100
+                : 0;
+
+            breakdownHTML += `
+                <div class="rating-line">
+
+                    <span class="stars">
+                        ${star} ★
+                    </span>
+
+                    <div class="rating-track">
+                        <div class="rating-fill"
+                             style="width:${percentage}%">
+                        </div>
+                    </div>
+
+                    <strong>${count}</strong>
+
+                </div>
+            `;
+        }
+
+        breakdown.innerHTML = breakdownHTML;
+    }
+
+    // DISPLAY REVIEWS
+    function renderReviews() {
+
+        const filteredReviews = allReviews.filter(
+            review => review.status === currentStatus
+        );
+
+        if (!filteredReviews.length) {
+
+            reviewList.innerHTML = `
+                <div class="empty-reviews">
+                    <strong>No ${currentStatus} reviews.</strong>
+                    <p>
+                        Reviews in this category will appear here.
+                    </p>
+                </div>
+            `;
+
+            return;
+        }
+
+        reviewList.innerHTML = filteredReviews.map(
+            review => {
+
+                const rating = Number(review.rating) || 0;
+
+                const stars =
+                    "★".repeat(Math.max(0, Math.min(5, rating))) +
+                    "☆".repeat(5 - Math.max(0, Math.min(5, rating)));
+
+                const date = review.created_at
+                    ? new Date(review.created_at).toLocaleDateString(
+                        "en-ZA",
+                        {
+                            day: "numeric",
+                            month: "long",
+                            year: "numeric"
+                        }
+                    )
+                    : "Date unavailable";
+
+                const safe = value =>
+                    String(value || "")
+                        .replace(/[&<>"']/g, character => ({
+                            "&": "&amp;",
+                            "<": "&lt;",
+                            ">": "&gt;",
+                            '"': "&quot;",
+                            "'": "&#39;"
+                        })[character]);
+
+                const actionButtons =
+                    currentStatus === "pending"
+                    ? `
+                        <div class="review-card-actions">
+
+                            <button class="approve-btn"
+                                    data-id="${safe(review.id)}"
+                                    data-action="approved">
+                                ✓ Approve
+                            </button>
+
+                            <button class="reject-btn"
+                                    data-id="${safe(review.id)}"
+                                    data-action="rejected">
+                                ✕ Reject
+                            </button>
+
+                        </div>
+                    `
+                    : "";
+
+                return `
+                    <article class="review-card">
+
+                        <div class="review-card-top">
+
+                            <div>
+                                <h3>${safe(review.reviewer_name)}</h3>
+
+                                <div class="review-date">
+                                    ${date}
+                                </div>
+                            </div>
+
+                            <div class="review-stars">
+                                ${stars}
+                            </div>
+
+                        </div>
+
+                        <div class="review-answer">
+                            <strong>Question 1</strong>
+                            <p>${safe(review.q1_answer)}</p>
+                        </div>
+
+                        <div class="review-answer">
+                            <strong>Question 2</strong>
+                            <p>${safe(review.q2_answer)}</p>
+                        </div>
+
+                        <div class="review-answer">
+                            <strong>Question 3</strong>
+                            <p>${safe(review.q3_answer)}</p>
+                        </div>
+
+                        <div class="recommendation">
+                            <strong>Would recommend us:</strong>
+                            ${safe(review.recommend || "Not provided")}
+                        </div>
+
+                        <span class="review-status ${safe(review.status)}">
+                            ${safe(review.status)}
+                        </span>
+
+                        ${actionButtons}
+
+                    </article>
+                `;
+
+            }
+        ).join("");
+
+    }
+
+    // APPROVE OR REJECT A REVIEW
+    reviewList.addEventListener("click", async function (event) {
+
+        const button = event.target.closest("button[data-action]");
+
+        if (!button) return;
+
+        const reviewId = button.dataset.id;
+        const newStatus = button.dataset.action;
+
+        if (!reviewId ||
+            !["approved", "rejected"].includes(newStatus)) {
+            return;
+        }
+
+        const review = allReviews.find(
+            item => String(item.id) === String(reviewId)
+        );
+
+        if (!review) return;
+
+        const confirmed = confirm(
+            newStatus === "approved"
+                ? "Approve this review? It will become eligible to appear publicly."
+                : "Reject this review? It will not appear publicly."
+        );
+
+        if (!confirmed) return;
+
+        button.disabled = true;
+        button.textContent = "Saving...";
+
+        try {
+
+            const { data, error } = await EMA.db
+                .from("academy_reviews")
+                .update({
+                    status: newStatus
+                })
+                .eq("id", reviewId)
+                .select("id, status")
+                .single();
+
+            if (error) throw error;
+
+            if (!data || data.status !== newStatus) {
+                throw new Error(
+                    "The review status could not be confirmed."
+                );
+            }
+
+            reviewMessage.textContent =
+                "Review successfully " + newStatus + ".";
+
+            await loadReviews();
+
+        } catch (error) {
+
+            console.error("Review moderation error:", error);
+
+            alert(
+                "Could not update this review: " +
+                (error.message || "Unknown error.")
+            );
+
+            button.disabled = false;
+            button.textContent =
+                newStatus === "approved" ? "✓ Approve" : "✕ Reject";
+        }
+
+    });
+
+    // SWITCH BETWEEN REVIEW CATEGORIES
+    document.querySelectorAll(".review-tab").forEach(
+        tab => {
+
+            tab.addEventListener("click", function () {
+
+                document.querySelectorAll(".review-tab").forEach(
+                    item => item.classList.remove("active")
+                );
+
+                this.classList.add("active");
+
+                currentStatus = this.dataset.status;
+
+                reviewMessage.textContent = "";
+
+                renderReviews();
+            });
+
+        }
+    );
+
+    // REFRESH REVIEWS
+    document.getElementById("refreshReviews")
+        .addEventListener("click", async function () {
+
+            const button = this;
+
+            button.disabled = true;
+            button.textContent = "Refreshing...";
+
+            await loadReviews();
+
+            button.disabled = false;
+            button.textContent = "↻ Refresh Reviews";
+
+        });
 
 });
 </script>
