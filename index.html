@@ -1076,18 +1076,21 @@
 
         } catch (error) {
 
-            console.error("Review loading error:", error);
+    console.error("REVIEW SUBMISSION ERROR:", {
+        message: error.message,
+        code: error.code,
+        details: error.details,
+        hint: error.hint,
+        error: error
+    });
 
-            reviewGrid.innerHTML = `
-                <div class="reviews-empty">
-                    We couldn't load reviews right now.
-                    Please try again later.
-                </div>
-            `;
+    showReviewStatus(
+        "Submission failed: " +
+        (error.message || "Unknown database error"),
+        "error"
+    );
 
-            reviewCount.textContent = "Unable to load reviews";
-
-        }
+}
 
     }
 
