@@ -984,108 +984,110 @@
             };
         }
 
-        /* OPEN THE REVIEW FORM */
-        async function openReviewForm() {
+        
+/* OPEN THE REVIEW FORM */
+async function openReviewForm() {
 
-            const result = await getActiveLearner();
+    const result = await getActiveLearner();
 
-            if (!result.allowed) {
+    if (!result.allowed) {
 
-                if (result.reason === "login") {
-                    window.location.href =
-                        "login.html?redirect=index.html%23ema-reviews";
-                    return;
-                }
+        if (result.reason === "login") {
+            window.location.href =
+                "login.html?redirect=" +
+                encodeURIComponent("index.html#ema-reviews");
+            return;
+        }
 
-                reviewLoginMessage.style.display = "block";
+        reviewLoginMessage.style.display = "block";
 
-                reviewLoginMessage.textContent =
-                    result.reason === "connection"
-                        ? "The review service is temporarily unavailable. Please try again later."
-                        : "Please use an active learner account to submit a review.";
+        reviewLoginMessage.textContent =
+            result.reason === "connection"
+                ? "The review service is temporarily unavailable. Please try again later."
+                : "Please use an active learner account to submit a review.";
 
-                reviewLoginMessage.scrollIntoView({
-                    behavior: "smooth",
-                    block: "center"
-                });
+        reviewLoginMessage.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
 
-                return;
-            }
+        return;
+    }
 
-            reviewLoginMessage.style.display = "none";
-            reviewFormContainer.style.display = "block";
+    reviewLoginMessage.style.display = "none";
+    reviewFormContainer.style.display = "block";
 
+    reviewFormContainer.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+/* LEAVE A REVIEW BUTTON */
+leaveReviewButton.addEventListener("click", function () {
+
+    leaveReviewButton.disabled = true;
+    leaveReviewButton.textContent = "Opening...";
+
+    openReviewForm().catch(error => {
+
+        console.error("Review access error:", error);
+
+        reviewLoginMessage.style.display = "block";
+        reviewLoginMessage.textContent =
+            "We couldn't open the review form. Please try again.";
+
+        leaveReviewButton.disabled = false;
+        leaveReviewButton.textContent = "✍ Leave a Review";
+    });
+});
+
+/* AUTOMATICALLY OPEN FORM AFTER LOGIN */
+async function handleReviewReturn() {
+
+    if (window.location.hash !== "#ema-reviews") {
+        return;
+    }
+
+    // Allow time for the Supabase login session to become available.
+    let result = null;
+
+    for (let attempt = 0; attempt < 10; attempt++) {
+
+        result = await getActiveLearner();
+
+        if (result.allowed || result.reason === "learner" ||
+            result.reason === "profile" ||
+            result.reason === "connection") {
+            break;
+        }
+
+        await new Promise(resolve => setTimeout(resolve, 500));
+    }
+
+    if (result && result.allowed) {
+
+        reviewLoginMessage.style.display = "none";
+        reviewFormContainer.style.display = "block";
+
+        setTimeout(() => {
             reviewFormContainer.scrollIntoView({
                 behavior: "smooth",
                 block: "start"
             });
-        }
+        }, 300);
 
-        /* LEAVE A REVIEW: GO STRAIGHT TO LOGIN IF LOGGED OUT */
-        leaveReviewButton.addEventListener("click", async function () {
+    } else {
 
-            leaveReviewButton.disabled = true;
-            leaveReviewButton.textContent = "Please wait...";
+        reviewLoginMessage.style.display = "block";
 
-            try {
-                await openReviewForm();
-            } catch (error) {
-                console.error("Review access error:", error);
+        reviewLoginMessage.textContent =
+            result && result.reason === "learner"
+                ? "Please log in using an active learner account to submit a review."
+                : "We couldn't verify your learner login. Please log in again.";
 
-                reviewLoginMessage.style.display = "block";
-                reviewLoginMessage.textContent =
-                    "We couldn't open the review form. Please try again.";
-            } finally {
-                leaveReviewButton.disabled = false;
-                leaveReviewButton.textContent = "✍ Leave a Review";
-            }
-        });
-
-        /* AUTOMATICALLY OPEN FORM AFTER RETURNING FROM LOGIN */
-        async function handleReviewReturn() {
-
-            const isReviewReturn =
-                window.location.hash === "#ema-reviews";
-
-            if (!isReviewReturn) {
-                return;
-            }
-
-            await new Promise(resolve => setTimeout(resolve, 300));
-
-            try {
-                const result = await getActiveLearner();
-
-                if (result.allowed) {
-
-                    reviewLoginMessage.style.display = "none";
-                    reviewFormContainer.style.display = "block";
-
-                    setTimeout(() => {
-                        reviewFormContainer.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start"
-                        });
-                    }, 200);
-
-                } else if (result.reason === "learner") {
-
-                    reviewLoginMessage.style.display = "block";
-                    reviewLoginMessage.textContent =
-                        "Please log in using an active learner account to submit a review.";
-
-                } else if (result.reason === "connection") {
-
-                    reviewLoginMessage.style.display = "block";
-                    reviewLoginMessage.textContent =
-                        "The review service is temporarily unavailable. Please try again later.";
-                }
-
-            } catch (error) {
-                console.error("Automatic review form opening failed:", error);
-            }
-        }
-
+    }
+}
         /* STAR RATING PICKER */
         const ratingButtons = document.querySelectorAll(
             "#rating-picker button"
