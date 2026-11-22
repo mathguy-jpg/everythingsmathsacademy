@@ -183,56 +183,30 @@
         /* GOLD-AND-BLUE READ MORE / READ LESS BUTTON */
 
         #ema-reviews .review-read-more {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 15px;
-            padding: 10px 20px;
-            border: 2px solid #d6a900;
-            border-radius: 9px;
-            background: linear-gradient(135deg, #061b4d 0%, #123d87 100%);
-            color: #ffd84d;
-            box-shadow: 0 3px 10px rgba(6, 27, 77, 0.18),
-                        0 0 0 2px rgba(242, 184, 0, 0.10);
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 0.2px;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease,
-                        background 0.2s ease;
-        }
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 145px;
+    min-height: 44px;
+    padding: 12px 22px;
+    margin-top: 12px;
 
-        #ema-reviews .review-read-more:hover {
-            background: linear-gradient(135deg, #123d87 0%, #1b56a8 100%);
-            box-shadow: 0 5px 14px rgba(6, 27, 77, 0.24),
-                        0 0 9px rgba(242, 184, 0, 0.28);
-            transform: translateY(-1px);
-        }
+    background: linear-gradient(135deg, #001f66, #063b91);
+    color: #ffd700;
+    border: 2px solid #ffd700;
+    border-radius: 10px;
 
-        #ema-reviews .review-read-more:focus-visible {
-            outline: 3px solid #f2b800;
-            outline-offset: 3px;
-        }
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0, 31, 102, 0.2);
+}
 
-        #ema-reviews .review-read-more[hidden] {
-            display: none !important;
-        }
-
-        #ema-reviews .review-date {
-            margin-top: 16px;
-            color: #8993a6;
-            font-size: 12px;
-        }
-
-        #ema-reviews .reviews-empty {
-            grid-column: 1 / -1;
-            padding: 30px;
-            border-radius: 12px;
-            background: #ffffff;
-            color: #65718a;
-            text-align: center;
-        }
+.review-read-more:hover {
+    background: #ffd700;
+    color: #001f66;
+}
 
         /* LOGIN MESSAGE */
 
