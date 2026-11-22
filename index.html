@@ -103,6 +103,11 @@
             transform: translateY(-2px);
         }
 
+        .leave-review-btn:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
         .reviews-grid {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -306,567 +311,694 @@
 </head>
 
 <body>
-    <div id="site-scale-shell">
-    <div id="desktop-site">
 
-        <!-- NAVIGATION -->
-        <header>
-            <nav aria-label="Main navigation">
-                <div class="menu">
-                    <a href="index.html" aria-current="page">Home</a>
-                    <a href="lessons.html">Our Lessons</a>
-                    <a href="#why-choose-us">Why Choose Us</a>
-                    <a href="#ema-reviews">Reviews</a>
-                    <a href="#about-us">About Us</a>
-                    <a href="#contact">Contact</a>
-                    <a href="login.html" class="login-btn">Login</a>
-                </div>
+<div id="site-scale-shell">
+<div id="desktop-site">
 
-                <div class="trial-btn">
-                    <a href="trial.html">
-                        <button type="button">Start Free Trial</button>
-                    </a>
-                </div>
-            </nav>
-        </header>
+    <!-- NAVIGATION -->
+    <header>
+        <nav aria-label="Main navigation">
 
-        <main>
-
-            <!-- HERO SECTION -->
-            <section class="hero">
-                <div class="hero-left">
-
-                    <div class="badge">
-                        ONLINE TUTORING • SOUTH AFRICA
-                    </div>
-
-                    <h1>
-                        Your Future Starts <br>
-                        With Maths.
-                    </h1>
-
-                    <p>
-                        Live, interactive Mathematics and Physical Sciences
-                        lessons that make learning accessible, flexible
-                        and affordable for South African learners.
-                    </p>
-
-                    <div class="hero-buttons">
-
-                        <a href="trial.html">
-                            <button type="button">
-                                Start Your 3-Day Free Trial
-                            </button>
-                        </a>
-
-                        <a href="video-ad.html">
-                            <button type="button">
-                                Explore Our Lessons
-                            </button>
-                        </a>
-
-                    </div>
-                </div>
-
-                <div class="hero-right">
-                    <img
-                        src="logo.png.png"
-                        alt="Everything's Maths Academy logo"
-                    >
-                </div>
-            </section>
-
-            <!-- LEARNING SHOWCASE -->
-            <section class="learning-showcase">
-                <img
-                    src="Add.png"
-                    alt="Everything's Maths Academy online learning"
-                    loading="lazy"
-                >
-            </section>
-
-            <!-- WHY CHOOSE US -->
-            <section id="why-choose-us">
-
-                <h1>Why Choose Everything's Maths Academy?</h1>
-
-                <p class="subtitle">
-                    Making Mathematics and Physical Sciences accessible,
-                    affordable and interactive for every learner across
-                    South Africa.
-                </p>
-
-                <div class="surround-container">
-
-                    <div class="top-card card">
-                        <h3>🎓 Live Interactive Classes</h3>
-                        <p>
-                            Engage with tutors in real time and receive
-                            immediate support during lessons.
-                        </p>
-                    </div>
-
-                    <div class="left-card card">
-                        <h3>🌍 Learn From Anywhere</h3>
-                        <p>
-                            Join our online lessons from anywhere
-                            in South Africa.
-                        </p>
-                    </div>
-
-                    <div class="center-image">
-                        <img
-                            src="whychooseus.png"
-                            alt="Why choose Everything's Maths Academy"
-                            loading="lazy"
-                        >
-                    </div>
-
-                    <div class="right-card card">
-                        <h3>🏆 Proven Academic Support</h3>
-                        <p>
-                            Structured learning designed to improve
-                            confidence, understanding and results.
-                        </p>
-                    </div>
-
-                    <div class="bottom-card card">
-                        <h3>💰 Affordable Education</h3>
-                        <p>
-                            Quality Mathematics and Physical Sciences
-                            tutoring at accessible prices.
-                        </p>
-                    </div>
-
-                </div>
-            </section>
-
-            <!-- REVIEWS SECTION -->
-<section id="ema-reviews">
-
-    <h1 class="reviews-heading">
-        What Our Learners Say
-    </h1>
-
-    <p class="reviews-subtitle">
-        Real experiences from learners who are part of
-        Everything's Maths Academy. Read their stories
-        and share your own learning experience.
-    </p>
-
-    <div class="reviews-top-bar">
-
-        <div class="reviews-summary">
-            <strong id="reviews-average">— / 5</strong>
-
-            <div class="reviews-stars" id="reviews-average-stars">
-                ☆☆☆☆☆
+            <div class="menu">
+                <a href="index.html" aria-current="page">Home</a>
+                <a href="lessons.html">Our Lessons</a>
+                <a href="#why-choose-us">Why Choose Us</a>
+                <a href="#ema-reviews">Reviews</a>
+                <a href="#about-us">About Us</a>
+                <a href="#contact">Contact</a>
+                <a href="login.html" class="login-btn">Login</a>
             </div>
 
-            <span id="reviews-count">
-                Loading learner reviews...
-            </span>
-        </div>
+            <div class="trial-btn">
+                <a href="trial.html">
+                    <button type="button">Start Free Trial</button>
+                </a>
+            </div>
 
-        <button
-            type="button"
-            class="leave-review-btn"
-            id="leave-review-button"
-        >
-            ✍ Leave a Review
-        </button>
+        </nav>
+    </header>
 
-    </div>
+    <main>
 
-    <div
-        class="reviews-grid"
-        id="reviews-grid"
-        aria-live="polite"
-    >
-        <div class="reviews-empty">
-            Loading reviews...
-        </div>
-    </div>
+        <!-- HERO SECTION -->
+        <section class="hero">
 
-    <div
-        class="review-login-message"
-        id="review-login-message"
-    >
-        Please log in to your learner account to share your experience.
+            <div class="hero-left">
 
-        <br>
+                <div class="badge">
+                    ONLINE TUTORING • SOUTH AFRICA
+                </div>
 
-        <a href="login.html?redirect=index.html%23ema-reviews">
-            Log in to your learner account
-        </a>
-    </div>
-                <!-- LEARNER REVIEW FORM -->
-                <div id="review-form-container">
+                <h1>
+                    Your Future Starts <br>
+                    With Maths.
+                </h1>
 
-                    <h2>Share Your Experience</h2>
+                <p>
+                    Live, interactive Mathematics and Physical Sciences
+                    lessons that make learning accessible, flexible
+                    and affordable for South African learners.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="trial.html">
+                        <button type="button">
+                            Start Your 3-Day Free Trial
+                        </button>
+                    </a>
+
+                    <a href="video-ad.html">
+                        <button type="button">
+                            Explore Our Lessons
+                        </button>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="hero-right">
+                <img
+                    src="logo.png.png"
+                    alt="Everything's Maths Academy logo"
+                >
+            </div>
+
+        </section>
+
+        <!-- LEARNING SHOWCASE -->
+        <section class="learning-showcase">
+            <img
+                src="Add.png"
+                alt="Everything's Maths Academy online learning"
+                loading="lazy"
+            >
+        </section>
+
+        <!-- WHY CHOOSE US -->
+        <section id="why-choose-us">
+
+            <h1>Why Choose Everything's Maths Academy?</h1>
+
+            <p class="subtitle">
+                Making Mathematics and Physical Sciences accessible,
+                affordable and interactive for every learner across
+                South Africa.
+            </p>
+
+            <div class="surround-container">
+
+                <div class="top-card card">
+                    <h3>🎓 Live Interactive Classes</h3>
+                    <p>
+                        Engage with tutors in real time and receive
+                        immediate support during lessons.
+                    </p>
+                </div>
+
+                <div class="left-card card">
+                    <h3>🌍 Learn From Anywhere</h3>
+                    <p>
+                        Join our online lessons from anywhere
+                        in South Africa.
+                    </p>
+                </div>
+
+                <div class="center-image">
+                    <img
+                        src="whychooseus.png"
+                        alt="Why choose Everything's Maths Academy"
+                        loading="lazy"
+                    >
+                </div>
+
+                <div class="right-card card">
+                    <h3>🏆 Proven Academic Support</h3>
+                    <p>
+                        Structured learning designed to improve
+                        confidence, understanding and results.
+                    </p>
+                </div>
+
+                <div class="bottom-card card">
+                    <h3>💰 Affordable Education</h3>
+                    <p>
+                        Quality Mathematics and Physical Sciences
+                        tutoring at accessible prices.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- REVIEWS SECTION -->
+        <section id="ema-reviews">
+
+            <h1 class="reviews-heading">
+                What Our Learners Say
+            </h1>
+
+            <p class="reviews-subtitle">
+                Real experiences from learners who are part of
+                Everything's Maths Academy. Read their stories
+                and share your own learning experience.
+            </p>
+
+            <div class="reviews-top-bar">
+
+                <div class="reviews-summary">
+                    <strong id="reviews-average">— / 5</strong>
+
+                    <div class="reviews-stars" id="reviews-average-stars">
+                        ☆☆☆☆☆
+                    </div>
+
+                    <span id="reviews-count">
+                        Loading learner reviews...
+                    </span>
+                </div>
+
+                <button
+                    type="button"
+                    class="leave-review-btn"
+                    id="leave-review-button"
+                >
+                    ✍ Leave a Review
+                </button>
+
+            </div>
+
+            <div
+                class="reviews-grid"
+                id="reviews-grid"
+                aria-live="polite"
+            >
+                <div class="reviews-empty">
+                    Loading reviews...
+                </div>
+            </div>
+
+            <div
+                class="review-login-message"
+                id="review-login-message"
+            >
+                Please log in to your learner account to share your experience.
+
+                <br>
+
+                <a href="login.html?redirect=index.html%23ema-reviews">
+                    Log in to your learner account
+                </a>
+            </div>
+
+            <!-- LEARNER REVIEW FORM -->
+            <div id="review-form-container">
+
+                <h2>Share Your Experience</h2>
+
+                <p>
+                    Tell us about your experience at
+                    Everything's Maths Academy.
+                </p>
+
+                <form id="learner-review-form">
+
+                    <div class="review-form-group">
+
+                        <label>Your Rating</label>
+
+                        <div class="rating-picker" id="rating-picker">
+
+                            <button type="button" data-rating="1" aria-label="1 star">★</button>
+                            <button type="button" data-rating="2" aria-label="2 stars">★</button>
+                            <button type="button" data-rating="3" aria-label="3 stars">★</button>
+                            <button type="button" data-rating="4" aria-label="4 stars">★</button>
+                            <button type="button" data-rating="5" aria-label="5 stars">★</button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="review-form-group">
+
+                        <label for="review-q1">
+                            1. How has Everything's Maths Academy helped you with your studies?
+                        </label>
+
+                        <textarea
+                            id="review-q1"
+                            required
+                            maxlength="1000"
+                            placeholder="Tell us about your academic experience..."
+                        ></textarea>
+
+                    </div>
+
+                    <div class="review-form-group">
+
+                        <label for="review-q2">
+                            2. What do you enjoy most about our lessons and tutors?
+                        </label>
+
+                        <textarea
+                            id="review-q2"
+                            required
+                            maxlength="1000"
+                            placeholder="Share what you enjoy most..."
+                        ></textarea>
+
+                    </div>
+
+                    <div class="review-form-group">
+
+                        <label for="review-q3">
+                            3. What difference has the academy made to your confidence or results?
+                        </label>
+
+                        <textarea
+                            id="review-q3"
+                            required
+                            maxlength="1000"
+                            placeholder="Tell us about the difference..."
+                        ></textarea>
+
+                    </div>
+
+                    <div class="review-form-group">
+
+                        <label>
+                            Would you recommend Everything's Maths Academy to other learners?
+                        </label>
+
+                        <div class="recommend-options">
+
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="recommend"
+                                    value="Yes"
+                                    required
+                                >
+                                Yes
+                            </label>
+
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="recommend"
+                                    value="No"
+                                >
+                                No
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="submit-review-btn"
+                        id="submit-review-button"
+                    >
+                        Submit My Review
+                    </button>
+
+                    <div
+                        class="review-status"
+                        id="review-status"
+                        role="status"
+                        aria-live="polite"
+                    ></div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+        <!-- ABOUT US -->
+        <section id="about-us">
+
+            <h1>About Everything's Maths Academy</h1>
+
+            <div class="about-container">
+
+                <p class="about-text">
+                    Everything's Maths Academy is a modern academic
+                    institution dedicated to developing confident,
+                    high-performing learners in Mathematics and
+                    Physical Sciences. We provide quality tutoring,
+                    examination preparation, academic mentorship
+                    and digital learning solutions designed to help
+                    learners achieve excellence both inside and
+                    outside the classroom.
+                </p>
+
+                <p class="about-text">
+                    Founded with a vision of making quality education
+                    accessible and affordable, the academy continues
+                    to empower learners across South Africa through
+                    innovation, dedication and academic excellence.
+                </p>
+
+                <div class="vision-boxes">
+
+                    <div class="vision-card">
+                        <h3>Our Vision</h3>
+                        <p>
+                            To become one of South Africa's most trusted
+                            and innovative Mathematics and Physical
+                            Sciences academies.
+                        </p>
+                    </div>
+
+                    <div class="vision-card">
+                        <h3>Our Mission</h3>
+                        <p>
+                            To simplify complex concepts, inspire
+                            confidence and help learners reach their
+                            highest academic potential.
+                        </p>
+                    </div>
+
+                    <div class="vision-card">
+                        <h3>Our Goal</h3>
+                        <p>
+                            To create opportunities through quality
+                            education, mentorship, innovation and
+                            academic support.
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- FOUNDER RECOGNITION -->
+                <section class="founder-recognition">
+
+                    <h2>Founder &amp; Recognition</h2>
 
                     <p>
-                        Tell us about your experience at
-                        Everything's Maths Academy.
+                        <strong>Mr H. Bilankulu</strong>, Founder and
+                        Head of Mathematics at Everything's Maths
+                        Academy, was featured on
+                        <strong>MUT Radio's The Hangout</strong>,
+                        where he shared the academy's vision of
+                        empowering learners through quality
+                        Mathematics education and academic development.
                     </p>
 
-                    <form id="learner-review-form">
+                    <a
+                        href="https://iono.fm/e/1706736"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="radio-box"
+                    >
+                        🎙 Listen to the Radio Interview
+                    </a>
 
-                        <div class="review-form-group">
-                            <label>Your Rating</label>
-
-                            <div class="rating-picker" id="rating-picker">
-                                <button type="button" data-rating="1" aria-label="1 star">★</button>
-                                <button type="button" data-rating="2" aria-label="2 stars">★</button>
-                                <button type="button" data-rating="3" aria-label="3 stars">★</button>
-                                <button type="button" data-rating="4" aria-label="4 stars">★</button>
-                                <button type="button" data-rating="5" aria-label="5 stars">★</button>
-                            </div>
-                        </div>
-
-                        <div class="review-form-group">
-                            <label for="review-q1">
-                                1. How has Everything's Maths Academy helped you with your studies?
-                            </label>
-
-                            <textarea
-                                id="review-q1"
-                                required
-                                maxlength="1000"
-                                placeholder="Tell us about your academic experience..."
-                            ></textarea>
-                        </div>
-
-                        <div class="review-form-group">
-                            <label for="review-q2">
-                                2. What do you enjoy most about our lessons and tutors?
-                            </label>
-
-                            <textarea
-                                id="review-q2"
-                                required
-                                maxlength="1000"
-                                placeholder="Share what you enjoy most..."
-                            ></textarea>
-                        </div>
-
-                        <div class="review-form-group">
-                            <label for="review-q3">
-                                3. What difference has the academy made to your confidence or results?
-                            </label>
-
-                            <textarea
-                                id="review-q3"
-                                required
-                                maxlength="1000"
-                                placeholder="Tell us about the difference..."
-                            ></textarea>
-                        </div>
-
-                        <div class="review-form-group">
-                            <label>Would you recommend Everything's Maths Academy to other learners?</label>
-
-                            <div class="recommend-options">
-                                <label>
-                                    <input type="radio" name="recommend" value="Yes" required>
-                                    Yes
-                                </label>
-
-                                <label>
-                                    <input type="radio" name="recommend" value="No">
-                                    No
-                                </label>
-                            </div>
-                        </div>
-
-                        <button
-                            type="submit"
-                            class="submit-review-btn"
-                            id="submit-review-button"
-                        >
-                            Submit My Review
-                        </button>
-
-                        <div
-                            class="review-status"
-                            id="review-status"
-                            role="status"
-                            aria-live="polite"
-                        ></div>
-
-                    </form>
-                </div>
-
-            </section>
-
-            <!-- ABOUT US -->
-            <section id="about-us">
-
-                <h1>About Everything's Maths Academy</h1>
-
-                <div class="about-container">
-
-                    <p class="about-text">
-                        Everything's Maths Academy is a modern academic
-                        institution dedicated to developing confident,
-                        high-performing learners in Mathematics and
-                        Physical Sciences. We provide quality tutoring,
-                        examination preparation, academic mentorship
-                        and digital learning solutions designed to help
-                        learners achieve excellence both inside and
-                        outside the classroom.
-                    </p>
-
-                    <p class="about-text">
-                        Founded with a vision of making quality education
-                        accessible and affordable, the academy continues
-                        to empower learners across South Africa through
-                        innovation, dedication and academic excellence.
-                    </p>
-
-                    <div class="vision-boxes">
-
-                        <div class="vision-card">
-                            <h3>Our Vision</h3>
-                            <p>
-                                To become one of South Africa's most trusted
-                                and innovative Mathematics and Physical
-                                Sciences academies.
-                            </p>
-                        </div>
-
-                        <div class="vision-card">
-                            <h3>Our Mission</h3>
-                            <p>
-                                To simplify complex concepts, inspire
-                                confidence and help learners reach their
-                                highest academic potential.
-                            </p>
-                        </div>
-
-                        <div class="vision-card">
-                            <h3>Our Goal</h3>
-                            <p>
-                                To create opportunities through quality
-                                education, mentorship, innovation and
-                                academic support.
-                            </p>
-                        </div>
-
-                    </div>
-
-                    <!-- FOUNDER RECOGNITION -->
-                    <section class="founder-recognition">
-
-                        <h2>Founder &amp; Recognition</h2>
-
-                        <p>
-                            <strong>Mr H. Bilankulu</strong>, Founder and
-                            Head of Mathematics at Everything's Maths
-                            Academy, was featured on
-                            <strong>MUT Radio's The Hangout</strong>,
-                            where he shared the academy's vision of
-                            empowering learners through quality
-                            Mathematics education and academic development.
-                        </p>
-
-                        <a
-                            href="https://iono.fm/e/1706736"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="radio-box"
-                        >
-                            🎙 Listen to the Radio Interview
-                        </a>
-
-                    </section>
-
-                    <!-- COMMUNITY IMPACT -->
-                    <div class="vision-card community-card">
-                        <h3>🌍 Community Impact</h3>
-                        <p>
-                            Committed to expanding educational opportunities
-                            and helping learners unlock their full potential
-                            through quality education.
-                        </p>
-                    </div>
-
-                </div>
-
-                <!-- MEET THE TEAM -->
-                <section class="team-section">
-
-                    <h2>Meet The Team</h2>
-
-                    <div class="founders-section">
-
-                        <img
-                            src="Founders.png"
-                            alt="Everything's Maths Academy team"
-                            loading="lazy"
-                        >
-
-                        <div class="team-info">
-
-                            <div class="team-card">
-                                <h3>Mr H. Bilankulu</h3>
-                                <h4>Founder &amp; Head of Mathematics</h4>
-
-                                <p>
-                                    Mathematics specialist, academic mentor
-                                    and Civil Engineering student dedicated
-                                    to transforming Mathematics education
-                                    through innovation and learner-centred
-                                    teaching.
-                                </p>
-                            </div>
-
-                            <div class="team-card">
-                                <h3>Mr Mabaso</h3>
-                                <h4>Head of Physical Sciences</h4>
-
-                                <p>
-                                    Mechanical Engineering student with
-                                    strong academic leadership and a passion
-                                    for helping learners excel in Physical
-                                    Sciences and problem-solving.
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
                 </section>
 
+                <!-- COMMUNITY IMPACT -->
+                <div class="vision-card community-card">
+
+                    <h3>🌍 Community Impact</h3>
+
+                    <p>
+                        Committed to expanding educational opportunities
+                        and helping learners unlock their full potential
+                        through quality education.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- MEET THE TEAM -->
+            <section class="team-section">
+
+                <h2>Meet The Team</h2>
+
+                <div class="founders-section">
+
+                    <img
+                        src="Founders.png"
+                        alt="Everything's Maths Academy team"
+                        loading="lazy"
+                    >
+
+                    <div class="team-info">
+
+                        <div class="team-card">
+
+                            <h3>Mr H. Bilankulu</h3>
+                            <h4>Founder &amp; Head of Mathematics</h4>
+
+                            <p>
+                                Mathematics specialist, academic mentor
+                                and Civil Engineering student dedicated
+                                to transforming Mathematics education
+                                through innovation and learner-centred
+                                teaching.
+                            </p>
+
+                        </div>
+
+                        <div class="team-card">
+
+                            <h3>Mr Mabaso</h3>
+                            <h4>Head of Physical Sciences</h4>
+
+                            <p>
+                                Mechanical Engineering student with
+                                strong academic leadership and a passion
+                                for helping learners excel in Physical
+                                Sciences and problem-solving.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
             </section>
 
-        </main>
+        </section>
 
-        <!-- FOOTER -->
-        <footer id="contact" class="ema-footer">
-            <span class="footer-brand">Everything's Maths Academy</span>
+    </main>
 
-            <span class="footer-message">
-                Empowering learners through Mathematics &amp; Physical Sciences
-            </span>
+    <!-- FOOTER -->
+    <footer id="contact" class="ema-footer">
 
-            <a href="lessons.html">Our Lessons</a>
-            <a href="trial.html">Start Free Trial</a>
-            <a href="login.html">Learner Login</a>
+        <span class="footer-brand">
+            Everything's Maths Academy
+        </span>
 
-            <span class="footer-copy">
-                &copy; <span id="current-year">2026</span> EMA
-            </span>
-        </footer>
+        <span class="footer-message">
+            Empowering learners through Mathematics &amp; Physical Sciences
+        </span>
 
-    </div>
-    </div>
+        <a href="lessons.html">Our Lessons</a>
+        <a href="trial.html">Start Free Trial</a>
+        <a href="login.html">Learner Login</a>
 
-    <!-- SUPABASE -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="config.js"></script>
-    <script src="ema-supabase.js"></script>
+        <span class="footer-copy">
+            &copy; <span id="current-year">2026</span> EMA
+        </span>
 
-    <!-- PAGE FUNCTIONALITY -->
-    <script>
-        const yearElement = document.getElementById("current-year");
+    </footer>
 
-        if (yearElement) {
-            yearElement.textContent = new Date().getFullYear();
+</div>
+</div>
+
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="ema-supabase.js"></script>
+
+<!-- PAGE FUNCTIONALITY -->
+<script>
+
+    /* =========================================
+       GENERAL PAGE SETUP
+    ========================================= */
+
+    const yearElement = document.getElementById("current-year");
+
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
+
+
+    /* =========================================
+       REVIEW SYSTEM
+    ========================================= */
+
+    let selectedRating = 0;
+
+    const reviewGrid = document.getElementById("reviews-grid");
+    const reviewAverage = document.getElementById("reviews-average");
+    const reviewAverageStars = document.getElementById("reviews-average-stars");
+    const reviewCount = document.getElementById("reviews-count");
+
+    const leaveReviewButton = document.getElementById("leave-review-button");
+    const reviewFormContainer = document.getElementById("review-form-container");
+    const reviewLoginMessage = document.getElementById("review-login-message");
+    const reviewForm = document.getElementById("learner-review-form");
+    const reviewStatus = document.getElementById("review-status");
+    const submitReviewButton = document.getElementById("submit-review-button");
+
+    const ratingButtons = document.querySelectorAll(
+        "#rating-picker button"
+    );
+
+
+    /* =========================================
+       DATABASE CONNECTION
+    ========================================= */
+
+    function getDatabase() {
+
+        if (window.EMA && window.EMA.db) {
+            return window.EMA.db;
         }
 
-        /* =========================================
-           REVIEW SYSTEM
-        ========================================= */
-
-        let selectedRating = 0;
-
-        const reviewGrid = document.getElementById("reviews-grid");
-        const reviewAverage = document.getElementById("reviews-average");
-        const reviewAverageStars = document.getElementById("reviews-average-stars");
-        const reviewCount = document.getElementById("reviews-count");
-
-        const leaveReviewButton = document.getElementById("leave-review-button");
-        const reviewFormContainer = document.getElementById("review-form-container");
-        const reviewLoginMessage = document.getElementById("review-login-message");
-        const reviewForm = document.getElementById("learner-review-form");
-        const reviewStatus = document.getElementById("review-status");
-        const submitReviewButton = document.getElementById("submit-review-button");
-
-        function escapeHTML(value) {
-            return String(value ?? "").replace(/[&<>"']/g, character => ({
-                "&": "&amp;",
-                "<": "&lt;",
-                ">": "&gt;",
-                '"': "&quot;",
-                "'": "&#039;"
-            })[character]);
+        if (
+            window.supabase &&
+            window.SUPABASE_CONFIG &&
+            window.SUPABASE_CONFIG.SUPABASE_URL &&
+            window.SUPABASE_CONFIG.SUPABASE_ANON_KEY
+        ) {
+            return window.supabase.createClient(
+                window.SUPABASE_CONFIG.SUPABASE_URL,
+                window.SUPABASE_CONFIG.SUPABASE_ANON_KEY
+            );
         }
 
-        function makeStars(rating) {
-            const number = Math.max(0, Math.min(5, Number(rating) || 0));
-            return "★".repeat(number) + "☆".repeat(5 - number);
+        return null;
+    }
+
+    const db = getDatabase();
+
+
+    /* =========================================
+       HELPER FUNCTIONS
+    ========================================= */
+
+    function escapeHTML(value) {
+
+        return String(value ?? "").replace(/[&<>"']/g, character => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+        })[character]);
+
+    }
+
+
+    function makeStars(rating) {
+
+        const number = Math.max(
+            0,
+            Math.min(5, Number(rating) || 0)
+        );
+
+        return "★".repeat(number) + "☆".repeat(5 - number);
+
+    }
+
+
+    function showReviewStatus(message, type) {
+
+        reviewStatus.textContent = message;
+        reviewStatus.className = "review-status " + (type || "");
+
+    }
+
+
+    function showLoginMessage(message) {
+
+        reviewLoginMessage.style.display = "block";
+        reviewLoginMessage.innerHTML =
+            escapeHTML(message) +
+            '<br><br><a href="login.html?redirect=index.html%23ema-reviews">Log in to your learner account</a>';
+
+        reviewLoginMessage.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    }
+
+
+    /* =========================================
+       LOGIN REDIRECT
+    ========================================= */
+
+    function redirectToLearnerLogin() {
+
+        const loginURL = new URL(
+            "login.html",
+            window.location.href
+        );
+
+        loginURL.searchParams.set(
+            "redirect",
+            "index.html#ema-reviews"
+        );
+
+        window.location.assign(loginURL.toString());
+
+    }
+
+
+    /* =========================================
+       LOAD APPROVED PUBLIC REVIEWS
+    ========================================= */
+
+    async function loadReviews() {
+
+        if (!db) {
+
+            reviewGrid.innerHTML = `
+                <div class="reviews-empty">
+                    Reviews are temporarily unavailable.
+                    Please try again later.
+                </div>
+            `;
+
+            reviewCount.textContent =
+                "Reviews currently unavailable";
+
+            return;
         }
 
-        function showReviewStatus(message, type) {
-            reviewStatus.textContent = message;
-            reviewStatus.className = "review-status " + type;
-        }
-
-        function getDatabase() {
-            if (window.EMA && window.EMA.db) {
-                return window.EMA.db;
-            }
-
-            if (window.supabase && window.SUPABASE_CONFIG) {
-                return window.supabase.createClient(
-                    window.SUPABASE_CONFIG.SUPABASE_URL,
-                    window.SUPABASE_CONFIG.SUPABASE_ANON_KEY
-                );
-            }
-
-            return null;
-        }
-
-        const db = getDatabase();
-
-        /* LOAD PUBLICLY APPROVED REVIEWS */
-        async function loadReviews() {
-
-            if (!db) {
-                reviewGrid.innerHTML = `
-                    <div class="reviews-empty">
-                        Reviews are temporarily unavailable. Please try again later.
-                    </div>
-                `;
-                reviewCount.textContent = "Reviews currently unavailable";
-                return;
-            }
+        try {
 
             const { data, error } = await db
                 .from("academy_reviews")
-                .select("reviewer_name, rating, q1, q2, q3, recommend, created_at")
+                .select(
+                    "reviewer_name, rating, q1, q2, q3, recommend, created_at"
+                )
                 .eq("status", "approved")
                 .order("created_at", { ascending: false });
 
             if (error) {
-                console.error("Review loading error:", error);
-
-                reviewGrid.innerHTML = `
-                    <div class="reviews-empty">
-                        We couldn't load reviews right now. Please try again later.
-                    </div>
-                `;
-
-                reviewCount.textContent = "Unable to load reviews";
-                return;
+                throw error;
             }
 
             const reviews = data || [];
 
             if (reviews.length === 0) {
+
                 reviewGrid.innerHTML = `
                     <div class="reviews-empty">
-                        <strong>Be among the first to share your experience!</strong>
+                        <strong>
+                            Be among the first to share your experience!
+                        </strong>
                         <br><br>
                         Our learner reviews will appear here once approved.
                     </div>
@@ -875,29 +1007,39 @@
                 reviewAverage.textContent = "— / 5";
                 reviewAverageStars.textContent = "☆☆☆☆☆";
                 reviewCount.textContent = "No approved reviews yet";
+
                 return;
             }
 
             const average = reviews.reduce(
-                (total, review) => total + Number(review.rating || 0),
+                (total, review) =>
+                    total + Number(review.rating || 0),
                 0
             ) / reviews.length;
 
-            reviewAverage.textContent = average.toFixed(1) + " / 5";
-            reviewAverageStars.textContent = makeStars(Math.round(average));
+            reviewAverage.textContent =
+                average.toFixed(1) + " / 5";
+
+            reviewAverageStars.textContent =
+                makeStars(Math.round(average));
+
             reviewCount.textContent =
-                reviews.length + (reviews.length === 1
+                reviews.length +
+                (reviews.length === 1
                     ? " approved learner review"
                     : " approved learner reviews");
 
             reviewGrid.innerHTML = reviews.map(review => {
 
                 const date = review.created_at
-                    ? new Date(review.created_at).toLocaleDateString("en-ZA", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric"
-                    })
+                    ? new Date(review.created_at).toLocaleDateString(
+                        "en-ZA",
+                        {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric"
+                        }
+                    )
                     : "";
 
                 const combinedComment = [
@@ -908,244 +1050,419 @@
 
                 return `
                     <article class="review-card">
+
                         <h3 class="reviewer-name">
-                            ${escapeHTML(review.reviewer_name || "EMA Learner")}
+                            ${escapeHTML(
+                                review.reviewer_name || "EMA Learner"
+                            )}
                         </h3>
 
                         <div class="review-rating">
                             ${makeStars(review.rating)}
                         </div>
 
-                        <p class="review-comment">
-                            ${escapeHTML(combinedComment)}
-                        </p>
+                        <p class="review-comment">${escapeHTML(
+                            combinedComment
+                        )}</p>
 
                         <div class="review-date">
                             ${escapeHTML(date)}
                         </div>
+
                     </article>
                 `;
+
             }).join("");
+
+        } catch (error) {
+
+            console.error("Review loading error:", error);
+
+            reviewGrid.innerHTML = `
+                <div class="reviews-empty">
+                    We couldn't load reviews right now.
+                    Please try again later.
+                </div>
+            `;
+
+            reviewCount.textContent = "Unable to load reviews";
+
         }
 
-        /* VERIFY THE CURRENT LEARNER SESSION */
-        async function getActiveLearner() {
+    }
 
-            if (!db) {
-                return {
-                    allowed: false,
-                    reason: "connection"
-                };
-            }
 
-            const { data: sessionData, error: sessionError } =
-                await db.auth.getSession();
+    /* =========================================
+       VERIFY ACTIVE LEARNER
+    ========================================= */
 
-            if (sessionError || !sessionData.session) {
-                return {
-                    allowed: false,
-                    reason: "login"
-                };
-            }
+    async function getActiveLearner() {
 
-            const user = sessionData.session.user;
-
-            const { data: profile, error: profileError } = await db
-                .from("profiles")
-                .select("id, full_name, role, status")
-                .eq("id", user.id)
-                .single();
-
-            if (profileError || !profile) {
-                console.error("Learner profile check failed:", profileError);
-
-                return {
-                    allowed: false,
-                    reason: "profile"
-                };
-            }
-
-            if (
-                profile.role !== "learner" ||
-                profile.status !== "active"
-            ) {
-                return {
-                    allowed: false,
-                    reason: "learner"
-                };
-            }
-
+        if (!db) {
             return {
-                allowed: true,
-                user: user,
-                profile: profile
+                allowed: false,
+                reason: "connection"
             };
         }
 
-        
-/* OPEN THE REVIEW FORM */
-async function openReviewForm() {
+        const {
+            data: sessionData,
+            error: sessionError
+        } = await db.auth.getSession();
 
-    const result = await getActiveLearner();
+        if (sessionError) {
 
-    if (!result.allowed) {
+            console.error(
+                "Session verification error:",
+                sessionError
+            );
 
-        if (result.reason === "login") {
-            window.location.href =
-                "login.html?redirect=" +
-                encodeURIComponent("index.html#ema-reviews");
-            return;
+            return {
+                allowed: false,
+                reason: "session"
+            };
+
         }
 
-        reviewLoginMessage.style.display = "block";
+        if (!sessionData || !sessionData.session) {
 
-        reviewLoginMessage.textContent =
-            result.reason === "connection"
-                ? "The review service is temporarily unavailable. Please try again later."
-                : "Please use an active learner account to submit a review.";
+            return {
+                allowed: false,
+                reason: "login"
+            };
 
-        reviewLoginMessage.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-
-        return;
-    }
-
-    reviewLoginMessage.style.display = "none";
-    reviewFormContainer.style.display = "block";
-
-    reviewFormContainer.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
-}
-
-/* LEAVE A REVIEW BUTTON */
-leaveReviewButton.addEventListener("click", function () {
-
-    leaveReviewButton.disabled = true;
-    leaveReviewButton.textContent = "Opening...";
-
-    openReviewForm().catch(error => {
-
-        console.error("Review access error:", error);
-
-        reviewLoginMessage.style.display = "block";
-        reviewLoginMessage.textContent =
-            "We couldn't open the review form. Please try again.";
-
-        leaveReviewButton.disabled = false;
-        leaveReviewButton.textContent = "✍ Leave a Review";
-    });
-});
-
-/* AUTOMATICALLY OPEN FORM AFTER LOGIN */
-async function handleReviewReturn() {
-
-    if (window.location.hash !== "#ema-reviews") {
-        return;
-    }
-
-    // Allow time for the Supabase login session to become available.
-    let result = null;
-
-    for (let attempt = 0; attempt < 10; attempt++) {
-
-        result = await getActiveLearner();
-
-        if (result.allowed || result.reason === "learner" ||
-            result.reason === "profile" ||
-            result.reason === "connection") {
-            break;
         }
 
-        await new Promise(resolve => setTimeout(resolve, 500));
+        const user = sessionData.session.user;
+
+        const {
+            data: profile,
+            error: profileError
+        } = await db
+            .from("profiles")
+            .select("id, full_name, role, status")
+            .eq("id", user.id)
+            .maybeSingle();
+
+        if (profileError) {
+
+            console.error(
+                "Learner profile check failed:",
+                profileError
+            );
+
+            return {
+                allowed: false,
+                reason: "profile"
+            };
+
+        }
+
+        if (!profile) {
+
+            return {
+                allowed: false,
+                reason: "profile"
+            };
+
+        }
+
+        if (
+            profile.role !== "learner" ||
+            profile.status !== "active"
+        ) {
+
+            return {
+                allowed: false,
+                reason: "learner"
+            };
+
+        }
+
+        return {
+            allowed: true,
+            user: user,
+            profile: profile
+        };
+
     }
 
-    if (result && result.allowed) {
 
-        reviewLoginMessage.style.display = "none";
-        reviewFormContainer.style.display = "block";
+    /* =========================================
+       OPEN THE REVIEW FORM
+    ========================================= */
 
-        setTimeout(() => {
+    async function openReviewForm() {
+
+        leaveReviewButton.disabled = true;
+        leaveReviewButton.textContent = "Checking account...";
+
+        try {
+
+            const result = await getActiveLearner();
+
+            if (!result.allowed) {
+
+                if (result.reason === "login") {
+
+                    redirectToLearnerLogin();
+                    return;
+
+                }
+
+                if (result.reason === "connection") {
+
+                    showLoginMessage(
+                        "The review service is temporarily unavailable. Please try again later."
+                    );
+
+                    return;
+
+                }
+
+                if (result.reason === "profile") {
+
+                    showLoginMessage(
+                        "We could not find your learner profile. Please contact the academy."
+                    );
+
+                    return;
+
+                }
+
+                if (result.reason === "learner") {
+
+                    showLoginMessage(
+                        "Only active learner accounts can submit academy reviews. Please log in using your learner account."
+                    );
+
+                    return;
+
+                }
+
+                showLoginMessage(
+                    "We couldn't verify your login. Please log in again."
+                );
+
+                return;
+
+            }
+
+            reviewLoginMessage.style.display = "none";
+            reviewFormContainer.style.display = "block";
+
             reviewFormContainer.scrollIntoView({
                 behavior: "smooth",
                 block: "start"
             });
-        }, 300);
 
-    } else {
+        } catch (error) {
 
-        reviewLoginMessage.style.display = "block";
+            console.error("Opening review form failed:", error);
 
-        reviewLoginMessage.textContent =
-            result && result.reason === "learner"
-                ? "Please log in using an active learner account to submit a review."
-                : "We couldn't verify your learner login. Please log in again.";
+            showLoginMessage(
+                "We couldn't verify your account. Please try again."
+            );
+
+        } finally {
+
+            leaveReviewButton.disabled = false;
+            leaveReviewButton.textContent = "✍ Leave a Review";
+
+        }
 
     }
-}
-        /* STAR RATING PICKER */
-        const ratingButtons = document.querySelectorAll(
-            "#rating-picker button"
+
+
+    /* =========================================
+       LEAVE A REVIEW BUTTON
+    ========================================= */
+
+    leaveReviewButton.addEventListener(
+        "click",
+        function () {
+            openReviewForm();
+        }
+    );
+
+
+    /* =========================================
+       AUTOMATICALLY OPEN FORM AFTER LOGIN
+    ========================================= */
+
+    async function handleReviewReturn() {
+
+        if (window.location.hash !== "#ema-reviews") {
+            return;
+        }
+
+        /*
+         * Wait for Supabase to restore the login session.
+         * The session may take a moment after returning
+         * from the login page.
+         */
+
+        let result = null;
+
+        for (let attempt = 0; attempt < 10; attempt++) {
+
+            result = await getActiveLearner();
+
+            if (
+                result.allowed ||
+                result.reason === "learner" ||
+                result.reason === "profile" ||
+                result.reason === "connection" ||
+                result.reason === "session"
+            ) {
+                break;
+            }
+
+            await new Promise(resolve =>
+                setTimeout(resolve, 500)
+            );
+
+        }
+
+        if (result && result.allowed) {
+
+            reviewLoginMessage.style.display = "none";
+            reviewFormContainer.style.display = "block";
+
+            setTimeout(() => {
+
+                reviewFormContainer.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }, 300);
+
+            return;
+
+        }
+
+        if (result && result.reason === "login") {
+
+            showLoginMessage(
+                "Please log in to your active learner account to leave a review."
+            );
+
+            return;
+
+        }
+
+        if (result && result.reason === "learner") {
+
+            showLoginMessage(
+                "You must use an active learner account to submit a review."
+            );
+
+            return;
+
+        }
+
+        if (result && result.reason === "profile") {
+
+            showLoginMessage(
+                "Your learner profile could not be verified. Please contact the academy."
+            );
+
+            return;
+
+        }
+
+        showLoginMessage(
+            "We couldn't verify your learner account. Please log in again."
         );
 
-        ratingButtons.forEach(button => {
+    }
 
-            button.addEventListener("click", function () {
 
-                selectedRating = Number(button.dataset.rating);
+    /* =========================================
+       STAR RATING PICKER
+    ========================================= */
 
-                ratingButtons.forEach(star => {
+    ratingButtons.forEach(button => {
 
-                    const value = Number(star.dataset.rating);
+        button.addEventListener("click", function () {
 
-                    star.classList.toggle(
-                        "selected",
-                        value <= selectedRating
-                    );
+            selectedRating = Number(button.dataset.rating);
 
-                    star.setAttribute(
-                        "aria-pressed",
-                        value <= selectedRating ? "true" : "false"
-                    );
+            ratingButtons.forEach(star => {
 
-                });
+                const value = Number(star.dataset.rating);
+
+                star.classList.toggle(
+                    "selected",
+                    value <= selectedRating
+                );
+
+                star.setAttribute(
+                    "aria-pressed",
+                    value <= selectedRating ? "true" : "false"
+                );
 
             });
 
         });
 
-        /* SUBMIT REVIEW */
-        reviewForm.addEventListener("submit", async function (event) {
+    });
+
+
+    /* =========================================
+       SUBMIT LEARNER REVIEW
+    ========================================= */
+
+    reviewForm.addEventListener(
+        "submit",
+        async function (event) {
 
             event.preventDefault();
 
             showReviewStatus("", "");
 
             if (!selectedRating) {
+
                 showReviewStatus(
                     "Please select a star rating before submitting.",
                     "error"
                 );
+
                 return;
+
             }
 
-            const q1 = document.getElementById("review-q1").value.trim();
-            const q2 = document.getElementById("review-q2").value.trim();
-            const q3 = document.getElementById("review-q3").value.trim();
+            const q1 = document
+                .getElementById("review-q1")
+                .value.trim();
+
+            const q2 = document
+                .getElementById("review-q2")
+                .value.trim();
+
+            const q3 = document
+                .getElementById("review-q3")
+                .value.trim();
 
             const recommendInput = document.querySelector(
                 'input[name="recommend"]:checked'
             );
 
-            if (!q1 || !q2 || !q3 || !recommendInput) {
+            if (
+                !q1 ||
+                !q2 ||
+                !q3 ||
+                !recommendInput
+            ) {
+
                 showReviewStatus(
                     "Please complete all questions before submitting.",
                     "error"
                 );
+
                 return;
+
             }
 
             submitReviewButton.disabled = true;
@@ -1158,17 +1475,20 @@ async function handleReviewReturn() {
                 if (!result.allowed) {
 
                     if (result.reason === "login") {
-                        window.location.href =
-                            "login.html?redirect=index.html%23ema-reviews";
+
+                        redirectToLearnerLogin();
                         return;
+
                     }
 
                     reviewFormContainer.style.display = "none";
-                    reviewLoginMessage.style.display = "block";
-                    reviewLoginMessage.textContent =
-                        "Please use an active learner account to submit a review.";
+
+                    showLoginMessage(
+                        "Please use an active learner account to submit a review."
+                    );
 
                     return;
+
                 }
 
                 const fullName =
@@ -1177,41 +1497,61 @@ async function handleReviewReturn() {
                     "EMA Learner";
 
                 const reviewData = {
+
                     user_id: result.user.id,
+
                     reviewer_name: fullName,
+
                     rating: selectedRating,
+
                     q1: q1,
+
                     q2: q2,
+
                     q3: q3,
+
                     recommend: recommendInput.value,
+
                     status: "pending"
+
                 };
 
-                const { error } = await db
+                const {
+                    error
+                } = await db
                     .from("academy_reviews")
                     .insert([reviewData]);
 
                 if (error) {
-                    console.error("Review submission error:", error);
                     throw error;
                 }
 
                 reviewForm.reset();
+
                 selectedRating = 0;
 
                 ratingButtons.forEach(button => {
+
                     button.classList.remove("selected");
-                    button.setAttribute("aria-pressed", "false");
+
+                    button.setAttribute(
+                        "aria-pressed",
+                        "false"
+                    );
+
                 });
 
                 showReviewStatus(
-                    "Thank you! Your review has been submitted successfully and is awaiting admin approval before appearing publicly.",
+                    "Thank you! Your review has been submitted successfully. It is awaiting admin approval before appearing publicly.",
                     "success"
                 );
 
             } catch (error) {
 
-                console.error("Review submission failed:", error);
+                console.error(
+                    "Review submission failed:",
+                    error
+                );
 
                 showReviewStatus(
                     "We couldn't submit your review. Please try again. If the problem continues, contact the academy.",
@@ -1221,18 +1561,25 @@ async function handleReviewReturn() {
             } finally {
 
                 submitReviewButton.disabled = false;
-                submitReviewButton.textContent = "Submit My Review";
+
+                submitReviewButton.textContent =
+                    "Submit My Review";
 
             }
 
-        });
+        }
+    );
 
-        /* INITIALISE */
-        loadReviews();
 
-        handleReviewReturn();
+    /* =========================================
+       INITIALISE REVIEW SYSTEM
+    ========================================= */
 
-    </script>
+    loadReviews();
+
+    handleReviewReturn();
+
+</script>
 
 </body>
 </html>
