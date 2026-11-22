@@ -1074,23 +1074,20 @@
 
             }).join("");
 
-        } catch (error) {
+                } catch (error) {
 
-    console.error("REVIEW SUBMISSION ERROR:", {
-        message: error.message,
-        code: error.code,
-        details: error.details,
-        hint: error.hint,
-        error: error
-    });
+            console.error("PUBLIC REVIEWS LOADING ERROR:", error);
 
-    showReviewStatus(
-        "Submission failed: " +
-        (error.message || "Unknown database error"),
-        "error"
-    );
+            reviewGrid.innerHTML = `
+                <div class="reviews-empty">
+                    We couldn't load learner reviews.
+                    Please refresh the page and try again.
+                </div>
+            `;
 
-}
+            reviewCount.textContent = "Unable to load reviews";
+
+        }
 
     }
 
@@ -1549,17 +1546,31 @@
                     "success"
                 );
 
-            } catch (error) {
+                        } catch (error) {
 
-                console.error(
-                    "Review submission failed:",
-                    error
-                );
+                console.error("ACTUAL REVIEW SUBMISSION ERROR:", {
+                    message: error.message,
+                    code: error.code,
+                    details: error.details,
+                    hint: error.hint,
+                    error: error
+                });
 
-                showReviewStatus(
-                    "We couldn't submit your review. Please try again. If the problem continues, contact the academy.",
-                    "error"
-                );
+                let message = "We couldn't submit your review.";
+
+                if (error.code === "42501") {
+                    message = "Database permission denied.";
+                } else if (error.code === "23502") {
+                    message = "A required database field is missing.";
+                } else if (error.code === "23503") {
+                    message = "The learner account reference could not be verified.";
+                } else if (error.code === "42703") {
+                    message = "A database column is missing or incorrectly named.";
+                } else if (error.message) {
+                    message += " " + error.message;
+                }
+
+                showReviewStatus(message, "error");
 
             } finally {
 
