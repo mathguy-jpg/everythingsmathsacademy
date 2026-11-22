@@ -1321,3 +1321,77 @@ footer#contact a:hover,
         width: 100%;
     }
 }
+
+/* =========================================
+   ENLARGED OVERALL RATING RIBBON
+   PRESERVE EXISTING SIDE-BY-SIDE LAYOUT
+========================================= */
+
+#ema-reviews .reviews-top-bar {
+    min-height: 125px;
+    padding: 25px 32px;
+    gap: 30px;
+    box-sizing: border-box;
+}
+
+#ema-reviews .reviews-summary strong {
+    font-size: 34px;
+}
+
+#ema-reviews .reviews-stars {
+    font-size: 27px;
+    letter-spacing: 4px;
+}
+
+#ema-reviews .reviews-summary span {
+    font-size: 16px;
+}
+
+#ema-reviews .leave-review-btn {
+    min-width: 220px;
+    min-height: 58px;
+    padding: 17px 28px;
+    font-size: 17px;
+    border-radius: 11px;
+    flex-shrink: 0;
+}
+
+/* Keep rating and button side by side on mobile too */
+@media screen and (max-device-width: 600px) {
+
+    #ema-reviews .reviews-top-bar {
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 12px;
+        padding: 20px 16px;
+        min-height: 115px;
+    }
+
+    #ema-reviews .reviews-summary {
+        text-align: left !important;
+        min-width: 0;
+    }
+
+    #ema-reviews .reviews-summary strong {
+        font-size: 27px;
+    }
+
+    #ema-reviews .reviews-stars {
+        font-size: 21px;
+        letter-spacing: 2px;
+    }
+
+    #ema-reviews .reviews-summary span {
+        font-size: 12px;
+    }
+
+    #ema-reviews .leave-review-btn {
+        min-width: 145px;
+        min-height: 52px;
+        padding: 12px 13px;
+        font-size: 13px;
+        white-space: normal;
+    }
+
+}
