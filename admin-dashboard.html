@@ -1110,10 +1110,52 @@ document.addEventListener("DOMContentLoaded", async function () {
         const reviewId = button.dataset.id;
         const newStatus = button.dataset.action;
 
-        if (!reviewId ||
-            !["approved", "rejected"].includes(newStatus)) {
-            return;
-        }
+// DELETE REVIEW
+if (newStatus === "delete") {
+
+    const confirmed = confirm(
+        "Are you sure you want to permanently delete this review? This action cannot be undone."
+    );
+
+    if (!confirmed) return;
+
+    button.disabled = true;
+    button.textContent = "Deleting...";
+
+    try {
+
+        const { error } = await EMA.db
+            .from("academy_reviews")
+            .delete()
+            .eq("id", reviewId);
+
+        if (error) throw error;
+
+        reviewMessage.textContent =
+            "Review successfully deleted.";
+
+        await loadReviews();
+
+    } catch (error) {
+
+        console.error("Review deletion error:", error);
+
+        alert(
+            "Could not delete review: " +
+            (error.message || "Unknown error.")
+        );
+
+        button.disabled = false;
+        button.textContent = "🗑 Delete Review";
+    }
+
+    return;
+}
+
+if (!reviewId ||
+    !["approved", "rejected"].includes(newStatus)) {
+    return;
+}
 
         const review = allReviews.find(
             item => String(item.id) === String(reviewId)
