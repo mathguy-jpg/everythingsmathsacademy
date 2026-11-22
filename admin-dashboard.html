@@ -1012,26 +1012,41 @@ document.addEventListener("DOMContentLoaded", async function () {
                         })[character]);
 
                 const actionButtons =
-                    currentStatus === "pending"
-                    ? `
-                        <div class="review-card-actions">
+    currentStatus === "pending"
+    ? `
+        <div class="review-card-actions">
 
-                            <button class="approve-btn"
-                                    data-id="${safe(review.id)}"
-                                    data-action="approved">
-                                ✓ Approve
-                            </button>
+            <button class="approve-btn"
+                    data-id="${safe(review.id)}"
+                    data-action="approved">
+                ✓ Approve
+            </button>
 
-                            <button class="reject-btn"
-                                    data-id="${safe(review.id)}"
-                                    data-action="rejected">
-                                ✕ Reject
-                            </button>
+            <button class="reject-btn"
+                    data-id="${safe(review.id)}"
+                    data-action="rejected">
+                ✕ Reject
+            </button>
 
-                        </div>
-                    `
-                    : "";
+            <button class="delete-btn"
+                    data-id="${safe(review.id)}"
+                    data-action="delete">
+                🗑 Delete
+            </button>
 
+        </div>
+    `
+    : `
+        <div class="review-card-actions">
+
+            <button class="delete-btn"
+                    data-id="${safe(review.id)}"
+                    data-action="delete">
+                🗑 Delete Review
+            </button>
+
+        </div>
+    `;
                 return `
                     <article class="review-card">
 
