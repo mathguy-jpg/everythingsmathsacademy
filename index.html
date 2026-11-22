@@ -1539,11 +1539,43 @@
 
                 });
 
-                showReviewStatus(
-                    "Thank you! Your review has been submitted successfully. It is awaiting admin approval before appearing publicly.",
-                    "success"
-                );
+               reviewFormContainer.innerHTML = `
+    <div style="
+        text-align: center;
+        padding: 35px 20px;
+    ">
+        <div style="
+            font-size: 55px;
+            color: #159447;
+            margin-bottom: 15px;
+        ">✓</div>
 
+        <h2 style="color: #061b4d;">
+            Thank You for Your Review!
+        </h2>
+
+        <p style="
+            color: #52617d;
+            font-size: 16px;
+            line-height: 1.7;
+        ">
+            Your review has been successfully received.
+            We truly appreciate you taking the time to
+            share your learning experience with us.
+        </p>
+
+        <p style="
+            color: #159447;
+            font-weight: bold;
+        ">
+            Your review is awaiting admin approval.
+        </p>
+
+        <p style="color: #52617d;">
+            Keep learning. Keep growing. Keep achieving!
+        </p>
+    </div>
+`;
                         } catch (error) {
 
                 console.error("ACTUAL REVIEW SUBMISSION ERROR:", {
