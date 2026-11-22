@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,14 +7,12 @@
 <meta name="theme-color" content="#001f66">
 <link rel="icon" type="image/png" href="logo.png.png">
 <title>Login Portal | EVERYTHING'S MATHS</title>
-
 <style>
 *,
 *::before,
 *::after {
     box-sizing: border-box;
 }
-
 :root {
     --navy: #001f66;
     --blue: #1565c0;
@@ -22,13 +21,11 @@
     --text: #263238;
     --muted: #64748b;
 }
-
 html {
     min-height: 100%;
     width: 100%;
     -webkit-text-size-adjust: 100%;
 }
-
 body {
     margin: 0;
     width: 100%;
@@ -41,7 +38,6 @@ body {
         linear-gradient(135deg, #edf4ff, #ffffff 55%, #f4f8ff);
     overflow-x: hidden;
 }
-
 /* NAVIGATION */
 nav {
     width: 100%;
@@ -53,7 +49,6 @@ nav {
     align-items: center;
     box-shadow: 0 3px 12px rgba(0,31,102,.12);
 }
-
 nav .menu {
     display: flex;
     justify-content: center;
@@ -61,7 +56,6 @@ nav .menu {
     flex-wrap: wrap;
     gap: 10px 26px;
 }
-
 nav a {
     color: white;
     text-decoration: none;
@@ -71,11 +65,9 @@ nav a {
     padding: 4px 6px;
     white-space: nowrap;
 }
-
 nav a:hover {
     color: var(--gold);
 }
-
 /* MAIN LOGIN AREA */
 .login-page {
     min-height: calc(100vh - 54px);
@@ -87,7 +79,6 @@ nav a:hover {
     justify-content: center;
     padding: 30px 18px;
 }
-
 .login-brand {
     display: flex;
     flex-direction: column;
@@ -95,14 +86,12 @@ nav a:hover {
     text-align: center;
     margin-bottom: 22px;
 }
-
 .login-logo {
     width: 76px;
     height: 76px;
     object-fit: contain;
     margin-bottom: 10px;
 }
-
 .login-title {
     color: var(--navy);
     font-size: clamp(26px, 5vw, 32px);
@@ -110,14 +99,12 @@ nav a:hover {
     letter-spacing: -.6px;
     margin: 0;
 }
-
 .login-subtitle {
     color: var(--muted);
     font-size: 14px;
     margin: 8px 0 0;
 }
-
-/* LOGIN CARD - Centered box matching desktop proportions */
+/* LOGIN CARD */
 .login-card {
     width: 100%;
     max-width: 410px;
@@ -129,28 +116,24 @@ nav a:hover {
     box-shadow: 0 12px 35px rgba(0,31,102,.11);
     text-align: center;
 }
-
 .card-heading {
     color: var(--navy);
     font-size: 18px;
     font-weight: 800;
     margin: 0 0 6px;
 }
-
 .card-description {
     color: var(--muted);
     font-size: 13px;
     margin: 0 0 20px;
     line-height: 1.5;
 }
-
-/* ROLE SELECTOR - 2x2 Grid */
+/* ROLE SELECTOR */
 .role-selector {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
 }
-
 .role-btn {
     min-height: 48px;
     padding: 12px 10px;
@@ -164,23 +147,19 @@ nav a:hover {
     transition: background .2s, color .2s, border-color .2s, transform .2s;
     -webkit-tap-highlight-color: transparent;
 }
-
 .role-btn:hover {
     border-color: var(--blue);
     background: #e8f1ff;
 }
-
 .role-btn.active {
     color: white;
     background: var(--navy);
     border-color: var(--navy);
     box-shadow: 0 4px 10px rgba(0,31,102,.15);
 }
-
 .role-btn:active {
     transform: scale(.98);
 }
-
 /* SELECTED ROLE */
 #selectedRole {
     min-height: 20px;
@@ -189,7 +168,6 @@ nav a:hover {
     font-size: 13px;
     font-weight: 700;
 }
-
 /* FORM & RECOVERY INPUTS */
 #loginForm {
     text-align: left;
@@ -197,14 +175,12 @@ nav a:hover {
     padding-top: 16px;
     border-top: 1px solid #edf1f7;
 }
-
 #loginForm h2 {
     color: #263238;
     font-size: 13px;
     font-weight: 700;
     margin: 12px 0 8px;
 }
-
 #loginForm input,
 #recoveryPanel input {
     display: block;
@@ -219,18 +195,15 @@ nav a:hover {
     outline: none;
     transition: border-color .2s, box-shadow .2s;
 }
-
 #loginForm input::placeholder,
 #recoveryPanel input::placeholder {
     color: #9aa7b8;
 }
-
 #loginForm input:focus,
 #recoveryPanel input:focus {
     border-color: var(--blue);
     box-shadow: 0 0 0 3px rgba(21,101,192,.11);
 }
-
 /* LOGIN BUTTON */
 .login-btn-main {
     display: block;
@@ -248,20 +221,16 @@ nav a:hover {
     transition: background .2s, transform .2s;
     -webkit-tap-highlight-color: transparent;
 }
-
 .login-btn-main:hover {
     background: var(--blue);
 }
-
 .login-btn-main:active {
     transform: scale(.99);
 }
-
 .login-btn-main:disabled {
     opacity: .65;
     cursor: wait;
 }
-
 /* FEEDBACK */
 #loginMessage,
 #recoveryMessage {
@@ -271,7 +240,6 @@ nav a:hover {
     margin: 14px 0 0;
     overflow-wrap: anywhere;
 }
-
 .contact-note {
     margin: 20px 0 0;
     padding-top: 16px;
@@ -280,11 +248,9 @@ nav a:hover {
     font-size: 12px;
     line-height: 1.6;
 }
-
 .contact-note strong {
     color: var(--navy);
 }
-
 /* FOOTER */
 .login-footer {
     margin-top: 20px;
@@ -292,108 +258,86 @@ nav a:hover {
     font-size: 11px;
     text-align: center;
 }
-
-/* MOBILE ADJUSTMENTS - Keeps exact card shape with clean side margins */
+/* MOBILE ADJUSTMENTS */
 @media (max-width: 480px) {
     nav {
         min-height: 50px;
         padding: 10px 10px;
     }
-
     nav .menu {
         gap: 8px 14px;
     }
-
     nav a {
         font-size: 13px;
         padding: 4px;
     }
-
     .login-page {
         min-height: calc(100svh - 50px);
         padding: 24px 16px;
     }
-
     .login-brand {
         margin-bottom: 18px;
     }
-
     .login-logo {
         width: 72px;
         height: 72px;
     }
-
     .login-title {
         font-size: 26px;
     }
-
     .login-card {
         max-width: 380px;
         padding: 24px 20px;
         border-radius: 16px;
     }
-
     .role-selector {
         gap: 10px;
     }
-
     .role-btn {
         min-height: 46px;
         font-size: 14px;
     }
 }
-
 /* SHORT SCREENS */
 @media (max-height: 650px) and (min-width: 481px) {
     .login-page {
         padding-top: 12px;
         padding-bottom: 12px;
     }
-
     .login-brand {
         margin-bottom: 10px;
     }
-
     .login-logo {
         width: 52px;
         height: 52px;
     }
-
     .login-title {
         font-size: 23px;
     }
-
     .login-subtitle {
         margin-top: 3px;
     }
-
     .login-card {
         padding: 16px 22px;
     }
-
     .card-description {
         margin-bottom: 12px;
     }
-
     #selectedRole {
         margin: 9px 0;
     }
-
     #loginForm {
         margin-top: 8px;
         padding-top: 9px;
     }
-
     .contact-note {
         margin-top: 10px;
         padding-top: 8px;
     }
-
     .login-footer {
         margin-top: 8px;
     }
 }
-
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -403,9 +347,7 @@ nav a:hover {
 }
 </style>
 </head>
-
 <body>
-
 <nav>
     <div class="menu">
         <a href="index.html">Home</a>
@@ -414,9 +356,7 @@ nav a:hover {
         <a href="index.html#about-us">About Us</a>
     </div>
 </nav>
-
 <main class="login-page">
-
     <div class="login-brand">
         <img
             src="logo.png.png"
@@ -426,45 +366,35 @@ nav a:hover {
         <h1 class="login-title">Login Portal</h1>
         <p class="login-subtitle">Welcome back! Sign in to continue.</p>
     </div>
-
     <section class="login-card">
-
         <h2 class="card-heading">Access Your Account</h2>
         <p class="card-description">
             Select your account type to get started.
         </p>
-
         <div class="role-selector">
             <button type="button" class="role-btn"
                 onclick="selectRole('learner', this)">
                 Learner
             </button>
-
             <button type="button" class="role-btn"
                 onclick="selectRole('parent', this)">
                 Parent
             </button>
-
             <button type="button" class="role-btn"
                 onclick="selectRole('tutor', this)">
                 Tutor
             </button>
-
             <button type="button" class="role-btn"
                 onclick="selectRole('admin', this)">
                 Administrator
             </button>
         </div>
-
         <p id="selectedRole" aria-live="polite">
             Select a role to continue
         </p>
-
         <form id="loginForm" style="display:none;"
             onsubmit="loginUser(event)">
-
             <h2 id="usernameLabel">Email Address</h2>
-
             <input
                 type="text"
                 id="usernameInput"
@@ -472,9 +402,7 @@ nav a:hover {
                 placeholder="Enter email address"
                 required
             >
-
             <h2>Password</h2>
-
             <input
                 type="password"
                 id="passwordInput"
@@ -482,11 +410,9 @@ nav a:hover {
                 placeholder="Enter password"
                 required
             >
-
             <button type="submit" class="login-btn-main" id="loginButton">
                 Login
             </button>
-
         </form>
         <button
             type="button"
@@ -495,64 +421,44 @@ nav a:hover {
             id="forgotPasswordButton">
             Forgot Password?
         </button>
-        
         <div id="recoveryPanel" style="display:none; margin-top:18px; text-align:left; border-top:1px solid #edf1f7; padding-top:14px;">
-
             <h3 style="color:#001f66; font-size:15px; margin:0 0 6px;">Recover Your Password</h3>
-
             <p style="font-size:12px; color:#64748b; margin:0 0 12px;">
                 Enter your registered email address to receive a verification code.
             </p>
-
             <input type="email" id="recoveryEmail"
                 placeholder="Registered email address">
-
             <button type="button" class="login-btn-main"
                 onclick="sendRecoveryCode()">
                 Send Verification Code
             </button>
-
             <div id="recoveryCodeSection" style="display:none; margin-top:15px;">
-
                 <input type="text" id="recoveryCode"
                     placeholder="Enter verification code">
-
                 <input type="password" id="newRecoveryPassword"
                     placeholder="Enter new password" style="margin-top:10px;">
-
                 <input type="password" id="confirmRecoveryPassword"
                     placeholder="Confirm new password" style="margin-top:10px;">
-
                 <button type="button" class="login-btn-main"
                     onclick="completePasswordRecovery()">
                     Verify Code & Change Password
                 </button>
-
             </div>
-
             <p id="recoveryMessage" role="status" aria-live="polite"></p>
-
         </div>
-        
         <p id="loginMessage" role="status" aria-live="polite"></p>
-
         <p class="contact-note">
             Haven't received your login credentials yet?<br>
             Please contact <strong>EVERYTHINGS MATHS ACADEMY administration.</strong>
         </p>
-
     </section>
-
     <div class="login-footer">
         © <span id="currentYear"></span> EVERYTHINGS MATHS ACADEMY. All rights reserved.
     </div>
-
 </main>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
 <script src="ema-supabase.js"></script>
-
 <script>
 let currentRole = '';
 
@@ -657,8 +563,16 @@ async function loginUser(event) {
         sessionStorage.setItem('studentNumber', profile.student_number || '');
         sessionStorage.setItem('adminName', profile.full_name || '');
 
+        /* REDIRECT FIX: RETURN LEARNERS TO REVIEWS WHEN REQUESTED */
         if (profile.role === 'learner') {
-            window.location.href = 'learner-dashboard.html';
+            const redirect = new URLSearchParams(window.location.search)
+                .get('redirect');
+
+            if (redirect === 'index.html#ema-reviews') {
+                window.location.href = redirect;
+            } else {
+                window.location.href = 'learner-dashboard.html';
+            }
 
         } else if (profile.role === 'admin' || profile.role === 'tutor') {
             window.location.href = 'admin-dashboard.html';
@@ -671,12 +585,12 @@ async function loginUser(event) {
     } catch (error) {
         message.textContent =
             error.message || 'Login failed. Check your details and try again.';
-
     } finally {
         button.disabled = false;
         button.textContent = 'Login';
     }
 }
+
 function startPasswordRecovery() {
     document.getElementById('recoveryPanel').style.display = 'block';
     document.getElementById('recoveryMessage').textContent = '';
@@ -699,6 +613,7 @@ async function sendRecoveryCode() {
         document.getElementById('recoveryCodeSection').style.display = 'block';
         message.style.color = '#16803c';
         message.textContent = 'Verification code sent. Check your email.';
+
     } catch (error) {
         message.style.color = '#c62828';
         message.textContent = error.message || 'Could not send verification code.';
@@ -737,12 +652,12 @@ async function completePasswordRecovery() {
 
         document.getElementById('recoveryCodeSection').style.display = 'none';
         document.getElementById('passwordInput').value = '';
+
     } catch (error) {
         message.style.color = '#c62828';
         message.textContent = error.message || 'Verification failed. Please try again.';
     }
-}    
+}
 </script>
-
 </body>
 </html>
