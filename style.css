@@ -1321,39 +1321,29 @@ footer#contact a:hover,
         width: 100%;
     }
 }
-/* =========================================
-   EMA REVIEWS — MOBILE FONT SIZE ONLY
-   ========================================= */
-@media (max-width: 600px) {
-
-    #ema-reviews .reviews-grid {
-        gap: 18px;
-    }
+/* EMA REVIEWS — PHONE SCREEN ADJUSTMENTS */
+@media screen and (max-device-width: 600px) {
 
     #ema-reviews .review-card {
-        padding: 25px 22px;
-        border-radius: 16px;
+        padding: 30px 24px !important;
     }
 
     #ema-reviews .reviewer-name {
-        font-size: 22px;
+        font-size: 22px !important;
         line-height: 1.4;
     }
 
     #ema-reviews .review-rating {
-        font-size: 23px;
-        margin-bottom: 16px;
+        font-size: 24px !important;
     }
 
     #ema-reviews .review-comment {
-        font-size: 20px;
-        line-height: 1.75;
+        font-size: 20px !important;
+        line-height: 1.75 !important;
     }
 
     #ema-reviews .review-read-more {
-        font-size: 17px;
+        font-size: 18px !important;
         min-height: 50px;
-        min-width: 155px;
-        padding: 13px 22px;
     }
 }
