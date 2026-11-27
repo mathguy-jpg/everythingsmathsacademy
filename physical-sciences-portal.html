@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +40,7 @@ body{
 a{text-decoration:none;color:inherit}
 button{font-family:inherit}
 
-/* TOP BRAND HEADER */
+/* TOP HEADER */
 
 .top-header{
     display:flex;
@@ -73,7 +73,7 @@ button{font-family:inherit}
     padding:22px 0 35px;
 }
 
-/* WELCOME PANEL */
+/* WELCOME */
 
 .welcome-panel{
     display:flex;
@@ -163,7 +163,7 @@ button{font-family:inherit}
     font-size:.84rem;
 }
 
-/* SECTION HEADINGS */
+/* HEADINGS */
 
 .portal-heading{
     margin:28px 0 13px;
@@ -233,29 +233,25 @@ button{font-family:inherit}
     font-size:.9rem;
 }
 
-/* ATTENDANCE */
+/* ATTENDANCE REGISTER */
 
-.attendance-section{margin:22px 0}
-
-.attendance-toggle{
-    width:100%;
-    display:flex;
-    align-items:center;
-    gap:14px;
-    padding:16px 18px;
-    text-align:left;
-    background:white;
-    border:1px solid var(--border);
-    border-radius:10px;
-    box-shadow:var(--shadow);
-    color:var(--royal);
-    cursor:pointer;
+.attendance-section{
+    margin:22px 0;
 }
 
-.attendance-toggle:hover,
-.attendance-toggle[aria-expanded=true]{
-    background:#fafdff;
-    border-color:var(--blue);
+.attendance-card{
+    padding:19px;
+    background:white;
+    border:1px solid var(--border);
+    border-radius:12px;
+    box-shadow:var(--shadow);
+}
+
+.attendance-header{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    margin-bottom:17px;
 }
 
 .attendance-icon{
@@ -264,80 +260,93 @@ button{font-family:inherit}
     flex-shrink:0;
     width:43px;
     height:43px;
-    border-radius:8px;
+    border-radius:9px;
     background:var(--light-blue);
     font-size:1.35rem;
 }
 
-.attendance-title{
-    flex:1;
-    min-width:0;
+.attendance-header h2{
+    margin:0 0 5px;
+    color:var(--royal);
+    font-size:1rem;
 }
 
-.attendance-title strong{
-    display:block;
-    margin-bottom:4px;
-    font-size:1.02rem;
-}
-
-.attendance-title small{
-    display:block;
+.attendance-header p{
+    margin:0;
     color:var(--muted);
-    font-size:.82rem;
+    font-size:.84rem;
     line-height:1.5;
 }
 
-.attendance-arrow{
-    flex-shrink:0;
-    transition:transform .25s;
+.attendance-count{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px;
+    margin-bottom:14px;
+    background:#f5f9ff;
+    border:1px solid #e0ebfa;
+    border-radius:9px;
 }
 
-.attendance-toggle[aria-expanded=true] .attendance-arrow{
-    transform:rotate(180deg);
+.attendance-count strong{
+    color:var(--royal);
+    font-size:1.8rem;
 }
 
-.attendance-content{
-    display:none;
-    margin-top:12px;
-    padding:15px;
-    background:white;
-    border:1px solid var(--border);
-    border-radius:10px;
-    box-shadow:var(--shadow);
-}
-
-.attendance-content.open{
-    display:block;
-    animation:revealForm .25s ease;
-}
-
-@keyframes revealForm{
-    from{opacity:0;transform:translateY(-5px)}
-    to{opacity:1;transform:translateY(0)}
-}
-
-.attendance-frame{
-    display:block;
-    width:100%;
-    height:700px;
-    border:0;
-    border-radius:5px;
-    background:white;
-}
-
-.attendance-fallback{
-    margin:12px 0 0;
+.attendance-count span{
     color:var(--muted);
-    font-size:.85rem;
+    font-size:.88rem;
 }
 
-.attendance-fallback a{
-    color:#0878ba;
-    text-decoration:underline;
+.mark-attendance-btn{
+    width:100%;
+    min-height:46px;
+    padding:12px 16px;
+    border:0;
+    border-radius:8px;
+    background:var(--royal);
+    color:white;
+    font-size:.9rem;
+    font-weight:800;
+    letter-spacing:.4px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.mark-attendance-btn:hover:not(:disabled){
+    background:#073b91;
+    transform:translateY(-1px);
+}
+
+.mark-attendance-btn:disabled{
+    cursor:not-allowed;
+    opacity:.75;
+}
+
+.mark-attendance-btn.recorded{
+    background:#16834a;
+    opacity:1;
+}
+
+.attendance-feedback{
+    min-height:20px;
+    margin-top:12px;
+    color:var(--muted);
+    font-size:.83rem;
+    line-height:1.5;
+}
+
+.attendance-feedback.success{
+    color:#16834a;
     font-weight:700;
 }
 
-/* PHYSICS AND CHEMISTRY TOPICS */
+.attendance-feedback.error{
+    color:#c0392b;
+}
+
+/* TOPIC CARDS */
 
 .portal-container{
     display:grid;
@@ -394,7 +403,7 @@ button{font-family:inherit}
     text-align:left;
 }
 
-/* ASSESSMENTS AND TASKS */
+/* TASKS */
 
 .task-card{
     min-width:0;
@@ -486,7 +495,7 @@ footer{
 
 footer strong{color:var(--gold)}
 
-/* FIXED BOTTOM NAVIGATION */
+/* BOTTOM NAVIGATION */
 
 .bottom-navigation{
     position:fixed;
@@ -537,10 +546,6 @@ footer strong{color:var(--gold)}
     background:var(--light-blue);
 }
 
-.bottom-navigation a.active .nav-icon{
-    color:var(--royal);
-}
-
 .bottom-navigation a span:last-child{
     white-space:nowrap;
 }
@@ -577,9 +582,7 @@ footer strong{color:var(--gold)}
 
 @media(max-width:600px){
 
-    body{
-        padding-bottom:82px;
-    }
+    body{padding-bottom:82px}
 
     .top-header{
         justify-content:flex-start;
@@ -601,8 +604,6 @@ footer strong{color:var(--gold)}
         width:96%;
         padding:12px 0 22px;
     }
-
-    /* REARRANGED WELCOME PANEL */
 
     .welcome-panel{
         align-items:center;
@@ -653,12 +654,12 @@ footer strong{color:var(--gold)}
         overflow-wrap:anywhere;
     }
 
-    /* THREE-COLUMN CONTENT */
-
     .portal-heading{
         font-size:.98rem;
         margin:20px 0 9px;
     }
+
+    /* THREE-COLUMN CONTENT */
 
     .portal-container,
     .task-container{
@@ -745,7 +746,6 @@ footer strong{color:var(--gold)}
     }
 
     .exam-badge{font-size:.57rem}
-
     .exam-card h2{font-size:1.05rem}
 
     .exam-card p{
@@ -760,9 +760,14 @@ footer strong{color:var(--gold)}
 
     /* ATTENDANCE */
 
-    .attendance-toggle{
-        padding:10px 8px;
+    .attendance-card{
+        padding:11px;
+        border-radius:9px;
+    }
+
+    .attendance-header{
         gap:8px;
+        margin-bottom:12px;
     }
 
     .attendance-icon{
@@ -771,16 +776,36 @@ footer strong{color:var(--gold)}
         font-size:.95rem;
     }
 
-    .attendance-title strong{font-size:.68rem}
-    .attendance-title small{font-size:.62rem}
+    .attendance-header h2{
+        font-size:.7rem;
+        line-height:1.4;
+    }
 
-    .attendance-frame{height:700px}
-    .attendance-content{padding:7px}
+    .attendance-header p{
+        font-size:.62rem;
+    }
+
+    .attendance-count{
+        padding:9px;
+        margin-bottom:10px;
+    }
+
+    .attendance-count strong{font-size:1.3rem}
+    .attendance-count span{font-size:.7rem}
+
+    .mark-attendance-btn{
+        min-height:41px;
+        padding:10px;
+        font-size:.72rem;
+    }
+
+    .attendance-feedback{
+        font-size:.67rem;
+    }
 
     /* PROGRESS AND ACHIEVEMENTS */
 
     .progress-section{padding:12px}
-
     .progress-section p{font-size:.72rem}
 
     .achievement{
@@ -795,7 +820,7 @@ footer strong{color:var(--gold)}
         font-size:.67rem;
     }
 
-    /* BOTTOM NAVIGATION */
+    /* NAVIGATION */
 
     .bottom-navigation{
         padding-top:6px;
@@ -815,8 +840,6 @@ footer strong{color:var(--gold)}
         font-size:1.08rem;
     }
 
-    /* PREVENT OVERFLOW */
-
     .dashboard-page,
     .welcome-panel,
     .subject-portal,
@@ -826,20 +849,16 @@ footer strong{color:var(--gold)}
         max-width:100%;
     }
 
-    img,iframe{max-width:100%}
+    img{max-width:100%}
 }
 
 /* VERY SMALL PHONES */
 
 @media(max-width:360px){
 
-    .bottom-navigation a{
-        font-size:.55rem;
-    }
+    .bottom-navigation a{font-size:.55rem}
 
-    .bottom-navigation a .nav-icon{
-        font-size:1rem;
-    }
+    .bottom-navigation a .nav-icon{font-size:1rem}
 
     .top-header strong{font-size:.7rem}
 
@@ -864,8 +883,6 @@ footer strong{color:var(--gold)}
 </head>
 
 <body>
-
-<!-- TOP BRAND HEADER: NO MENU -->
 
 <header class="top-header">
     <img src="logo.png.png" alt="EVERYTHING'S MATHS logo">
@@ -943,43 +960,42 @@ footer strong{color:var(--gold)}
 
 </section>
 
-<!-- ATTENDANCE -->
+<!-- PHYSICAL SCIENCES ATTENDANCE -->
 
 <section class="attendance-section" id="attendance">
 
-    <button type="button"
-            class="attendance-toggle"
-            id="attendanceToggle"
-            aria-expanded="false"
-            aria-controls="attendanceContent">
+    <div class="attendance-card">
 
-        <span class="attendance-icon">📋</span>
+        <div class="attendance-header">
 
-        <span class="attendance-title">
-            <strong>PHYSICAL SCIENCES ATTENDANCE REGISTER</strong>
-            <small>Click here to open the class attendance form.</small>
-        </span>
+            <div class="attendance-icon">📋</div>
 
-        <span class="attendance-arrow">⌄</span>
+            <div>
+                <h2>PHYSICAL SCIENCES ATTENDANCE REGISTER</h2>
+                <p>Record your attendance for your Physical Sciences lesson.</p>
+            </div>
 
-    </button>
+        </div>
 
-    <div class="attendance-content" id="attendanceContent">
+        <div class="attendance-count">
+            <strong id="attendanceCount">--</strong>
+            <span>Times attended</span>
+        </div>
 
-        <iframe class="attendance-frame"
-            src="https://docs.google.com/forms/d/e/1FAIpQLSeni2XH7abGThaorFarYcyi0OfVjqc0v96QhjFjgv0DDiLybA/viewform?embedded=true"
-            title="Physical Sciences Attendance Register"
-            loading="lazy">
-        </iframe>
+        <button
+            type="button"
+            id="markAttendanceBtn"
+            class="mark-attendance-btn"
+            disabled>
+            LOADING ATTENDANCE...
+        </button>
 
-        <p class="attendance-fallback">
-            If the form does not load,
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeni2XH7abGThaorFarYcyi0OfVjqc0v96QhjFjgv0DDiLybA/viewform"
-               target="_blank"
-               rel="noopener noreferrer">
-                open the attendance register directly
-            </a>.
-        </p>
+        <div
+            id="attendanceFeedback"
+            class="attendance-feedback"
+            role="status"
+            aria-live="polite">
+        </div>
 
     </div>
 
@@ -1118,7 +1134,7 @@ document.getElementById("currentYear").textContent =
     new Date().getFullYear();
 
 
-/* BOTTOM NAVIGATION ACTIVE STATE */
+/* BOTTOM NAVIGATION */
 
 const bottomNavLinks =
     document.querySelectorAll(".bottom-navigation a");
@@ -1138,7 +1154,7 @@ bottomNavLinks.forEach(link => {
 });
 
 
-/* UPDATE ACTIVE NAVIGATION WHILE SCROLLING */
+/* ACTIVE NAVIGATION WHILE SCROLLING */
 
 const navigationSections = [
     "dashboard",
@@ -1148,60 +1164,41 @@ const navigationSections = [
     "attendance"
 ];
 
-const sectionObserver = new IntersectionObserver(entries => {
+if ("IntersectionObserver" in window) {
 
-    entries.forEach(entry => {
+    const sectionObserver = new IntersectionObserver(entries => {
 
-        if (entry.isIntersecting) {
+        entries.forEach(entry => {
 
-            bottomNavLinks.forEach(link => {
+            if (entry.isIntersecting) {
 
-                link.classList.toggle(
-                    "active",
-                    link.dataset.section === entry.target.id
-                );
+                bottomNavLinks.forEach(link => {
 
-            });
+                    link.classList.toggle(
+                        "active",
+                        link.dataset.section === entry.target.id
+                    );
 
-        }
+                });
+
+            }
+
+        });
+
+    }, {
+        rootMargin:"-15% 0px -65% 0px",
+        threshold:0
+    });
+
+    navigationSections.forEach(id => {
+
+        const section = document.getElementById(id);
+
+        if (section) sectionObserver.observe(section);
 
     });
 
-}, {
-    rootMargin:"-15% 0px -65% 0px",
-    threshold:0
-});
-
-navigationSections.forEach(id => {
-
-    const section = document.getElementById(id);
-
-    if (section) sectionObserver.observe(section);
-
-});
-
-
-/* ATTENDANCE TOGGLE */
-
-const attendanceToggle =
-    document.getElementById("attendanceToggle");
-
-const attendanceContent =
-    document.getElementById("attendanceContent");
-
-attendanceToggle.addEventListener("click", () => {
-
-    const isOpen =
-        attendanceToggle.getAttribute("aria-expanded") === "true";
-
-    attendanceToggle.setAttribute(
-        "aria-expanded",
-        String(!isOpen)
-    );
-
-    attendanceContent.classList.toggle("open", !isOpen);
-
-});
+}
 
 
 /* LOGOUT */
@@ -1218,7 +1215,7 @@ async function logoutLearner(){
 }
 
 
-/* PHYSICS AND CHEMISTRY TOPICS */
+/* TOPICS */
 
 const physicsTopics = [
     "Motion",
@@ -1253,13 +1250,196 @@ function makeElement(tag, className, text) {
 }
 
 
+/* CURRENT LEARNER */
+
+let currentProfile = null;
+let attendanceBusy = false;
+
+
+/* ATTENDANCE FEEDBACK */
+
+function setAttendanceFeedback(message, type = "") {
+
+    const feedback =
+        document.getElementById("attendanceFeedback");
+
+    feedback.textContent = message;
+    feedback.className = "attendance-feedback";
+
+    if (type) {
+        feedback.classList.add(type);
+    }
+
+}
+
+
+/* LOAD PHYSICAL SCIENCES ATTENDANCE */
+
+async function loadLearnerAttendance() {
+
+    const button =
+        document.getElementById("markAttendanceBtn");
+
+    const count =
+        document.getElementById("attendanceCount");
+
+    button.disabled = true;
+    button.classList.remove("recorded");
+    button.textContent = "LOADING ATTENDANCE...";
+
+    try {
+
+        const { data, error } = await EMA.db.rpc(
+            "get_my_attendance_summary",
+            {
+                p_subject: "Physical Sciences"
+            }
+        );
+
+        if (error) throw error;
+
+        const attendanceCount =
+            Number(data?.attendance_count ?? 0);
+
+        const todayStatus =
+            data?.today_status ?? null;
+
+        count.textContent = attendanceCount;
+
+        if (todayStatus === "present") {
+
+            button.disabled = true;
+            button.textContent = "ATTENDANCE RECORDED";
+            button.classList.add("recorded");
+
+            setAttendanceFeedback(
+                "Your attendance has already been recorded for today.",
+                "success"
+            );
+
+        } else {
+
+            button.disabled = false;
+            button.textContent = "MARK REGISTER";
+
+            if (todayStatus === "absent") {
+
+                setAttendanceFeedback(
+                    "Your register currently shows absent. You may submit your attendance."
+                );
+
+            } else {
+
+                setAttendanceFeedback(
+                    "You have not yet marked attendance for today."
+                );
+
+            }
+
+        }
+
+    } catch (error) {
+
+        console.error("Attendance loading error:", error);
+
+        count.textContent = "--";
+
+        button.disabled = true;
+        button.textContent = "ATTENDANCE UNAVAILABLE";
+
+        setAttendanceFeedback(
+            "We could not load your attendance. Please refresh the page or contact your administrator.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* MARK PHYSICAL SCIENCES ATTENDANCE */
+
+async function markLearnerAttendance() {
+
+    if (!currentProfile || attendanceBusy) return;
+
+    const button =
+        document.getElementById("markAttendanceBtn");
+
+    attendanceBusy = true;
+    button.disabled = true;
+    button.textContent = "RECORDING...";
+
+    setAttendanceFeedback(
+        "Please wait while we record your attendance."
+    );
+
+    try {
+
+        const { data, error } = await EMA.db.rpc(
+            "mark_my_attendance",
+            {
+                p_subject: "Physical Sciences"
+            }
+        );
+
+        if (error) throw error;
+
+        if (data === false) {
+
+            await loadLearnerAttendance();
+
+            setAttendanceFeedback(
+                "Your attendance has already been recorded for today.",
+                "success"
+            );
+
+            return;
+
+        }
+
+        await loadLearnerAttendance();
+
+        setAttendanceFeedback(
+            `Thank you, ${currentProfile.full_name || "Learner"}! Your Physical Sciences attendance has been successfully recorded.`,
+            "success"
+        );
+
+    } catch (error) {
+
+        console.error("Attendance submission error:", error);
+
+        button.disabled = false;
+        button.textContent = "TRY AGAIN";
+
+        setAttendanceFeedback(
+            "Your attendance could not be recorded. Please try again or contact your administrator.",
+            "error"
+        );
+
+    } finally {
+
+        attendanceBusy = false;
+
+    }
+
+}
+
+
+/* ATTENDANCE BUTTON */
+
+document
+    .getElementById("markAttendanceBtn")
+    .addEventListener("click", markLearnerAttendance);
+
+
 /* INITIALISE PORTAL */
 
 async function initialisePortal() {
 
     try {
 
-        if (!window.EMA) {
+        if (!window.EMA || !EMA.db) {
 
             throw new Error(
                 "Supabase could not initialise. Check config.js and ema-supabase.js."
@@ -1267,13 +1447,18 @@ async function initialisePortal() {
 
         }
 
-        const profile = await EMA.requireSession(["learner"]);
+        const profile =
+            await EMA.requireSession(["learner"]);
 
         if (!profile) return;
 
+        currentProfile = profile;
 
-        if (profile.subject_access &&
-            !profile.subject_access.includes("Physical Sciences")) {
+
+        if (
+            profile.subject_access &&
+            !profile.subject_access.includes("Physical Sciences")
+        ) {
 
             alert(
                 "Your account does not currently have Physical Sciences access."
@@ -1293,11 +1478,37 @@ async function initialisePortal() {
             `Grade ${profile.grade || "Not assigned"} · Physical Sciences Portal — explore Physics and Chemistry.`;
 
 
-        await Promise.all([
+        /*
+         * Load each section independently.
+         * An attendance error will not prevent resources,
+         * assessments or announcements from loading.
+         */
+
+        const results = await Promise.allSettled([
+
+            loadLearnerAttendance(),
+
             loadResources(profile),
+
             loadAssessments(profile),
+
             loadAnnouncements(profile)
+
         ]);
+
+
+        results.forEach((result, index) => {
+
+            if (result.status === "rejected") {
+
+                console.error(
+                    `Portal section ${index + 1} failed:`,
+                    result.reason
+                );
+
+            }
+
+        });
 
 
     } catch (error) {
@@ -1353,7 +1564,6 @@ function renderTopicCards(containerId, topics, resources) {
             topic.toLowerCase()
         );
 
-
         const card = makeElement("article", "subject-portal");
 
         card.appendChild(
@@ -1372,7 +1582,6 @@ function renderTopicCards(containerId, topics, resources) {
             )
         );
 
-
         if (!matching.length) {
 
             card.appendChild(
@@ -1385,7 +1594,6 @@ function renderTopicCards(containerId, topics, resources) {
 
         }
 
-
         matching.forEach(resource => {
 
             const link = makeElement(
@@ -1393,7 +1601,6 @@ function renderTopicCards(containerId, topics, resources) {
                 "portal-btn resource-link",
                 "📄 " + resource.title
             );
-
 
             if (resource.file_path) {
 
@@ -1417,9 +1624,7 @@ function renderTopicCards(containerId, topics, resources) {
 
             }
 
-
             card.appendChild(link);
-
 
             if (resource.description) {
 
@@ -1430,7 +1635,6 @@ function renderTopicCards(containerId, topics, resources) {
             }
 
         });
-
 
         container.appendChild(card);
 
@@ -1460,7 +1664,6 @@ async function loadAssessments(profile) {
 
     container.innerHTML = "";
 
-
     if (!assessments.length) {
 
         container.appendChild(
@@ -1472,7 +1675,6 @@ async function loadAssessments(profile) {
         );
 
     }
-
 
     assessments.forEach(assessment => {
 
@@ -1490,13 +1692,11 @@ async function loadAssessments(profile) {
             )
         );
 
-
         const button = makeElement(
             "a",
             "portal-btn",
             "Start Assessment →"
         );
-
 
         if (
             assessment.assessment_type === "google_form" &&
@@ -1513,7 +1713,6 @@ async function loadAssessments(profile) {
 
         }
 
-
         card.appendChild(button);
         container.appendChild(card);
 
@@ -1525,7 +1724,6 @@ async function loadAssessments(profile) {
     const tasks = document.getElementById("tasksContainer");
 
     tasks.innerHTML = "";
-
 
     if (!assessments.length) {
 
@@ -1561,7 +1759,6 @@ async function loadAssessments(profile) {
 
     }
 
-
     await loadResults(assessments, profile);
 
 }
@@ -1579,7 +1776,6 @@ async function loadResults(assessments, profile) {
 
     if (error) throw error;
 
-
     const assessmentIds = new Set(
         assessments.map(item => item.id)
     );
@@ -1587,7 +1783,6 @@ async function loadResults(assessments, profile) {
     const results = (data || []).filter(result =>
         assessmentIds.has(result.assessment_id)
     );
-
 
     const average = results.length
         ? results.reduce(
@@ -1597,29 +1792,23 @@ async function loadResults(assessments, profile) {
           ) / results.length
         : null;
 
-
     document.getElementById("averageStat").textContent =
         average === null ? "--" : `${average.toFixed(1)}%`;
 
-
     document.getElementById("assessmentStat").textContent =
         results.length;
-
 
     const achievements = results.filter(result =>
         Number(result.percentage) >= 80
     ).length;
 
-
     document.getElementById("achievementStat").textContent =
         achievements;
-
 
     const progress =
         document.getElementById("progressContainer");
 
     progress.innerHTML = "";
-
 
     if (average === null) {
 
@@ -1641,7 +1830,6 @@ async function loadResults(assessments, profile) {
             )
         );
 
-
         const bar = makeElement("div", "progress-bar");
 
         const fill = makeElement("div", "progress-fill");
@@ -1654,7 +1842,6 @@ async function loadResults(assessments, profile) {
         progress.appendChild(bar);
 
     }
-
 
     if (achievements > 0) {
 
@@ -1681,18 +1868,15 @@ async function loadAnnouncements(profile) {
 
     if (error) throw error;
 
-
     const announcements = (data || []).filter(item =>
         !item.grade ||
         Number(item.grade) === Number(profile.grade)
     );
 
-
     const container =
         document.getElementById("announcementsContainer");
 
     container.innerHTML = "";
-
 
     if (!announcements.length) {
 
@@ -1707,7 +1891,6 @@ async function loadAnnouncements(profile) {
         return;
 
     }
-
 
     announcements.forEach(item => {
 
@@ -1744,3 +1927,4 @@ initialisePortal();
 
 </body>
 </html>
+```
