@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -882,7 +881,7 @@ footer strong{color:var(--gold)}
     </a>
 </section>
 
-<!-- LEARNER ATTENDANCE -->
+<!-- LEARNER MATHEMATICS ATTENDANCE -->
 <section class="attendance-section" id="attendance">
     <div class="attendance-card">
 
@@ -890,14 +889,14 @@ footer strong{color:var(--gold)}
             <div class="attendance-header-icon">📋</div>
 
             <div>
-                <h2>ATTENDANCE REGISTER</h2>
-                <p>Record your attendance for today's lesson.</p>
+                <h2>MATHEMATICS ATTENDANCE REGISTER</h2>
+                <p>Record your attendance for today's Mathematics lesson.</p>
             </div>
         </div>
 
         <div class="attendance-count">
             <strong id="attendanceCount">--</strong>
-            <span>Times attended</span>
+            <span>Mathematics lessons attended</span>
         </div>
 
         <button
@@ -986,8 +985,9 @@ document.getElementById("currentYear").textContent =
 
 
 /* =========================================
-   EMA LEARNER ATTENDANCE SYSTEM
+   EMA MATHEMATICS LEARNER ATTENDANCE
    Uses secure Supabase RPC functions.
+   This register is separate from Physical Sciences.
    Dates are determined by Supabase using
    Africa/Johannesburg timezone.
 ========================================= */
@@ -1027,7 +1027,10 @@ async function loadLearnerAttendance(profile){
     try{
 
         const {data,error} = await EMA.db.rpc(
-            "get_my_attendance_summary"
+            "get_my_attendance_summary",
+            {
+                p_subject: "Mathematics"
+            }
         );
 
         if(error) throw error;
@@ -1041,7 +1044,7 @@ async function loadLearnerAttendance(profile){
             button.textContent = "✓ ATTENDANCE RECORDED";
 
             showAttendanceFeedback(
-                `Thank you, ${profile.full_name || "Learner"}! Your attendance has already been recorded for today.`
+                `Thank you, ${profile.full_name || "Learner"}! Your Mathematics attendance has already been recorded for today.`
             );
 
         }else if(data.today_status === "absent"){
@@ -1063,13 +1066,13 @@ async function loadLearnerAttendance(profile){
 
     }catch(error){
 
-        console.error("Attendance loading error:",error);
+        console.error("Mathematics attendance loading error:",error);
 
         button.disabled = true;
         button.textContent = "ATTENDANCE UNAVAILABLE";
 
         showAttendanceFeedback(
-            "We could not load your attendance. Please refresh the page or contact your administrator.",
+            "We could not load your Mathematics attendance. Please refresh the page or contact your administrator.",
             "error"
         );
 
@@ -1093,41 +1096,42 @@ async function markLearnerAttendance(){
     try{
 
         const {data,error} = await EMA.db.rpc(
-            "mark_my_attendance"
+            "mark_my_attendance",
+            {
+                p_subject: "Mathematics"
+            }
         );
 
         if(error) throw error;
 
-        if(!data){
+        await loadLearnerAttendance(profile);
 
-            await loadLearnerAttendance(profile);
+        if(data === true){
+
+            button.disabled = true;
+            button.textContent = "✓ ATTENDANCE RECORDED";
 
             showAttendanceFeedback(
-                `Thank you, ${profile.full_name || "Learner"}! Your attendance has already been recorded today.`
+                `Thank you, ${profile.full_name || "Learner"}! Your Mathematics attendance has been successfully recorded.`
             );
 
-            return;
+        }else{
+
+            showAttendanceFeedback(
+                `Thank you, ${profile.full_name || "Learner"}! Your Mathematics attendance has already been recorded today.`
+            );
 
         }
 
-        await loadLearnerAttendance(profile);
-
-        button.disabled = true;
-        button.textContent = "✓ ATTENDANCE RECORDED";
-
-        showAttendanceFeedback(
-            `Thank you, ${profile.full_name || "Learner"}! Your attendance has been successfully recorded.`
-        );
-
     }catch(error){
 
-        console.error("Attendance submission error:",error);
+        console.error("Mathematics attendance submission error:",error);
 
         button.disabled = false;
         button.textContent = "✓ TRY AGAIN";
 
         showAttendanceFeedback(
-            "Your attendance could not be recorded. Please check your internet connection and try again.",
+            "Your Mathematics attendance could not be recorded. Please check your internet connection and try again.",
             "error"
         );
 
