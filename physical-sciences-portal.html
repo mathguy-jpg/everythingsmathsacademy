@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -231,46 +232,123 @@ button{font-family:inherit}
     font-weight:800;
     font-size:.9rem;
 }
-<!-- PHYSICAL SCIENCES ATTENDANCE -->
 
-<section class="attendance-section" id="attendance">
+/* ATTENDANCE */
 
-    <div class="attendance-card">
+.attendance-section{
+    margin:22px 0;
+    scroll-margin-top:20px;
+}
 
-        <div class="attendance-header">
+.attendance-card{
+    padding:22px;
+    background:white;
+    border:1px solid var(--border);
+    border-radius:12px;
+    box-shadow:var(--shadow);
+}
 
-            <div class="attendance-icon">📋</div>
+.attendance-header{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    margin-bottom:18px;
+}
 
-            <div>
-                <h2>PHYSICAL SCIENCES ATTENDANCE REGISTER</h2>
-                <p>Record your attendance for your Physical Sciences lesson.</p>
-            </div>
+.attendance-icon{
+    display:grid;
+    place-items:center;
+    flex-shrink:0;
+    width:45px;
+    height:45px;
+    border-radius:9px;
+    background:var(--light-blue);
+    font-size:1.4rem;
+}
 
-        </div>
+.attendance-header h2{
+    margin:0 0 5px;
+    color:var(--royal);
+    font-size:1.05rem;
+}
 
-        <div class="attendance-count">
-            <strong id="attendanceCount">--</strong>
-            <span>Times attended</span>
-        </div>
+.attendance-header p{
+    margin:0;
+    color:var(--muted);
+    font-size:.85rem;
+    line-height:1.5;
+}
 
-        <button
-            type="button"
-            id="markAttendanceBtn"
-            class="mark-attendance-btn"
-            disabled>
-            LOADING ATTENDANCE...
-        </button>
+.attendance-count{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:15px;
+    margin-bottom:14px;
+    background:var(--light-blue);
+    border:1px solid #d4e8fa;
+    border-radius:9px;
+}
 
-        <div
-            id="attendanceFeedback"
-            class="attendance-feedback"
-            role="status"
-            aria-live="polite">
-        </div>
+.attendance-count strong{
+    color:var(--royal);
+    font-size:1.8rem;
+}
 
-    </div>
+.attendance-count span{
+    color:var(--muted);
+    font-size:.9rem;
+}
 
-</section>--
+.mark-attendance-btn{
+    display:block;
+    width:100%;
+    min-height:48px;
+    padding:12px;
+    color:white;
+    background:var(--royal);
+    border:1px solid var(--royal);
+    border-radius:8px;
+    font-size:.9rem;
+    font-weight:800;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.mark-attendance-btn:hover:not(:disabled){
+    background:#073b91;
+}
+
+.mark-attendance-btn:disabled{
+    opacity:.75;
+    cursor:not-allowed;
+}
+
+.mark-attendance-btn.recorded{
+    color:var(--royal);
+    background:#e8f8ef;
+    border-color:#a8dfbd;
+    opacity:1;
+}
+
+.attendance-feedback{
+    min-height:20px;
+    margin-top:12px;
+    color:var(--muted);
+    font-size:.83rem;
+    line-height:1.5;
+    overflow-wrap:anywhere;
+}
+
+.attendance-feedback.success{
+    color:#16803c;
+}
+
+.attendance-feedback.error{
+    color:#b42318;
+}
+
 /* TOPIC CARDS */
 
 .portal-container{
@@ -1188,6 +1266,8 @@ function setAttendanceFeedback(message, type = "") {
     const feedback =
         document.getElementById("attendanceFeedback");
 
+    if (!feedback) return;
+
     feedback.textContent = message;
     feedback.className = "attendance-feedback";
 
@@ -1198,17 +1278,18 @@ function setAttendanceFeedback(message, type = "") {
 }
 
 
-
 /* LOAD PHYSICAL SCIENCES ATTENDANCE */
 
 async function loadLearnerAttendance() {
 
-    const button = document.getElementById("markAttendanceBtn");
-    const count = document.getElementById("attendanceCount");
+    const button =
+        document.getElementById("markAttendanceBtn");
+
+    const count =
+        document.getElementById("attendanceCount");
 
     if (!button || !count) {
-        console.error("Attendance HTML elements were not found.");
-        return;
+        throw new Error("Attendance HTML elements were not found.");
     }
 
     button.disabled = true;
@@ -1217,8 +1298,10 @@ async function loadLearnerAttendance() {
 
     try {
 
-        if (!EMA || !EMA.db) {
-            throw new Error("Supabase connection (EMA.db) is unavailable.");
+        if (!window.EMA || !EMA.db) {
+            throw new Error(
+                "Supabase connection is unavailable. Check EMA initialisation."
+            );
         }
 
         const { data, error } = await EMA.db.rpc(
@@ -1233,11 +1316,22 @@ async function loadLearnerAttendance() {
         }
 
         if (!data || typeof data !== "object") {
-            throw new Error("Supabase returned an invalid attendance response.");
+            throw new Error(
+                "Supabase returned an invalid attendance response."
+            );
         }
 
-        const attendanceCount = Number(data.attendance_count ?? 0);
-        const todayStatus = data.today_status ?? null;
+        const attendanceCount =
+            Number(data.attendance_count ?? 0);
+
+        if (!Number.isFinite(attendanceCount)) {
+            throw new Error(
+                "The attendance count returned by Supabase is invalid."
+            );
+        }
+
+        const todayStatus =
+            data.today_status ?? null;
 
         count.textContent = attendanceCount;
 
@@ -1275,7 +1369,10 @@ async function loadLearnerAttendance() {
 
     } catch (error) {
 
-        console.error("Physical Sciences attendance loading error:", error);
+        console.error(
+            "Physical Sciences attendance loading error:",
+            error
+        );
 
         count.textContent = "--";
 
@@ -1285,7 +1382,7 @@ async function loadLearnerAttendance() {
 
         setAttendanceFeedback(
             "SUPABASE ERROR: " +
-            (error?.message || JSON.stringify(error)),
+            (error?.message || String(error)),
             "error"
         );
 
@@ -1320,7 +1417,9 @@ async function markLearnerAttendance() {
             }
         );
 
-        if (error) throw error;
+        if (error) {
+            throw error;
+        }
 
         if (data === false) {
 
@@ -1344,13 +1443,17 @@ async function markLearnerAttendance() {
 
     } catch (error) {
 
-        console.error("Attendance submission error:", error);
+        console.error(
+            "Physical Sciences attendance submission error:",
+            error
+        );
 
         button.disabled = false;
         button.textContent = "TRY AGAIN";
 
         setAttendanceFeedback(
-            "Your attendance could not be recorded. Please try again or contact your administrator.",
+            "ATTENDANCE ERROR: " +
+            (error?.message || String(error)),
             "error"
         );
 
@@ -1417,8 +1520,8 @@ async function initialisePortal() {
 
         /*
          * Load each section independently.
-         * An attendance error will not prevent resources,
-         * assessments or announcements from loading.
+         * An attendance error will not prevent other sections
+         * from loading.
          */
 
         const results = await Promise.allSettled([
