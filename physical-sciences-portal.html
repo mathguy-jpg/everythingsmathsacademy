@@ -26,7 +26,7 @@
 
 html{
     scroll-behavior:smooth;
-    scroll-padding-top:85px;
+    scroll-padding-top:20px;
 }
 
 body{
@@ -34,67 +34,43 @@ body{
     font-family:"Segoe UI",Arial,sans-serif;
     color:var(--text);
     background:#f5f7fb;
+    padding-bottom:90px;
 }
 
 a{text-decoration:none;color:inherit}
 button{font-family:inherit}
 
-/* NAVIGATION */
+/* TOP BRAND HEADER */
 
-nav{
-    position:sticky;
-    top:0;
-    z-index:1000;
+.top-header{
     display:flex;
     align-items:center;
-    justify-content:space-between;
-    gap:20px;
-    padding:10px 5%;
+    justify-content:center;
+    gap:12px;
+    padding:12px 5%;
     background:var(--royal);
+    color:white;
     box-shadow:0 2px 8px #0002;
 }
 
-.nav-brand{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    color:white;
-    font-size:.95rem;
-    font-weight:800;
-    letter-spacing:.5px;
-}
-
-.nav-brand img{
-    width:48px;
-    height:48px;
+.top-header img{
+    width:43px;
+    height:43px;
     object-fit:contain;
-    filter:drop-shadow(0 0 5px white);
+    filter:drop-shadow(0 0 4px #ffffff80);
 }
 
-.menu{
-    display:flex;
-    align-items:center;
-    gap:20px;
-}
-
-.menu a{
-    color:white;
-    font-size:.88rem;
-    font-weight:600;
-}
-
-.menu a:hover{color:var(--gold)}
-
-.mobile-menu-btn{
-    display:none;
+.top-header strong{
+    font-size:.95rem;
+    letter-spacing:.7px;
 }
 
 /* MAIN LAYOUT */
 
 .dashboard-page{
-    width:min(1080px,92%);
+    width:min(1080px,94%);
     margin:auto;
-    padding:25px 0 45px;
+    padding:22px 0 35px;
 }
 
 /* WELCOME PANEL */
@@ -102,8 +78,8 @@ nav{
 .welcome-panel{
     display:flex;
     align-items:center;
-    gap:22px;
-    padding:25px;
+    gap:18px;
+    padding:20px;
     background:white;
     border:1px solid var(--border);
     border-left:5px solid var(--royal);
@@ -112,8 +88,8 @@ nav{
 }
 
 .welcome-logo{
-    width:100px;
-    height:100px;
+    width:82px;
+    height:82px;
     flex-shrink:0;
     object-fit:contain;
 }
@@ -123,20 +99,14 @@ nav{
 #welcomeName{
     margin:0 0 7px;
     color:var(--royal);
-    font-size:clamp(1.6rem,3vw,2.2rem);
+    font-size:clamp(1.5rem,3vw,2.1rem);
 }
 
 .dashboard-subtitle{
     margin:0;
     color:var(--muted);
     line-height:1.6;
-}
-
-.quick-nav{
-    display:flex;
-    flex-wrap:wrap;
-    gap:9px;
-    margin-top:17px;
+    font-size:.9rem;
 }
 
 /* BUTTONS */
@@ -162,28 +132,18 @@ nav{
     transform:translateY(-1px);
 }
 
-.quick-nav .portal-btn{
-    background:white;
-    color:var(--royal);
-    border-color:var(--border);
-}
-
-.quick-nav .portal-btn:hover{
-    background:var(--light-blue);
-}
-
 /* STATISTICS */
 
 .stats-container{
     display:grid;
     grid-template-columns:repeat(4,minmax(0,1fr));
     gap:14px;
-    margin:22px 0 28px;
+    margin:20px 0 25px;
 }
 
 .stat-box{
     min-width:0;
-    padding:18px 12px;
+    padding:17px 12px;
     text-align:center;
     background:white;
     border:1px solid var(--border);
@@ -206,21 +166,22 @@ nav{
 /* SECTION HEADINGS */
 
 .portal-heading{
-    margin:30px 0 15px;
+    margin:28px 0 13px;
     color:var(--royal);
-    font-size:1.35rem;
+    font-size:1.3rem;
+    scroll-margin-top:20px;
 }
 
 /* EXAM CENTRE */
 
-.exam-card-wrap{margin:25px 0}
+.exam-card-wrap{margin:22px 0}
 
 .exam-card{
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:20px;
-    padding:24px;
+    padding:23px;
     color:white;
     background:var(--royal);
     border:1px solid #2aa9ec;
@@ -248,7 +209,7 @@ nav{
 .exam-card h2{
     margin:0 0 9px;
     color:white;
-    font-size:1.6rem;
+    font-size:1.55rem;
 }
 
 .exam-card p{
@@ -274,14 +235,14 @@ nav{
 
 /* ATTENDANCE */
 
-.attendance-section{margin:25px 0}
+.attendance-section{margin:22px 0}
 
 .attendance-toggle{
     width:100%;
     display:flex;
     align-items:center;
     gap:14px;
-    padding:17px 20px;
+    padding:16px 18px;
     text-align:left;
     background:white;
     border:1px solid var(--border);
@@ -386,7 +347,7 @@ nav{
 
 .subject-portal{
     min-width:0;
-    padding:20px;
+    padding:18px;
     background:white;
     border:1px solid var(--border);
     border-radius:10px;
@@ -437,7 +398,7 @@ nav{
 
 .task-card{
     min-width:0;
-    padding:20px;
+    padding:19px;
     background:white;
     border:1px solid var(--border);
     border-radius:10px;
@@ -501,7 +462,6 @@ nav{
 }
 
 .achievement-icon{font-size:2rem}
-
 .achievement h3{margin:0 0 5px}
 .achievement p{margin:0}
 
@@ -526,31 +486,72 @@ footer{
 
 footer strong{color:var(--gold)}
 
+/* FIXED BOTTOM NAVIGATION */
+
+.bottom-navigation{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:2000;
+    display:grid;
+    grid-template-columns:repeat(5,minmax(0,1fr));
+    align-items:center;
+    width:100%;
+    padding:8px max(8px,env(safe-area-inset-right))
+             calc(8px + env(safe-area-inset-bottom))
+             max(8px,env(safe-area-inset-left));
+    background:white;
+    border-top:1px solid var(--border);
+    box-shadow:0 -4px 18px rgba(0,31,102,.12);
+}
+
+.bottom-navigation a{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    padding:5px 2px;
+    color:#64748b;
+    border-radius:8px;
+    font-size:.72rem;
+    font-weight:700;
+    text-align:center;
+    transition:.2s;
+}
+
+.bottom-navigation a .nav-icon{
+    display:grid;
+    place-items:center;
+    width:30px;
+    height:25px;
+    font-size:1.2rem;
+    line-height:1;
+}
+
+.bottom-navigation a.active,
+.bottom-navigation a:hover{
+    color:var(--royal);
+    background:var(--light-blue);
+}
+
+.bottom-navigation a.active .nav-icon{
+    color:var(--royal);
+}
+
+.bottom-navigation a span:last-child{
+    white-space:nowrap;
+}
+
 /* TABLET */
 
 @media(max-width:760px){
 
-    nav{
-        padding:9px 3%;
-    }
-
-    .nav-brand{
-        font-size:.82rem;
-        gap:6px;
-    }
-
-    .nav-brand img{
-        width:38px;
-        height:38px;
-    }
-
-    .menu{gap:12px}
-
-    .menu a{font-size:.78rem}
-
     .dashboard-page{
         width:96%;
-        padding:18px 0 35px;
+        padding:16px 0 25px;
     }
 
     .stats-container{
@@ -572,297 +573,246 @@ footer strong{color:var(--gold)}
     .exam-action{width:100%}
 }
 
-/* MOBILE NAVIGATION */
+/* MOBILE */
 
 @media(max-width:600px){
 
-    html{scroll-padding-top:75px}
-
-    nav{
-        position:sticky;
-        top:0;
-        z-index:1000;
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        padding:7px 12px;
-        gap:8px;
+    body{
+        padding-bottom:82px;
     }
 
-    .nav-brand{
+    .top-header{
+        justify-content:flex-start;
+        padding:8px 13px;
+        gap:9px;
+    }
+
+    .top-header img{
+        width:36px;
+        height:36px;
+    }
+
+    .top-header strong{
         font-size:.76rem;
-        gap:6px;
-        letter-spacing:0;
+        letter-spacing:.3px;
     }
-
-    .nav-brand img{
-        width:35px;
-        height:35px;
-    }
-
-    .mobile-menu-btn{
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        gap:7px;
-        padding:8px 12px;
-        color:var(--royal);
-        background:var(--gold);
-        border:0;
-        border-radius:6px;
-        font-size:.78rem;
-        font-weight:800;
-        cursor:pointer;
-    }
-
-    .mobile-menu-btn span{
-        font-size:1.15rem;
-        line-height:1;
-    }
-
-    .menu{
-        display:none;
-        position:absolute;
-        top:100%;
-        left:0;
-        right:0;
-        width:100%;
-        padding:9px 12px 13px;
-        background:var(--royal);
-        border-top:1px solid #ffffff30;
-        box-shadow:0 5px 12px #0003;
-        flex-direction:column;
-        align-items:stretch;
-        gap:0;
-    }
-
-    .menu.mobile-open{display:flex}
-
-    .menu a{
-        display:block;
-        padding:11px 10px;
-        color:white;
-        font-size:.82rem;
-        border-bottom:1px solid #ffffff20;
-    }
-
-    .menu a:last-child{
-        color:var(--gold);
-        border-bottom:0;
-    }
-
-    .menu a:hover{
-        background:#ffffff12;
-        color:var(--gold);
-    }
-
-    /* PAGE */
 
     .dashboard-page{
         width:96%;
-        padding:13px 0 25px;
+        padding:12px 0 22px;
     }
 
+    /* REARRANGED WELCOME PANEL */
+
     .welcome-panel{
-        align-items:flex-start;
-        gap:9px;
-        padding:12px;
+        align-items:center;
+        gap:10px;
+        padding:12px 10px;
+        border-left-width:4px;
+        border-radius:9px;
     }
 
     .welcome-logo{
-        width:43px;
-        height:43px;
+        width:48px;
+        height:48px;
     }
 
     #welcomeName{
-        font-size:1.12rem;
+        font-size:1.05rem;
         line-height:1.3;
+        margin-bottom:4px;
     }
 
     .dashboard-subtitle{
-        font-size:.73rem;
+        font-size:.69rem;
         line-height:1.45;
     }
 
-    .quick-nav{
-        display:grid;
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:6px;
-        margin-top:10px;
-    }
-
-    .quick-nav .portal-btn{
-        padding:7px 4px;
-        font-size:.68rem;
-        white-space:nowrap;
-    }
-
-    /* FOUR STATISTICS SIDE BY SIDE */
+    /* FOUR STATISTICS IN ONE ROW */
 
     .stats-container{
         grid-template-columns:repeat(4,minmax(0,1fr));
         gap:5px;
-        margin:13px 0 18px;
+        margin:12px 0 17px;
     }
 
     .stat-box{
         min-width:0;
-        padding:10px 3px;
+        padding:9px 2px;
         border-radius:7px;
     }
 
     .stat-box h2{
-        font-size:1.05rem;
+        font-size:1rem;
         margin-bottom:4px;
     }
 
     .stat-box p{
-        font-size:.59rem;
+        font-size:.57rem;
         line-height:1.25;
+        overflow-wrap:anywhere;
     }
 
     /* THREE-COLUMN CONTENT */
 
     .portal-heading{
-        font-size:1rem;
-        margin:21px 0 10px;
+        font-size:.98rem;
+        margin:20px 0 9px;
     }
 
     .portal-container,
     .task-container{
         grid-template-columns:repeat(3,minmax(0,1fr));
-        gap:7px;
+        gap:6px;
     }
 
     .subject-portal{
         min-width:0;
-        padding:10px 7px;
+        padding:9px 6px;
         border-radius:8px;
     }
 
     .portal-icon{
-        width:29px;
-        height:29px;
+        width:28px;
+        height:28px;
         margin-bottom:7px;
-        font-size:.95rem;
+        font-size:.9rem;
     }
 
     .subject-portal h2{
-        font-size:.76rem;
+        font-size:.73rem;
         line-height:1.3;
         overflow-wrap:anywhere;
         margin-bottom:5px;
     }
 
     .subject-portal p{
-        font-size:.65rem;
+        font-size:.62rem;
         line-height:1.4;
         margin-bottom:8px;
         overflow-wrap:anywhere;
     }
 
     .subject-portal small{
-        font-size:.61rem;
+        font-size:.59rem;
         line-height:1.3;
     }
 
     .resource-link{
-        padding:7px 5px;
-        font-size:.62rem;
+        padding:7px 4px;
+        font-size:.59rem;
         line-height:1.3;
         overflow-wrap:anywhere;
     }
 
     .task-card{
         min-width:0;
-        padding:10px 7px;
+        padding:9px 6px;
         border-radius:8px;
     }
 
     .task-card h3{
-        font-size:.75rem;
+        font-size:.72rem;
         line-height:1.35;
         overflow-wrap:anywhere;
     }
 
     .task-card p{
-        font-size:.65rem;
+        font-size:.62rem;
         line-height:1.45;
         overflow-wrap:anywhere;
     }
 
     .task-card .portal-btn{
         width:100%;
-        padding:7px 4px;
-        font-size:.62rem;
+        padding:7px 3px;
+        font-size:.59rem;
         text-align:center;
     }
 
     .status-message{
         grid-column:1/-1;
-        padding:11px;
-        font-size:.72rem;
+        padding:10px;
+        font-size:.7rem;
     }
 
     /* EXAM CENTRE */
 
     .exam-card{
-        padding:14px;
-        gap:12px;
+        padding:13px;
+        gap:11px;
         border-radius:9px;
     }
 
-    .exam-badge{font-size:.59rem}
+    .exam-badge{font-size:.57rem}
 
-    .exam-card h2{font-size:1.08rem}
+    .exam-card h2{font-size:1.05rem}
 
     .exam-card p{
-        font-size:.73rem;
+        font-size:.7rem;
         line-height:1.5;
     }
 
     .exam-action{
         padding:10px;
-        font-size:.75rem;
+        font-size:.72rem;
     }
 
     /* ATTENDANCE */
 
     .attendance-toggle{
-        padding:11px 9px;
+        padding:10px 8px;
         gap:8px;
     }
 
     .attendance-icon{
-        width:32px;
-        height:32px;
-        font-size:1rem;
+        width:31px;
+        height:31px;
+        font-size:.95rem;
     }
 
-    .attendance-title strong{font-size:.72rem}
-
-    .attendance-title small{font-size:.65rem}
+    .attendance-title strong{font-size:.68rem}
+    .attendance-title small{font-size:.62rem}
 
     .attendance-frame{height:700px}
-
     .attendance-content{padding:7px}
 
     /* PROGRESS AND ACHIEVEMENTS */
 
-    .progress-section{padding:13px}
+    .progress-section{padding:12px}
 
-    .progress-section p{font-size:.75rem}
+    .progress-section p{font-size:.72rem}
 
     .achievement{
         gap:8px;
-        padding:10px;
+        padding:9px;
     }
 
-    .achievement-icon{font-size:1.4rem}
+    .achievement-icon{font-size:1.3rem}
 
     footer{
-        padding:14px 8px;
-        font-size:.7rem;
+        padding:13px 8px;
+        font-size:.67rem;
+    }
+
+    /* BOTTOM NAVIGATION */
+
+    .bottom-navigation{
+        padding-top:6px;
+        padding-bottom:calc(6px + env(safe-area-inset-bottom));
+        gap:2px;
+    }
+
+    .bottom-navigation a{
+        gap:3px;
+        padding:4px 1px;
+        font-size:.61rem;
+    }
+
+    .bottom-navigation a .nav-icon{
+        width:27px;
+        height:23px;
+        font-size:1.08rem;
     }
 
     /* PREVENT OVERFLOW */
@@ -879,6 +829,28 @@ footer strong{color:var(--gold)}
     img,iframe{max-width:100%}
 }
 
+/* VERY SMALL PHONES */
+
+@media(max-width:360px){
+
+    .bottom-navigation a{
+        font-size:.55rem;
+    }
+
+    .bottom-navigation a .nav-icon{
+        font-size:1rem;
+    }
+
+    .top-header strong{font-size:.7rem}
+
+    .welcome-logo{
+        width:40px;
+        height:40px;
+    }
+
+    #welcomeName{font-size:.95rem}
+}
+
 /* REDUCED MOTION */
 
 @media(prefers-reduced-motion:reduce){
@@ -893,32 +865,12 @@ footer strong{color:var(--gold)}
 
 <body>
 
-<!-- NAVIGATION -->
+<!-- TOP BRAND HEADER: NO MENU -->
 
-<nav>
-    <a class="nav-brand" href="learner-dashboard.html">
-        <img src="logo.png.png" alt="EVERYTHING'S MATHS logo">
-        <span>EVERYTHING'S MATHS</span>
-    </a>
-
-    <button type="button"
-            class="mobile-menu-btn"
-            id="mobileMenuBtn"
-            aria-expanded="false"
-            aria-controls="mainMenu">
-        <span>☰</span> MENU
-    </button>
-
-    <div class="menu" id="mainMenu">
-        <a href="learner-dashboard.html">🏠 Dashboard</a>
-        <a href="#physics-topics">⚛ Physics</a>
-        <a href="#chemistry-topics">🧪 Chemistry</a>
-        <a href="#weekly-quiz">📝 Assessments</a>
-        <a href="#attendance">📋 Attendance</a>
-        <a href="#progress">📈 Progress</a>
-        <a href="#" id="logoutLink">Logout</a>
-    </div>
-</nav>
+<header class="top-header">
+    <img src="logo.png.png" alt="EVERYTHING'S MATHS logo">
+    <strong>EVERYTHING'S MATHS</strong>
+</header>
 
 <main class="dashboard-page">
 
@@ -935,13 +887,6 @@ footer strong{color:var(--gold)}
             Physical Sciences Portal — explore Physics and Chemistry,
             practise your skills and prepare for assessments.
         </p>
-
-        <div class="quick-nav">
-            <a href="#physics-topics" class="portal-btn">⚛ Physics</a>
-            <a href="#chemistry-topics" class="portal-btn">🧪 Chemistry</a>
-            <a href="#weekly-quiz" class="portal-btn">📝 Assessments</a>
-            <a href="#attendance" class="portal-btn">📋 Attendance</a>
-        </div>
     </div>
 </header>
 
@@ -1128,6 +1073,37 @@ footer strong{color:var(--gold)}
     · Physical Sciences Portal
 </footer>
 
+<!-- FIXED BOTTOM NAVIGATION -->
+
+<nav class="bottom-navigation" aria-label="Main navigation">
+
+    <a href="#dashboard" class="active" data-section="dashboard">
+        <span class="nav-icon">🏠</span>
+        <span>Home</span>
+    </a>
+
+    <a href="#physics-topics" data-section="physics-topics">
+        <span class="nav-icon">⚛️</span>
+        <span>Physics</span>
+    </a>
+
+    <a href="#chemistry-topics" data-section="chemistry-topics">
+        <span class="nav-icon">🧪</span>
+        <span>Chemistry</span>
+    </a>
+
+    <a href="#weekly-quiz" data-section="weekly-quiz">
+        <span class="nav-icon">📝</span>
+        <span>Assessments</span>
+    </a>
+
+    <a href="#attendance" data-section="attendance">
+        <span class="nav-icon">📋</span>
+        <span>Attendance</span>
+    </a>
+
+</nav>
+
 <!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -1142,48 +1118,65 @@ document.getElementById("currentYear").textContent =
     new Date().getFullYear();
 
 
-/* MOBILE NAVIGATION */
+/* BOTTOM NAVIGATION ACTIVE STATE */
 
-const mobileMenuBtn =
-    document.getElementById("mobileMenuBtn");
+const bottomNavLinks =
+    document.querySelectorAll(".bottom-navigation a");
 
-const mainMenu =
-    document.getElementById("mainMenu");
-
-mobileMenuBtn.addEventListener("click", () => {
-
-    const isOpen =
-        mobileMenuBtn.getAttribute("aria-expanded") === "true";
-
-    mobileMenuBtn.setAttribute(
-        "aria-expanded",
-        String(!isOpen)
-    );
-
-    mobileMenuBtn.innerHTML = isOpen
-        ? "<span>☰</span> MENU"
-        : "<span>✕</span> CLOSE";
-
-    mainMenu.classList.toggle("mobile-open", !isOpen);
-});
-
-
-/* CLOSE MENU AFTER SELECTING A LINK */
-
-mainMenu.querySelectorAll("a").forEach(link => {
+bottomNavLinks.forEach(link => {
 
     link.addEventListener("click", () => {
 
-        mainMenu.classList.remove("mobile-open");
-
-        mobileMenuBtn.setAttribute(
-            "aria-expanded",
-            "false"
+        bottomNavLinks.forEach(item =>
+            item.classList.remove("active")
         );
 
-        mobileMenuBtn.innerHTML = "<span>☰</span> MENU";
+        link.classList.add("active");
 
     });
+
+});
+
+
+/* UPDATE ACTIVE NAVIGATION WHILE SCROLLING */
+
+const navigationSections = [
+    "dashboard",
+    "physics-topics",
+    "chemistry-topics",
+    "weekly-quiz",
+    "attendance"
+];
+
+const sectionObserver = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+            bottomNavLinks.forEach(link => {
+
+                link.classList.toggle(
+                    "active",
+                    link.dataset.section === entry.target.id
+                );
+
+            });
+
+        }
+
+    });
+
+}, {
+    rootMargin:"-15% 0px -65% 0px",
+    threshold:0
+});
+
+navigationSections.forEach(id => {
+
+    const section = document.getElementById(id);
+
+    if (section) sectionObserver.observe(section);
 
 });
 
@@ -1213,13 +1206,16 @@ attendanceToggle.addEventListener("click", () => {
 
 /* LOGOUT */
 
-document.getElementById("logoutLink")
-    .addEventListener("click", async event => {
+async function logoutLearner(){
 
-        event.preventDefault();
+    try{
         await EMA.signOut();
+    }catch(error){
+        console.error("Logout error:",error);
+        alert("Unable to log out. Please try again.");
+    }
 
-    });
+}
 
 
 /* PHYSICS AND CHEMISTRY TOPICS */
