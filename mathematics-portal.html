@@ -266,86 +266,125 @@ nav{
     font-size:.9rem;
 }
 
-/* ATTENDANCE */
+/* ATTENDANCE REGISTER */
 .attendance-section{margin:25px 0}
 
-.attendance-toggle{
-    width:100%;
+.attendance-card{
+    padding:22px;
+    background:white;
+    border:1px solid var(--border);
+    border-top:4px solid var(--royal);
+    border-radius:12px;
+    box-shadow:var(--shadow);
+    text-align:center;
+}
+
+.attendance-header{
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:14px;
-    padding:17px 20px;
-    text-align:center;
-    background:white;
-    border:1px solid var(--border);
-    border-radius:10px;
-    box-shadow:var(--shadow);
-    color:var(--royal);
-    cursor:pointer;
+    gap:10px;
+    margin-bottom:15px;
 }
 
-.attendance-icon{
+.attendance-header-icon{
     display:grid;
     place-items:center;
-    flex-shrink:0;
     width:43px;
     height:43px;
-    border-radius:8px;
+    border-radius:9px;
     background:var(--light-blue);
-    font-size:1.35rem;
+    font-size:1.4rem;
 }
 
-.attendance-title{flex:1}
-
-.attendance-title strong{
-    display:block;
-    margin-bottom:4px;
-    font-size:1.02rem;
+.attendance-header h2{
+    margin:0;
+    color:var(--royal);
+    font-size:1.15rem;
 }
 
-.attendance-title small{
-    display:block;
+.attendance-header p{
+    margin:4px 0 0;
     color:var(--muted);
     font-size:.82rem;
-    line-height:1.5;
 }
 
-.attendance-arrow{transition:transform .25s}
-
-.attendance-toggle[aria-expanded=true] .attendance-arrow{
-    transform:rotate(180deg);
-}
-
-.attendance-content{
-    display:none;
-    margin-top:12px;
-    padding:15px;
-    background:white;
-    border:1px solid var(--border);
+.attendance-count{
+    margin:15px 0;
+    padding:17px;
+    background:var(--light-blue);
     border-radius:10px;
-    box-shadow:var(--shadow);
 }
 
-.attendance-content.open{display:block}
-
-.attendance-frame{
+.attendance-count strong{
     display:block;
-    width:100%;
-    height:700px;
-    border:0;
-    border-radius:5px;
+    color:var(--royal);
+    font-size:2rem;
 }
 
-.attendance-fallback{
+.attendance-count span{
     color:var(--muted);
     font-size:.85rem;
 }
 
-.attendance-fallback a{
-    color:#0878ba;
-    text-decoration:underline;
-    font-weight:700;
+.mark-attendance-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    width:100%;
+    max-width:380px;
+    margin:15px auto 0;
+    padding:14px 18px;
+    color:white;
+    background:var(--royal);
+    border:0;
+    border-radius:8px;
+    font-size:.95rem;
+    font-weight:800;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.mark-attendance-btn:hover:not(:disabled){
+    background:#073b91;
+    transform:translateY(-1px);
+}
+
+.mark-attendance-btn:disabled{
+    opacity:.65;
+    cursor:not-allowed;
+    transform:none;
+}
+
+.attendance-feedback{
+    display:none;
+    margin-top:15px;
+    padding:13px;
+    background:#eaf8ef;
+    border:1px solid #b9e4c7;
+    border-radius:9px;
+    color:#176b35;
+    font-size:.88rem;
+    line-height:1.5;
+}
+
+.attendance-feedback.show{display:block}
+
+.attendance-feedback.error{
+    background:#fff1f1;
+    border-color:#f0c5c5;
+    color:#a32222;
+}
+
+@media(max-width:480px){
+    .attendance-card{padding:14px 10px}
+    .attendance-header h2{font-size:.95rem}
+    .attendance-header p{font-size:.72rem}
+    .attendance-count{padding:13px}
+    .attendance-count strong{font-size:1.7rem}
+    .mark-attendance-btn{padding:12px;font-size:.82rem}
+    .attendance-feedback{font-size:.76rem}
 }
 
 /* SECTION HEADINGS */
@@ -509,13 +548,10 @@ footer strong{color:var(--gold)}
     text-align:center;
 }
 
-.bottom-nav a:hover{
-    background:#ffd700;
-}
+.bottom-nav a:hover{background:#ffd700}
 
 /* TABLETS */
 @media(max-width:760px){
-
     nav{
         flex-direction:column;
         justify-content:center;
@@ -523,9 +559,7 @@ footer strong{color:var(--gold)}
         padding:12px;
     }
 
-    .nav-brand{
-        justify-content:center;
-    }
+    .nav-brand{justify-content:center}
 
     .menu{
         justify-content:center;
@@ -550,27 +584,18 @@ footer strong{color:var(--gold)}
     }
 
     .subject-portal,
-    .task-card{
-        padding:13px 10px;
-    }
+    .task-card{padding:13px 10px}
 
     .subject-portal h2,
-    .task-card h3{
-        font-size:.95rem;
-    }
+    .task-card h3{font-size:.95rem}
 
     .subject-portal p,
-    .task-card p{
-        font-size:.8rem;
-    }
+    .task-card p{font-size:.8rem}
 }
 
 /* PHONES */
 @media(max-width:480px){
-
-    body{
-        overflow-x:hidden;
-    }
+    body{overflow-x:hidden}
 
     nav{
         padding:10px 8px;
@@ -593,9 +618,7 @@ footer strong{color:var(--gold)}
         justify-content:center;
     }
 
-    .menu a{
-        font-size:.75rem;
-    }
+    .menu a{font-size:.75rem}
 
     .dashboard-page{
         width:94%;
@@ -604,7 +627,6 @@ footer strong{color:var(--gold)}
         text-align:center;
     }
 
-    /* CENTER THE ENTIRE WELCOME AREA */
     .welcome-panel{
         display:flex;
         flex-direction:column;
@@ -653,34 +675,22 @@ footer strong{color:var(--gold)}
         width:100%;
     }
 
-    /* STATS */
     .stats-container{
         grid-template-columns:repeat(2,minmax(0,1fr));
         gap:9px;
         margin:15px 0 20px;
     }
 
-    .stat-box{
-        padding:13px 7px;
-    }
+    .stat-box{padding:13px 7px}
+    .stat-box h2{font-size:1.35rem}
+    .stat-box p{font-size:.72rem}
 
-    .stat-box h2{
-        font-size:1.35rem;
-    }
-
-    .stat-box p{
-        font-size:.72rem;
-    }
-
-    /* EXAM CARD */
     .exam-card{
         padding:16px 12px;
         gap:12px;
     }
 
-    .exam-card h2{
-        font-size:1.15rem;
-    }
+    .exam-card h2{font-size:1.15rem}
 
     .exam-card p{
         font-size:.78rem;
@@ -692,11 +702,8 @@ footer strong{color:var(--gold)}
         padding:12px;
     }
 
-    .exam-badge{
-        font-size:.62rem;
-    }
+    .exam-badge{font-size:.62rem}
 
-    /* THREE CARDS PER ROW */
     .portal-container,
     .task-container{
         display:grid;
@@ -741,9 +748,7 @@ footer strong{color:var(--gold)}
     }
 
     .subject-portal small,
-    .task-card small{
-        font-size:.65rem;
-    }
+    .task-card small{font-size:.65rem}
 
     .resource-link{
         padding:7px 4px;
@@ -758,51 +763,18 @@ footer strong{color:var(--gold)}
         margin:23px 0 12px;
     }
 
-    /* ATTENDANCE */
-    .attendance-toggle{
-        padding:11px 8px;
-        gap:7px;
-    }
-
-    .attendance-icon{
-        width:34px;
-        height:34px;
-        font-size:1rem;
-    }
-
-    .attendance-title strong{
-        font-size:.82rem;
-    }
-
-    .attendance-title small{
-        font-size:.7rem;
-    }
-
-    .attendance-frame{
-        height:760px;
-    }
-
-    .attendance-content{
-        padding:8px;
-    }
-
-    /* PROGRESS */
-    .progress-section{
-        padding:13px 10px;
-    }
+    .progress-section{padding:13px 10px}
 
     .progress-section p{
         font-size:.78rem;
         line-height:1.5;
     }
 
-    /* ACHIEVEMENT */
     .achievement{
         flex-direction:column;
         gap:6px;
     }
 
-    /* BOTTOM NAVIGATION */
     .bottom-nav{
         display:grid;
         grid-template-columns:repeat(3,minmax(0,1fr));
@@ -854,11 +826,9 @@ footer strong{color:var(--gold)}
 <main class="dashboard-page">
 
 <header class="welcome-panel">
-
     <img src="logo.png.png" class="welcome-logo" alt="Academy logo">
 
     <div class="welcome-content">
-
         <h1 id="welcomeName">Welcome Back 👋</h1>
 
         <p class="dashboard-subtitle" id="learnerDetails">
@@ -871,12 +841,10 @@ footer strong{color:var(--gold)}
             <a href="#progress" class="portal-btn">📈 Progress</a>
             <a href="#attendance" class="portal-btn">📋 Attendance</a>
         </div>
-
     </div>
 </header>
 
 <section class="stats-container">
-
     <div class="stat-box">
         <h2 id="averageStat">--</h2>
         <p>Current Average</p>
@@ -896,70 +864,58 @@ footer strong{color:var(--gold)}
         <h2 id="achievementStat">--</h2>
         <p>Achievements</p>
     </div>
-
 </section>
 
 <section class="exam-card-wrap" id="exam-centre">
-
     <a class="exam-card" href="exam-site.html">
-
         <div class="exam-card-content">
-
             <span class="exam-badge">ONLINE ASSESSMENT CENTRE</span>
-
             <h2>📝 EMA Exam Test Centre</h2>
-
             <p>
                 Access Mathematics and Physical Sciences assessments
                 for Grades 9–12. Choose your grade and paper,
                 then complete available online tests.
             </p>
-
         </div>
 
         <span class="exam-action">ENTER EXAM SITE →</span>
-
     </a>
-
 </section>
 
+<!-- LEARNER ATTENDANCE -->
 <section class="attendance-section" id="attendance">
+    <div class="attendance-card">
 
-    <button type="button"
-            class="attendance-toggle"
-            id="attendanceToggle"
-            aria-expanded="false">
+        <div class="attendance-header">
+            <div class="attendance-header-icon">📋</div>
 
-        <span class="attendance-icon">📋</span>
+            <div>
+                <h2>ATTENDANCE REGISTER</h2>
+                <p>Record your attendance for today's lesson.</p>
+            </div>
+        </div>
 
-        <span class="attendance-title">
-            <strong>ATTENDANCE REGISTER</strong>
-            <small>Click here to open the class attendance form.</small>
-        </span>
+        <div class="attendance-count">
+            <strong id="attendanceCount">--</strong>
+            <span>Times attended</span>
+        </div>
 
-        <span class="attendance-arrow">⌄</span>
+        <button
+            type="button"
+            class="mark-attendance-btn"
+            id="markAttendanceBtn"
+            disabled>
+            LOADING ATTENDANCE...
+        </button>
 
-    </button>
-
-    <div class="attendance-content" id="attendanceContent">
-
-        <iframe class="attendance-frame"
-            src="https://docs.google.com/forms/d/e/1FAIpQLSegLizn7dBqzH9mVJoz6Mtmok1tceBQYgTz6fydXVopKTNrHg/viewform?embedded=true"
-            title="Class Attendance Register"
-            loading="lazy">
-        </iframe>
-
-        <p class="attendance-fallback">
-            If the form does not load,
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSegLizn7dBqzH9mVJoz6Mtmok1tceBQYgTz6fydXVopKTNrHg/viewform"
-               target="_blank"
-               rel="noopener noreferrer">
-               open the attendance register directly
-            </a>.
-        </p>
+        <div
+            class="attendance-feedback"
+            id="attendanceFeedback"
+            role="status"
+            aria-live="polite">
+        </div>
 
     </div>
-
 </section>
 
 <h2 class="portal-heading" id="topics">📘 Mathematics Topics</h2>
@@ -995,28 +951,24 @@ footer strong{color:var(--gold)}
 <h2 class="portal-heading">🏆 Latest Achievement</h2>
 
 <div class="task-card achievement" id="achievementCard">
-
     <div class="achievement-icon">🏆</div>
 
     <div>
         <h3>Your learning journey starts here!</h3>
         <p>Complete assessments and keep improving your Mathematics results.</p>
     </div>
-
 </div>
 
 </main>
 
 <!-- BOTTOM NAVIGATION -->
 <div class="bottom-nav">
-
     <a href="learner-dashboard.html">🏠 Dashboard</a>
     <a href="#topics">📚 Notes</a>
     <a href="#weekly-quiz">📝 Quizzes</a>
     <a href="#attendance">📋 Attendance</a>
     <a href="#progress">📈 Progress</a>
     <a href="#exam-centre">🎓 Exams</a>
-
 </div>
 
 <footer>
@@ -1032,24 +984,164 @@ footer strong{color:var(--gold)}
 document.getElementById("currentYear").textContent =
     new Date().getFullYear();
 
-const attendanceToggle =
-    document.getElementById("attendanceToggle");
 
-const attendanceContent =
-    document.getElementById("attendanceContent");
+/* =========================================
+   EMA LEARNER ATTENDANCE SYSTEM
+   Uses secure Supabase RPC functions.
+   Dates are determined by Supabase using
+   Africa/Johannesburg timezone.
+========================================= */
 
-attendanceToggle.addEventListener("click", () => {
+let currentLearnerProfile = null;
 
-    const open =
-        attendanceToggle.getAttribute("aria-expanded") === "true";
 
-    attendanceToggle.setAttribute("aria-expanded", String(!open));
+function showAttendanceFeedback(message, type = "success"){
 
-    attendanceContent.classList.toggle("open", !open);
+    const feedback =
+        document.getElementById("attendanceFeedback");
 
-});
+    feedback.textContent = message;
 
-document.getElementById("logoutLink").addEventListener("click", async event => {
+    feedback.className = "attendance-feedback show";
+
+    if(type === "error"){
+        feedback.classList.add("error");
+    }
+
+}
+
+
+async function loadLearnerAttendance(profile){
+
+    const button =
+        document.getElementById("markAttendanceBtn");
+
+    const countDisplay =
+        document.getElementById("attendanceCount");
+
+    currentLearnerProfile = profile;
+
+    button.disabled = true;
+    button.textContent = "LOADING ATTENDANCE...";
+
+    try{
+
+        const {data,error} = await EMA.db.rpc(
+            "get_my_attendance_summary"
+        );
+
+        if(error) throw error;
+
+        countDisplay.textContent =
+            data.attendance_count ?? 0;
+
+        if(data.today_status === "present"){
+
+            button.disabled = true;
+            button.textContent = "✓ ATTENDANCE RECORDED";
+
+            showAttendanceFeedback(
+                `Thank you, ${profile.full_name || "Learner"}! Your attendance has already been recorded for today.`
+            );
+
+        }else if(data.today_status === "absent"){
+
+            button.disabled = true;
+            button.textContent = "REGISTER CLOSED";
+
+            showAttendanceFeedback(
+                "Today's register has been closed. Please contact your administrator if you need a correction.",
+                "error"
+            );
+
+        }else{
+
+            button.disabled = false;
+            button.textContent = "✓ MARK REGISTER";
+
+        }
+
+    }catch(error){
+
+        console.error("Attendance loading error:",error);
+
+        button.disabled = true;
+        button.textContent = "ATTENDANCE UNAVAILABLE";
+
+        showAttendanceFeedback(
+            "We could not load your attendance. Please refresh the page or contact your administrator.",
+            "error"
+        );
+
+    }
+
+}
+
+
+async function markLearnerAttendance(){
+
+    const button =
+        document.getElementById("markAttendanceBtn");
+
+    const profile = currentLearnerProfile;
+
+    if(!profile) return;
+
+    button.disabled = true;
+    button.textContent = "RECORDING ATTENDANCE...";
+
+    try{
+
+        const {data,error} = await EMA.db.rpc(
+            "mark_my_attendance"
+        );
+
+        if(error) throw error;
+
+        if(!data){
+
+            await loadLearnerAttendance(profile);
+
+            showAttendanceFeedback(
+                `Thank you, ${profile.full_name || "Learner"}! Your attendance has already been recorded today.`
+            );
+
+            return;
+
+        }
+
+        await loadLearnerAttendance(profile);
+
+        button.disabled = true;
+        button.textContent = "✓ ATTENDANCE RECORDED";
+
+        showAttendanceFeedback(
+            `Thank you, ${profile.full_name || "Learner"}! Your attendance has been successfully recorded.`
+        );
+
+    }catch(error){
+
+        console.error("Attendance submission error:",error);
+
+        button.disabled = false;
+        button.textContent = "✓ TRY AGAIN";
+
+        showAttendanceFeedback(
+            "Your attendance could not be recorded. Please check your internet connection and try again.",
+            "error"
+        );
+
+    }
+
+}
+
+
+document.getElementById("markAttendanceBtn")
+    .addEventListener("click",markLearnerAttendance);
+
+
+/* LOGOUT */
+document.getElementById("logoutLink").addEventListener("click",async event => {
 
     event.preventDefault();
 
@@ -1061,6 +1153,8 @@ document.getElementById("logoutLink").addEventListener("click", async event => {
 
 });
 
+
+/* TOPICS */
 const topics = [
     "Algebra",
     "Geometry",
@@ -1069,6 +1163,7 @@ const topics = [
     "Measurement",
     "Probability"
 ];
+
 
 function makeElement(tag,className,text){
 
@@ -1079,7 +1174,9 @@ function makeElement(tag,className,text){
     if(text !== undefined) el.textContent = text;
 
     return el;
+
 }
+
 
 function showMessage(containerId,message){
 
@@ -1090,8 +1187,11 @@ function showMessage(containerId,message){
     container.appendChild(
         makeElement("div","status-message",message)
     );
+
 }
 
+
+/* INITIALISE PORTAL */
 async function initialisePortal(){
 
     try{
@@ -1116,6 +1216,7 @@ async function initialisePortal(){
             location.replace("learner-dashboard.html");
 
             return;
+
         }
 
         document.getElementById("welcomeName").textContent =
@@ -1127,7 +1228,8 @@ async function initialisePortal(){
         await Promise.all([
             loadResources(profile),
             loadAssessments(profile),
-            loadAnnouncements(profile)
+            loadAnnouncements(profile),
+            loadLearnerAttendance(profile)
         ]);
 
     }catch(error){
@@ -1142,6 +1244,8 @@ async function initialisePortal(){
 
 }
 
+
+/* LOAD RESOURCES */
 async function loadResources(profile){
 
     const {data,error} = await EMA.db
@@ -1186,7 +1290,7 @@ async function loadResources(profile){
         if(matching.length === 0){
 
             card.appendChild(
-                makeElement("small","", "No resources uploaded yet.")
+                makeElement("small","","No resources uploaded yet.")
             );
 
         }
@@ -1237,6 +1341,8 @@ async function loadResources(profile){
 
 }
 
+
+/* LOAD ASSESSMENTS */
 async function loadAssessments(profile){
 
     const {data,error} = await EMA.db
@@ -1343,15 +1449,18 @@ async function loadAssessments(profile){
 
     }
 
-    await loadResults(assessments);
+    await loadResults(assessments,profile);
 
 }
 
-async function loadResults(assessments){
+
+/* LOAD ONLY THIS LEARNER'S RESULTS */
+async function loadResults(assessments,profile){
 
     const {data,error} = await EMA.db
         .from("assessment_results")
         .select("assessment_id,score,percentage,submitted_at")
+        .eq("learner_id",profile.id)
         .order("submitted_at",{ascending:false});
 
     if(error) throw error;
@@ -1432,6 +1541,8 @@ async function loadResults(assessments){
 
 }
 
+
+/* LOAD ANNOUNCEMENTS */
 async function loadAnnouncements(profile){
 
     const {data,error} = await EMA.db
@@ -1491,7 +1602,10 @@ async function loadAnnouncements(profile){
 
 }
 
+
+/* START */
 initialisePortal();
+
 </script>
 
 </body>
