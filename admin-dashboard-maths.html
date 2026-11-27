@@ -4,15 +4,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#001f66">
 <link rel="icon" type="image/png" href="logo.png.png">
 <title>Mathematics Admin | EVERYTHING'S MATHS</title>
 <link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js"></script>
 <script src="config.js"></script>
 <script src="ema-supabase.js"></script>
+
 <style>
 :root{--blue:#001f66;--bright:#1565c0;--cyan:#16a9e8;--gold:#ffd700;--white:#fff;--ink:#263238;--muted:#64748b;--bg:#f3f6fb;--line:#e2e8f0;--green:#16834a;--red:#c62828}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,sans-serif;overflow-x:hidden}
 button,input,select,textarea{font:inherit}
 nav{background:var(--blue);padding:13px 22px;min-height:58px}
@@ -36,7 +41,11 @@ nav a:hover{color:var(--gold)}
 .subject-portal p{color:var(--muted);line-height:1.5;flex:1;margin:0 0 17px}
 .portal-btn,.ema-btn{border:0;border-radius:8px;padding:11px 15px;background:var(--blue);color:white;cursor:pointer;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;max-width:100%;overflow-wrap:anywhere}
 .portal-btn:hover,.ema-btn:hover{filter:brightness(1.12)}
-.ema-btn.gold{background:#e2b400;color:#172033}.ema-btn.red{background:#b42318}.ema-btn.grey{background:#64748b}.ema-btn.green{background:var(--green)}.ema-btn.light{background:#e8f2ff;color:var(--blue)}
+.ema-btn.gold{background:#e2b400;color:#172033}
+.ema-btn.red{background:#b42318}
+.ema-btn.grey{background:#64748b}
+.ema-btn.green{background:var(--green)}
+.ema-btn.light{background:#e8f2ff;color:var(--blue)}
 .ema-btn:disabled{opacity:.5;cursor:not-allowed}
 .exam-manager,.content-panel{background:white;padding:22px;border:1px solid var(--line);border-radius:14px;margin:22px 0;box-shadow:0 3px 12px #0000000c;min-width:0}
 .exam-manager h2,.content-panel h2{color:var(--blue);margin-top:0}
@@ -45,7 +54,9 @@ nav a:hover{color:var(--gold)}
 .exam-item,.record-card{border:1px solid var(--line);border-radius:12px;padding:17px;margin:13px 0;background:white;min-width:0;overflow-wrap:anywhere}
 .exam-item h3,.record-card h3{color:var(--blue);margin:0 0 8px;font-size:17px}
 .exam-item p,.record-card p{margin:7px 0;line-height:1.5;overflow-wrap:anywhere}
-.exam-status{font-size:12px;font-weight:800}.status-draft{color:#b7791f}.status-live{color:var(--green)}
+.exam-status{font-size:12px;font-weight:800}
+.status-draft{color:#b7791f}
+.status-live{color:var(--green)}
 .task-container{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .task-card{background:white;border:1px solid var(--line);border-left:4px solid var(--cyan);border-radius:11px;padding:17px;box-shadow:0 2px 8px #0000000b;color:var(--blue);font-weight:700;min-width:0}
 .empty-state{background:#f8fafc;border:1px dashed #cbd5e1;padding:20px;border-radius:10px;color:var(--muted);line-height:1.5;overflow-wrap:anywhere}
@@ -61,13 +72,16 @@ nav a:hover{color:var(--gold)}
 .modal-panel{display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;width:min(900px,100%)!important;margin:15px auto 35px!important;padding:25px!important;border-radius:16px!important;background:white!important;color:var(--ink)!important;box-shadow:0 20px 60px #0006!important;overflow-wrap:anywhere}
 .modal-panel h2{color:var(--blue)}
 .modal-header{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding-bottom:13px;margin-bottom:18px}
-.modal-header h2{margin:0 0 7px}.modal-header p{margin:0;color:var(--muted)}
+.modal-header h2{margin:0 0 7px}
+.modal-header p{margin:0;color:var(--muted)}
 .modal-note{background:#eff6ff;border-left:4px solid var(--cyan);padding:13px;border-radius:5px;margin:14px 0;line-height:1.5}
 .creation-options{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:22px 0}
 .creation-option{display:block!important;width:100%;min-width:0;min-height:185px;padding:21px;border:2px solid #dce6f5;border-radius:13px;background:#f7faff;text-align:left;cursor:pointer;color:var(--ink);transition:.2s}
 .creation-option:hover{border-color:var(--cyan);background:#eaf5ff;transform:translateY(-2px)}
-.creation-option h3{color:var(--blue);margin:9px 0}.creation-option p{color:var(--muted);line-height:1.5}
-.option-icon{font-size:34px}.creation-option strong{color:var(--blue)}
+.creation-option h3{color:var(--blue);margin:9px 0}
+.creation-option p{color:var(--muted);line-height:1.5}
+.option-icon{font-size:34px}
+.creation-option strong{color:var(--blue)}
 .assignment-summary{background:#f1f6ff;padding:17px;border-radius:12px;margin:15px 0;overflow-wrap:anywhere}
 .assignment-summary strong{color:var(--blue)}
 .assignment-stat{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0}
@@ -90,31 +104,104 @@ nav a:hover{color:var(--gold)}
 .remove-learner-btn{background:#b42318;color:white;border:0;border-radius:7px;padding:8px 11px;font-weight:700;cursor:pointer;white-space:nowrap}
 .remove-learner-btn:hover{background:#8f1b13}
 .remove-learner-btn:disabled{opacity:.5;cursor:not-allowed}
-@media(max-width:850px){.stats-container{grid-template-columns:repeat(2,minmax(0,1fr))}.portal-container{grid-template-columns:repeat(2,minmax(0,1fr))}.task-container{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ATTENDANCE REGISTER */
+.attendance-section{margin:30px 0}
+.attendance-toggle-main{width:100%;padding:19px 22px;border:0;border-radius:12px;background:linear-gradient(110deg,#001f66,#0756a5);color:white;font-size:18px;font-weight:800;text-align:left;cursor:pointer;box-shadow:0 5px 16px #001f6620}
+.attendance-toggle-main:hover{filter:brightness(1.1)}
+.attendance-content{display:none;margin-top:15px}
+.attendance-content.open{display:block}
+.attendance-panel{background:white;border:1px solid var(--line);border-radius:14px;padding:20px;margin:15px 0;box-shadow:0 3px 12px #0000000c}
+.attendance-panel h2{color:var(--blue);margin:0 0 8px}
+.attendance-panel>p{color:var(--muted);line-height:1.5}
+.attendance-grade-card{border:1px solid var(--line);border-radius:12px;margin:17px 0;overflow:hidden;background:white}
+.attendance-grade-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:#f1f6ff;padding:15px 17px}
+.attendance-grade-heading h3{margin:0;color:var(--blue)}
+.grade-switch{border:0;border-radius:30px;padding:9px 16px;font-size:12px;font-weight:800;cursor:pointer;color:white;min-width:100px}
+.grade-switch.on{background:var(--green)}
+.grade-switch.off{background:var(--red)}
+.attendance-grade-body{padding:15px}
+.attendance-status{display:inline-block;padding:6px 10px;border-radius:5px;font-size:11px;font-weight:900;letter-spacing:.3px}
+.attendance-status.present{background:#dcfce7;color:#166534;border:1px solid #86efac}
+.attendance-status.absent{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5}
+.attendance-status.unknown{background:#f1f5f9;color:#475569}
+.attendance-table{width:100%;min-width:760px;border-collapse:collapse;text-align:left}
+.attendance-table th{background:#001f66;color:white;padding:12px;font-size:12px;white-space:nowrap}
+.attendance-table td{padding:12px;border-bottom:1px solid var(--line);font-size:13px}
+.attendance-table tr:last-child td{border-bottom:0}
+.attendance-table td:first-child{width:75px;white-space:nowrap;font-weight:800;color:var(--blue)}
+.attendance-table td:nth-child(2){font-weight:700}
+.attendance-actions{display:flex;gap:7px;flex-wrap:wrap}
+.attendance-actions .ema-btn{min-height:32px;padding:7px 10px;font-size:11px}
+.attendance-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0}
+.attendance-toolbar p{margin:0;color:var(--muted);font-size:13px}
+.attendance-form{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:end;background:#f8fafc;padding:15px;border-radius:10px;margin:15px 0}
+.attendance-form .form-field{margin:0}
+.attendance-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:15px 0}
+.attendance-summary div{background:#f1f6ff;border:1px solid #dce6f5;border-radius:9px;padding:13px}
+.attendance-summary strong{display:block;color:var(--blue);font-size:23px}
+.attendance-summary span{color:var(--muted);font-size:12px}
+.promotion-btn{background:#e2b400;color:#172033;border:0;border-radius:7px;padding:8px 10px;font-weight:800;cursor:pointer}
+.completion-btn{background:#16834a;color:white;border:0;border-radius:7px;padding:8px 10px;font-weight:800;cursor:pointer}
+.academic-completed{display:inline-block;padding:5px 8px;border-radius:20px;background:#dcfce7;color:#166534;font-size:11px;font-weight:800}
+@media(max-width:850px){
+.stats-container{grid-template-columns:repeat(2,minmax(0,1fr))}
+.portal-container{grid-template-columns:repeat(2,minmax(0,1fr))}
+.task-container{grid-template-columns:repeat(2,minmax(0,1fr))}
+.attendance-form{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
 @media(max-width:600px){
-nav{padding:12px 13px}nav .menu{justify-content:center;gap:12px 18px}nav a{font-size:13px}
-.dashboard-page{padding:12px 13px 40px}.login-logo{width:75px;margin:8px auto 15px}
+nav{padding:12px 13px}
+nav .menu{justify-content:center;gap:12px 18px}
+nav a{font-size:13px}
+.dashboard-page{padding:12px 13px 40px}
+.login-logo{width:75px;margin:8px auto 15px}
 .welcome-banner{padding:21px 18px;border-radius:13px;margin:14px 0 18px}
-.welcome-banner h1{font-size:22px;line-height:1.3}.welcome-banner p{font-size:14px}
+.welcome-banner h1{font-size:22px;line-height:1.3}
+.welcome-banner p{font-size:14px}
 .stats-container{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:15px 0 25px}
-.stat-box{padding:14px 12px}.stat-box h2{font-size:23px}.stat-box p{font-size:12px}
-.portal-heading{font-size:19px;margin:27px 0 13px}.portal-container{grid-template-columns:1fr;gap:12px}
-.subject-portal{padding:18px}.task-container{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.stat-box{padding:14px 12px}
+.stat-box h2{font-size:23px}
+.stat-box p{font-size:12px}
+.portal-heading{font-size:19px;margin:27px 0 13px}
+.portal-container{grid-template-columns:1fr;gap:12px}
+.subject-portal{padding:18px}
+.task-container{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
 .task-card{padding:13px 11px;font-size:13px}
 .exam-manager,.content-panel{padding:16px;margin:17px 0}
 .exam-manager h2,.content-panel h2{font-size:19px}
 .exam-item,.record-card{padding:14px}
 .form-grid,.creation-options,.assignment-stat{grid-template-columns:1fr}
-.modal{padding:7px!important}.modal-panel{padding:16px!important;margin:8px auto 22px!important;border-radius:12px!important}
-.modal-header{align-items:flex-start;flex-direction:column}.modal-header .ema-btn{align-self:flex-start}
-.creation-option{min-height:auto}.modal-footer{flex-direction:column}.modal-footer .ema-btn{width:100%}
+.modal{padding:7px!important}
+.modal-panel{padding:16px!important;margin:8px auto 22px!important;border-radius:12px!important}
+.modal-header{align-items:flex-start;flex-direction:column}
+.modal-header .ema-btn{align-self:flex-start}
+.creation-option{min-height:auto}
+.modal-footer{flex-direction:column}
+.modal-footer .ema-btn{width:100%}
 .exam-actions .ema-btn,.exam-actions a{flex:1 1 auto}
 .directory-toolbar{align-items:stretch;flex-direction:column}
 .directory-search{width:100%;max-width:none}
+.attendance-panel{padding:13px}
+.attendance-grade-heading{align-items:flex-start}
+.attendance-form{grid-template-columns:1fr}
+.attendance-summary{grid-template-columns:repeat(3,minmax(0,1fr))}
+.attendance-summary div{padding:9px}
+.attendance-summary strong{font-size:19px}
+.attendance-summary span{font-size:10px}
+.attendance-toggle-main{font-size:15px;padding:16px}
 }
-@media(max-width:380px){.dashboard-page{padding-left:10px;padding-right:10px}.stats-container{gap:7px}.stat-box{padding:12px 9px}.stat-box h2{font-size:21px}.task-card{font-size:12px}.welcome-banner h1{font-size:20px}}
+@media(max-width:380px){
+.dashboard-page{padding-left:10px;padding-right:10px}
+.stats-container{gap:7px}
+.stat-box{padding:12px 9px}
+.stat-box h2{font-size:21px}
+.task-card{font-size:12px}
+.welcome-banner h1{font-size:20px}
+}
 </style>
 </head>
+
 <body>
 <nav><div class="menu">
 <a href="index.html">Home</a>
@@ -125,6 +212,7 @@ nav{padding:12px 13px}nav .menu{justify-content:center;gap:12px 18px}nav a{font-
 
 <section class="dashboard-page">
 <img src="logo.png.png" class="login-logo" alt="EMA logo">
+
 <div class="welcome-banner">
 <h1>📘 Mathematics Control Centre</h1>
 <p id="adminWelcome">Loading administrator profile...</p>
@@ -138,23 +226,97 @@ nav{padding:12px 13px}nav .menu{justify-content:center;gap:12px 18px}nav a{font-
 <div class="stat-box"><h2 id="resourceCount">--</h2><p>Resources Registered</p></div>
 </div>
 
+<!-- ATTENDANCE REGISTER -->
+<section class="attendance-section" id="attendanceRegister">
+<button type="button" class="attendance-toggle-main" id="attendanceMainToggle">
+📋 TRACK ATTENDANCE REGISTER <span style="float:right">＋</span>
+</button>
+
+<div class="attendance-content" id="attendanceContent">
+<div class="attendance-panel">
+<h2>Mathematics Attendance Register</h2>
+<p>View learner attendance across Grades 10, 11 and 12. Each grade has its own independent attendance switch. You can also record or correct attendance on behalf of a learner.</p>
+
+<div class="attendance-summary">
+<div><strong id="attendanceTotal">0</strong><span>Attendance records</span></div>
+<div><strong id="attendancePresent">0</strong><span>Present records</span></div>
+<div><strong id="attendanceAbsent">0</strong><span>Absent records</span></div>
+</div>
+
+<div class="attendance-toolbar">
+<p id="attendanceUpdated">Attendance information has not been loaded yet.</p>
+<div class="exam-actions">
+<button type="button" class="ema-btn light" id="refreshAttendanceBtn">↻ Refresh Register</button>
+<button type="button" class="ema-btn gold" id="downloadAttendancePdfBtn">⬇ Download Combined PDF</button>
+</div>
+</div>
+
+<div class="modal-note">
+<strong>Important:</strong> Switching a grade OFF prevents learners in that grade from marking their own Mathematics attendance. It does not delete existing records or affect other grades or Physical Sciences. Absences are only recorded when an administrator marks a learner absent.
+</div>
+
+<h2 style="margin-top:25px">Record Attendance for a Learner</h2>
+<div class="attendance-form">
+<div class="form-field">
+<label for="attendanceLearner">Learner</label>
+<select id="attendanceLearner"><option value="">Load learners first</option></select>
+</div>
+<div class="form-field">
+<label for="attendanceDate">Attendance date</label>
+<input type="date" id="attendanceDate">
+</div>
+<div class="form-field">
+<label for="attendanceStatus">Attendance status</label>
+<select id="attendanceStatus">
+<option value="present">PRESENT</option>
+<option value="absent">ABSENT</option>
+</select>
+</div>
+<button type="button" class="ema-btn green" id="saveAttendanceBtn">Save Attendance</button>
+</div>
+
+<div id="attendanceGradeGroups">
+<div class="empty-state">Loading Mathematics attendance register...</div>
+</div>
+</div>
+</div>
+</section>
+
 <h2 class="portal-heading">Mathematics Management</h2>
 <div class="portal-container">
-<div class="subject-portal"><div class="portal-icon">📝</div><h2>Exam Management</h2><p>Create, edit, preview and assign Mathematics assessments.</p><button class="portal-btn" id="newExamBtn">＋ Create New Exam</button></div>
-<div class="subject-portal"><div class="portal-icon">📄</div><h2>Study Resources</h2><p>Register PDFs, revision guides and study resource links.</p><button class="portal-btn" id="resourceBtn">＋ Add Resource</button></div>
-<div class="subject-portal"><div class="portal-icon">📢</div><h2>Announcements</h2><p>Publish notices for Mathematics learners.</p><button class="portal-btn" id="announcementBtn">＋ Publish Announcement</button></div>
+<div class="subject-portal">
+<div class="portal-icon">📝</div>
+<h2>Exam Management</h2>
+<p>Create, edit, preview and assign Mathematics assessments.</p>
+<button class="portal-btn" id="newExamBtn">＋ Create New Exam</button>
+</div>
+<div class="subject-portal">
+<div class="portal-icon">📄</div>
+<h2>Study Resources</h2>
+<p>Register PDFs, revision guides and study resource links.</p>
+<button class="portal-btn" id="resourceBtn">＋ Add Resource</button>
+</div>
+<div class="subject-portal">
+<div class="portal-icon">📢</div>
+<h2>Announcements</h2>
+<p>Publish notices for Mathematics learners.</p>
+<button class="portal-btn" id="announcementBtn">＋ Publish Announcement</button>
+</div>
 </div>
 
 <div class="exam-manager" id="examLibrary">
 <h2>📚 Mathematics Assessment Library</h2>
 <p>Manage saved Mathematics assessments, including drafts and published tests.</p>
-<div class="exam-actions"><button class="ema-btn" id="refreshExamsBtn">↻ Refresh Assessments</button><button class="ema-btn gold" id="libraryCreateBtn">＋ Create Exam</button></div>
+<div class="exam-actions">
+<button class="ema-btn" id="refreshExamsBtn">↻ Refresh Assessments</button>
+<button class="ema-btn gold" id="libraryCreateBtn">＋ Create Exam</button>
+</div>
 <div id="examList"><p>Loading assessments...</p></div>
 </div>
 
 <h2 class="portal-heading">Mathematics Learner Directory</h2>
 <div class="content-panel">
-<p>Active learners registered for Mathematics. Learner names are loaded directly from your EMA database.</p>
+<p>Active learners registered for Mathematics. Promote learners to the next grade or mark Grade 12 learners as completed. Promotion updates the existing learner profile and does not create another account.</p>
 <div class="directory-toolbar">
 <input type="search" id="learnerSearch" class="directory-search" placeholder="Search learner name, email or student number...">
 <span class="directory-count" id="directoryCount">Loading learners...</span>
@@ -167,28 +329,67 @@ nav{padding:12px 13px}nav .menu{justify-content:center;gap:12px 18px}nav a{font-
 
 <h2 class="portal-heading">Mathematics Topics</h2>
 <div class="task-container">
-<div class="task-card">Algebra</div><div class="task-card">Equations and Inequalities</div><div class="task-card">Patterns and Sequences</div><div class="task-card">Functions and Graphs</div><div class="task-card">Finance and Growth</div><div class="task-card">Trigonometry</div><div class="task-card">Euclidean Geometry</div><div class="task-card">Analytical Geometry</div><div class="task-card">Measurement</div><div class="task-card">Statistics</div><div class="task-card">Probability</div><div class="task-card">Differential Calculus</div>
+<div class="task-card">Algebra</div>
+<div class="task-card">Equations and Inequalities</div>
+<div class="task-card">Patterns and Sequences</div>
+<div class="task-card">Functions and Graphs</div>
+<div class="task-card">Finance and Growth</div>
+<div class="task-card">Trigonometry</div>
+<div class="task-card">Euclidean Geometry</div>
+<div class="task-card">Analytical Geometry</div>
+<div class="task-card">Measurement</div>
+<div class="task-card">Statistics</div>
+<div class="task-card">Probability</div>
+<div class="task-card">Differential Calculus</div>
 </div>
 
 <h2 class="portal-heading">Recent Mathematics Resources</h2>
 <div id="resourceList"><div class="empty-state">Loading resources...</div></div>
+
 <h2 class="portal-heading">Recent Announcements</h2>
 <div id="announcementList"><div class="empty-state">Loading announcements...</div></div>
 </section>
 
-<div class="modal" id="examCreationModal" aria-hidden="true"><div class="modal-panel">
-<div class="modal-header"><div><h2>🚀 Create a Mathematics Exam</h2><p>Choose how you want to prepare your assessment.</p></div><button class="ema-btn grey" id="closeCreationModal">✕ Close</button></div>
+<!-- EXAM CREATION MODAL -->
+<div class="modal" id="examCreationModal" aria-hidden="true">
+<div class="modal-panel">
+<div class="modal-header">
+<div><h2>🚀 Create a Mathematics Exam</h2><p>Choose how you want to prepare your assessment.</p></div>
+<button class="ema-btn grey" id="closeCreationModal">✕ Close</button>
+</div>
 <div class="creation-options">
-<button type="button" class="creation-option" id="chooseGoogle"><div class="option-icon">📝</div><h3>Google Forms Quiz</h3><p>Connect an existing Google Forms quiz. Learners complete it inside the EMA Exam Centre.</p><strong>Choose Google Forms →</strong></button>
-<button type="button" class="creation-option" id="chooseBuilder"><div class="option-icon">📚</div><h3>EMA Quiz Builder</h3><p>Create your own multiple-choice, short-answer and written questions directly in EMA.</p><strong>Build an EMA exam →</strong></button>
-<button type="button" class="creation-option" id="chooseAI"><div class="option-icon">🤖</div><h3>AI-Assisted Quiz Generator</h3><p>Prepare an AI question-generation prompt using a grade, topic, difficulty and question count.</p><strong>Generate questions →</strong></button>
-<button type="button" class="creation-option" id="chooseUpload"><div class="option-icon">📄</div><h3>Upload an Exam Paper</h3><p>PDF and Word upload support will be added after file storage is connected.</p><strong>Upload feature coming soon</strong></button>
+<button type="button" class="creation-option" id="chooseGoogle">
+<div class="option-icon">📝</div><h3>Google Forms Quiz</h3>
+<p>Connect an existing Google Forms quiz. Learners complete it inside the EMA Exam Centre.</p>
+<strong>Choose Google Forms →</strong>
+</button>
+<button type="button" class="creation-option" id="chooseBuilder">
+<div class="option-icon">📚</div><h3>EMA Quiz Builder</h3>
+<p>Create your own multiple-choice, short-answer and written questions directly in EMA.</p>
+<strong>Build an EMA exam →</strong>
+</button>
+<button type="button" class="creation-option" id="chooseAI">
+<div class="option-icon">🤖</div><h3>AI-Assisted Quiz Generator</h3>
+<p>Prepare an AI question-generation prompt using a grade, topic, difficulty and question count.</p>
+<strong>Generate questions →</strong>
+</button>
+<button type="button" class="creation-option" id="chooseUpload">
+<div class="option-icon">📄</div><h3>Upload an Exam Paper</h3>
+<p>PDF and Word upload support will be added after file storage is connected.</p>
+<strong>Upload feature coming soon</strong>
+</button>
 </div>
 <div class="modal-note">Your selected method opens in the exam editor. Review your assessment before assigning it.</div>
-</div></div>
+</div>
+</div>
 
-<div class="modal" id="examModal" aria-hidden="true"><div class="modal-panel">
-<div class="modal-header"><div><h2 id="editorHeading">Create Mathematics Exam</h2><p id="editorMessage">Complete the assessment details below.</p></div><button class="ema-btn grey" id="closeEditorBtn">✕ Close</button></div>
+<!-- EXAM EDITOR MODAL -->
+<div class="modal" id="examModal" aria-hidden="true">
+<div class="modal-panel">
+<div class="modal-header">
+<div><h2 id="editorHeading">Create Mathematics Exam</h2><p id="editorMessage">Complete the assessment details below.</p></div>
+<button class="ema-btn grey" id="closeEditorBtn">✕ Close</button>
+</div>
 <div class="form-grid">
 <div class="form-field"><label for="examTitle">Assessment title</label><input id="examTitle" placeholder="e.g. Grade 10 Algebra Test"></div>
 <div class="form-field"><label for="examGrade">Grade</label><select id="examGrade"><option value="">Choose grade</option><option value="8">Grade 8</option><option value="9">Grade 9</option><option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option></select></div>
@@ -197,56 +398,143 @@ nav{padding:12px 13px}nav .menu{justify-content:center;gap:12px 18px}nav a{font-
 <div class="form-field"><label for="examType">Assessment type</label><select id="examType"><option value="built_in">Built-in EMA exam</option><option value="google_form">Google Forms exam</option></select></div>
 <div class="form-field"><label for="examMaxScore">Total marks (Google Forms)</label><input id="examMaxScore" type="number" min="1" step="0.5" placeholder="e.g. 50"></div>
 </div>
-<div id="googleFormFields" class="hidden"><div class="form-field"><label for="googleFormUrl">Google Forms link</label><input id="googleFormUrl" type="url" placeholder="Paste your Google Forms URL"></div><div class="modal-note">Paste the normal Google Forms link ending in /viewform.</div></div>
-<div id="builtInFields"><hr><h2>Exam Questions</h2><p>Add multiple-choice, short-answer or long-answer questions.</p><div id="questionList"></div><button class="ema-btn grey" id="addQuestionBtn" type="button">＋ Add Question</button></div>
+<div id="googleFormFields" class="hidden">
+<div class="form-field"><label for="googleFormUrl">Google Forms link</label><input id="googleFormUrl" type="url" placeholder="Paste your Google Forms URL"></div>
+<div class="modal-note">Paste the normal Google Forms link ending in /viewform.</div>
+</div>
+<div id="builtInFields">
+<hr><h2>Exam Questions</h2><p>Add multiple-choice, short-answer or long-answer questions.</p>
+<div id="questionList"></div>
+<button class="ema-btn grey" id="addQuestionBtn" type="button">＋ Add Question</button>
+</div>
 <div class="modal-note" id="editorStatus">Save as a draft first. You can return to edit it before assigning it.</div>
-<div class="modal-footer"><button class="ema-btn" id="saveDraftBtn">Save Draft</button><button class="ema-btn gold" id="assignExamBtn">Assign Test</button><button class="ema-btn grey" id="backToChoicesBtn">Back to Choices</button></div>
-</div></div>
+<div class="modal-footer">
+<button class="ema-btn" id="saveDraftBtn">Save Draft</button>
+<button class="ema-btn gold" id="assignExamBtn">Assign Test</button>
+<button class="ema-btn grey" id="backToChoicesBtn">Back to Choices</button>
+</div>
+</div>
+</div>
 
-<div class="modal" id="assignModal" aria-hidden="true"><div class="modal-panel">
-<div class="modal-header"><div><h2>📣 Assign Mathematics Assessment</h2><p>Review the assignment before publishing.</p></div><button class="ema-btn grey" id="closeAssignBtn">✕ Close</button></div>
-<div class="assignment-summary"><h3 id="assignTitle">Assessment title</h3><p id="assignDetails">Grade and assessment information</p><div class="assignment-stat"><div><h3 id="assignLearnerCount">--</h3><p>Eligible active learners</p></div><div><h3 id="assignGrade">--</h3><p>Target grade</p></div></div></div>
+<!-- ASSIGN MODAL -->
+<div class="modal" id="assignModal" aria-hidden="true">
+<div class="modal-panel">
+<div class="modal-header">
+<div><h2>📣 Assign Mathematics Assessment</h2><p>Review the assignment before publishing.</p></div>
+<button class="ema-btn grey" id="closeAssignBtn">✕ Close</button>
+</div>
+<div class="assignment-summary">
+<h3 id="assignTitle">Assessment title</h3>
+<p id="assignDetails">Grade and assessment information</p>
+<div class="assignment-stat">
+<div><h3 id="assignLearnerCount">--</h3><p>Eligible active learners</p></div>
+<div><h3 id="assignGrade">--</h3><p>Target grade</p></div>
+</div>
+</div>
 <div class="modal-note"><strong>Website availability:</strong> After publishing, active Mathematics learners in the selected grade can see the assessment in their Exam Centre.</div>
 <div class="modal-note"><strong>Email notifications:</strong> Email delivery is not connected in this version. Publishing here does not send an email.</div>
 <div id="assignLearnerPreview" class="empty-state">Loading eligible learners...</div>
-<div class="modal-footer"><button class="ema-btn gold" id="confirmAssignBtn">Confirm & Publish Assessment</button><button class="ema-btn grey" id="cancelAssignBtn">Cancel</button></div>
-</div></div>
+<div class="modal-footer">
+<button class="ema-btn gold" id="confirmAssignBtn">Confirm & Publish Assessment</button>
+<button class="ema-btn grey" id="cancelAssignBtn">Cancel</button>
+</div>
+</div>
+</div>
 
 <script>
 document.addEventListener("DOMContentLoaded",async()=>{
 const $=id=>document.getElementById(id);
-if(!window.EMA||!EMA.db){alert("Supabase connection not found. Check config.js and ema-supabase.js.");return}
+
+if(!window.EMA||!EMA.db){
+alert("Supabase connection not found. Check config.js and ema-supabase.js.");
+return;
+}
+
 const db=EMA.db;
 const profile=await EMA.requireSession(["admin"]);
 if(!profile)return;
 
-let editingId=null,editingPublished=false,questionCounter=0,assignmentMode=null,selectedLibraryExam=null,assignmentBusy=false,directoryLearners=[];
+let editingId=null;
+let editingPublished=false;
+let questionCounter=0;
+let assignmentMode=null;
+let selectedLibraryExam=null;
+let assignmentBusy=false;
+let directoryLearners=[];
+let attendanceData={records:[],learners:[],settings:[]};
 
 $("adminWelcome").textContent="Welcome, "+(profile.full_name||"Mathematics Administrator");
-$("logoutBtn").addEventListener("click",async e=>{e.preventDefault();await EMA.signOut()});
 
-function escapeHTML(value){return String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[char]))}
-function moveToModal(id){const modal=$(id),panel=modal?.querySelector(".modal-panel");if(!modal)return;modal.scrollTop=0;requestAnimationFrame(()=>panel?.scrollIntoView({behavior:"smooth",block:"start"}))}
-function openModal(id){$(id).classList.add("open");$(id).setAttribute("aria-hidden","false");document.body.style.overflow="hidden";moveToModal(id)}
-function closeModal(id){$(id).classList.remove("open");$(id).setAttribute("aria-hidden","true");if(!document.querySelectorAll(".modal.open").length)document.body.style.overflow=""}
-function openCreationChoices(){closeModal("examModal");closeModal("assignModal");openModal("examCreationModal")}
-function closeCreationChoices(){closeModal("examCreationModal")}
+$("logoutBtn").addEventListener("click",async e=>{
+e.preventDefault();
+await EMA.signOut();
+});
+
+function escapeHTML(value){
+return String(value??"").replace(/[&<>"']/g,char=>({
+"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+}[char]));
+}
+
+function moveToModal(id){
+const modal=$(id);
+const panel=modal?.querySelector(".modal-panel");
+if(!modal)return;
+modal.scrollTop=0;
+requestAnimationFrame(()=>panel?.scrollIntoView({behavior:"smooth",block:"start"}));
+}
+
+function openModal(id){
+$(id).classList.add("open");
+$(id).setAttribute("aria-hidden","false");
+document.body.style.overflow="hidden";
+moveToModal(id);
+}
+
+function closeModal(id){
+$(id).classList.remove("open");
+$(id).setAttribute("aria-hidden","true");
+if(!document.querySelectorAll(".modal.open").length){
+document.body.style.overflow="";
+}
+}
+
+function openCreationChoices(){
+closeModal("examModal");
+closeModal("assignModal");
+openModal("examCreationModal");
+}
+
+function closeCreationChoices(){
+closeModal("examCreationModal");
+}
 
 $("newExamBtn").addEventListener("click",openCreationChoices);
 $("libraryCreateBtn").addEventListener("click",openCreationChoices);
 $("closeCreationModal").addEventListener("click",closeCreationChoices);
-$("backToChoicesBtn").addEventListener("click",()=>{closeModal("examModal");openCreationChoices()});
+$("backToChoicesBtn").addEventListener("click",()=>{
+closeModal("examModal");
+openCreationChoices();
+});
 $("closeEditorBtn").addEventListener("click",()=>closeModal("examModal"));
 $("closeAssignBtn").addEventListener("click",()=>closeModal("assignModal"));
 $("cancelAssignBtn").addEventListener("click",()=>closeModal("assignModal"));
 
-function updateExamType(){const google=$("examType").value==="google_form";$("googleFormFields").classList.toggle("hidden",!google);$("builtInFields").classList.toggle("hidden",google);$("examMaxScore").disabled=!google}
+function updateExamType(){
+const google=$("examType").value==="google_form";
+$("googleFormFields").classList.toggle("hidden",!google);
+$("builtInFields").classList.toggle("hidden",google);
+$("examMaxScore").disabled=!google;
+}
 $("examType").addEventListener("change",updateExamType);
 
 function addQuestion(question={}){
 questionCounter++;
-const card=document.createElement("div");card.className="question-card";card.dataset.questionId=questionCounter;
+const card=document.createElement("div");
+card.className="question-card";
+card.dataset.questionId=questionCounter;
 const options=Array.isArray(question.options)?question.options.join("\n"):"";
+
 card.innerHTML=`
 <h3>Question ${questionCounter}</h3>
 <div class="form-field"><label>Question text</label><textarea class="q-text" placeholder="Enter the question">${escapeHTML(question.question_text||"")}</textarea></div>
@@ -257,43 +545,93 @@ card.innerHTML=`
 <div class="form-field q-options-wrap"><label>Answer options (one per line)</label><textarea class="q-options" placeholder="Option A&#10;Option B&#10;Option C&#10;Option D">${escapeHTML(options)}</textarea></div>
 <div class="form-field"><label>Correct answer / marking guide</label><textarea class="q-answer" placeholder="Enter the correct answer or marking guide">${escapeHTML(question.correct_answer||"")}</textarea></div>
 <button type="button" class="ema-btn red remove-question">Remove Question</button>`;
+
 $("questionList").appendChild(card);
 card.querySelector(".q-type").value=question.question_type||"mcq";
-function updateQuestionFields(){card.querySelector(".q-options-wrap").classList.toggle("hidden",card.querySelector(".q-type").value!=="mcq")}
+
+function updateQuestionFields(){
+card.querySelector(".q-options-wrap").classList.toggle("hidden",card.querySelector(".q-type").value!=="mcq");
+}
+
 card.querySelector(".q-type").addEventListener("change",updateQuestionFields);
 card.querySelector(".remove-question").addEventListener("click",()=>card.remove());
 updateQuestionFields();
 }
+
 $("addQuestionBtn").addEventListener("click",()=>addQuestion());
 
 function readQuestions(){
 return [...$("questionList").querySelectorAll(".question-card")].map((card,index)=>{
 const type=card.querySelector(".q-type").value;
-return{question_text:card.querySelector(".q-text").value.trim(),question_type:type,options:type==="mcq"?card.querySelector(".q-options").value.split("\n").map(x=>x.trim()).filter(Boolean):[],correct_answer:card.querySelector(".q-answer").value.trim(),marks:Number(card.querySelector(".q-marks").value),position:index+1}
-})
+return{
+question_text:card.querySelector(".q-text").value.trim(),
+question_type:type,
+options:type==="mcq"?card.querySelector(".q-options").value.split("\n").map(x=>x.trim()).filter(Boolean):[],
+correct_answer:card.querySelector(".q-answer").value.trim(),
+marks:Number(card.querySelector(".q-marks").value),
+position:index+1
+};
+});
 }
+
 function validateQuestions(questions){
 if(!questions.length)return"Add at least one question.";
-for(let i=0;i<questions.length;i++){const q=questions[i];if(!q.question_text)return`Enter the text for question ${i+1}.`;if(!Number.isFinite(q.marks)||q.marks<=0)return`Enter valid marks for question ${i+1}.`;if(q.question_type==="mcq"&&q.options.length<2)return`Question ${i+1} needs at least two options.`;if(!q.correct_answer)return`Enter the correct answer or marking guide for question ${i+1}.`}
-return null
+for(let i=0;i<questions.length;i++){
+const q=questions[i];
+if(!q.question_text)return`Enter the text for question ${i+1}.`;
+if(!Number.isFinite(q.marks)||q.marks<=0)return`Enter valid marks for question ${i+1}.`;
+if(q.question_type==="mcq"&&q.options.length<2)return`Question ${i+1} needs at least two options.`;
+if(!q.correct_answer)return`Enter the correct answer or marking guide for question ${i+1}.`;
 }
+return null;
+}
+
 function resetEditor(){
-editingId=null;editingPublished=false;questionCounter=0;
-$("editorHeading").textContent="Create Mathematics Exam";$("editorMessage").textContent="Complete the assessment details below.";
-$("examTitle").value="";$("examGrade").value="";$("examPaper").value="";$("examDuration").value=45;$("examType").value="built_in";$("examMaxScore").value="";$("googleFormUrl").value="";$("questionList").innerHTML="";
-$("editorStatus").textContent="Save as a draft first. You can return to edit it before assigning it.";updateExamType()
+editingId=null;
+editingPublished=false;
+questionCounter=0;
+$("editorHeading").textContent="Create Mathematics Exam";
+$("editorMessage").textContent="Complete the assessment details below.";
+$("examTitle").value="";
+$("examGrade").value="";
+$("examPaper").value="";
+$("examDuration").value=45;
+$("examType").value="built_in";
+$("examMaxScore").value="";
+$("googleFormUrl").value="";
+$("questionList").innerHTML="";
+$("editorStatus").textContent="Save as a draft first. You can return to edit it before assigning it.";
+updateExamType();
 }
-function openNewExam(type){resetEditor();$("examType").value=type;updateExamType();$("editorHeading").textContent=type==="google_form"?"Create Google Forms Assessment":"Create EMA Assessment";closeCreationChoices();openModal("examModal")}
+
+function openNewExam(type){
+resetEditor();
+$("examType").value=type;
+updateExamType();
+$("editorHeading").textContent=type==="google_form"?"Create Google Forms Assessment":"Create EMA Assessment";
+closeCreationChoices();
+openModal("examModal");
+}
+
 $("chooseGoogle").addEventListener("click",()=>openNewExam("google_form"));
 $("chooseBuilder").addEventListener("click",()=>openNewExam("built_in"));
 
 $("chooseAI").addEventListener("click",async()=>{
 const grade=prompt("Which grade? (8–12)");
-if(!["8","9","10","11","12"].includes(grade)){alert("Choose a valid grade.");return}
-const topic=prompt("Enter the Mathematics topic:");if(!topic?.trim())return;
-const difficulty=prompt("Choose difficulty: Easy, Medium or Hard","Medium");if(!difficulty?.trim())return;
+if(!["8","9","10","11","12"].includes(grade)){
+alert("Choose a valid grade.");
+return;
+}
+const topic=prompt("Enter the Mathematics topic:");
+if(!topic?.trim())return;
+const difficulty=prompt("Choose difficulty: Easy, Medium or Hard","Medium");
+if(!difficulty?.trim())return;
 const count=prompt("How many questions?","10");
-if(!/^\d+$/.test(count)||Number(count)<1||Number(count)>50){alert("Enter a number between 1 and 50.");return}
+if(!/^\d+$/.test(count)||Number(count)<1||Number(count)>50){
+alert("Enter a number between 1 and 50.");
+return;
+}
+
 const promptText=`Create a Grade ${grade} South African Mathematics assessment.
 
 Topic: ${topic}
@@ -309,116 +647,341 @@ Requirements:
 - Include a marking guide for written questions.
 - Separate the questions from the memorandum.
 - Prepare the assessment for teacher review and editing.`;
-try{await navigator.clipboard.writeText(promptText);alert("AI assessment prompt copied. Paste it into ChatGPT.")}catch(error){window.prompt("Copy this AI assessment prompt:",promptText)}
-window.open("https://chatgpt.com/","_blank")
-});
-$("chooseUpload").addEventListener("click",()=>alert("PDF and Word upload is not connected yet. File storage and document processing still need to be implemented."));
 
-function getGoogleFormId(url){try{const match=url.match(/\/forms\/d\/(?:e\/)?([^/]+)/);return match?match[1]:null}catch{return null}}
+try{
+await navigator.clipboard.writeText(promptText);
+alert("AI assessment prompt copied. Paste it into ChatGPT.");
+}catch(error){
+window.prompt("Copy this AI assessment prompt:",promptText);
+}
+window.open("https://chatgpt.com/","_blank");
+});
+
+$("chooseUpload").addEventListener("click",()=>{
+alert("PDF and Word upload is not connected yet. File storage and document processing still need to be implemented.");
+});
+
+function getGoogleFormId(url){
+try{
+const match=url.match(/\/forms\/d\/(?:e\/)?([^/]+)/);
+return match?match[1]:null;
+}catch{
+return null;
+}
+}
 
 function getEditorData(){
-const title=$("examTitle").value.trim(),grade=Number($("examGrade").value),paper=$("examPaper").value.trim(),duration=Number($("examDuration").value),type=$("examType").value,formUrl=$("googleFormUrl").value.trim();
+const title=$("examTitle").value.trim();
+const grade=Number($("examGrade").value);
+const paper=$("examPaper").value.trim();
+const duration=Number($("examDuration").value);
+const type=$("examType").value;
+const formUrl=$("googleFormUrl").value.trim();
+
 if(!title)throw new Error("Enter an assessment title.");
 if(![8,9,10,11,12].includes(grade))throw new Error("Choose a valid grade.");
 if(!Number.isFinite(duration)||duration<=0)throw new Error("Enter a valid duration.");
-let questions=[],maxScore=Number($("examMaxScore").value||0);
-if(type==="built_in"){questions=readQuestions();const problem=validateQuestions(questions);if(problem)throw new Error(problem);maxScore=questions.reduce((total,q)=>total+q.marks,0)}
-else{if(!/^https:\/\/docs\.google\.com\/forms\//i.test(formUrl))throw new Error("Paste a valid Google Forms link.");if(!Number.isFinite(maxScore)||maxScore<=0)throw new Error("Enter the total marks for this Google Form.")}
-return{title,grade,paper:paper||null,duration,type,formUrl,questions,maxScore}
+
+let questions=[];
+let maxScore=Number($("examMaxScore").value||0);
+
+if(type==="built_in"){
+questions=readQuestions();
+const problem=validateQuestions(questions);
+if(problem)throw new Error(problem);
+maxScore=questions.reduce((total,q)=>total+q.marks,0);
+}else{
+if(!/^https:\/\/docs\.google\.com\/forms\//i.test(formUrl))throw new Error("Paste a valid Google Forms link.");
+if(!Number.isFinite(maxScore)||maxScore<=0)throw new Error("Enter the total marks for this Google Form.");
+}
+
+return{title,grade,paper:paper||null,duration,type,formUrl,questions,maxScore};
 }
 
 async function saveExam(publish=false){
-let values;try{values=getEditorData()}catch(error){alert(error.message);return false}
-$("saveDraftBtn").disabled=true;$("assignExamBtn").disabled=true;$("editorStatus").textContent="Saving assessment...";
+let values;
 try{
-const payload={title:values.title,subject:"Mathematics",grade:values.grade,paper:values.paper,duration_minutes:values.duration,max_score:values.maxScore,assessment_type:values.type,google_form_url:values.type==="google_form"?values.formUrl:null,google_form_id:values.type==="google_form"?getGoogleFormId(values.formUrl):null,published:publish?true:editingPublished,created_by:profile.id};
+values=getEditorData();
+}catch(error){
+alert(error.message);
+return false;
+}
+
+$("saveDraftBtn").disabled=true;
+$("assignExamBtn").disabled=true;
+$("editorStatus").textContent="Saving assessment...";
+
+try{
+const payload={
+title:values.title,
+subject:"Mathematics",
+grade:values.grade,
+paper:values.paper,
+duration_minutes:values.duration,
+max_score:values.maxScore,
+assessment_type:values.type,
+google_form_url:values.type==="google_form"?values.formUrl:null,
+google_form_id:values.type==="google_form"?getGoogleFormId(values.formUrl):null,
+published:publish?true:editingPublished,
+created_by:profile.id
+};
+
 let savedId=editingId;
-if(savedId){const{error}=await db.from("assessments").update(payload).eq("id",savedId);if(error)throw error}
-else{const{data,error}=await db.from("assessments").insert(payload).select("id").single();if(error)throw error;savedId=data.id;editingId=savedId}
+
+if(savedId){
+const{error}=await db.from("assessments").update(payload).eq("id",savedId);
+if(error)throw error;
+}else{
+const{data,error}=await db.from("assessments").insert(payload).select("id").single();
+if(error)throw error;
+savedId=data.id;
+editingId=savedId;
+}
+
 if(values.type==="built_in"){
-const{error:deleteError}=await db.from("questions").delete().eq("assessment_id",savedId);if(deleteError)throw deleteError;
+const{error:deleteError}=await db.from("questions").delete().eq("assessment_id",savedId);
+if(deleteError)throw deleteError;
 const questionRows=values.questions.map(q=>({...q,assessment_id:savedId}));
-const{error:insertError}=await db.from("questions").insert(questionRows);if(insertError)throw insertError
-}else{const{error:deleteError}=await db.from("questions").delete().eq("assessment_id",savedId);if(deleteError)throw deleteError}
+const{error:insertError}=await db.from("questions").insert(questionRows);
+if(insertError)throw insertError;
+}else{
+const{error:deleteError}=await db.from("questions").delete().eq("assessment_id",savedId);
+if(deleteError)throw deleteError;
+}
+
 editingPublished=publish?true:editingPublished;
 $("editorStatus").textContent=publish?"Assessment successfully published.":"Draft saved successfully.";
-closeModal("examModal");await loadDashboard();
-alert(publish?"Assessment published. Eligible Mathematics learners can now see it in their Exam Centre.":"Assessment draft saved successfully.");return true
-}catch(error){console.error(error);$("editorStatus").textContent="Save failed: "+error.message;alert("Could not save assessment: "+error.message);return false}
-finally{$("saveDraftBtn").disabled=false;$("assignExamBtn").disabled=false}
+closeModal("examModal");
+await loadDashboard();
+
+alert(publish?"Assessment published. Eligible Mathematics learners can now see it in their Exam Centre.":"Assessment draft saved successfully.");
+return true;
+
+}catch(error){
+console.error(error);
+$("editorStatus").textContent="Save failed: "+error.message;
+alert("Could not save assessment: "+error.message);
+return false;
+}finally{
+$("saveDraftBtn").disabled=false;
+$("assignExamBtn").disabled=false;
 }
+}
+
 $("saveDraftBtn").addEventListener("click",()=>saveExam(false));
 
 async function getEligibleLearners(grade){
-const{data,error}=await db.from("profiles").select("id,full_name,email,student_number,grade").eq("role","learner").eq("status","active").eq("grade",Number(grade)).contains("subject_access",["Mathematics"]).order("full_name",{ascending:true});
-if(error)throw error;return data||[]
+const{data,error}=await db.from("profiles")
+.select("id,full_name,email,student_number,grade")
+.eq("role","learner")
+.eq("status","active")
+.eq("grade",Number(grade))
+.contains("subject_access",["Mathematics"])
+.order("full_name",{ascending:true});
+
+if(error)throw error;
+return data||[];
 }
+
 async function openAssignmentForEditor(){
-let values;try{values=getEditorData()}catch(error){alert(error.message);return}
-assignmentMode="editor";selectedLibraryExam=null;
-$("assignTitle").textContent=values.title;$("assignDetails").textContent=`${values.type==="google_form"?"Google Forms":"EMA built-in"} | ${values.duration} minutes | ${values.maxScore} marks`;
-$("assignGrade").textContent="Grade "+values.grade;$("assignLearnerCount").textContent="...";$("assignLearnerPreview").textContent="Loading eligible learners...";
-closeModal("examModal");openModal("assignModal");
-try{const learners=await getEligibleLearners(values.grade);$("assignLearnerCount").textContent=learners.length;$("assignLearnerPreview").innerHTML=learners.length?`<strong>Eligible learners:</strong><ul>${learners.map(l=>`<li>${escapeHTML(l.full_name)} — ${escapeHTML(l.student_number||"No student number")}</li>`).join("")}</ul>`:"No active Mathematics learners currently match this grade.";$("confirmAssignBtn").disabled=learners.length===0}
-catch(error){$("assignLearnerPreview").textContent="Could not load eligible learners: "+error.message;$("confirmAssignBtn").disabled=true}
-}
-async function openAssignmentForLibrary(exam){
-assignmentMode="library";selectedLibraryExam=exam;
-$("assignTitle").textContent=exam.title;$("assignDetails").textContent=`${exam.assessment_type==="google_form"?"Google Forms":"EMA built-in"} | ${exam.duration_minutes} minutes | ${exam.max_score} marks`;
-$("assignGrade").textContent="Grade "+exam.grade;$("assignLearnerCount").textContent="...";$("assignLearnerPreview").textContent="Loading eligible learners...";openModal("assignModal");
-try{const learners=await getEligibleLearners(exam.grade);$("assignLearnerCount").textContent=learners.length;$("assignLearnerPreview").innerHTML=learners.length?`<strong>Eligible learners:</strong><ul>${learners.map(l=>`<li>${escapeHTML(l.full_name)} — ${escapeHTML(l.student_number||"No student number")}</li>`).join("")}</ul>`:"No active Mathematics learners currently match this grade.";$("confirmAssignBtn").disabled=learners.length===0}
-catch(error){$("assignLearnerPreview").textContent="Could not load eligible learners: "+error.message;$("confirmAssignBtn").disabled=true}
-}
-$("assignExamBtn").addEventListener("click",openAssignmentForEditor);
-$("confirmAssignBtn").addEventListener("click",async()=>{
-if(assignmentBusy)return;assignmentBusy=true;$("confirmAssignBtn").disabled=true;$("confirmAssignBtn").textContent="Publishing...";
+let values;
 try{
-if(assignmentMode==="editor"){closeModal("assignModal");openModal("examModal");const success=await saveExam(true);if(!success)openAssignmentForEditor()}
-if(assignmentMode==="library"&&selectedLibraryExam){
-const{error}=await db.from("assessments").update({published:true}).eq("id",selectedLibraryExam.id).eq("published",false);
-if(error)throw error;closeModal("assignModal");alert("Assessment published. Eligible learners can now access it in their Exam Centre.");await loadDashboard()
+values=getEditorData();
+}catch(error){
+alert(error.message);
+return;
 }
-}catch(error){console.error(error);alert("Could not publish assessment: "+error.message)}
-finally{assignmentBusy=false;$("confirmAssignBtn").disabled=false;$("confirmAssignBtn").textContent="Confirm & Publish Assessment"}
+
+assignmentMode="editor";
+selectedLibraryExam=null;
+$("assignTitle").textContent=values.title;
+$("assignDetails").textContent=`${values.type==="google_form"?"Google Forms":"EMA built-in"} | ${values.duration} minutes | ${values.maxScore} marks`;
+$("assignGrade").textContent="Grade "+values.grade;
+$("assignLearnerCount").textContent="...";
+$("assignLearnerPreview").textContent="Loading eligible learners...";
+closeModal("examModal");
+openModal("assignModal");
+
+try{
+const learners=await getEligibleLearners(values.grade);
+$("assignLearnerCount").textContent=learners.length;
+$("assignLearnerPreview").innerHTML=learners.length?
+`<strong>Eligible learners:</strong><ul>${learners.map(l=>`<li>${escapeHTML(l.full_name)} — ${escapeHTML(l.student_number||"No student number")}</li>`).join("")}</ul>`:
+"No active Mathematics learners currently match this grade.";
+$("confirmAssignBtn").disabled=learners.length===0;
+}catch(error){
+$("assignLearnerPreview").textContent="Could not load eligible learners: "+error.message;
+$("confirmAssignBtn").disabled=true;
+}
+}
+
+async function openAssignmentForLibrary(exam){
+assignmentMode="library";
+selectedLibraryExam=exam;
+$("assignTitle").textContent=exam.title;
+$("assignDetails").textContent=`${exam.assessment_type==="google_form"?"Google Forms":"EMA built-in"} | ${exam.duration_minutes} minutes | ${exam.max_score} marks`;
+$("assignGrade").textContent="Grade "+exam.grade;
+$("assignLearnerCount").textContent="...";
+$("assignLearnerPreview").textContent="Loading eligible learners...";
+openModal("assignModal");
+
+try{
+const learners=await getEligibleLearners(exam.grade);
+$("assignLearnerCount").textContent=learners.length;
+$("assignLearnerPreview").innerHTML=learners.length?
+`<strong>Eligible learners:</strong><ul>${learners.map(l=>`<li>${escapeHTML(l.full_name)} — ${escapeHTML(l.student_number||"No student number")}</li>`).join("")}</ul>`:
+"No active Mathematics learners currently match this grade.";
+$("confirmAssignBtn").disabled=learners.length===0;
+}catch(error){
+$("assignLearnerPreview").textContent="Could not load eligible learners: "+error.message;
+$("confirmAssignBtn").disabled=true;
+}
+}
+
+$("assignExamBtn").addEventListener("click",openAssignmentForEditor);
+
+$("confirmAssignBtn").addEventListener("click",async()=>{
+if(assignmentBusy)return;
+assignmentBusy=true;
+$("confirmAssignBtn").disabled=true;
+$("confirmAssignBtn").textContent="Publishing...";
+
+try{
+if(assignmentMode==="editor"){
+closeModal("assignModal");
+openModal("examModal");
+const success=await saveExam(true);
+if(!success)openAssignmentForEditor();
+}
+if(assignmentMode==="library"&&selectedLibraryExam){
+const{error}=await db.from("assessments")
+.update({published:true})
+.eq("id",selectedLibraryExam.id)
+.eq("published",false);
+
+if(error)throw error;
+closeModal("assignModal");
+alert("Assessment published. Eligible learners can now access it in their Exam Centre.");
+await loadDashboard();
+}
+}catch(error){
+console.error(error);
+alert("Could not publish assessment: "+error.message);
+}finally{
+assignmentBusy=false;
+$("confirmAssignBtn").disabled=false;
+$("confirmAssignBtn").textContent="Confirm & Publish Assessment";
+}
 });
 
 async function openEditor(id){
 const{data:exam,error}=await db.from("assessments").select("*").eq("id",id).single();
-if(error||!exam){alert("Could not open assessment: "+(error?.message||"Not found"));return}
-editingId=exam.id;editingPublished=!!exam.published;questionCounter=0;
-$("editorHeading").textContent="Edit Mathematics Exam";$("editorMessage").textContent=exam.published?"This assessment is published. Be careful when changing its questions.":"This assessment is a draft.";
-$("examTitle").value=exam.title||"";$("examGrade").value=String(exam.grade||"");$("examPaper").value=exam.paper||"";$("examDuration").value=exam.duration_minutes||45;$("examType").value=exam.assessment_type||"built_in";$("examMaxScore").value=exam.max_score||"";$("googleFormUrl").value=exam.google_form_url||"";$("questionList").innerHTML="";
-updateExamType();
-if(exam.assessment_type==="built_in"){
-const{data:questions,error:qError}=await db.from("questions").select("*").eq("assessment_id",id).order("position",{ascending:true});
-if(qError){alert("Could not load questions: "+qError.message);return}(questions||[]).forEach(addQuestion)
+if(error||!exam){
+alert("Could not open assessment: "+(error?.message||"Not found"));
+return;
 }
-$("editorStatus").textContent=editingPublished?"Published assessment. Saving changes updates the existing assessment.":"Draft loaded. Make your changes and save or assign it.";openModal("examModal")
+
+editingId=exam.id;
+editingPublished=!!exam.published;
+questionCounter=0;
+$("editorHeading").textContent="Edit Mathematics Exam";
+$("editorMessage").textContent=exam.published?"This assessment is published. Be careful when changing its questions.":"This assessment is a draft.";
+$("examTitle").value=exam.title||"";
+$("examGrade").value=String(exam.grade||"");
+$("examPaper").value=exam.paper||"";
+$("examDuration").value=exam.duration_minutes||45;
+$("examType").value=exam.assessment_type||"built_in";
+$("examMaxScore").value=exam.max_score||"";
+$("googleFormUrl").value=exam.google_form_url||"";
+$("questionList").innerHTML="";
+updateExamType();
+
+if(exam.assessment_type==="built_in"){
+const{data:questions,error:qError}=await db.from("questions")
+.select("*")
+.eq("assessment_id",id)
+.order("position",{ascending:true});
+
+if(qError){
+alert("Could not load questions: "+qError.message);
+return;
+}
+(questions||[]).forEach(addQuestion);
+}
+
+$("editorStatus").textContent=editingPublished?
+"Published assessment. Saving changes updates the existing assessment.":
+"Draft loaded. Make your changes and save or assign it.";
+openModal("examModal");
 }
 
 async function loadAssessments(){
-const container=$("examList");container.innerHTML="<div class='empty-state'>Loading assessments...</div>";
-const{data,error}=await db.from("assessments").select("*").eq("subject","Mathematics").order("created_at",{ascending:false});
-if(error){container.textContent="Could not load assessments: "+error.message;return}
-if(!data?.length){container.innerHTML="<div class='empty-state'>No Mathematics assessments found. Create your first exam above.</div>";return}
+const container=$("examList");
+container.innerHTML="<div class='empty-state'>Loading assessments...</div>";
+
+const{data,error}=await db.from("assessments")
+.select("*")
+.eq("subject","Mathematics")
+.order("created_at",{ascending:false});
+
+if(error){
+container.textContent="Could not load assessments: "+error.message;
+return;
+}
+if(!data?.length){
+container.innerHTML="<div class='empty-state'>No Mathematics assessments found. Create your first exam above.</div>";
+return;
+}
+
 container.innerHTML="";
+
 data.forEach(exam=>{
-const card=document.createElement("div");card.className="exam-item";
-const status=exam.published?"<span class='exam-status status-live'>● PUBLISHED</span>":"<span class='exam-status status-draft'>● DRAFT</span>";
-card.innerHTML=`<h3>${escapeHTML(exam.title)}</h3><p>${status}</p><p>Grade ${escapeHTML(exam.grade)} | ${escapeHTML(exam.paper||"No paper specified")}</p><p>Type: ${exam.assessment_type==="google_form"?"Google Forms":"Built-in EMA exam"}</p><p>Duration: ${escapeHTML(exam.duration_minutes)} minutes | Marks: ${escapeHTML(exam.max_score)}</p><div class="exam-actions"><button class="ema-btn light edit-exam">Edit</button>${!exam.published?'<button class="ema-btn gold assign-exam">Assign Test</button>':""}${!exam.published?'<button class="ema-btn red delete-exam">Delete Draft</button>':""}${exam.assessment_type==="google_form"&&exam.google_form_url?'<a class="ema-btn grey open-form" target="_blank" rel="noopener noreferrer">Open Form</a>':""}</div>`;
+const card=document.createElement("div");
+card.className="exam-item";
+const status=exam.published?
+"<span class='exam-status status-live'>● PUBLISHED</span>":
+"<span class='exam-status status-draft'>● DRAFT</span>";
+
+card.innerHTML=`
+<h3>${escapeHTML(exam.title)}</h3>
+<p>${status}</p>
+<p>Grade ${escapeHTML(exam.grade)} | ${escapeHTML(exam.paper||"No paper specified")}</p>
+<p>Type: ${exam.assessment_type==="google_form"?"Google Forms":"Built-in EMA exam"}</p>
+<p>Duration: ${escapeHTML(exam.duration_minutes)} minutes | Marks: ${escapeHTML(exam.max_score)}</p>
+<div class="exam-actions">
+<button class="ema-btn light edit-exam">Edit</button>
+${!exam.published?'<button class="ema-btn gold assign-exam">Assign Test</button>':""}
+${!exam.published?'<button class="ema-btn red delete-exam">Delete Draft</button>':""}
+${exam.assessment_type==="google_form"&&exam.google_form_url?'<a class="ema-btn grey open-form" target="_blank" rel="noopener noreferrer">Open Form</a>':""}
+</div>`;
+
 card.querySelector(".edit-exam").addEventListener("click",()=>openEditor(exam.id));
-const assignButton=card.querySelector(".assign-exam");if(assignButton)assignButton.addEventListener("click",()=>openAssignmentForLibrary(exam));
+
+const assignButton=card.querySelector(".assign-exam");
+if(assignButton)assignButton.addEventListener("click",()=>openAssignmentForLibrary(exam));
+
 const deleteButton=card.querySelector(".delete-exam");
 if(deleteButton)deleteButton.addEventListener("click",async()=>{
 if(!confirm(`Permanently delete the draft "${exam.title}"?`))return;
-const{error}=await db.from("assessments").delete().eq("id",exam.id).eq("published",false);
-if(error){alert("Could not delete draft: "+error.message);return}
-alert("Draft deleted.");await loadDashboard()
-});
-const openForm=card.querySelector(".open-form");if(openForm)openForm.href=exam.google_form_url;
-container.appendChild(card)
-})
+const{error}=await db.from("assessments")
+.delete()
+.eq("id",exam.id)
+.eq("published",false);
+if(error){
+alert("Could not delete draft: "+error.message);
+return;
 }
+alert("Draft deleted.");
+await loadDashboard();
+});
+
+const openForm=card.querySelector(".open-form");
+if(openForm)openForm.href=exam.google_form_url;
+
+container.appendChild(card);
+});
+}
+
 $("refreshExamsBtn").addEventListener("click",loadAssessments);
 
 async function loadStatistics(){
@@ -428,58 +991,729 @@ db.from("profiles").select("id",{count:"exact",head:true}).eq("role","learner").
 db.from("assessments").select("id",{count:"exact",head:true}).eq("subject","Mathematics"),
 db.from("resources").select("id",{count:"exact",head:true}).eq("subject","Mathematics")
 ]);
+
 const errors=[learners.error,pending.error,quizzes.error,resources.error].filter(Boolean);
-if(errors.length){console.error(errors);return}
-$("learnerCount").textContent=learners.count??0;$("pendingCount").textContent=pending.count??0;$("quizCount").textContent=quizzes.count??0;$("resourceCount").textContent=resources.count??0
+if(errors.length){
+console.error(errors);
+return;
 }
 
-// ---------------------------------------
-// MATHEMATICS LEARNER DIRECTORY + REMOVAL
-// ---------------------------------------
+$("learnerCount").textContent=learners.count??0;
+$("pendingCount").textContent=pending.count??0;
+$("quizCount").textContent=quizzes.count??0;
+$("resourceCount").textContent=resources.count??0;
+}
+
+// ============================================================
+// MATHEMATICS ATTENDANCE REGISTER
+// ============================================================
+
+function localDateString(){
+const now=new Date();
+const parts=new Intl.DateTimeFormat("en-CA",{
+timeZone:"Africa/Johannesburg",
+year:"numeric",month:"2-digit",day:"2-digit"
+}).formatToParts(now);
+const get=type=>parts.find(p=>p.type===type)?.value;
+return `${get("year")}-${get("month")}-${get("day")}`;
+}
+
+function formatAttendanceDate(value){
+if(!value)return"—";
+const date=new Date(value+"T00:00:00");
+return date.toLocaleDateString("en-ZA",{
+day:"2-digit",month:"short",year:"numeric"
+});
+}
+
+function formatAttendanceTimestamp(value){
+if(!value)return"—";
+return new Date(value).toLocaleString("en-ZA",{
+timeZone:"Africa/Johannesburg",
+day:"2-digit",month:"short",year:"numeric",
+hour:"2-digit",minute:"2-digit",second:"2-digit",
+hour12:false
+});
+}
+
+function attendanceStatusHTML(status){
+const normalized=String(status||"").toLowerCase();
+if(normalized==="present")return'<span class="attendance-status present">PRESENT</span>';
+if(normalized==="absent")return'<span class="attendance-status absent">ABSENT</span>';
+return'<span class="attendance-status unknown">UNKNOWN</span>';
+}
+
+function getGradeSetting(grade){
+const setting=attendanceData.settings.find(item=>Number(item.grade)===Number(grade));
+return setting?setting.enabled!==false:true;
+}
+
+async function loadAttendanceRegister(){
+const container=$("attendanceGradeGroups");
+container.innerHTML="<div class='empty-state'>Loading Mathematics attendance records...</div>";
+
+try{
+const{data,error}=await db.rpc("admin_get_attendance_register",{
+p_subject:"Mathematics"
+});
+
+if(error)throw error;
+
+attendanceData={
+records:Array.isArray(data?.records)?data.records:[],
+learners:Array.isArray(data?.learners)?data.learners:[],
+settings:Array.isArray(data?.settings)?data.settings:[]
+};
+
+renderAttendanceRegister();
+populateAttendanceLearnerSelect();
+
+$("attendanceUpdated").textContent="Last refreshed: "+new Date().toLocaleString("en-ZA",{
+timeZone:"Africa/Johannesburg"
+});
+
+}catch(error){
+console.error("Attendance register error:",error);
+container.innerHTML=`<div class="empty-state">Could not load the attendance register: ${escapeHTML(error.message)}<br><br>Check that the Supabase admin attendance functions were created successfully.</div>`;
+}
+}
+
+function populateAttendanceLearnerSelect(){
+const select=$("attendanceLearner");
+const previous=select.value;
+
+const learners=attendanceData.learners||[];
+
+select.innerHTML='<option value="">Choose a Mathematics learner</option>';
+
+learners.forEach(learner=>{
+const option=document.createElement("option");
+option.value=learner.id;
+option.textContent=`Grade ${learner.grade} — ${learner.full_name}`;
+select.appendChild(option);
+});
+
+if(previous&&learners.some(l=>l.id===previous)){
+select.value=previous;
+}
+}
+
+function renderAttendanceRegister(){
+const container=$("attendanceGradeGroups");
+const records=attendanceData.records||[];
+
+$("attendanceTotal").textContent=records.length;
+$("attendancePresent").textContent=records.filter(r=>String(r.status).toLowerCase()==="present").length;
+$("attendanceAbsent").textContent=records.filter(r=>String(r.status).toLowerCase()==="absent").length;
+
+container.innerHTML="";
+
+[10,11,12].forEach(grade=>{
+const gradeRecords=records.filter(record=>Number(record.grade)===grade);
+const enabled=getGradeSetting(grade);
+
+const section=document.createElement("section");
+section.className="attendance-grade-card";
+
+const heading=document.createElement("div");
+heading.className="attendance-grade-heading";
+heading.innerHTML=`
+<h3>GRADE ${grade} MATHEMATICS ATTENDANCE</h3>
+<button type="button" class="grade-switch ${enabled?"on":"off"}" data-grade="${grade}">
+${enabled?"ATTENDANCE ON":"ATTENDANCE OFF"}
+</button>`;
+
+heading.querySelector(".grade-switch").addEventListener("click",()=>toggleGradeAttendance(grade,!enabled));
+
+const body=document.createElement("div");
+body.className="attendance-grade-body";
+
+const toolbar=document.createElement("div");
+toolbar.className="attendance-toolbar";
+toolbar.innerHTML=`
+<p>${gradeRecords.length} recorded attendance entries</p>
+<p>${enabled?"Learners can mark attendance":"Learner self-marking is disabled"}</p>`;
+
+const tableWrap=document.createElement("div");
+tableWrap.className="table-wrap";
+
+if(!gradeRecords.length){
+tableWrap.innerHTML="<div class='empty-state'>No attendance records have been recorded for Grade "+grade+" yet.</div>";
+}else{
+const rows=gradeRecords.map(record=>`
+<tr>
+<td>Grade ${escapeHTML(record.grade)}</td>
+<td>${escapeHTML(record.full_name||"Learner")}</td>
+<td>${escapeHTML(formatAttendanceDate(record.attendance_date))}</td>
+<td>
+${attendanceStatusHTML(record.status)}
+<div class="attendance-actions" style="margin-top:7px">
+<button type="button" class="ema-btn light correct-attendance" data-id="${escapeHTML(record.learner_id)}" data-date="${escapeHTML(record.attendance_date)}" data-status="${escapeHTML(record.status)}">Correct</button>
+</div>
+</td>
+<td>${escapeHTML(formatAttendanceTimestamp(record.marked_at))}</td>
+</tr>`).join("");
+
+tableWrap.innerHTML=`
+<table class="attendance-table">
+<thead>
+<tr>
+<th>Grade</th>
+<th>Name and surname</th>
+<th>Date</th>
+<th>Status</th>
+<th>Timestamp</th>
+</tr>
+</thead>
+<tbody>${rows}</tbody>
+</table>`;
+
+tableWrap.querySelectorAll(".correct-attendance").forEach(button=>{
+button.addEventListener("click",()=>{
+correctAttendance(
+button.dataset.id,
+button.dataset.date,
+button.dataset.status
+);
+});
+});
+}
+
+body.append(toolbar,tableWrap);
+section.append(heading,body);
+container.appendChild(section);
+});
+}
+
+async function toggleGradeAttendance(grade,enabled){
+const action=enabled?"OPEN":"CLOSE";
+const confirmed=confirm(
+`${action} Mathematics attendance for Grade ${grade}?\n\nThis affects only Grade ${grade} Mathematics. It does not affect the other grades or Physical Sciences.`
+);
+
+if(!confirmed)return;
+
+try{
+const{error}=await db.rpc("admin_set_grade_attendance_enabled",{
+p_subject:"Mathematics",
+p_grade:grade,
+p_enabled:enabled
+});
+
+if(error)throw error;
+
+const setting=attendanceData.settings.find(s=>Number(s.grade)===Number(grade));
+if(setting){
+setting.enabled=enabled;
+}else{
+attendanceData.settings.push({grade,enabled});
+}
+
+renderAttendanceRegister();
+
+alert(`Grade ${grade} Mathematics attendance is now ${enabled?"ON":"OFF"}.`);
+}catch(error){
+console.error(error);
+alert("Could not update the grade attendance switch: "+error.message);
+}
+}
+
+async function saveManualAttendance(){
+const learnerId=$("attendanceLearner").value;
+const attendanceDate=$("attendanceDate").value;
+const status=$("attendanceStatus").value;
+
+if(!learnerId){
+alert("Choose a learner first.");
+return;
+}
+if(!attendanceDate){
+alert("Choose the attendance date.");
+return;
+}
+if(!["present","absent"].includes(status)){
+alert("Choose a valid attendance status.");
+return;
+}
+
+const learner=attendanceData.learners.find(l=>l.id===learnerId);
+if(!learner){
+alert("The selected learner could not be found. Refresh the register and try again.");
+return;
+}
+
+const confirmed=confirm(
+`Record ${status.toUpperCase()} for ${learner.full_name}?\n\nGrade: ${learner.grade}\nSubject: Mathematics\nDate: ${attendanceDate}\n\nIf a record already exists for this learner and date, it will be corrected.`
+);
+
+if(!confirmed)return;
+
+const button=$("saveAttendanceBtn");
+button.disabled=true;
+button.textContent="Saving...";
+
+try{
+const{error}=await db.rpc("admin_mark_learner_attendance",{
+p_learner_id:learnerId,
+p_subject:"Mathematics",
+p_attendance_date:attendanceDate,
+p_status:status
+});
+
+if(error)throw error;
+
+alert("Attendance successfully saved.");
+await loadAttendanceRegister();
+
+}catch(error){
+console.error(error);
+alert("Could not save attendance: "+error.message);
+}finally{
+button.disabled=false;
+button.textContent="Save Attendance";
+}
+}
+
+async function correctAttendance(learnerId,currentDate,currentStatus){
+const learner=attendanceData.learners.find(l=>l.id===learnerId);
+const learnerName=learner?.full_name||"this learner";
+
+const newDate=prompt(
+`Correct attendance date for ${learnerName}.\nUse YYYY-MM-DD format:`,
+currentDate
+);
+
+if(newDate===null)return;
+
+if(!/^\d{4}-\d{2}-\d{2}$/.test(newDate)){
+alert("Please enter the date in YYYY-MM-DD format.");
+return;
+}
+
+const newStatus=prompt(
+`Enter the corrected status for ${learnerName}:\nType PRESENT or ABSENT.`,
+String(currentStatus).toUpperCase()
+);
+
+if(newStatus===null)return;
+
+const normalized=newStatus.trim().toLowerCase();
+if(!["present","absent"].includes(normalized)){
+alert("Status must be PRESENT or ABSENT.");
+return;
+}
+
+if(!confirm(
+`Confirm correction for ${learnerName}?\n\nNew date: ${newDate}\nNew status: ${normalized.toUpperCase()}`
+))return;
+
+try{
+const{error}=await db.rpc("admin_mark_learner_attendance",{
+p_learner_id:learnerId,
+p_subject:"Mathematics",
+p_attendance_date:newDate,
+p_status:normalized
+});
+
+if(error)throw error;
+
+alert("Attendance record corrected successfully.");
+await loadAttendanceRegister();
+
+}catch(error){
+console.error(error);
+alert("Could not correct attendance: "+error.message);
+}
+}
+
+$("attendanceMainToggle").addEventListener("click",()=>{
+const content=$("attendanceContent");
+const open=content.classList.toggle("open");
+$("attendanceMainToggle").querySelector("span").textContent=open?"−":"＋";
+
+if(open&&attendanceData.records.length===0){
+loadAttendanceRegister();
+}
+});
+
+$("refreshAttendanceBtn").addEventListener("click",loadAttendanceRegister);
+$("saveAttendanceBtn").addEventListener("click",saveManualAttendance);
+
+$("attendanceDate").value=localDateString();
+
+async function downloadCombinedAttendancePDF(){
+if(!attendanceData.records){
+alert("Load the attendance register first.");
+return;
+}
+
+if(!window.jspdf||!window.jspdf.jsPDF){
+alert("The PDF library could not load. Check your internet connection and refresh the page.");
+return;
+}
+
+const button=$("downloadAttendancePdfBtn");
+button.disabled=true;
+button.textContent="Preparing PDF...";
+
+try{
+const{jsPDF}=window.jspdf;
+const doc=new jsPDF({orientation:"landscape",unit:"mm",format:"a4"});
+
+const pageWidth=doc.internal.pageSize.getWidth();
+const pageHeight=doc.internal.pageSize.getHeight();
+const records=attendanceData.records||[];
+
+const presentCount=records.filter(r=>String(r.status).toLowerCase()==="present").length;
+const absentCount=records.filter(r=>String(r.status).toLowerCase()==="absent").length;
+
+let logoData=null;
+
+try{
+const logo=new Image();
+logo.src="logo.png.png";
+
+await new Promise((resolve,reject)=>{
+logo.onload=resolve;
+logo.onerror=reject;
+});
+
+const canvas=document.createElement("canvas");
+canvas.width=logo.naturalWidth;
+canvas.height=logo.naturalHeight;
+
+const context=canvas.getContext("2d");
+context.drawImage(logo,0,0);
+logoData=canvas.toDataURL("image/png");
+
+}catch(logoError){
+console.warn("Academy logo could not be loaded for PDF:",logoError);
+}
+
+function addPageHeader(){
+doc.setFillColor(0,31,102);
+doc.rect(0,0,pageWidth,30,"F");
+
+if(logoData){
+try{
+doc.addImage(logoData,"PNG",10,4,21,21);
+}catch(error){
+console.warn("Could not insert logo into PDF.",error);
+}
+}
+
+doc.setTextColor(255,255,255);
+doc.setFont("helvetica","bold");
+doc.setFontSize(17);
+doc.text("EVERYTHING'S MATHS ACADEMY",36,12);
+
+doc.setFontSize(10);
+doc.setFont("helvetica","normal");
+doc.text("MATHEMATICS ATTENDANCE REGISTER",36,20);
+
+doc.setTextColor(0,31,102);
+}
+
+addPageHeader();
+
+let y=39;
+
+doc.setFont("helvetica","bold");
+doc.setFontSize(14);
+doc.text("MATHEMATICS ATTENDANCE REPORT",10,y);
+
+y+=7;
+
+doc.setFont("helvetica","normal");
+doc.setFontSize(9);
+doc.text("Generated: "+new Date().toLocaleString("en-ZA",{
+timeZone:"Africa/Johannesburg"
+}),10,y);
+
+y+=9;
+
+doc.setFillColor(241,246,255);
+doc.roundedRect(10,y,pageWidth-20,17,2,2,"F");
+
+doc.setFont("helvetica","bold");
+doc.setFontSize(10);
+doc.setTextColor(0,31,102);
+
+doc.text("TOTAL RECORDS: "+records.length,16,y+7);
+doc.text("PRESENT: "+presentCount,90,y+7);
+doc.text("ABSENT: "+absentCount,160,y+7);
+
+y+=25;
+
+[10,11,12].forEach(grade=>{
+const gradeRecords=records.filter(r=>Number(r.grade)===grade);
+
+if(y>pageHeight-40){
+doc.addPage();
+addPageHeader();
+y=39;
+}
+
+doc.setFillColor(0,31,102);
+doc.roundedRect(10,y,pageWidth-20,10,1.5,1.5,"F");
+
+doc.setTextColor(255,255,255);
+doc.setFont("helvetica","bold");
+doc.setFontSize(11);
+doc.text(`GRADE ${grade} MATHEMATICS`,15,y+6.8);
+
+y+=14;
+
+doc.setTextColor(0,31,102);
+
+if(!gradeRecords.length){
+doc.setFont("helvetica","italic");
+doc.setFontSize(9);
+doc.text("No attendance records recorded for this grade.",12,y+3);
+y+=13;
+return;
+}
+
+const rows=gradeRecords.map(record=>[
+"Grade "+record.grade,
+record.full_name||"Learner",
+formatAttendanceDate(record.attendance_date),
+String(record.status||"").toUpperCase(),
+formatAttendanceTimestamp(record.marked_at)
+]);
+
+doc.autoTable({
+startY:y,
+head:[["Grade","Name and surname","Date","Status","Timestamp"]],
+body:rows,
+theme:"grid",
+margin:{left:10,right:10,bottom:18,top:35},
+styles:{
+font:"helvetica",
+fontSize:8,
+cellPadding:3,
+textColor:[38,50,56],
+lineColor:[220,228,239],
+lineWidth:.2,
+overflow:"linebreak"
+},
+headStyles:{
+fillColor:[0,31,102],
+textColor:[255,255,255],
+fontStyle:"bold"
+},
+columnStyles:{
+0:{cellWidth:23},
+1:{cellWidth:70},
+2:{cellWidth:32},
+3:{cellWidth:30},
+4:{cellWidth:"auto"}
+},
+didParseCell:function(data){
+if(data.section==="body"&&data.column.index===3){
+const value=String(data.cell.raw).toLowerCase();
+if(value==="present"){
+data.cell.styles.textColor=[22,101,52];
+data.cell.styles.fontStyle="bold";
+}else if(value==="absent"){
+data.cell.styles.textColor=[153,27,27];
+data.cell.styles.fontStyle="bold";
+}
+}
+}
+});
+
+y=doc.lastAutoTable.finalY+12;
+});
+
+const pageCount=doc.internal.getNumberOfPages();
+
+for(let page=1;page<=pageCount;page++){
+doc.setPage(page);
+doc.setDrawColor(226,232,240);
+doc.line(10,pageHeight-13,pageWidth-10,pageHeight-13);
+doc.setFont("helvetica","normal");
+doc.setFontSize(8);
+doc.setTextColor(100,116,139);
+doc.text("EVERYTHING'S MATHS ACADEMY | Mathematics Attendance",10,pageHeight-7);
+doc.text(`Page ${page} of ${pageCount}`,pageWidth-10,pageHeight-7,{align:"right"});
+}
+
+doc.save("EMΑ-Mathematics-Attendance-Register.pdf".replace("Α","A"));
+
+}catch(error){
+console.error("PDF generation failed:",error);
+alert("Could not generate the attendance PDF: "+error.message);
+}finally{
+button.disabled=false;
+button.textContent="⬇ Download Combined PDF";
+}
+}
+
+$("downloadAttendancePdfBtn").addEventListener("click",downloadCombinedAttendancePDF);
+
+// ============================================================
+// LEARNER DIRECTORY + PROMOTION
+// ============================================================
 
 function renderLearnerDirectory(){
-const container=$("learnerDirectory"),search=$("learnerSearch").value.trim().toLowerCase();
+const container=$("learnerDirectory");
+const search=$("learnerSearch").value.trim().toLowerCase();
+
 const filtered=directoryLearners.filter(learner=>{
-const searchable=[learner.full_name,learner.email,learner.student_number,learner.grade].join(" ").toLowerCase();
-return searchable.includes(search)
+const searchable=[
+learner.full_name,
+learner.email,
+learner.student_number,
+learner.grade
+].join(" ").toLowerCase();
+
+return searchable.includes(search);
 });
+
 $("directoryCount").textContent=`${filtered.length} of ${directoryLearners.length} learners`;
+
 if(!filtered.length){
-container.innerHTML=`<div class="empty-state">${directoryLearners.length?"No learners match your search.":"No active Mathematics learners found."}</div>`;return
+container.innerHTML=`<div class="empty-state">${directoryLearners.length?"No learners match your search.":"No active Mathematics learners found."}</div>`;
+return;
 }
-const rows=filtered.map((learner,index)=>`
+
+const rows=filtered.map((learner,index)=>{
+let academicAction="";
+
+if(learner.academic_status==="completed"){
+academicAction='<span class="academic-completed">COMPLETED</span>';
+}else if(Number(learner.grade)===12){
+academicAction=`<button type="button" class="completion-btn complete-learner" data-learner-id="${escapeHTML(learner.id)}">Mark Completed</button>`;
+}else if([10,11].includes(Number(learner.grade))){
+academicAction=`<button type="button" class="promotion-btn promote-learner" data-learner-id="${escapeHTML(learner.id)}">Promote</button>`;
+}else{
+academicAction='<span>—</span>';
+}
+
+return`
 <tr>
 <td>${index+1}</td>
 <td class="learner-name">${escapeHTML(learner.full_name||"Name not provided")}</td>
 <td>${escapeHTML(learner.student_number||"—")}</td>
 <td>${escapeHTML(learner.email||"—")}</td>
 <td><span class="grade-pill">Grade ${escapeHTML(learner.grade||"—")}</span></td>
+<td>${academicAction}</td>
 <td><button type="button" class="remove-learner-btn" data-learner-id="${escapeHTML(learner.id)}" ${learner.removing?"disabled":""}>${learner.removing?"Removing...":"Remove"}</button></td>
-</tr>`).join("");
+</tr>`;
+}).join("");
+
 container.innerHTML=`
-<div class="table-wrap"><table class="learner-table">
-<thead><tr><th>#</th><th>Learner Name</th><th>Student Number</th><th>Email Address</th><th>Grade</th><th>Action</th></tr></thead>
-<tbody>${rows}</tbody></table></div>`;
+<div class="table-wrap">
+<table class="learner-table">
+<thead>
+<tr>
+<th>#</th>
+<th>Learner Name</th>
+<th>Student Number</th>
+<th>Email Address</th>
+<th>Grade</th>
+<th>Academic Progress</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>${rows}</tbody>
+</table>
+</div>`;
+
 container.querySelectorAll(".remove-learner-btn").forEach(button=>{
-button.addEventListener("click",()=>removeMathematicsLearner(button.dataset.learnerId))
-})
+button.addEventListener("click",()=>removeMathematicsLearner(button.dataset.learnerId));
+});
+
+container.querySelectorAll(".promote-learner").forEach(button=>{
+button.addEventListener("click",()=>promoteLearner(button.dataset.learnerId));
+});
+
+container.querySelectorAll(".complete-learner").forEach(button=>{
+button.addEventListener("click",()=>completeLearner(button.dataset.learnerId));
+});
+}
+
+async function promoteLearner(learnerId){
+const learner=directoryLearners.find(item=>item.id===learnerId);
+if(!learner)return;
+
+const oldGrade=Number(learner.grade);
+const newGrade=oldGrade+1;
+
+if(![10,11].includes(oldGrade)){
+alert("Only Grade 10 and Grade 11 learners can be promoted.");
+return;
+}
+
+const confirmed=confirm(
+`PROMOTE LEARNER?\n\nLearner: ${learner.full_name}\nCurrent grade: Grade ${oldGrade}\nNew grade: Grade ${newGrade}\n\nThis updates the existing learner profile. It does not create a new account.\n\nThe learner's grade will also update for their other registered subjects.`
+);
+
+if(!confirmed)return;
+
+try{
+const{data,error}=await db.rpc("admin_promote_learner",{
+p_learner_id:learnerId,
+p_new_grade:newGrade
+});
+
+if(error)throw error;
+
+alert(`${learner.full_name} has been promoted from Grade ${oldGrade} to Grade ${newGrade}.`);
+
+await loadDashboard();
+await loadAttendanceRegister();
+
+}catch(error){
+console.error(error);
+alert("Could not promote learner: "+error.message);
+}
+}
+
+async function completeLearner(learnerId){
+const learner=directoryLearners.find(item=>item.id===learnerId);
+if(!learner)return;
+
+const confirmed=confirm(
+`MARK LEARNER AS COMPLETED?\n\nLearner: ${learner.full_name}\nGrade: 12\n\nThis records Grade 12 completion. The learner will not be moved to Grade 13 and their account will not be deleted.`
+);
+
+if(!confirmed)return;
+
+try{
+const{data,error}=await db.rpc("admin_complete_learner",{
+p_learner_id:learnerId
+});
+
+if(error)throw error;
+
+alert(`${learner.full_name} has been marked as academically completed.`);
+await loadDashboard();
+
+}catch(error){
+console.error(error);
+alert("Could not update learner completion status: "+error.message);
+}
 }
 
 async function removeMathematicsLearner(learnerId){
 const learner=directoryLearners.find(item=>item.id===learnerId);
 if(!learner)return;
 if(learner.removing)return;
+
 const learnerName=learner.full_name||"this learner";
+
 const confirmed=confirm(
 `Remove ${learnerName} from Mathematics?\n\nThis will remove Mathematics access only. Their EMA account and access to other subjects will remain.`
 );
+
 if(!confirmed)return;
 
 learner.removing=true;
 renderLearnerDirectory();
 
 try{
-// Fetch the latest subject access before changing anything.
 const{data:currentProfile,error:fetchError}=await db
 .from("profiles")
 .select("id,full_name,subject_access")
@@ -493,8 +1727,9 @@ if(!currentProfile)throw new Error("Learner profile could not be found.");
 const currentAccess=currentProfile.subject_access;
 if(!Array.isArray(currentAccess))throw new Error("The learner's subject_access field is not an array. No changes were made.");
 
-if(!currentAccess.includes("Mathematics"))
+if(!currentAccess.includes("Mathematics")){
 throw new Error("This learner no longer has Mathematics access.");
+}
 
 const updatedAccess=currentAccess.filter(subject=>subject!=="Mathematics");
 
@@ -513,123 +1748,271 @@ await loadDashboard();
 console.error("Mathematics learner removal failed:",error);
 alert("Could not remove learner from Mathematics: "+error.message+"\n\nCheck that your Supabase administrator update policy permits changing learner subject_access.");
 learner.removing=false;
-await loadLearnerDirectory()
+await loadLearnerDirectory();
 }
 }
 
 async function loadLearnerDirectory(){
 const container=$("learnerDirectory");
 container.innerHTML="<div class='empty-state'>Loading Mathematics learners...</div>";
+
 const{data,error}=await db.from("profiles")
-.select("id,full_name,email,student_number,grade,subject_access")
+.select("id,full_name,email,student_number,grade,subject_access,academic_status")
 .eq("role","learner")
 .eq("status","active")
 .contains("subject_access",["Mathematics"])
 .order("full_name",{ascending:true});
+
 if(error){
 console.error("Learner directory error:",error);
 container.innerHTML=`<div class="empty-state">Could not load learners: ${escapeHTML(error.message)}</div>`;
-$("directoryCount").textContent="Unable to load";return
+$("directoryCount").textContent="Unable to load";
+return;
 }
+
 directoryLearners=data||[];
-renderLearnerDirectory()
+renderLearnerDirectory();
 }
+
 $("learnerSearch").addEventListener("input",renderLearnerDirectory);
 
-// ---------------------------------------
+// ============================================================
 // PENDING LEARNERS
-// ---------------------------------------
+// ============================================================
 
 async function loadPendingLearners(){
 const container=$("pendingLearners");
-const{data,error}=await db.from("profiles").select("id,full_name,email,student_number,grade").eq("role","learner").eq("status","pending").contains("subject_access",["Mathematics"]).order("created_at",{ascending:true});
-if(error){container.textContent="Could not load requests: "+error.message;return}
+
+const{data,error}=await db.from("profiles")
+.select("id,full_name,email,student_number,grade")
+.eq("role","learner")
+.eq("status","pending")
+.contains("subject_access",["Mathematics"])
+.order("created_at",{ascending:true});
+
+if(error){
+container.textContent="Could not load requests: "+error.message;
+return;
+}
+
 container.innerHTML="";
-if(!data?.length){container.innerHTML="<div class='empty-state'>No pending Mathematics learner requests.</div>";return}
+
+if(!data?.length){
+container.innerHTML="<div class='empty-state'>No pending Mathematics learner requests.</div>";
+return;
+}
+
 data.forEach(learner=>{
-const card=document.createElement("div");card.className="record-card";
-const heading=document.createElement("h3");heading.textContent=learner.full_name||"New learner";
-const details=document.createElement("p");details.textContent=`Grade ${learner.grade||"Not specified"} | ${learner.email||""}`;
-const approve=document.createElement("button");approve.className="ema-btn";approve.textContent="Approve Learner";
+const card=document.createElement("div");
+card.className="record-card";
+
+const heading=document.createElement("h3");
+heading.textContent=learner.full_name||"New learner";
+
+const details=document.createElement("p");
+details.textContent=`Grade ${learner.grade||"Not specified"} | ${learner.email||""}`;
+
+const approve=document.createElement("button");
+approve.className="ema-btn";
+approve.textContent="Approve Learner";
+
 approve.addEventListener("click",async()=>{
 if(!confirm(`Approve ${learner.full_name}?`))return;
+
 approve.disabled=true;
-const{error:updateError}=await db.from("profiles").update({status:"active"}).eq("id",learner.id);
-if(updateError){alert("Approval failed: "+updateError.message);approve.disabled=false;return}
-alert("Learner approved.");await loadDashboard()
-});
-card.append(heading,details,approve);container.appendChild(card)
-})
+
+const{error:updateError}=await db.from("profiles")
+.update({status:"active"})
+.eq("id",learner.id);
+
+if(updateError){
+alert("Approval failed: "+updateError.message);
+approve.disabled=false;
+return;
 }
 
-// ---------------------------------------
+alert("Learner approved.");
+await loadDashboard();
+});
+
+card.append(heading,details,approve);
+container.appendChild(card);
+});
+}
+
+// ============================================================
 // RESOURCES
-// ---------------------------------------
+// ============================================================
 
 async function addResource(){
-const title=prompt("Enter the resource title:");if(!title?.trim())return;
+const title=prompt("Enter the resource title:");
+if(!title?.trim())return;
+
 const grade=prompt("Enter the grade (8 to 12):");
-if(!["8","9","10","11","12"].includes(grade)){alert("Enter a valid grade.");return}
-const topic=prompt("Enter the Mathematics topic:");if(!topic?.trim())return;
-const url=prompt("Paste the PDF or resource link:");
-if(!url||!/^https:\/\/\S+/i.test(url)){alert("Enter a valid HTTPS link.");return}
-const{error}=await db.from("resources").insert({title:title.trim(),description:"Mathematics study resource",subject:"Mathematics",grade:Number(grade),topic:topic.trim(),file_path:url,created_by:profile.id});
-if(error){alert("Could not register resource: "+error.message);return}
-alert("Resource registered.");await loadDashboard()
+if(!["8","9","10","11","12"].includes(grade)){
+alert("Enter a valid grade.");
+return;
 }
+
+const topic=prompt("Enter the Mathematics topic:");
+if(!topic?.trim())return;
+
+const url=prompt("Paste the PDF or resource link:");
+if(!url||!/^https:\/\/\S+/i.test(url)){
+alert("Enter a valid HTTPS link.");
+return;
+}
+
+const{error}=await db.from("resources").insert({
+title:title.trim(),
+description:"Mathematics study resource",
+subject:"Mathematics",
+grade:Number(grade),
+topic:topic.trim(),
+file_path:url,
+created_by:profile.id
+});
+
+if(error){
+alert("Could not register resource: "+error.message);
+return;
+}
+
+alert("Resource registered.");
+await loadDashboard();
+}
+
 $("resourceBtn").addEventListener("click",addResource);
 
 async function loadResources(){
 const container=$("resourceList");
-const{data,error}=await db.from("resources").select("title,grade,topic,file_path,created_at").eq("subject","Mathematics").order("created_at",{ascending:false}).limit(10);
-if(error){container.textContent="Could not load resources: "+error.message;return}
-container.innerHTML="";
-if(!data?.length){container.innerHTML="<div class='empty-state'>No resources registered yet.</div>";return}
-data.forEach(item=>{
-const card=document.createElement("div");card.className="record-card";
-const heading=document.createElement("h3");heading.textContent=item.title;
-const details=document.createElement("p");details.textContent=`Grade ${item.grade} | ${item.topic||"General"}`;
-card.append(heading,details);
-if(item.file_path){const link=document.createElement("a");link.href=item.file_path;link.target="_blank";link.rel="noopener noreferrer";link.textContent="Open Resource";card.appendChild(link)}
-container.appendChild(card)
-})
+
+const{data,error}=await db.from("resources")
+.select("title,grade,topic,file_path,created_at")
+.eq("subject","Mathematics")
+.order("created_at",{ascending:false})
+.limit(10);
+
+if(error){
+container.textContent="Could not load resources: "+error.message;
+return;
 }
 
-// ---------------------------------------
+container.innerHTML="";
+
+if(!data?.length){
+container.innerHTML="<div class='empty-state'>No resources registered yet.</div>";
+return;
+}
+
+data.forEach(item=>{
+const card=document.createElement("div");
+card.className="record-card";
+
+const heading=document.createElement("h3");
+heading.textContent=item.title;
+
+const details=document.createElement("p");
+details.textContent=`Grade ${item.grade} | ${item.topic||"General"}`;
+
+card.append(heading,details);
+
+if(item.file_path){
+const link=document.createElement("a");
+link.href=item.file_path;
+link.target="_blank";
+link.rel="noopener noreferrer";
+link.textContent="Open Resource";
+card.appendChild(link);
+}
+
+container.appendChild(card);
+});
+}
+
+// ============================================================
 // ANNOUNCEMENTS
-// ---------------------------------------
+// ============================================================
 
 async function addAnnouncement(){
-const title=prompt("Enter announcement title:");if(!title?.trim())return;
-const body=prompt("Enter announcement message:");if(!body?.trim())return;
-const{error}=await db.from("announcements").insert({title:title.trim(),body:body.trim(),subject:"Mathematics",created_by:profile.id});
-if(error){alert("Could not publish announcement: "+error.message);return}
-alert("Announcement published.");await loadDashboard()
+const title=prompt("Enter announcement title:");
+if(!title?.trim())return;
+
+const body=prompt("Enter announcement message:");
+if(!body?.trim())return;
+
+const{error}=await db.from("announcements").insert({
+title:title.trim(),
+body:body.trim(),
+subject:"Mathematics",
+created_by:profile.id
+});
+
+if(error){
+alert("Could not publish announcement: "+error.message);
+return;
 }
+
+alert("Announcement published.");
+await loadDashboard();
+}
+
 $("announcementBtn").addEventListener("click",addAnnouncement);
 
 async function loadAnnouncements(){
 const container=$("announcementList");
-const{data,error}=await db.from("announcements").select("title,body,created_at").eq("subject","Mathematics").order("created_at",{ascending:false}).limit(10);
-if(error){container.textContent="Could not load announcements: "+error.message;return}
-container.innerHTML="";
-if(!data?.length){container.innerHTML="<div class='empty-state'>No announcements yet.</div>";return}
-data.forEach(item=>{
-const card=document.createElement("div");card.className="record-card";
-const heading=document.createElement("h3");heading.textContent=item.title;
-const message=document.createElement("p");message.textContent=item.body;
-card.append(heading,message);container.appendChild(card)
-})
+
+const{data,error}=await db.from("announcements")
+.select("title,body,created_at")
+.eq("subject","Mathematics")
+.order("created_at",{ascending:false})
+.limit(10);
+
+if(error){
+container.textContent="Could not load announcements: "+error.message;
+return;
 }
 
-// ---------------------------------------
+container.innerHTML="";
+
+if(!data?.length){
+container.innerHTML="<div class='empty-state'>No announcements yet.</div>";
+return;
+}
+
+data.forEach(item=>{
+const card=document.createElement("div");
+card.className="record-card";
+
+const heading=document.createElement("h3");
+heading.textContent=item.title;
+
+const message=document.createElement("p");
+message.textContent=item.body;
+
+card.append(heading,message);
+container.appendChild(card);
+});
+}
+
+// ============================================================
 // LOAD EVERYTHING
-// ---------------------------------------
+// ============================================================
 
 async function loadDashboard(){
-await Promise.all([loadStatistics(),loadLearnerDirectory(),loadPendingLearners(),loadAssessments(),loadResources(),loadAnnouncements()])
+await Promise.all([
+loadStatistics(),
+loadLearnerDirectory(),
+loadPendingLearners(),
+loadAssessments(),
+loadResources(),
+loadAnnouncements()
+]);
 }
+
 await loadDashboard();
+await loadAttendanceRegister();
+
 });
 </script>
 </body>
