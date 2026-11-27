@@ -1338,7 +1338,7 @@ async function loadLearnerAttendance() {
 
         }
 
-   } catch (error) {
+  } catch (error) {
 
     console.error("Attendance loading error:", error);
 
@@ -1348,10 +1348,9 @@ async function loadLearnerAttendance() {
     button.textContent = "ATTENDANCE UNAVAILABLE";
 
     setAttendanceFeedback(
-        "Supabase error: " + (error.message || JSON.stringify(error)),
+        "SUPABASE ERROR: " + (error.message || JSON.stringify(error)),
         "error"
     );
-
 }
 
     }
