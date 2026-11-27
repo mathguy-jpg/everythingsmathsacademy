@@ -232,120 +232,46 @@ button{font-family:inherit}
     font-weight:800;
     font-size:.9rem;
 }
+<!-- PHYSICAL SCIENCES ATTENDANCE -->
 
-/* ATTENDANCE REGISTER */
+<section class="attendance-section" id="attendance">
 
-.attendance-section{
-    margin:22px 0;
-}
+    <div class="attendance-card">
 
-.attendance-card{
-    padding:19px;
-    background:white;
-    border:1px solid var(--border);
-    border-radius:12px;
-    box-shadow:var(--shadow);
-}
+        <div class="attendance-header">
 
-.attendance-header{
-    display:flex;
-    align-items:center;
-    gap:13px;
-    margin-bottom:17px;
-}
+            <div class="attendance-icon">📋</div>
 
-.attendance-icon{
-    display:grid;
-    place-items:center;
-    flex-shrink:0;
-    width:43px;
-    height:43px;
-    border-radius:9px;
-    background:var(--light-blue);
-    font-size:1.35rem;
-}
+            <div>
+                <h2>PHYSICAL SCIENCES ATTENDANCE REGISTER</h2>
+                <p>Record your attendance for your Physical Sciences lesson.</p>
+            </div>
 
-.attendance-header h2{
-    margin:0 0 5px;
-    color:var(--royal);
-    font-size:1rem;
-}
+        </div>
 
-.attendance-header p{
-    margin:0;
-    color:var(--muted);
-    font-size:.84rem;
-    line-height:1.5;
-}
+        <div class="attendance-count">
+            <strong id="attendanceCount">--</strong>
+            <span>Times attended</span>
+        </div>
 
-.attendance-count{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:14px;
-    margin-bottom:14px;
-    background:#f5f9ff;
-    border:1px solid #e0ebfa;
-    border-radius:9px;
-}
+        <button
+            type="button"
+            id="markAttendanceBtn"
+            class="mark-attendance-btn"
+            disabled>
+            LOADING ATTENDANCE...
+        </button>
 
-.attendance-count strong{
-    color:var(--royal);
-    font-size:1.8rem;
-}
+        <div
+            id="attendanceFeedback"
+            class="attendance-feedback"
+            role="status"
+            aria-live="polite">
+        </div>
 
-.attendance-count span{
-    color:var(--muted);
-    font-size:.88rem;
-}
+    </div>
 
-.mark-attendance-btn{
-    width:100%;
-    min-height:46px;
-    padding:12px 16px;
-    border:0;
-    border-radius:8px;
-    background:var(--royal);
-    color:white;
-    font-size:.9rem;
-    font-weight:800;
-    letter-spacing:.4px;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.mark-attendance-btn:hover:not(:disabled){
-    background:#073b91;
-    transform:translateY(-1px);
-}
-
-.mark-attendance-btn:disabled{
-    cursor:not-allowed;
-    opacity:.75;
-}
-
-.mark-attendance-btn.recorded{
-    background:#16834a;
-    opacity:1;
-}
-
-.attendance-feedback{
-    min-height:20px;
-    margin-top:12px;
-    color:var(--muted);
-    font-size:.83rem;
-    line-height:1.5;
-}
-
-.attendance-feedback.success{
-    color:#16834a;
-    font-weight:700;
-}
-
-.attendance-feedback.error{
-    color:#c0392b;
-}
-
+</section>--
 /* TOPIC CARDS */
 
 .portal-container{
@@ -1273,21 +1199,28 @@ function setAttendanceFeedback(message, type = "") {
 }
 
 
+
 /* LOAD PHYSICAL SCIENCES ATTENDANCE */
 
 async function loadLearnerAttendance() {
 
-    const button =
-        document.getElementById("markAttendanceBtn");
+    const button = document.getElementById("markAttendanceBtn");
+    const count = document.getElementById("attendanceCount");
 
-    const count =
-        document.getElementById("attendanceCount");
+    if (!button || !count) {
+        console.error("Attendance HTML elements were not found.");
+        return;
+    }
 
     button.disabled = true;
     button.classList.remove("recorded");
     button.textContent = "LOADING ATTENDANCE...";
 
     try {
+
+        if (!EMA || !EMA.db) {
+            throw new Error("Supabase connection (EMA.db) is unavailable.");
+        }
 
         const { data, error } = await EMA.db.rpc(
             "get_my_attendance_summary",
@@ -1296,13 +1229,16 @@ async function loadLearnerAttendance() {
             }
         );
 
-        if (error) throw error;
+        if (error) {
+            throw error;
+        }
 
-        const attendanceCount =
-            Number(data?.attendance_count ?? 0);
+        if (!data || typeof data !== "object") {
+            throw new Error("Supabase returned an invalid attendance response.");
+        }
 
-        const todayStatus =
-            data?.today_status ?? null;
+        const attendanceCount = Number(data.attendance_count ?? 0);
+        const todayStatus = data.today_status ?? null;
 
         count.textContent = attendanceCount;
 
@@ -1313,7 +1249,7 @@ async function loadLearnerAttendance() {
             button.classList.add("recorded");
 
             setAttendanceFeedback(
-                "Your attendance has already been recorded for today.",
+                "Your Physical Sciences attendance has already been recorded for today.",
                 "success"
             );
 
@@ -1331,27 +1267,28 @@ async function loadLearnerAttendance() {
             } else {
 
                 setAttendanceFeedback(
-                    "You have not yet marked attendance for today."
+                    "You have not yet marked your Physical Sciences attendance for today."
                 );
 
             }
 
         }
 
-  } catch (error) {
+    } catch (error) {
 
-    console.error("Attendance loading error:", error);
+        console.error("Physical Sciences attendance loading error:", error);
 
-    count.textContent = "--";
+        count.textContent = "--";
 
-    button.disabled = true;
-    button.textContent = "ATTENDANCE UNAVAILABLE";
+        button.disabled = true;
+        button.classList.remove("recorded");
+        button.textContent = "ATTENDANCE UNAVAILABLE";
 
-    setAttendanceFeedback(
-        "SUPABASE ERROR: " + (error.message || JSON.stringify(error)),
-        "error"
-    );
-}
+        setAttendanceFeedback(
+            "SUPABASE ERROR: " +
+            (error?.message || JSON.stringify(error)),
+            "error"
+        );
 
     }
 
