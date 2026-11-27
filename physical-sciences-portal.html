@@ -1338,19 +1338,21 @@ async function loadLearnerAttendance() {
 
         }
 
-    } catch (error) {
+   } catch (error) {
 
-        console.error("Attendance loading error:", error);
+    console.error("Attendance loading error:", error);
 
-        count.textContent = "--";
+    count.textContent = "--";
 
-        button.disabled = true;
-        button.textContent = "ATTENDANCE UNAVAILABLE";
+    button.disabled = true;
+    button.textContent = "ATTENDANCE UNAVAILABLE";
 
-        setAttendanceFeedback(
-            "We could not load your attendance. Please refresh the page or contact your administrator.",
-            "error"
-        );
+    setAttendanceFeedback(
+        "Supabase error: " + (error.message || JSON.stringify(error)),
+        "error"
+    );
+
+}
 
     }
 
