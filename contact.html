@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="theme-color" content="#001f66">
+<link rel="icon" type="image/png" href="logo.png.png">
+<title>Contact | EVERYTHING'S MATHS ACADEMY</title>
+
+<style>
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --navy: #001f66;
+    --blue: #1565c0;
+    --gold: #ffd700;
+    --light: #eef5ff;
+    --text: #263238;
+    --muted: #64748b;
+    --green: #25D366;
+}
+
+html {
+    min-height: 100%;
+    width: 100%;
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 15% 15%, rgba(21,101,192,.10), transparent 30%),
+        radial-gradient(circle at 85% 85%, rgba(255,215,0,.10), transparent 28%),
+        linear-gradient(135deg, #edf4ff, #ffffff 55%, #f4f8ff);
+    overflow-x: hidden;
+}
+
+/* NAVIGATION */
+
+nav {
+    width: 100%;
+    min-height: 54px;
+    padding: 12px 5%;
+    background: var(--navy);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 12px rgba(0,31,102,.12);
+}
+
+nav .menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 26px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 4px 6px;
+    white-space: nowrap;
+    transition: color .2s ease;
+}
+
+nav a:hover {
+    color: var(--gold);
+}
+
+/* MAIN PAGE */
+
+.contact-page {
+    min-height: calc(100vh - 54px);
+    min-height: calc(100svh - 54px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 18px;
+}
+
+/* PROFESSIONAL BRAND HEADER */
+
+.contact-brand {
+    width: 100%;
+    max-width: 760px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    gap: 18px;
+    margin-bottom: 22px;
+    padding: 6px 2px;
+}
+
+.contact-logo {
+    width: 94px;
+    height: 94px;
+    flex: 0 0 94px;
+    object-fit: contain;
+    margin: 0;
+}
+
+.contact-brand-text {
+    min-width: 0;
+}
+
+.contact-brand-text .contact-subtitle {
+    max-width: 480px;
+}
+
+.contact-title {
+    color: var(--navy);
+    font-size: clamp(26px, 5vw, 32px);
+    font-weight: 800;
+    letter-spacing: -.6px;
+    margin: 0;
+}
+
+.contact-subtitle {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.55;
+    margin: 6px 0 0;
+}
+
+/* CARDS */
+
+.contact-card {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto 22px;
+    padding: 28px 24px;
+    background: rgba(255,255,255,.97);
+    border: 1px solid #e0e9f7;
+    border-radius: 16px;
+    box-shadow: 0 12px 35px rgba(0,31,102,.11);
+}
+
+.card-heading {
+    color: var(--navy);
+    font-size: 19px;
+    font-weight: 800;
+    margin: 0 0 6px;
+}
+
+.card-description {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0 0 20px;
+}
+
+/* FORM */
+
+.form-group {
+    margin: 14px 0;
+}
+
+.form-group label {
+    display: block;
+    color: #263238;
+    font-size: 13px;
+    font-weight: 700;
+    margin: 0 0 8px;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="tel"],
+.contact-form select,
+.contact-form textarea {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid #ccd6e5;
+    border-radius: 10px;
+    background: #fff;
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.contact-form textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(21,101,192,.11);
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #9aa7b8;
+}
+
+/* MARKETING CONSENT */
+
+.consent-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 18px 0;
+    color: #465569;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.consent-row input {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    margin-top: 2px;
+    accent-color: var(--blue);
+}
+
+.consent-row label {
+    font-weight: 400;
+    margin: 0;
+}
+
+/* BUTTONS */
+
+.main-button {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    margin-top: 20px;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 10px;
+    background: var(--navy);
+    color: white;
+    font-size: 15px;
+    font-weight: 800;
+    text-align: center;
+    cursor: pointer;
+    transition: background .2s, transform .2s;
+    text-decoration: none;
+}
+
+.main-button:hover {
+    background: var(--blue);
+}
+
+.main-button:active {
+    transform: scale(.99);
+}
+
+.main-button:disabled {
+    opacity: .65;
+    cursor: wait;
+}
+
+.whatsapp-button {
+    background: var(--green);
+    color: white;
+}
+
+.whatsapp-button:hover {
+    background: #1eb954;
+}
+
+/* WHATSAPP CONTACTS */
+
+.whatsapp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.whatsapp-box {
+    border: 1px solid #dce5f2;
+    border-radius: 12px;
+    padding: 16px;
+    background: #f8fbff;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.whatsapp-box h3 {
+    color: var(--navy);
+    font-size: 15px;
+    margin: 0 0 8px;
+}
+
+.whatsapp-box p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+    margin: 0 0 10px;
+    flex-grow: 1;
+}
+
+.whatsapp-box .main-button {
+    font-size: 13px;
+    padding: 11px 10px;
+    margin-top: auto;
+    width: 100%;
+}
+
+/* FORM FEEDBACK */
+
+#formStatus {
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 14px 0 0;
+    overflow-wrap: anywhere;
+}
+
+/* TERMS & CONDITIONS */
+
+.terms details {
+    border: 1px solid #dce5f2;
+    border-radius: 10px;
+    margin: 10px 0;
+    background: white;
+    overflow: hidden;
+}
+
+.terms summary {
+    cursor: pointer;
+    padding: 14px 16px;
+    color: var(--navy);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.terms summary:hover {
+    background: #f5f8ff;
+}
+
+.terms details[open] summary {
+    background: #f5f8ff;
+    border-bottom: 1px solid #dce5f2;
+}
+
+.term-content {
+    padding: 14px 16px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #465569;
+}
+
+.term-content p {
+    margin: 0 0 8px;
+}
+
+.term-content ul {
+    padding-left: 20px;
+    margin: 8px 0;
+}
+
+.terms-update {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+    margin-top: 18px;
+}
+
+/* FOOTER */
+
+.contact-footer {
+    margin-top: 10px;
+    color: #8491a5;
+    font-size: 11px;
+    text-align: center;
+}
+
+/* BOTTOM PAGE NAVIGATION */
+
+.bottom-navigation {
+    width: 100%;
+    max-width: 760px;
+    margin: 18px auto 10px;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    background: var(--navy);
+    border: 1px solid rgba(255,215,0,.45);
+    border-radius: 14px;
+    box-shadow: 0 8px 22px rgba(0,31,102,.14);
+}
+
+.bottom-navigation a,
+.bottom-navigation button {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 44px;
+    padding: 10px 8px;
+    border: none;
+    border-radius: 9px;
+    background: transparent;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+}
+
+.bottom-navigation a:hover,
+.bottom-navigation button:hover {
+    background: rgba(255,255,255,.12);
+    color: var(--gold);
+}
+
+.bottom-navigation a:active,
+.bottom-navigation button:active {
+    transform: scale(.97);
+}
+
+.bottom-navigation .top-button {
+    color: var(--gold);
+}
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+
+    nav {
+        min-height: 50px;
+        padding: 10px;
+    }
+
+    nav .menu {
+        gap: 8px 14px;
+    }
+
+    nav a {
+        font-size: 13px;
+        padding: 4px;
+    }
+
+    .contact-page {
+        min-height: calc(100svh - 50px);
+        padding: 24px 16px;
+    }
+
+    .contact-brand {
+        gap: 12px;
+        margin-bottom: 18px;
+    }
+
+    .contact-logo {
+        width: 82px;
+        height: 82px;
+        flex: 0 0 82px;
+    }
+
+    .contact-brand-text .contact-subtitle {
+        max-width: none;
+    }
+
+    .contact-title {
+        font-size: 26px;
+    }
+
+    .contact-card {
+        padding: 20px 16px;
+        border-radius: 14px;
+    }
+
+    .whatsapp-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    .whatsapp-box p {
+        min-height: 0;
+        flex-grow: 0;
+    }
+
+    .whatsapp-box .main-button {
+        margin-top: 10px;
+    }
+
+    /* MOBILE BOTTOM NAVIGATION */
+
+    .bottom-navigation {
+        gap: 5px;
+        padding: 8px 6px;
+        border-radius: 12px;
+    }
+
+    .bottom-navigation a,
+    .bottom-navigation button {
+        font-size: 12px;
+        min-height: 44px;
+        padding: 9px 4px;
+    }
+}
+
+@media (max-width: 360px) {
+    .contact-brand { gap: 9px; }
+    .contact-logo { width: 70px; height: 70px; flex-basis: 70px; }
+    .contact-title { font-size: 23px; }
+    .contact-subtitle { font-size: 12px; }
+    .contact-card { padding: 18px 14px; }
+}
+
+/* SHORT SCREENS */
+
+@media (max-height: 650px) and (min-width: 481px) {
+    .contact-page {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .contact-brand {
+        margin-bottom: 10px;
+    }
+
+    .contact-logo {
+        width: 52px;
+        height: 52px;
+    }
+
+    .contact-title {
+        font-size: 23px;
+    }
+}
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAVIGATION -->
+
+<nav>
+    <div class="menu">
+        <a href="index.html">Home</a>
+        <a href="lessons.html">Our Lessons</a>
+        <a href="index.html#why-choose-us">Why Choose Us</a>
+        <a href="index.html#about-us">About Us</a>
+    </div>
+</nav>
+
+<main class="contact-page">
+
+    <!-- BRAND -->
+
+    <header class="contact-brand">
+
+        <img
+            src="logo.png.png"
+            class="contact-logo"
+            alt="EVERYTHING'S MATHS ACADEMY logo"
+        >
+
+        <div class="contact-brand-text">
+            <h1 class="contact-title">Contact Us</h1>
+            <p class="contact-subtitle">
+                Have a question? We're here to help.
+                Reach the right team at Everything's Maths Academy.
+            </p>
+        </div>
+
+    </header>
+
+    <!-- CONTACT FORM -->
+
+    <section class="contact-card">
+
+        <h2 class="card-heading">Send an Enquiry</h2>
+
+        <p class="card-description">
+            Complete this short form and let us know how we can assist.
+        </p>
+
+        <form class="contact-form" id="contactForm">
+
+            <div class="form-group">
+
+                <label for="recipient">
+                    Who would you like to contact?
+                </label>
+
+                <select id="recipient" required>
+
+                    <option value="" disabled selected>
+                        Select a team
+                    </option>
+
+                    <option value="Mathematics Tutor">
+                        Mathematics Tutor
+                    </option>
+
+                    <option value="Physical Sciences Tutor">
+                        Physical Sciences Tutor
+                    </option>
+
+                    <option value="Administration">
+                        Administration
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="fullName">Full Name</label>
+
+                <input
+                    type="text"
+                    id="fullName"
+                    autocomplete="name"
+                    placeholder="Enter your full name"
+                    maxlength="150"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="email">Email Address</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    autocomplete="email"
+                    placeholder="Enter your email address"
+                    maxlength="254"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="phone">
+                    WhatsApp / Phone Number (Optional)
+                </label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    autocomplete="tel"
+                    placeholder="Enter phone number"
+                    maxlength="40"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="message">Your Message</label>
+
+                <textarea
+                    id="message"
+                    placeholder="How can we help you?"
+                    maxlength="5000"
+                    required
+                ></textarea>
+
+            </div>
+
+            <!-- OPTIONAL MARKETING CONSENT -->
+
+            <div class="consent-row">
+
+                <input
+                    type="checkbox"
+                    id="marketingConsent"
+                >
+
+                <label for="marketingConsent">
+                    I would like to receive email updates, special offers,
+                    enrolment announcements and educational promotions
+                    from Everything's Maths Academy. I understand that
+                    I can unsubscribe at any time. This is optional and
+                    is not required to submit my enquiry.
+                </label>
+
+            </div>
+
+            <button
+                type="submit"
+                class="main-button"
+                id="submitButton"
+            >
+                Send Enquiry
+            </button>
+
+            <p
+                id="formStatus"
+                role="status"
+                aria-live="polite"
+            ></p>
+
+        </form>
+
+    </section>
+
+    <!-- DIRECT WHATSAPP CONTACT -->
+
+    <section class="contact-card">
+
+        <h2 class="card-heading">Contact Us Directly</h2>
+
+        <p class="card-description">
+            Prefer WhatsApp? Contact the relevant team directly.
+            A message will be prepared for you automatically.
+        </p>
+
+        <div class="whatsapp-grid">
+
+            <!-- MATHEMATICS -->
+
+            <div class="whatsapp-box">
+
+                <h3>Mathematics Tutor</h3>
+
+                <p>
+                    Mathematics tutoring, lessons, academic support
+                    and subject enquiries.
+                </p>
+
+                <a
+                    class="main-button whatsapp-button"
+                    id="mathWhatsApp"
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    Contact Maths Tutor
+                </a>
+
+            </div>
+
+            <!-- PHYSICAL SCIENCES -->
+
+            <div class="whatsapp-box">
+
+                <h3>Physical Sciences Tutor</h3>
+
+                <p>
+                    Physics lessons, Physical Sciences tutoring
+                    and science support.
+                </p>
+
+                <a
+                    class="main-button whatsapp-button"
+                    id="physicsWhatsApp"
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    Contact Physics Tutor
+                </a>
+
+            </div>
+
+            <!-- ADMINISTRATION -->
+
+            <div class="whatsapp-box">
+
+                <h3>Administration</h3>
+
+                <p>
+                    Registration, payments, accounts, portal access
+                    and general enquiries.
+                </p>
+
+                <a
+                    class="main-button whatsapp-button"
+                    id="adminWhatsApp"
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    Contact Administration
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- TERMS & CONDITIONS -->
+
+    <section class="contact-card terms">
+
+        <h2 class="card-heading">Terms &amp; Conditions</h2>
+
+        <p class="card-description">
+            Please read the terms governing the use of our website,
+            tutoring services and learner platform.
+        </p>
+
+        <details>
+            <summary>1. Acceptance of Terms</summary>
+            <div class="term-content">
+                <p>
+                    By accessing, registering on, or using the Everything's
+                    Maths Academy website, learner portal or tutoring services,
+                    you agree to abide by these Terms &amp; Conditions.
+                    If you do not agree, you should refrain from using
+                    the platform or services.
+                </p>
+            </div>
+        </details>
+
+        <details>
+            <summary>2. Registration and Account Information</summary>
+            <div class="term-content">
+                <ul>
+                    <li>Users must provide accurate information during registration.</li>
+                    <li>Users are responsible for keeping their login credentials confidential.</li>
+                    <li>Accounts may not be shared, transferred or used by unauthorised individuals.</li>
+                    <li>The academy may suspend accounts where misuse, fraud or unauthorised access is suspected, subject to applicable law.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>3. Free Trial</summary>
+            <div class="term-content">
+                <ul>
+                    <li>The academy may offer a 3-day free trial to eligible prospective learners.</li>
+                    <li>Trial access is subject to the conditions communicated at registration.</li>
+                    <li>A trial does not automatically guarantee continued access to paid services after the trial period.</li>
+                    <li>The academy may limit or withdraw trial access in cases of abuse or repeated misuse.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>4. Fees and Payments</summary>
+            <div class="term-content">
+                <ul>
+                    <li>Applicable tutoring, subscription, registration or other fees will be communicated before enrolment or payment.</li>
+                    <li>Payments must be made according to communicated payment arrangements.</li>
+                    <li>Failure to pay within the agreed period may result in temporary suspension of lessons, resources or portal access, subject to applicable law.</li>
+                    <li>Proof of payment may be requested where necessary.</li>
+                    <li>Refunds, credits and payment disputes will be handled according to applicable policies and South African law.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>5. Lessons and Educational Services</summary>
+            <div class="term-content">
+                <ul>
+                    <li>The academy provides academic support, tutoring, learning materials, revision, assessments and related educational services.</li>
+                    <li>Lessons may be delivered online or through other arrangements communicated by the academy.</li>
+                    <li>The academy may adjust lesson schedules, teaching arrangements, educational content or platforms when reasonably necessary.</li>
+                    <li>Resources may vary depending on the learner's grade and subject access.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>6. Attendance and Missed Lessons</summary>
+            <div class="term-content">
+                <ul>
+                    <li>Learners are expected to attend scheduled lessons punctually.</li>
+                    <li>Learners should communicate in advance where they are unable to attend.</li>
+                    <li>Missed lessons, late arrivals or absences do not automatically entitle learners to refunds or additional lessons unless agreed or required by law.</li>
+                    <li>The academy will endeavour to communicate schedule changes in advance where reasonably possible.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>7. Learner Conduct</summary>
+            <div class="term-content">
+                <p>
+                    Learners are expected to treat tutors, administrators
+                    and fellow learners respectfully, refrain from bullying,
+                    harassment, offensive language or disruptive behaviour,
+                    avoid inappropriate content, and use the website, portal,
+                    quizzes and resources responsibly.
+                </p>
+
+                <p>
+                    The academy may restrict or suspend access for serious
+                    or repeated misconduct, subject to applicable law
+                    and reasonable procedures.
+                </p>
+            </div>
+        </details>
+
+        <details>
+            <summary>8. Learning Materials and Intellectual Property</summary>
+            <div class="term-content">
+                <ul>
+                    <li>Notes, videos, worksheets, quizzes, tests, presentations and other materials are protected by applicable intellectual property laws.</li>
+                    <li>Materials may not be reproduced, redistributed, sold, published or commercially exploited without prior written permission.</li>
+                    <li>Learners may use materials for their personal educational purposes.</li>
+                    <li>Unauthorised recording, copying or distribution of lessons or materials is prohibited, subject to applicable law.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>9. Academic Performance Disclaimer</summary>
+            <div class="term-content">
+                <ul>
+                    <li>The academy aims to improve learners' understanding, confidence and academic performance.</li>
+                    <li>Specific marks, pass rates, examination results or other academic outcomes are not guaranteed.</li>
+                    <li>Results depend on factors including attendance, effort, preparation, participation and individual learning circumstances.</li>
+                    <li>The academy will endeavour to provide quality educational support within the scope of its services.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>10. Cancellation, Suspension and Termination</summary>
+            <div class="term-content">
+                <ul>
+                    <li>Learners or parents wishing to discontinue services should notify the academy through its official communication channels.</li>
+                    <li>Cancellation will be handled according to applicable payment and cancellation arrangements communicated at enrolment, subject to applicable law.</li>
+                    <li>The academy may suspend or terminate access where accounts are misused, payment obligations are not met or serious violations occur, subject to applicable law.</li>
+                    <li>Where reasonably possible, the academy will communicate the reason for suspension or termination.</li>
+                </ul>
+            </div>
+        </details>
+                <details>
+            <summary>11. Privacy and Protection of Personal Information</summary>
+            <div class="term-content">
+                <ul>
+                    <li>Personal information may be collected for registration, communication, tutoring, assessment, account management and service delivery.</li>
+                    <li>Personal information will be handled in accordance with applicable South African privacy laws, including POPIA.</li>
+                    <li>Learner information, academic records, contact details and account information will not be made publicly available without lawful justification.</li>
+                    <li>Information may be processed where necessary for contractual, operational or legal purposes or with appropriate consent.</li>
+                    <li>Users may contact the academy regarding privacy and personal-information concerns.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>12. Website, Learner Portal and Assessments</summary>
+            <div class="term-content">
+                <ul>
+                    <li>Users must not attempt unauthorised access to the website, portal, database or administrative systems.</li>
+                    <li>Users must not interfere with functionality, exploit security vulnerabilities or manipulate assessments.</li>
+                    <li>Quizzes, assessments, marks, achievements and resources are provided for educational and administrative purposes.</li>
+                    <li>The academy may update or temporarily restrict functionality for maintenance, security or improvements.</li>
+                    <li>Uninterrupted access is not guaranteed.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>13. Reviews and Public Submissions</summary>
+            <div class="term-content">
+                <ul>
+                    <li>Reviews must be truthful, respectful and based on genuine experiences.</li>
+                    <li>Users may not submit defamatory, misleading, abusive, fraudulent or inappropriate content.</li>
+                    <li>The academy may moderate, remove or reject submissions that violate guidelines or applicable law.</li>
+                    <li>Reviews may be displayed publicly subject to applicable privacy requirements and review policies.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>14. Communication and Marketing</summary>
+            <div class="term-content">
+                <ul>
+                    <li>The academy may communicate about lessons, payments, registrations, academic progress, account notices and service-related updates.</li>
+                    <li>Promotional communications will be sent in accordance with applicable laws and consent requirements.</li>
+                    <li>Individuals may unsubscribe from marketing communications at any time.</li>
+                    <li>Unsubscribing from marketing will not necessarily prevent essential service-related communications.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>15. Limitation of Liability</summary>
+            <div class="term-content">
+                <p>
+                    The academy will endeavour to provide services responsibly
+                    and professionally. To the extent permitted by law,
+                    it shall not be liable for interruptions caused by
+                    third-party internet providers, external platforms,
+                    technical failures beyond its reasonable control
+                    or other circumstances beyond its reasonable control.
+                </p>
+
+                <p>
+                    Nothing in these terms excludes or limits rights or
+                    liabilities that cannot lawfully be excluded or limited
+                    under South African law.
+                </p>
+            </div>
+        </details>
+
+        <details>
+            <summary>16. Changes to Terms &amp; Conditions</summary>
+            <div class="term-content">
+                <ul>
+                    <li>The academy may update these Terms &amp; Conditions when reasonably necessary.</li>
+                    <li>Updated terms may be published on the website.</li>
+                    <li>Where material changes affect learners or service arrangements, the academy will endeavour to provide reasonable notice.</li>
+                    <li>Use of the platform or services following changes is subject to updated terms to the extent permitted by law.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>17. Governing Law</summary>
+            <div class="term-content">
+                <p>
+                    These Terms &amp; Conditions are governed by the laws
+                    of the Republic of South Africa. Disputes arising in
+                    connection with the academy's services will be handled
+                    in accordance with applicable South African law.
+                </p>
+            </div>
+        </details>
+
+        <details>
+            <summary>18. Contact Information</summary>
+            <div class="term-content">
+                <p>
+                    For questions, complaints, clarification or assistance
+                    regarding these Terms &amp; Conditions, contact
+                    Everything's Maths Academy through the official
+                    contact channels provided on this website.
+                </p>
+            </div>
+        </details>
+
+        <p class="terms-update">
+            Last updated: November 2026.
+            These terms are a proposed draft and should be reviewed
+            for legal compliance before publication.
+        </p>
+
+    </section>
+
+    <!-- BOTTOM NAVIGATION -->
+
+    <div class="bottom-navigation" aria-label="Page navigation">
+
+        <button type="button" id="backButton">
+            ← Back
+        </button>
+
+        <a href="index.html">
+            ⌂ Home
+        </a>
+
+        <a href="lessons.html">
+            Lessons
+        </a>
+
+        <button type="button" class="top-button" id="topButton">
+            ↑ Top
+        </button>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <footer class="contact-footer">
+        © <span id="currentYear"></span>
+        EVERYTHING'S MATHS ACADEMY.
+        All rights reserved.
+    </footer>
+
+</main>
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+/* =========================================
+   CONFIGURATION
+========================================= */
+
+const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
+
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+
+/* WhatsApp numbers in international format.
+   Digits only, without + or spaces. */
+
+const WHATSAPP_NUMBERS = {
+
+    maths: "27733882049",
+
+    physics: "27728363511",
+
+    admin: "27733882049"
+
+};
+
+
+/* =========================================
+   YEAR
+========================================= */
+
+document.getElementById("currentYear").textContent =
+    new Date().getFullYear();
+
+
+/* =========================================
+   BOTTOM NAVIGATION ACTIONS
+========================================= */
+
+document.getElementById("backButton").addEventListener("click", function() {
+
+    if (window.history.length > 1) {
+
+        window.history.back();
+
+    } else {
+
+        window.location.href = "index.html";
+
+    }
+
+});
+
+document.getElementById("topButton").addEventListener("click", function() {
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+});
+
+
+/* =========================================
+   WHATSAPP LINKS
+========================================= */
+
+function createWhatsAppLink(number, message) {
+
+    return "https://wa.me/" +
+        number +
+        "?text=" +
+        encodeURIComponent(message);
+
+}
+
+document.getElementById("mathWhatsApp").href =
+    createWhatsAppLink(
+        WHATSAPP_NUMBERS.maths,
+        "Hi Everything's Maths Academy! I would like to enquire about your Mathematics tutoring services. Please assist me with more information."
+    );
+
+document.getElementById("physicsWhatsApp").href =
+    createWhatsAppLink(
+        WHATSAPP_NUMBERS.physics,
+        "Hi Everything's Maths Academy! I would like to enquire about your Physical Sciences tutoring services. Please assist me with more information."
+    );
+
+document.getElementById("adminWhatsApp").href =
+    createWhatsAppLink(
+        WHATSAPP_NUMBERS.admin,
+        "Hi Everything's Maths Academy Administration! I need assistance with an administrative enquiry. Please assist me."
+    );
+
+
+/* =========================================
+   SUPABASE INITIALISATION
+========================================= */
+
+let supabaseClient = null;
+
+if (
+    window.supabase &&
+    SUPABASE_URL.startsWith("https://") &&
+    !SUPABASE_ANON_KEY.includes("YOUR_SUPABASE")
+) {
+
+    supabaseClient = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+
+}
+
+
+/* =========================================
+   CONTACT FORM
+========================================= */
+
+const contactForm =
+    document.getElementById("contactForm");
+
+const formStatus =
+    document.getElementById("formStatus");
+
+const submitButton =
+    document.getElementById("submitButton");
+
+
+contactForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    formStatus.textContent = "";
+    formStatus.style.color = "#c62828";
+
+    if (!supabaseClient) {
+
+        formStatus.textContent =
+            "The contact form database is not configured yet. Please contact the website administrator.";
+
+        return;
+
+    }
+
+    const recipient =
+        document.getElementById("recipient").value;
+
+    const fullName =
+        document.getElementById("fullName").value.trim();
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const phone =
+        document.getElementById("phone").value.trim();
+
+    const message =
+        document.getElementById("message").value.trim();
+
+    const marketingConsent =
+        document.getElementById("marketingConsent").checked;
+
+
+    if (!recipient || !fullName || !email || !message) {
+
+        formStatus.textContent =
+            "Please complete all required fields.";
+
+        return;
+
+    }
+
+
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending Enquiry...";
+
+
+    try {
+
+        /* STORE THE CONTACT ENQUIRY */
+
+        const { error: enquiryError } = await supabaseClient
+            .from("ema_contact_enquiries")
+            .insert([{
+
+                recipient: recipient,
+
+                full_name: fullName,
+
+                email: email,
+
+                phone: phone || null,
+
+                message: message
+
+            }]);
+
+
+        if (enquiryError) {
+            throw enquiryError;
+        }
+
+
+        /* STORE MARKETING SUBSCRIPTION ONLY
+           WHEN THE USER HAS OPTED IN */
+
+        if (marketingConsent) {
+
+            const { error: subscriberError } =
+                await supabaseClient
+                .from("ema_email_subscribers")
+                .insert([{
+
+                    full_name: fullName,
+
+                    email: email,
+
+                    source: "website_contact_form",
+
+                    consent: true,
+
+                    consent_at: new Date().toISOString(),
+
+                    status: "subscribed"
+
+                }]);
+
+            if (subscriberError) {
+
+                console.error(
+                    "Marketing subscription error:",
+                    subscriberError
+                );
+
+                formStatus.style.color = "#b45309";
+
+                formStatus.textContent =
+                    "Your enquiry was submitted, but your marketing subscription could not be recorded. Please try again later if you wish to subscribe.";
+
+                contactForm.reset();
+
+                return;
+
+            }
+
+        }
+
+
+        formStatus.style.color = "#16803c";
+
+        formStatus.textContent =
+            "Thank you! Your enquiry has been submitted successfully.";
+
+        contactForm.reset();
+
+
+    } catch (error) {
+
+        console.error("Contact submission error:", error);
+
+        formStatus.style.color = "#c62828";
+
+        formStatus.textContent =
+            "We could not submit your enquiry. Please try again or contact us via WhatsApp.";
+
+    } finally {
+
+        submitButton.disabled = false;
+
+        submitButton.textContent = "Send Enquiry";
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
