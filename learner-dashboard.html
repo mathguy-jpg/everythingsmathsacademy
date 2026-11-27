@@ -18,23 +18,42 @@
             display: none !important;
         }
 
-        /* DASHBOARD LAYOUT */
+        /* =========================
+           GLOBAL LAYOUT
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
         body {
+            margin: 0;
             background: #f4f7fc;
+            overflow-x: hidden;
+            width: 100%;
         }
 
         .dashboard-page {
             width: min(1100px, 94%);
             max-width: 1100px;
             margin: 0 auto;
-            padding: 22px 20px 45px;
-            box-sizing: border-box;
+            padding: 22px 20px 100px;
             text-align: center;
+            box-sizing: border-box;
         }
 
-        /* NAVIGATION */
+        /* =========================
+           TOP NAVIGATION
+        ========================= */
+
         body > nav {
-            padding: 13px 30px;
+            width: 100%;
+            padding: 13px 20px;
             min-height: 52px;
             box-sizing: border-box;
         }
@@ -44,29 +63,37 @@
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            gap: 8px 20px;
+            gap: 8px 22px;
+            width: 100%;
+            margin: 0 auto;
         }
 
         body > nav .menu a {
             font-size: 15px;
             margin: 0;
+            text-align: center;
         }
 
-        /* LOGO */
+        /* =========================
+           LOGO AND PROFILE
+        ========================= */
+
         .dashboard-logo {
+            display: block;
             width: 145px !important;
             max-width: 40%;
             height: auto;
-            margin: 0 auto 5px;
+            margin: 0 auto 8px;
             animation: none !important;
             filter: none !important;
         }
 
-        /* LEARNER PROFILE */
         #welcomeName {
             color: #001f66;
             font-size: clamp(25px, 3vw, 34px);
-            margin: 5px 0 8px;
+            margin: 8px 0;
+            text-align: center;
+            overflow-wrap: anywhere;
         }
 
         #studentNumber {
@@ -74,6 +101,8 @@
             font-size: 14px;
             margin: 7px 0;
             font-weight: 600;
+            text-align: center;
+            overflow-wrap: anywhere;
         }
 
         .learner-grade {
@@ -84,7 +113,8 @@
             border-radius: 25px;
             font-weight: bold;
             font-size: 13px;
-            margin: 8px 0 10px;
+            margin: 8px auto 10px;
+            text-align: center;
         }
 
         .dashboard-subtitle {
@@ -92,14 +122,16 @@
             font-size: 13px;
             font-weight: 600;
             letter-spacing: 1px;
-            margin: 5px 0 10px;
+            margin: 5px auto 10px;
+            text-align: center;
         }
 
         #dashboardMessage {
             color: #526174;
             font-size: 13px;
-            margin: 8px 0 15px;
+            margin: 8px auto 15px;
             line-height: 1.5;
+            text-align: center;
         }
 
         .dashboard-error {
@@ -108,48 +140,62 @@
             border: 1px solid #f2caca;
             border-radius: 8px;
             padding: 12px;
-            margin: 12px 0;
+            margin: 12px auto;
             font-size: 13px;
+            width: 100%;
+            text-align: center;
         }
 
-        /* STATISTICS */
+        /* =========================
+           STATISTICS
+        ========================= */
+
         .stats-container {
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 15px;
-            margin: 20px 0 25px;
+            width: 100%;
+            margin: 20px auto 25px;
         }
 
         .stat-box {
-            width: auto !important;
+            width: 100% !important;
             min-width: 0;
             padding: 17px 12px !important;
             background: white;
             border-radius: 14px;
             box-shadow: 0 4px 15px rgba(0, 31, 102, 0.07);
-            box-sizing: border-box;
             animation: none !important;
+            text-align: center;
+            margin: 0;
         }
 
         .stat-box h2 {
             color: #1565c0;
             font-size: 29px;
             margin: 0 0 7px;
+            text-align: center;
         }
 
         .stat-box p {
             color: #526174;
             font-size: 12px;
             margin: 0;
+            line-height: 1.4;
+            text-align: center;
         }
 
-        /* EXAMINATION CENTRE */
+        /* =========================
+           EXAMINATION CENTRE
+        ========================= */
+
         .exam-centre-card {
+            width: 100%;
+            margin: 20px auto 25px;
             background: linear-gradient(135deg, #001f66, #1565c0);
             color: white;
             padding: 23px;
             border-radius: 16px;
-            margin: 20px 0 25px;
             text-align: center;
             box-shadow: 0 6px 18px rgba(0, 31, 102, 0.12);
         }
@@ -158,6 +204,7 @@
             color: #ffd700;
             font-size: 21px;
             margin: 0 0 10px;
+            text-align: center;
         }
 
         .exam-centre-card p {
@@ -165,7 +212,9 @@
             font-size: 13px;
             line-height: 1.6;
             max-width: 650px;
+            width: 100%;
             margin: 0 auto;
+            text-align: center;
         }
 
         .exam-centre-btn {
@@ -179,6 +228,7 @@
             font-size: 13px;
             margin-top: 12px;
             transition: 0.2s ease;
+            text-align: center;
         }
 
         .exam-centre-btn:hover {
@@ -186,22 +236,29 @@
             transform: translateY(-2px);
         }
 
-        /* SUBJECT PORTALS */
+        /* =========================
+           SUBJECT PORTALS
+        ========================= */
+
         .portal-heading {
             color: #001f66;
             font-size: 22px;
-            margin: 27px 0 15px;
+            margin: 27px auto 15px;
+            text-align: center;
+            width: 100%;
         }
 
         .portal-container {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 17px;
-            margin: 15px 0 25px;
+            width: 100%;
+            margin: 15px auto 25px;
+            justify-items: stretch;
         }
 
         .subject-portal {
-            width: auto !important;
+            width: 100% !important;
             min-width: 0;
             min-height: 0 !important;
             padding: 22px 18px !important;
@@ -212,12 +269,13 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            box-sizing: border-box;
+            text-align: center;
+            margin: 0;
             cursor: default;
         }
 
         .subject-portal:hover {
-            transform: translateY(-4px);
+            transform: translateY(-3px);
         }
 
         .portal-icon {
@@ -225,20 +283,26 @@
             height: 62px;
             font-size: 29px;
             margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .subject-portal h2 {
             color: #001f66;
             font-size: 19px;
             margin: 5px 0 8px;
+            text-align: center;
+            overflow-wrap: anywhere;
         }
 
         .subject-portal p {
             color: #667085;
             font-size: 12px;
             line-height: 1.6;
-            margin: 0;
+            margin: 0 auto;
             max-width: 300px;
+            text-align: center;
         }
 
         .portal-link {
@@ -252,6 +316,7 @@
             font-size: 12px;
             margin-top: 14px;
             transition: 0.2s ease;
+            text-align: center;
         }
 
         .portal-link:hover {
@@ -260,7 +325,8 @@
         }
 
         .portal-link:focus-visible,
-        .exam-centre-btn:focus-visible {
+        .exam-centre-btn:focus-visible,
+        .bottom-nav-link:focus-visible {
             outline: 3px solid #ffd700;
             outline-offset: 3px;
         }
@@ -271,32 +337,45 @@
             background: white;
             padding: 18px;
             border-radius: 12px;
+            width: 100%;
+            margin: 15px auto;
+            text-align: center;
         }
 
-        /* THIS WEEK */
+        /* =========================
+           THIS WEEK
+        ========================= */
+
         .task-container {
             width: 100%;
             max-width: 100%;
             margin: 0 auto;
-            text-align: left;
+            text-align: center;
         }
 
         .task-card {
             background: white;
             padding: 14px 17px;
-            margin: 10px 0;
+            margin: 0;
             border-radius: 11px;
             box-shadow: 0 3px 12px rgba(0, 31, 102, 0.05);
             font-size: 13px;
             color: #344054;
+            text-align: center;
+            min-width: 0;
+            overflow-wrap: anywhere;
         }
 
-        /* RESULTS */
+        /* =========================
+           RESULTS
+        ========================= */
+
         .results-list {
             list-style: none;
             padding: 0;
-            margin: 0;
+            margin: 0 auto;
             width: 100%;
+            max-width: 100%;
         }
 
         .results-list li {
@@ -305,11 +384,12 @@
             background: white;
             border-left: 4px solid #1565c0;
             border-radius: 7px;
-            text-align: left;
+            text-align: center;
             line-height: 1.5;
             font-size: 13px;
             color: #344054;
             box-shadow: 0 3px 10px rgba(0, 31, 102, 0.04);
+            overflow-wrap: anywhere;
         }
 
         .empty-results {
@@ -317,19 +397,52 @@
             font-style: italic;
         }
 
-        /* TABLETS */
+        /* =========================
+           BOTTOM NAVIGATION
+        ========================= */
+
+        .dashboard-bottom-nav {
+            display: none;
+        }
+
+        /* =========================
+           TABLET
+        ========================= */
+
         @media (max-width: 750px) {
+
             .dashboard-page {
-                width: 96%;
-                padding: 18px 12px 35px;
+                width: 100%;
+                max-width: 100%;
+                padding: 18px 14px 105px;
+                margin: 0 auto;
             }
 
             .stats-container {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px;
             }
 
             .portal-container {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px;
+            }
+
+            .task-container {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 10px;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .task-card {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 85px;
+                padding: 12px 8px;
+                line-height: 1.5;
             }
 
             .subject-portal {
@@ -337,103 +450,372 @@
             }
         }
 
-        /* PHONES */
+        /* =========================
+           PHONE
+        ========================= */
+
         @media (max-width: 480px) {
+
+            body {
+                width: 100%;
+                overflow-x: hidden;
+            }
+
+            /* TOP NAV */
+
             body > nav {
+                width: 100%;
                 padding: 12px 8px;
             }
 
             body > nav .menu {
-                gap: 10px 14px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: nowrap;
+                gap: 0;
             }
 
             body > nav .menu a {
-                font-size: 12px;
+                flex: 1 1 0;
+                min-width: 0;
+                font-size: 11px;
+                padding: 8px 3px;
+                text-align: center;
+                white-space: nowrap;
             }
+
+            /* MAIN CONTENT */
 
             .dashboard-page {
                 width: 100%;
-                padding: 15px 12px 30px;
+                max-width: 100%;
+                padding: 15px 10px 110px;
+                margin: 0 auto;
+                text-align: center;
             }
 
             .dashboard-logo {
-                width: 115px !important;
+                width: 105px !important;
+                max-width: 45%;
+                margin: 0 auto 8px;
             }
 
             #welcomeName {
-                font-size: 25px;
+                font-size: 23px;
+                line-height: 1.25;
+                text-align: center;
+                margin: 7px auto;
             }
 
             #studentNumber {
                 font-size: 12px;
+                text-align: center;
+                margin: 7px auto;
             }
 
+            .learner-grade {
+                padding: 7px 14px;
+                font-size: 12px;
+                margin: 8px auto;
+            }
+
+            .dashboard-subtitle {
+                font-size: 12px;
+                margin: 6px auto;
+                text-align: center;
+            }
+
+            #dashboardMessage {
+                font-size: 12px;
+                margin: 8px auto 12px;
+                text-align: center;
+            }
+
+            .dashboard-error {
+                width: 100%;
+                margin: 12px auto;
+                font-size: 12px;
+                text-align: center;
+            }
+
+            /* FOUR STATISTICS IN TWO COLUMNS */
+
             .stats-container {
-                gap: 10px;
-                margin: 16px 0 20px;
+                width: 100%;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 9px;
+                margin: 16px auto 20px;
             }
 
             .stat-box {
-                padding: 14px 8px !important;
+                padding: 14px 7px !important;
+                width: 100% !important;
+                border-radius: 11px;
             }
 
             .stat-box h2 {
-                font-size: 25px;
+                font-size: 23px;
+                margin-bottom: 6px;
             }
 
             .stat-box p {
-                font-size: 11px;
+                font-size: 10px;
+                line-height: 1.4;
             }
 
+            /* EXAM CARD */
+
             .exam-centre-card {
-                padding: 19px 14px;
-                margin: 17px 0 22px;
+                width: 100%;
+                padding: 18px 12px;
+                margin: 17px auto 22px;
+                border-radius: 13px;
+                text-align: center;
             }
 
             .exam-centre-card h2 {
                 font-size: 18px;
+                text-align: center;
             }
 
             .exam-centre-card p {
                 font-size: 12px;
+                line-height: 1.55;
+                text-align: center;
             }
 
-            .exam-centre-btn,
-            .portal-link {
+            .exam-centre-btn {
                 width: 100%;
                 text-align: center;
-                box-sizing: border-box;
+                padding: 11px 10px;
+                font-size: 12px;
             }
 
+            /* SUBJECT PORTALS - SIDE BY SIDE */
+
             .portal-heading {
-                font-size: 20px;
+                font-size: 19px;
+                margin: 23px auto 13px;
+                text-align: center;
+            }
+
+            .portal-container {
+                width: 100%;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 9px;
+                margin: 13px auto 22px;
             }
 
             .subject-portal {
-                padding: 19px 14px !important;
+                width: 100% !important;
+                padding: 15px 8px !important;
+                border-radius: 12px;
+                min-height: 0 !important;
+                text-align: center;
             }
 
-            .task-card,
-            .results-list li {
-                padding: 12px;
+            .portal-icon {
+                width: 42px;
+                height: 42px;
+                font-size: 24px;
+                margin: 0 auto 6px;
+            }
+
+            .subject-portal h2 {
+                font-size: 15px;
+                margin: 5px auto 7px;
+                line-height: 1.35;
+                text-align: center;
+            }
+
+            .subject-portal p {
+                font-size: 10px;
+                line-height: 1.5;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            .portal-link {
+                width: 100%;
+                margin-top: 10px;
+                padding: 9px 5px;
+                font-size: 10px;
+                text-align: center;
+            }
+
+            #noSubjectsMessage {
+                width: 100%;
+                padding: 14px 10px;
+                margin: 12px auto;
                 font-size: 12px;
+                text-align: center;
+            }
+
+            /* THREE TASK BLOCKS SIDE BY SIDE */
+
+            .task-container {
+                width: 100%;
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 8px;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            .task-card {
+                width: 100%;
+                min-width: 0;
+                min-height: 95px;
+                padding: 10px 6px;
+                font-size: 10px;
+                line-height: 1.45;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 9px;
+                overflow-wrap: anywhere;
+            }
+
+            /* RESULTS */
+
+            .results-list {
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            .results-list li {
+                width: 100%;
+                padding: 11px 9px;
+                font-size: 11px;
+                text-align: center;
+                margin: 8px auto;
+                line-height: 1.5;
+            }
+
+            /* FIXED BOTTOM NAVIGATION */
+
+            .dashboard-bottom-nav {
+                display: flex;
+                position: fixed;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                z-index: 9999;
+                background: #001f66;
+                padding: 8px 5px calc(8px + env(safe-area-inset-bottom));
+                box-shadow: 0 -4px 15px rgba(0, 31, 102, 0.15);
+                justify-content: space-around;
+                align-items: center;
+                gap: 4px;
+                border-top: 2px solid #ffd700;
+            }
+
+            .bottom-nav-link {
+                display: flex;
+                flex: 1 1 0;
+                min-width: 0;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                text-decoration: none;
+                color: white;
+                font-size: 10px;
+                font-weight: 600;
+                padding: 6px 3px;
+                line-height: 1.3;
+                border-radius: 7px;
+                overflow-wrap: anywhere;
+            }
+
+            .bottom-nav-link span {
+                display: block;
+                font-size: 16px;
+                margin-bottom: 3px;
+            }
+
+            .bottom-nav-link:hover {
+                background: rgba(255, 255, 255, 0.12);
             }
         }
 
+        /* =========================
+           SMALL PHONES
+        ========================= */
+
+        @media (max-width: 360px) {
+
+            .dashboard-page {
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+
+            body > nav .menu a {
+                font-size: 10px;
+                padding: 7px 2px;
+            }
+
+            .stats-container {
+                gap: 7px;
+            }
+
+            .stat-box p {
+                font-size: 9px;
+            }
+
+            .portal-container {
+                gap: 7px;
+            }
+
+            .subject-portal {
+                padding: 13px 6px !important;
+            }
+
+            .subject-portal h2 {
+                font-size: 13px;
+            }
+
+            .subject-portal p {
+                font-size: 9px;
+            }
+
+            .task-container {
+                gap: 5px;
+            }
+
+            .task-card {
+                font-size: 9px;
+                padding: 8px 4px;
+            }
+
+            .bottom-nav-link {
+                font-size: 9px;
+            }
+        }
+
+        /* =========================
+           ACCESSIBILITY
+        ========================= */
+
         @media (prefers-reduced-motion: reduce) {
-            .dashboard-page,
-            .stat-box,
-            .subject-portal,
-            .exam-centre-btn,
-            .portal-link {
+            *,
+            *::before,
+            *::after {
                 animation: none !important;
                 transition: none !important;
+                scroll-behavior: auto !important;
             }
         }
     </style>
 </head>
 
 <body>
+
+<!-- TOP NAVIGATION -->
 
 <nav>
     <div class="menu">
@@ -446,9 +828,13 @@
 
 <main class="dashboard-page">
 
+    <!-- LOGO -->
+
     <img src="logo.png.png"
          class="dashboard-logo"
          alt="EVERYTHING'S MATHS logo">
+
+    <!-- PROFILE -->
 
     <h1 id="welcomeName">Welcome Back 👋</h1>
 
@@ -472,7 +858,8 @@
          hidden>
     </div>
 
-    <!-- LEARNER STATISTICS -->
+    <!-- STATISTICS -->
+
     <div class="stats-container">
 
         <div class="stat-box">
@@ -498,6 +885,7 @@
     </div>
 
     <!-- EXAMINATION CENTRE -->
+
     <section class="exam-centre-card">
 
         <h2>📝 EMA Examination Centre</h2>
@@ -514,6 +902,7 @@
     </section>
 
     <!-- SUBJECT PORTALS -->
+
     <h2 class="portal-heading">My Subject Portals</h2>
 
     <div class="portal-container">
@@ -560,6 +949,7 @@
     </p>
 
     <!-- THIS WEEK -->
+
     <h2 class="portal-heading" id="this-week">
         This Week
     </h2>
@@ -581,6 +971,7 @@
     </div>
 
     <!-- RECENT RESULTS -->
+
     <h2 class="portal-heading">My Recent Results</h2>
 
     <div class="task-container">
@@ -593,6 +984,32 @@
 
 </main>
 
+<!-- MOBILE BOTTOM NAVIGATION -->
+
+<footer class="dashboard-bottom-nav">
+
+    <a href="index.html" class="bottom-nav-link">
+        <span>⌂</span>
+        Home
+    </a>
+
+    <a href="learner-dashboard.html" class="bottom-nav-link">
+        <span>▦</span>
+        Dashboard
+    </a>
+
+    <a href="#this-week" class="bottom-nav-link">
+        <span>📝</span>
+        This Week
+    </a>
+
+    <a href="#" class="bottom-nav-link" id="bottomLogoutLink">
+        <span>↪</span>
+        Logout
+    </a>
+
+</footer>
+
 <script>
 document.addEventListener("DOMContentLoaded", async function () {
 
@@ -601,6 +1018,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const message = $("dashboardMessage");
     const errorBox = $("dashboardError");
     const logoutLink = $("logoutLink");
+    const bottomLogoutLink = $("bottomLogoutLink");
 
     function showError(text) {
         errorBox.textContent = text;
@@ -613,28 +1031,51 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     // LOGOUT
-    logoutLink.addEventListener("click", async function (event) {
-        event.preventDefault();
+
+    async function handleLogout(event) {
+
+        if (event) {
+            event.preventDefault();
+        }
 
         logoutLink.textContent = "Logging out...";
 
+        if (bottomLogoutLink) {
+            bottomLogoutLink.innerHTML = "<span>↪</span>Logging out...";
+        }
+
         try {
+
             if (window.EMA && typeof EMA.signOut === "function") {
                 await EMA.signOut();
             } else {
                 window.location.replace("login.html");
             }
+
         } catch (error) {
+
             console.error("EMA logout error:", error);
+
             logoutLink.textContent = "Logout";
+
+            if (bottomLogoutLink) {
+                bottomLogoutLink.innerHTML = "<span>↪</span>Logout";
+            }
 
             showError(
                 "Logout could not be completed. Please try again."
             );
         }
-    });
+    }
+
+    logoutLink.addEventListener("click", handleLogout);
+
+    if (bottomLogoutLink) {
+        bottomLogoutLink.addEventListener("click", handleLogout);
+    }
 
     // CHECK SUPABASE CONNECTION
+
     if (!window.EMA ||
         typeof EMA.requireSession !== "function") {
 
@@ -651,6 +1092,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     try {
 
         // VERIFY LEARNER LOGIN
+
         const profile = await EMA.requireSession(["learner"]);
 
         if (!profile) {
@@ -660,6 +1102,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         clearError();
 
         // LEARNER PROFILE
+
         $("welcomeName").textContent =
             "Welcome " + (profile.full_name || "Learner") + " 👋";
 
@@ -671,6 +1114,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             "GRADE " + (profile.grade || "NOT ASSIGNED");
 
         // SUBJECT ACCESS
+
         const subjects = Array.isArray(profile.subject_access)
             ? profile.subject_access
             : [];
@@ -685,10 +1129,12 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         $("noSubjectsMessage").hidden = subjects.length > 0;
 
-        // UPCOMING TASKS
+        // EXAMINATION CENTRE
+
         $("upcomingTasks").textContent = "Open";
 
         // EXAMINATION RESULTS
+
         const resultsList = $("recentResults");
 
         try {
@@ -704,6 +1150,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 : [];
 
             // CALCULATE AVERAGE
+
             const percentages = safeResults
                 .map(result => Number(result.percentage))
                 .filter(value => Number.isFinite(value));
@@ -721,6 +1168,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 average === null ? "--" : average + "%";
 
             // ACHIEVEMENTS
+
             $("achievements").textContent =
                 safeResults.filter(result => {
                     const percentage = Number(result.percentage);
@@ -730,6 +1178,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 }).length;
 
             // LATEST FIVE RESULTS
+
             resultsList.replaceChildren();
 
             if (!safeResults.length) {
@@ -794,6 +1243,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
 
         // DASHBOARD READY
+
         message.textContent =
             "Your learner dashboard is ready.";
 
