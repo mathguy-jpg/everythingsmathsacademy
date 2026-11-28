@@ -18,10 +18,6 @@
             display: none !important;
         }
 
-        /* =========================
-           GLOBAL LAYOUT
-        ========================= */
-
         * {
             box-sizing: border-box;
         }
@@ -47,9 +43,7 @@
             box-sizing: border-box;
         }
 
-        /* =========================
-           TOP NAVIGATION
-        ========================= */
+        /* TOP NAVIGATION */
 
         body > nav {
             width: 100%;
@@ -74,9 +68,7 @@
             text-align: center;
         }
 
-        /* =========================
-           LOGO AND PROFILE
-        ========================= */
+        /* LOGO AND PROFILE */
 
         .dashboard-logo {
             display: block;
@@ -146,9 +138,7 @@
             text-align: center;
         }
 
-        /* =========================
-           STATISTICS
-        ========================= */
+        /* STATISTICS */
 
         .stats-container {
             display: grid;
@@ -185,9 +175,7 @@
             text-align: center;
         }
 
-        /* =========================
-           EXAMINATION CENTRE
-        ========================= */
+        /* EXAMINATION CENTRE */
 
         .exam-centre-card {
             width: 100%;
@@ -236,9 +224,7 @@
             transform: translateY(-2px);
         }
 
-        /* =========================
-           SUBJECT PORTALS
-        ========================= */
+        /* SUBJECT PORTALS */
 
         .portal-heading {
             color: #001f66;
@@ -342,9 +328,7 @@
             text-align: center;
         }
 
-        /* =========================
-           THIS WEEK
-        ========================= */
+        /* THIS WEEK */
 
         .task-container {
             width: 100%;
@@ -366,9 +350,7 @@
             overflow-wrap: anywhere;
         }
 
-        /* =========================
-           RESULTS
-        ========================= */
+        /* RESULTS */
 
         .results-list {
             list-style: none;
@@ -397,17 +379,243 @@
             font-style: italic;
         }
 
-        /* =========================
-           BOTTOM NAVIGATION
-        ========================= */
+        /* CHANGE PASSWORD BUTTON */
+
+        .password-section {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 35px auto 10px;
+        }
+
+        .password-open-btn {
+            background: #001f66;
+            color: #ffd700;
+            border: 2px solid #ffd700;
+            border-radius: 30px;
+            padding: 13px 28px;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 31, 102, 0.12);
+            transition: 0.2s ease;
+        }
+
+        .password-open-btn:hover {
+            background: #1565c0;
+            transform: translateY(-2px);
+        }
+
+        /* FULL-SCREEN PASSWORD PANEL */
+
+        .password-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 100000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding: 18px;
+            background: linear-gradient(145deg, #001f66, #0b3d91);
+            overflow-y: auto;
+            overscroll-behavior: contain;
+        }
+
+        .password-panel {
+            width: 100%;
+            max-width: 470px;
+            max-height: 95%;
+            overflow-y: auto;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 28px 25px;
+            text-align: left;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+            margin: auto;
+        }
+
+        .password-panel-logo {
+            display: block;
+            width: 105px;
+            max-width: 40%;
+            height: auto;
+            margin: 0 auto 12px;
+        }
+
+        .password-panel h2 {
+            color: #001f66;
+            text-align: center;
+            font-size: 23px;
+            margin: 8px 0;
+        }
+
+        .password-panel-intro {
+            color: #667085;
+            font-size: 13px;
+            text-align: center;
+            line-height: 1.55;
+            margin: 0 auto 22px;
+        }
+
+        .password-field {
+            margin: 0 0 15px;
+        }
+
+        .password-field label {
+            display: block;
+            color: #001f66;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+
+        .password-field input {
+            display: block;
+            width: 100%;
+            min-width: 0;
+            padding: 13px 12px;
+            border: 1px solid #ccd5e3;
+            border-radius: 9px;
+            background: #f9fbff;
+            color: #172b4d;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .password-field input:focus {
+            border-color: #1565c0;
+            box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.12);
+        }
+
+        .password-strength {
+            margin-top: 9px;
+        }
+
+        .strength-track {
+            width: 100%;
+            height: 7px;
+            background: #e7ebf2;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .strength-fill {
+            display: block;
+            height: 100%;
+            width: 0%;
+            border-radius: 20px;
+            transition: width 0.2s ease, background 0.2s ease;
+            background: #dc2626;
+        }
+
+        .strength-label {
+            display: block;
+            text-align: right;
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: 5px;
+            color: #dc2626;
+        }
+
+        .password-hint {
+            color: #7b8798;
+            font-size: 11px;
+            margin: 6px 0 0;
+        }
+
+        .password-form-error {
+            display: none;
+            color: #a32121;
+            background: #fff0f0;
+            border: 1px solid #f2caca;
+            border-radius: 8px;
+            padding: 11px;
+            font-size: 12px;
+            line-height: 1.5;
+            margin: 12px 0;
+        }
+
+        .password-form-error.show {
+            display: block;
+        }
+
+        .password-success {
+            display: none;
+            color: #166534;
+            background: #eaf8ee;
+            border: 1px solid #86d39b;
+            border-radius: 10px;
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.6;
+            margin-top: 15px;
+        }
+
+        .password-success.show {
+            display: block;
+        }
+
+        .password-success span {
+            display: block;
+            font-size: 25px;
+            margin-bottom: 5px;
+        }
+
+        .password-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .password-save-btn,
+        .password-cancel-btn {
+            flex: 1;
+            min-width: 0;
+            padding: 13px 10px;
+            border: none;
+            border-radius: 9px;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .password-save-btn {
+            background: #001f66;
+            color: #ffd700;
+        }
+
+        .password-save-btn:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
+        .password-cancel-btn {
+            background: #edf1f7;
+            color: #344054;
+        }
+
+        .password-security-note {
+            text-align: center;
+            color: #7b8798;
+            font-size: 10px;
+            line-height: 1.5;
+            margin: 16px 0 0;
+        }
+
+        /* MOBILE BOTTOM NAVIGATION */
 
         .dashboard-bottom-nav {
             display: none;
         }
 
-        /* =========================
-           TABLET
-        ========================= */
+        /* TABLET */
 
         @media (max-width: 750px) {
 
@@ -450,9 +658,7 @@
             }
         }
 
-        /* =========================
-           PHONE
-        ========================= */
+        /* PHONE */
 
         @media (max-width: 480px) {
 
@@ -460,8 +666,6 @@
                 width: 100%;
                 overflow-x: hidden;
             }
-
-            /* TOP NAV */
 
             body > nav {
                 width: 100%;
@@ -485,8 +689,6 @@
                 text-align: center;
                 white-space: nowrap;
             }
-
-            /* MAIN CONTENT */
 
             .dashboard-page {
                 width: 100%;
@@ -540,8 +742,6 @@
                 text-align: center;
             }
 
-            /* FOUR STATISTICS IN TWO COLUMNS */
-
             .stats-container {
                 width: 100%;
                 grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -564,8 +764,6 @@
                 font-size: 10px;
                 line-height: 1.4;
             }
-
-            /* EXAM CARD */
 
             .exam-centre-card {
                 width: 100%;
@@ -592,8 +790,6 @@
                 padding: 11px 10px;
                 font-size: 12px;
             }
-
-            /* SUBJECT PORTALS - SIDE BY SIDE */
 
             .portal-heading {
                 font-size: 19px;
@@ -653,8 +849,6 @@
                 text-align: center;
             }
 
-            /* THREE TASK BLOCKS SIDE BY SIDE */
-
             .task-container {
                 width: 100%;
                 display: grid;
@@ -679,8 +873,6 @@
                 overflow-wrap: anywhere;
             }
 
-            /* RESULTS */
-
             .results-list {
                 width: 100%;
                 margin: 0 auto;
@@ -695,7 +887,15 @@
                 line-height: 1.5;
             }
 
-            /* FIXED BOTTOM NAVIGATION */
+            .password-section {
+                margin: 28px auto 18px;
+            }
+
+            .password-open-btn {
+                width: min(100%, 290px);
+                padding: 13px 15px;
+                font-size: 12px;
+            }
 
             .dashboard-bottom-nav {
                 display: flex;
@@ -741,11 +941,45 @@
             .bottom-nav-link:hover {
                 background: rgba(255, 255, 255, 0.12);
             }
+
+            /* FULL-SCREEN PASSWORD PANEL ON PHONES */
+
+            .password-overlay {
+                padding: 12px;
+                align-items: flex-start;
+            }
+
+            .password-panel {
+                max-width: 100%;
+                max-height: none;
+                min-height: calc(100vh - 24px);
+                min-height: calc(100dvh - 24px);
+                border-radius: 15px;
+                padding: 23px 17px;
+                margin: auto 0;
+            }
+
+            .password-panel h2 {
+                font-size: 21px;
+            }
+
+            .password-field input {
+                font-size: 16px;
+                padding: 13px 11px;
+            }
+
+            .password-actions {
+                flex-direction: column;
+            }
+
+            .password-save-btn,
+            .password-cancel-btn {
+                width: 100%;
+                min-height: 45px;
+            }
         }
 
-        /* =========================
-           SMALL PHONES
-        ========================= */
+        /* SMALL PHONES */
 
         @media (max-width: 360px) {
 
@@ -797,9 +1031,7 @@
             }
         }
 
-        /* =========================
-           ACCESSIBILITY
-        ========================= */
+        /* ACCESSIBILITY */
 
         @media (prefers-reduced-motion: reduce) {
             *,
@@ -828,13 +1060,9 @@
 
 <main class="dashboard-page">
 
-    <!-- LOGO -->
-
     <img src="logo.png.png"
          class="dashboard-logo"
          alt="EVERYTHING'S MATHS logo">
-
-    <!-- PROFILE -->
 
     <h1 id="welcomeName">Welcome Back 👋</h1>
 
@@ -982,6 +1210,16 @@
 
     </div>
 
+    <!-- CHANGE PASSWORD BUTTON -->
+
+    <section class="password-section">
+        <button type="button"
+                class="password-open-btn"
+                id="openPasswordPanel">
+            🔒 CHANGE PASSWORD
+        </button>
+    </section>
+
 </main>
 
 <!-- MOBILE BOTTOM NAVIGATION -->
@@ -1010,6 +1248,146 @@
 
 </footer>
 
+<!-- FULL-SCREEN PASSWORD CHANGE PANEL -->
+
+<section class="password-overlay"
+         id="passwordOverlay"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="passwordPanelTitle"
+         hidden>
+
+    <div class="password-panel">
+
+        <img src="logo.png.png"
+             class="password-panel-logo"
+             alt="EVERYTHING'S MATHS">
+
+        <h2 id="passwordPanelTitle">CHANGE YOUR PASSWORD</h2>
+
+        <p class="password-panel-intro">
+            Verify your account and choose a new password.
+            Your new password will be used for future EMA logins.
+        </p>
+
+        <form id="passwordChangeForm">
+
+            <div class="password-field">
+                <label for="passwordEmail">
+                    EMAIL ADDRESS LINKED TO THIS ACCOUNT
+                </label>
+
+                <input type="email"
+                       id="passwordEmail"
+                       name="email"
+                       placeholder="Enter your registered email address"
+                       autocomplete="username"
+                       required>
+            </div>
+
+            <div class="password-field">
+                <label for="oldPassword">
+                    OLD PASSWORD
+                </label>
+
+                <input type="password"
+                       id="oldPassword"
+                       name="oldPassword"
+                       placeholder="Enter your current password"
+                       autocomplete="current-password"
+                       required>
+            </div>
+
+            <div class="password-field">
+                <label for="newPassword">
+                    NEW PASSWORD
+                </label>
+
+                <input type="password"
+                       id="newPassword"
+                       name="newPassword"
+                       placeholder="Enter your new password"
+                       autocomplete="new-password"
+                       minlength="6"
+                       required>
+
+                <div class="password-strength">
+                    <div class="strength-track">
+                        <span class="strength-fill"
+                              id="strengthFill"></span>
+                    </div>
+
+                    <span class="strength-label"
+                          id="strengthLabel">
+                        Password strength: Not entered
+                    </span>
+                </div>
+
+                <p class="password-hint">
+                    Minimum 6 characters. Password strength is rated automatically.
+                </p>
+            </div>
+
+            <div class="password-field">
+                <label for="verifyPassword">
+                    VERIFY NEW PASSWORD
+                </label>
+
+                <input type="password"
+                       id="verifyPassword"
+                       name="verifyPassword"
+                       placeholder="Enter your new password again"
+                       autocomplete="new-password"
+                       minlength="6"
+                       required>
+            </div>
+
+            <div id="passwordFormError"
+                 class="password-form-error"
+                 role="alert">
+            </div>
+
+            <div id="passwordSuccess"
+                 class="password-success"
+                 role="status"
+                 aria-live="polite">
+
+                <span>✓</span>
+
+                You have successfully changed your password!
+
+                <br>
+
+                You can now use your new password to log in.
+            </div>
+
+            <div class="password-actions" id="passwordActions">
+
+                <button type="submit"
+                        class="password-save-btn"
+                        id="savePasswordBtn">
+                    SAVE NEW PASSWORD
+                </button>
+
+                <button type="button"
+                        class="password-cancel-btn"
+                        id="closePasswordPanel">
+                    CANCEL
+                </button>
+
+            </div>
+
+        </form>
+
+        <p class="password-security-note">
+            Your password is securely managed by Supabase Authentication.
+            EMA does not store your password in your learner profile.
+        </p>
+
+    </div>
+
+</section>
+
 <script>
 document.addEventListener("DOMContentLoaded", async function () {
 
@@ -1019,6 +1397,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     const errorBox = $("dashboardError");
     const logoutLink = $("logoutLink");
     const bottomLogoutLink = $("bottomLogoutLink");
+
+    let learnerProfile = null;
+    let passwordChangeInProgress = false;
+    let passwordChangeSuccessful = false;
 
     function showError(text) {
         errorBox.textContent = text;
@@ -1038,18 +1420,28 @@ document.addEventListener("DOMContentLoaded", async function () {
             event.preventDefault();
         }
 
+        if (passwordChangeInProgress) {
+            return;
+        }
+
         logoutLink.textContent = "Logging out...";
 
         if (bottomLogoutLink) {
-            bottomLogoutLink.innerHTML = "<span>↪</span>Logging out...";
+            bottomLogoutLink.innerHTML =
+                "<span>↪</span>Logging out...";
         }
 
         try {
 
-            if (window.EMA && typeof EMA.signOut === "function") {
+            if (window.EMA &&
+                typeof EMA.signOut === "function") {
+
                 await EMA.signOut();
+
             } else {
+
                 window.location.replace("login.html");
+
             }
 
         } catch (error) {
@@ -1059,7 +1451,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             logoutLink.textContent = "Logout";
 
             if (bottomLogoutLink) {
-                bottomLogoutLink.innerHTML = "<span>↪</span>Logout";
+                bottomLogoutLink.innerHTML =
+                    "<span>↪</span>Logout";
             }
 
             showError(
@@ -1074,12 +1467,510 @@ document.addEventListener("DOMContentLoaded", async function () {
         bottomLogoutLink.addEventListener("click", handleLogout);
     }
 
+    // PASSWORD PANEL
+
+    const passwordOverlay = $("passwordOverlay");
+    const passwordForm = $("passwordChangeForm");
+
+    const openPasswordButton = $("openPasswordPanel");
+    const closePasswordButton = $("closePasswordPanel");
+
+    const passwordEmail = $("passwordEmail");
+    const oldPassword = $("oldPassword");
+    const newPassword = $("newPassword");
+    const verifyPassword = $("verifyPassword");
+
+    const passwordError = $("passwordFormError");
+    const passwordSuccess = $("passwordSuccess");
+
+    const savePasswordButton = $("savePasswordBtn");
+    const passwordActions = $("passwordActions");
+
+    const strengthFill = $("strengthFill");
+    const strengthLabel = $("strengthLabel");
+
+    function showPasswordError(text) {
+        passwordError.textContent = text;
+        passwordError.classList.add("show");
+    }
+
+    function clearPasswordError() {
+        passwordError.textContent = "";
+        passwordError.classList.remove("show");
+    }
+
+    function ratePasswordStrength(password) {
+
+        if (!password) {
+
+            return {
+                score: 0,
+                label: "Not entered",
+                color: "#dc2626"
+            };
+
+        }
+
+        let score = 0;
+
+        if (password.length >= 6) score++;
+        if (password.length >= 8) score++;
+        if (/[a-z]/.test(password) &&
+            /[A-Z]/.test(password)) score++;
+        if (/[0-9]/.test(password)) score++;
+        if (/[^A-Za-z0-9]/.test(password)) score++;
+
+        if (score <= 1) {
+
+            return {
+                score: 25,
+                label: "Weak",
+                color: "#dc2626"
+            };
+
+        }
+
+        if (score <= 2) {
+
+            return {
+                score: 50,
+                label: "Medium",
+                color: "#e69b18"
+            };
+
+        }
+
+        if (score <= 3) {
+
+            return {
+                score: 75,
+                label: "Strong",
+                color: "#16a34a"
+            };
+
+        }
+
+        return {
+            score: 100,
+            label: "Very Strong",
+            color: "#087443"
+        };
+    }
+
+    function updatePasswordStrength() {
+
+        const result = ratePasswordStrength(
+            newPassword.value
+        );
+
+        strengthFill.style.width = result.score + "%";
+        strengthFill.style.background = result.color;
+
+        strengthLabel.textContent =
+            "Password strength: " + result.label;
+
+        strengthLabel.style.color = result.color;
+    }
+
+    newPassword.addEventListener(
+        "input",
+        updatePasswordStrength
+    );
+
+    function clearPasswordFields() {
+
+        passwordForm.reset();
+
+        strengthFill.style.width = "0%";
+
+        strengthLabel.textContent =
+            "Password strength: Not entered";
+
+        strengthLabel.style.color = "#dc2626";
+
+        clearPasswordError();
+
+        passwordSuccess.classList.remove("show");
+
+        passwordActions.hidden = false;
+
+        savePasswordButton.disabled = false;
+
+        savePasswordButton.textContent =
+            "SAVE NEW PASSWORD";
+    }
+
+    async function openPasswordPanel() {
+
+        if (passwordChangeInProgress ||
+            passwordChangeSuccessful) {
+            return;
+        }
+
+        clearPasswordFields();
+
+        passwordOverlay.hidden = false;
+
+        document.body.style.overflow = "hidden";
+
+        // Fill the registered email automatically.
+        // The learner can still check or enter it manually.
+
+        if (learnerProfile && learnerProfile.email) {
+
+            passwordEmail.value =
+                learnerProfile.email;
+
+        } else if (window.EMA && EMA.db) {
+
+            try {
+
+                const { data } =
+                    await EMA.db.auth.getUser();
+
+                if (data && data.user && data.user.email) {
+                    passwordEmail.value = data.user.email;
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Could not retrieve learner email:",
+                    error
+                );
+
+            }
+        }
+
+        // Request actual browser fullscreen when supported.
+        // The full-screen overlay remains available as a fallback.
+
+        if (document.documentElement.requestFullscreen) {
+
+            try {
+
+                await document.documentElement.requestFullscreen();
+
+            } catch (error) {
+
+                console.info(
+                    "Browser fullscreen is unavailable. " +
+                    "Using the full-screen password panel instead."
+                );
+
+            }
+
+        }
+
+        passwordEmail.focus();
+    }
+
+    async function closePasswordPanel() {
+
+        if (passwordChangeInProgress ||
+            passwordChangeSuccessful) {
+            return;
+        }
+
+        passwordOverlay.hidden = true;
+
+        document.body.style.overflow = "";
+
+        if (document.fullscreenElement &&
+            document.exitFullscreen) {
+
+            try {
+                await document.exitFullscreen();
+            } catch (error) {
+                console.info("Could not exit browser fullscreen.", error);
+            }
+
+        }
+
+        clearPasswordFields();
+    }
+
+    openPasswordButton.addEventListener(
+        "click",
+        openPasswordPanel
+    );
+
+    closePasswordButton.addEventListener(
+        "click",
+        closePasswordPanel
+    );
+
+    // ESCAPE KEY
+
+    document.addEventListener("keydown", function (event) {
+
+        if (event.key === "Escape" &&
+            !passwordOverlay.hidden &&
+            !passwordChangeInProgress &&
+            !passwordChangeSuccessful) {
+
+            closePasswordPanel();
+
+        }
+
+    });
+
+    // PASSWORD CHANGE
+
+    passwordForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+            if (passwordChangeInProgress ||
+                passwordChangeSuccessful) {
+                return;
+            }
+
+            clearPasswordError();
+
+            const email = passwordEmail.value.trim();
+            const currentPassword = oldPassword.value;
+            const newPasswordValue = newPassword.value;
+            const confirmedPassword = verifyPassword.value;
+
+            if (!email || !currentPassword ||
+                !newPasswordValue || !confirmedPassword) {
+
+                showPasswordError(
+                    "Please complete all four fields."
+                );
+
+                return;
+            }
+
+            if (newPasswordValue.length < 6) {
+
+                showPasswordError(
+                    "Your new password must contain at least 6 characters."
+                );
+
+                return;
+            }
+
+            if (newPasswordValue !== confirmedPassword) {
+
+                showPasswordError(
+                    "Your new password and verification password do not match."
+                );
+
+                return;
+            }
+
+            if (newPasswordValue === currentPassword) {
+
+                showPasswordError(
+                    "Your new password must be different from your old password."
+                );
+
+                return;
+            }
+
+            if (!window.EMA ||
+                !EMA.db ||
+                !EMA.db.auth) {
+
+                showPasswordError(
+                    "The account security service is unavailable. Please refresh and try again."
+                );
+
+                return;
+            }
+
+            passwordChangeInProgress = true;
+
+            savePasswordButton.disabled = true;
+
+            savePasswordButton.textContent =
+                "VERIFYING ACCOUNT...";
+
+            try {
+
+                // STEP 1: VERIFY THE CURRENT SIGNED-IN ACCOUNT
+
+                const {
+                    data: currentUserData,
+                    error: currentUserError
+                } = await EMA.db.auth.getUser();
+
+                if (currentUserError) {
+                    throw currentUserError;
+                }
+
+                const currentUser = currentUserData?.user;
+
+                if (!currentUser || !currentUser.email) {
+
+                    throw new Error(
+                        "Your login session could not be verified. Please log in again."
+                    );
+
+                }
+
+                // STEP 2: CHECK THE EMAIL ADDRESS
+
+                if (
+                    email.toLowerCase() !==
+                    currentUser.email.toLowerCase()
+                ) {
+
+                    throw new Error(
+                        "The email address does not match the account currently signed in."
+                    );
+
+                }
+
+                // STEP 3: VERIFY THE OLD PASSWORD
+
+                savePasswordButton.textContent =
+                    "CHECKING OLD PASSWORD...";
+
+                const {
+                    data: verifiedData,
+                    error: verificationError
+                } = await EMA.db.auth.signInWithPassword({
+
+                    email: currentUser.email,
+
+                    password: currentPassword
+
+                });
+
+                if (verificationError) {
+
+                    throw new Error(
+                        "Your old password is incorrect. Please check it and try again."
+                    );
+
+                }
+
+                if (
+                    !verifiedData ||
+                    !verifiedData.user ||
+                    verifiedData.user.id !== currentUser.id
+                ) {
+
+                    throw new Error(
+                        "Account verification failed. Please log in again."
+                    );
+
+                }
+
+                // STEP 4: SAVE THE NEW PASSWORD PERMANENTLY
+
+                savePasswordButton.textContent =
+                    "SAVING NEW PASSWORD...";
+
+                const {
+                    data: updateData,
+                    error: updateError
+                } = await EMA.db.auth.updateUser({
+
+                    password: newPasswordValue
+
+                });
+
+                if (updateError) {
+                    throw updateError;
+                }
+
+                if (!updateData || !updateData.user) {
+
+                    throw new Error(
+                        "Supabase did not confirm the password update. Please try again."
+                    );
+
+                }
+
+                // STEP 5: DISPLAY GREEN SUCCESS MESSAGE
+
+                passwordChangeSuccessful = true;
+
+                passwordChangeInProgress = false;
+
+                passwordForm.querySelectorAll("input").forEach(input => {
+                    input.disabled = true;
+                });
+
+                passwordActions.hidden = true;
+
+                passwordError.classList.remove("show");
+
+                passwordSuccess.classList.add("show");
+
+                // Remove sensitive values from the form.
+
+                oldPassword.value = "";
+                newPassword.value = "";
+                verifyPassword.value = "";
+
+                strengthFill.style.width = "0%";
+
+                strengthLabel.textContent =
+                    "Password successfully updated";
+
+                strengthLabel.style.color = "#166534";
+
+                // STEP 6: WAIT 3 SECONDS, SIGN OUT, THEN REDIRECT
+
+                setTimeout(async function () {
+
+                    try {
+
+                        await EMA.db.auth.signOut();
+
+                    } catch (signOutError) {
+
+                        console.error(
+                            "Automatic logout error:",
+                            signOutError
+                        );
+
+                    }
+
+                    // Force the learner to log in using the new password.
+
+                    window.location.replace("login.html");
+
+                }, 3000);
+
+            } catch (error) {
+
+                console.error(
+                    "Password change error:",
+                    error
+                );
+
+                passwordChangeInProgress = false;
+
+                savePasswordButton.disabled = false;
+
+                savePasswordButton.textContent =
+                    "SAVE NEW PASSWORD";
+
+                showPasswordError(
+                    error.message ||
+                    "Your password could not be changed. Please try again."
+                );
+
+            }
+
+        }
+    );
+
     // CHECK SUPABASE CONNECTION
 
     if (!window.EMA ||
         typeof EMA.requireSession !== "function") {
 
-        message.textContent = "Login service unavailable.";
+        message.textContent =
+            "Login service unavailable.";
 
         showError(
             "The Supabase connection could not be loaded. " +
@@ -1098,6 +1989,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (!profile) {
             return;
         }
+
+        learnerProfile = profile;
 
         clearError();
 
@@ -1171,10 +2064,12 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             $("achievements").textContent =
                 safeResults.filter(result => {
+
                     const percentage = Number(result.percentage);
 
                     return Number.isFinite(percentage) &&
                            percentage >= 80;
+
                 }).length;
 
             // LATEST FIVE RESULTS
@@ -1226,7 +2121,10 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         } catch (resultsError) {
 
-            console.error("EMA results error:", resultsError);
+            console.error(
+                "EMA results error:",
+                resultsError
+            );
 
             $("currentAverage").textContent = "--";
             $("achievements").textContent = "0";
@@ -1249,7 +2147,10 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     } catch (error) {
 
-        console.error("EMA learner dashboard error:", error);
+        console.error(
+            "EMA learner dashboard error:",
+            error
+        );
 
         message.textContent =
             "We could not load your dashboard.";
